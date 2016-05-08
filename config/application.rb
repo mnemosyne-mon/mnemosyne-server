@@ -17,6 +17,20 @@ Bundler.require(*Rails.groups)
 
 module Mnemosyne
   class Application < Rails::Application
+    config.filter_parameters += [:password]
+    config.session_store :cookie_store, key: '_mnemosyne'
+
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.action_dispatch.cookies_serializer = :json
+
+    # Move some files from `config` to `app` as they have nothing to do with
+    # configuring the application. Moving `application.rb` and `boot.rb` works
+    # too but breaks third party gems.
+    config.paths.add 'config/environments',
+      with: 'app/environments', glob: "#{Rails.env}.rb"
+
+    config.paths['config/locales'].unshift 'app/locales'
+    config.paths['config/routes.rb'].unshift 'app/routes.rb'
   end
 end
