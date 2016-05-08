@@ -11,9 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160508163201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "applications", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "spans", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "trace_id"
+    t.string   "name"
+    t.integer  "start",      limit: 8
+    t.integer  "stop",       limit: 8
+    t.jsonb    "meta"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "traces", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "application_id"
+    t.uuid     "transaction_id"
+    t.uuid     "origin_id"
+    t.string   "name"
+    t.integer  "start",          limit: 8
+    t.integer  "stop",           limit: 8
+    t.jsonb    "meta"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
 end

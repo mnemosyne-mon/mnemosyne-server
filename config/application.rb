@@ -29,6 +29,7 @@ module Mnemosyne
     # too but breaks third party gems.
     config.paths.add 'config/environments',
       with: 'app/environments', glob: "#{Rails.env}.rb"
+    config.paths.add 'lib', load_path: true, eager_load: true
 
     config.paths['config/locales'].unshift 'app/locales'
     config.paths['config/routes.rb'].unshift 'app/routes.rb'
