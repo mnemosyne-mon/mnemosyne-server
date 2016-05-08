@@ -1,0 +1,5 @@
+ul.traces
+  - @traces.each do |trace|
+    li
+      span= link_to trace.id, trace_path(trace)
+      span= link_to trace.start, trace_path(trace)

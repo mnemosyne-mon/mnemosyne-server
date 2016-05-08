@@ -4,9 +4,16 @@ gem 'rails', '~> 4.2.6'
 gem 'pg', '~> 0.15'
 
 gem 'hutch', '~> 0.21.0'
-
-gem 'bcrypt', '~> 3.1'
 gem 'puma'
+
+gem 'slim'
+
+gem 'sass-rails', '~> 5.0'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'therubyracer', platforms: :ruby
+
+gem 'bourbon'
+gem 'neat'
 
 group :development do
   gem 'web-console', '~> 2.0'
