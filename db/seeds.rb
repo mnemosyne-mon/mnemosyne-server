@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Application.create! \
+  id: '9d77c3fa-9859-45a6-9765-99b18fdf1aeb',
+  name: 'Demo Application'

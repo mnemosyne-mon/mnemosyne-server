@@ -24,22 +24,22 @@ ActiveRecord::Schema.define(version: 20160508163201) do
   end
 
   create_table "spans", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "trace_id"
-    t.string   "name"
-    t.integer  "start",      limit: 8
-    t.integer  "stop",       limit: 8
+    t.uuid     "trace_id",             null: false
+    t.string   "name",                 null: false
+    t.integer  "start",      limit: 8, null: false
+    t.integer  "stop",       limit: 8, null: false
     t.jsonb    "meta"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
 
   create_table "traces", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "application_id"
-    t.uuid     "transaction_id"
+    t.uuid     "application_id",           null: false
+    t.uuid     "transaction_id",           null: false
     t.uuid     "origin_id"
-    t.string   "name"
-    t.integer  "start",          limit: 8
-    t.integer  "stop",           limit: 8
+    t.string   "name",                     null: false
+    t.integer  "start",          limit: 8, null: false
+    t.integer  "stop",           limit: 8, null: false
     t.jsonb    "meta"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false

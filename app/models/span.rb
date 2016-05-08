@@ -3,4 +3,6 @@ class Span < ActiveRecord::Base
 
   attribute :start, ::Mnemosyne::Types::PreciseDateTime.new
   attribute :stop, ::Mnemosyne::Types::PreciseDateTime.new
+
+  belongs_to :trace
 end

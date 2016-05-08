@@ -3,4 +3,7 @@ class Trace < ActiveRecord::Base
 
   attribute :start, ::Mnemosyne::Types::PreciseDateTime.new
   attribute :stop, ::Mnemosyne::Types::PreciseDateTime.new
+
+  has_many :spans
+  belongs_to :application
 end

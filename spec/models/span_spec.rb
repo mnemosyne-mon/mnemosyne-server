@@ -5,7 +5,7 @@ RSpec.describe Span, type: :model do
 
   describe '#start' do
     it 'saves nanoseconds' do
-      Span.create! start: time
+      create :span, start: time
 
       expect(Span.first.start).to eq time
     end
@@ -13,7 +13,7 @@ RSpec.describe Span, type: :model do
 
   describe '#stop' do
     it 'saves nanoseconds' do
-      Span.create! stop: time
+      create :span, stop: time
 
       expect(Span.first.stop).to eq time
     end
@@ -21,7 +21,7 @@ RSpec.describe Span, type: :model do
 
   describe '#duration' do
     it 'returns duration in nanoseconds' do
-      Span.create! start: time, stop: time + Rational(5000, 1_000_000_000)
+      create :span, start: time, stop: time + Rational(5000, 1_000_000_000)
 
       expect(Span.first.duration).to eq 5000
     end

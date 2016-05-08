@@ -7,6 +7,7 @@ end
 
 require 'spec_helper'
 require 'rspec/rails'
+require 'factory_girl_rails'
 
 #
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -23,6 +24,8 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  config.include FactoryGirl::Syntax::Methods
 
   config.filter_rails_from_backtrace!
 end
