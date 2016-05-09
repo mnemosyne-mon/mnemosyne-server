@@ -5,11 +5,11 @@
     .span
       span.info= @trace.name
       span.bar
-        = (@trace.stop - @trace.start).to_f * 1_000
+        = ((@trace.stop - @trace.start).to_f * 1_000).round(3)
         ' ms
     - @trace.spans.each do |span|
       .span
         span.info= span.title
         span.bar(style=span.style)
-          = (span.stop - span.start).to_f * 1_000
+          = ((span.stop - span.start).to_f * 1_000).round(3)
           ' ms

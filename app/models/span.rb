@@ -12,6 +12,8 @@ class Span < ActiveRecord::Base
         meta['controller'] + '#' + meta['action']
       when 'db.query'
         meta['sql']
+      when 'custom.trace'
+        "custom.trace: #{meta['name']} #{meta['meta'].to_json}"
       else
         name
     end
