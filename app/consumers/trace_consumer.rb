@@ -8,7 +8,7 @@ class TraceConsumer
     content = message.body
 
     ActiveRecord::Base.transaction do
-      app = Application.find content[:application]
+      app = Application.fetch content[:application]
 
       _trace = {
         id: content[:uuid],
