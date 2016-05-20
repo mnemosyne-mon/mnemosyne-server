@@ -1,5 +1,7 @@
 ul.traces
   - @traces.each do |trace|
     li
-      span= link_to trace.id, trace_path(trace)
+      span= link_to trace.transaction_id, trace_path(trace)
+      span= link_to trace.app_name, trace_path(trace)
+      span= link_to trace.name, trace_path(trace)
       span= link_to trace.start, trace_path(trace)
