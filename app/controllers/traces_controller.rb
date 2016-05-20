@@ -3,7 +3,7 @@ class TracesController < ApplicationController
     @traces = Trace
       .where(name: 'app.rack.request')
       .order('created_at DESC')
-      .limit(20)
+      .limit(200)
   end
 
   def show

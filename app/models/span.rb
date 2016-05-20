@@ -14,6 +14,8 @@ class Span < ActiveRecord::Base
         meta['sql']
       when 'custom.trace'
         "custom.trace: #{meta['name']} #{meta['meta'].to_json}"
+      when /external\.http\.\w+(\.\w+)?/
+        "external.http: #{meta['method']} #{meta['url']}"
       else
         name
     end
