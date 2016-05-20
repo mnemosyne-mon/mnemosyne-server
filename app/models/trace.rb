@@ -14,7 +14,7 @@ class Trace < ActiveRecord::Base
     application.original_name
   end
 
-  def name
+  def title
     controller_span = spans.where(name: 'rails.process_action.action_controller')
 
     if controller_span.any?
@@ -22,6 +22,6 @@ class Trace < ActiveRecord::Base
       return "#{span.meta['controller']}##{span.meta['action']}"
     end
 
-    super
+    name
   end
 end
