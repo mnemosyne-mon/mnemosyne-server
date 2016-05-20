@@ -5,6 +5,7 @@ class Span < ActiveRecord::Base
   attribute :stop, ::Mnemosyne::Types::PreciseDateTime.new
 
   belongs_to :trace
+  has_one :triggered_trace, foreign_key: :origin_id, class_name: :Trace
 
   def title
     case name
