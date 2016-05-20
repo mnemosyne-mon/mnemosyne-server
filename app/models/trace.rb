@@ -24,4 +24,8 @@ class Trace < ActiveRecord::Base
 
     name
   end
+
+  def full_title
+    "#{app_name}: #{title}"
+  end
 end
