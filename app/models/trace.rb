@@ -15,12 +15,9 @@ class Trace < ActiveRecord::Base
   end
 
   def title
-    controller_span = spans.where(name: 'rails.process_action.action_controller')
+    span = spans.where("name ILIKE 'app.controller.%'").order(start: :desc).take
 
-    if controller_span.any?
-      span = controller_span.take
-      return "#{span.meta['controller']}##{span.meta['action']}"
-    end
+    return span.title if span
 
     name
   end

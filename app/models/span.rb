@@ -9,9 +9,9 @@ class Span < ActiveRecord::Base
 
   def title
     case name
-      when 'rails.process_action.action_controller'
+      when 'app.controller.request.rails'
         meta['controller'] + '#' + meta['action']
-      when 'db.query'
+      when 'db.query.active_record'
         meta['sql']
       when 'custom.trace'
         "custom.trace: #{meta['name']} #{meta['meta'].to_json}"
