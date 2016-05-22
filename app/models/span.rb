@@ -18,7 +18,7 @@ class Span < ActiveRecord::Base
       when /external\.http\.\w+(\.\w+)?/
         "#{name} <#{meta['method'].upcase} #{meta['url']}>"
       else
-        name
+        "#{name} <#{meta.keys.join(', ')}>"
     end
   end
 
