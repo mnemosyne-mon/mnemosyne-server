@@ -10,13 +10,13 @@ class Span < ActiveRecord::Base
   def title
     case name
       when 'app.controller.request.rails'
-        meta['controller'] + '#' + meta['action']
+        "#{name} <#{meta['controller']}##{meta['action']}>"
       when 'db.query.active_record'
-        meta['sql']
+        "#{name} <#{meta['sql']}>"
       when 'custom.trace'
-        "custom.trace: #{meta['name']} #{meta['meta'].to_json}"
+        "custom.trace <#{meta['name']} #{meta['meta'].to_json}>"
       when /external\.http\.\w+(\.\w+)?/
-        "external.http: #{meta['method']} #{meta['url']}"
+        "#{name} <#{meta['method'].upcase} #{meta['url']}>"
       else
         name
     end
