@@ -4,7 +4,7 @@ class TracesController < ApplicationController
       .joins(:spans)
       .includes(:spans)
       .where(name: 'app.rack.request')
-      .order(created_at: :desc)
+      .order(start: :desc)
       .limit(200)
       .uniq
   end
