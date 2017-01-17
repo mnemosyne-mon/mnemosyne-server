@@ -5,3 +5,4 @@ ul.traces
       span= link_to trace.app_name, trace_path(trace)
       span= link_to trace.title, trace_path(trace)
       span= link_to trace.start, trace_path(trace)
+      span= link_to "#{(trace.duration.to_f / 1_000_000).round(3)} ms", trace_path(trace)
