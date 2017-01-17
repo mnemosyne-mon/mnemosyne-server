@@ -3,7 +3,7 @@ class TracesController < ApplicationController
     @traces = Trace
       .joins(:spans)
       .includes(:spans)
-      .where(name: 'app.rack.request')
+      .where(name: 'app.web.request.rack')
       .order(start: :desc)
       .limit(200)
       .uniq
