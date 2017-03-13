@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Duration
   def duration
     start = ::Mnemosyne::Clock.to_tick self.start

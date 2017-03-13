@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Span < ApplicationRecord
   include Duration
 
@@ -27,7 +28,7 @@ class Span < ApplicationRecord
 
     width = duration.to_f / trace_duration * 100
 
-    s_start = ::Mnemosyne::Clock.to_tick self.start
+    s_start = ::Mnemosyne::Clock.to_tick start
     t_start = ::Mnemosyne::Clock.to_tick trace.start
 
     offset = s_start - t_start

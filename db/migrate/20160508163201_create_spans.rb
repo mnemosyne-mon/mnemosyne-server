@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateSpans < ActiveRecord::Migration[5.0]
   def change
     create_table :spans, id: :uuid do |t|

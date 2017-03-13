@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 FactoryGirl.define do
   factory :application do
-    sequence(:name) {|n| "Spec Application ##{n}"}
+    sequence(:name) {|n| "Spec Application ##{n}" }
   end
 
   factory :trace do
