@@ -36,6 +36,8 @@ end
 group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
+
+  gem 'rubocop', '~> 0.47.1'
 end
 
 group :test do

@@ -11,3 +11,6 @@ before_install:
 before_script:
   - bundle exec rails db:create:all
   - bundle exec rails db:migrate
+script:
+  - bundle exec rake rubocop
+  - bundle exec rake spec

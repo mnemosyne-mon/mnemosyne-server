@@ -1,0 +1,54 @@
+AllCops:
+  Exclude:
+    - 'vendor/**'
+    - 'db/schema.rb'
+    - 'bin/**'
+  TargetRubyVersion: 2.4
+
+Rails:
+  Enabled: true
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+
+Style/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+Style/SpaceInsideBlockBraces:
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: no_space
+  SpaceBeforeBlockParameters: false
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/CaseIndentation:
+  EnforcedStyle: end
+  SupportedStyles:
+    - case
+    - end
+  IndentOneStep: true
+
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/Semicolon:
+  Exclude:
+    - '**/*_spec.rb'
+
+Style/RescueModifier:
+  Exclude:
+    - '**/*_spec.rb'
+
+Metrics/LineLength:
+  Exclude:
+    - 'mnemosyne.gemspec'
+
+Style/Documentation:
+  Enabled: false
