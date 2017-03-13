@@ -1,4 +1,4 @@
-class Trace < ActiveRecord::Base
+class Trace < ApplicationRecord
   include Duration
 
   attribute :start, ::Mnemosyne::Types::PreciseDateTime.new

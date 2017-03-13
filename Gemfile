@@ -1,24 +1,35 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.6'
-gem 'pg', '~> 0.15'
+gem 'rails', '~> 5.0.2'
+gem 'puma', '~> 3.0'
 
-gem 'hutch', '~> 0.21.0'
-gem 'puma'
+gem 'pg', '~> 0.15'
+gem 'hutch', '~> 0.21'
+
+# Use Redis adapter to run Action Cable in production
+# gem 'redis', '~> 3.0'
+# Use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
 
 gem 'slim'
 
 gem 'sass-rails', '~> 5.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2'
 gem 'therubyracer', platforms: :ruby
+
+gem 'jquery-rails'
+gem 'turbolinks', '~> 5'
+gem 'jbuilder', '~> 2.5'
 
 gem 'bourbon'
 gem 'neat'
 
-group :development do
-  gem 'web-console', '~> 2.0'
+group :development, :test do
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '~> 3.0.5'
 
   gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
 
   gem 'pry'

@@ -1,4 +1,4 @@
-class Span < ActiveRecord::Base
+class Span < ApplicationRecord
   include Duration
 
   attribute :start, ::Mnemosyne::Types::PreciseDateTime.new
