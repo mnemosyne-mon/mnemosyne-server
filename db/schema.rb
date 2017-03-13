@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -17,33 +16,33 @@ ActiveRecord::Schema.define(version: 20160509220242) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "applications", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+  create_table "applications", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "original_name"
   end
 
-  create_table "spans", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "trace_id",             null: false
-    t.string   "name",                 null: false
-    t.integer  "start",      limit: 8, null: false
-    t.integer  "stop",       limit: 8, null: false
+  create_table "spans", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "trace_id",   null: false
+    t.string   "name",       null: false
+    t.bigint   "start",      null: false
+    t.bigint   "stop",       null: false
     t.jsonb    "meta"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "traces", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "application_id",           null: false
-    t.uuid     "transaction_id",           null: false
+  create_table "traces", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid     "application_id", null: false
+    t.uuid     "transaction_id", null: false
     t.uuid     "origin_id"
-    t.string   "name",                     null: false
-    t.integer  "start",          limit: 8, null: false
-    t.integer  "stop",           limit: 8, null: false
+    t.string   "name",           null: false
+    t.bigint   "start",          null: false
+    t.bigint   "stop",           null: false
     t.jsonb    "meta"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end

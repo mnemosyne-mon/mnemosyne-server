@@ -1,4 +1,4 @@
-class CreateSpans < ActiveRecord::Migration
+class CreateSpans < ActiveRecord::Migration[5.0]
   def change
     create_table :spans, id: :uuid do |t|
       t.uuid :trace_id, null: false
