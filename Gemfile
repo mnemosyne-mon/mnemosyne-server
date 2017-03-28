@@ -17,6 +17,7 @@ gem 'slim'
 gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 5.0'
 gem 'therubyracer', platforms: :ruby
+gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
