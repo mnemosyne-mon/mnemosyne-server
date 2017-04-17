@@ -16,7 +16,7 @@ class Trace < ApplicationRecord
   end
 
   def title
-    span = spans.where("name ILIKE 'app.controller.%'").order(start: :desc).take
+    span = spans.find {|s| s.name =~ /^app\.controller\./}
 
     return span.title if span
 
