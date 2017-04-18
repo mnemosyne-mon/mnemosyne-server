@@ -2,7 +2,6 @@
 module Mnemosyne
   module Types
     class PreciseDateTime < ActiveRecord::Type::Value
-
       def serialize(value)
         ::Mnemosyne::Clock.to_tick(value)
       end
