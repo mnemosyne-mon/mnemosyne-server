@@ -17,7 +17,10 @@ class Trace < ApplicationRecord
   end
 
   def title
-    span = spans.find {|s| s.name =~ /^app\.controller\./}
+    span = spans
+      .sort_by(&:start)
+      .reverse
+      .find {|s| s.name =~ /^app\.controller\./ }
 
     return span.title if span
 

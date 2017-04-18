@@ -8,6 +8,9 @@ AllCops:
 Rails:
   Enabled: true
 
+Rails/FilePath:
+  Enabled: false
+
 Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
@@ -49,6 +52,10 @@ Style/RescueModifier:
 Metrics/LineLength:
   Exclude:
     - 'mnemosyne.gemspec'
+
+Metrics/BlockLength:
+  Exclude:
+    - '**/*_spec.rb'
 
 Style/Documentation:
   Enabled: false

@@ -4,15 +4,22 @@ class TraceConsumer
   include Hutch::Consumer
 
   consume '#'
-  queue_name 'mnemosyne.server'
 
+  if ENV['QUEUE_IDENT'].present?
+    queue_name "mnemosyne.server.#{ENV['QUEUE_IDENT'].strip}"
+  else
+    queue_name 'mnemosyne.server'
+  end
+
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def process(message)
     content = message.body
 
     ActiveRecord::Base.transaction do
       app = Application.fetch content[:application]
 
-      _trace = {
+      trace_data = {
         id: content[:uuid],
         origin_id: content[:origin],
         application: app,
@@ -23,10 +30,10 @@ class TraceConsumer
         meta: content[:meta]
       }
 
-      trace = Trace.create! _trace
+      trace = Trace.create! trace_data
 
       Array(content[:span]).each do |span|
-        _span = {
+        span_data = {
           id: span[:uuid],
           name: span[:name],
           trace: trace,
@@ -35,7 +42,7 @@ class TraceConsumer
           meta: span[:meta]
         }
 
-        Span.create! _span
+        Span.create! span_data
       end
     end
   ensure
