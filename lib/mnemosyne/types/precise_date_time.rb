@@ -13,7 +13,7 @@ module Mnemosyne
         elsif value.is_a?(String) && value =~ /^\d+$/
           ::Mnemosyne::Clock.to_time Integer(value)
         elsif value.acts_like?(:time)
-          value.getutc
+          value
         end
       end
     end

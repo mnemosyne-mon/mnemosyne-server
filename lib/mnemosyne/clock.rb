@@ -4,11 +4,13 @@ module Mnemosyne
   module Clock
     class << self
       def to_tick(time)
-        time.to_i * 1_000_000_000 + time.nsec
+        utc = time.utc
+        utc.to_i * 1_000_000_000 + utc.nsec
       end
 
       def to_time(value)
-        Time.at(0) + Rational(value.to_i, 1_000_000_000)
+        time = Time.at(0).utc + Rational(value.to_i, 1_000_000_000)
+        time.localtime
       end
     end
   end
