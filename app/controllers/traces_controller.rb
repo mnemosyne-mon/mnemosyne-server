@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class TracesController < ApplicationController
   def index
     @traces = Trace

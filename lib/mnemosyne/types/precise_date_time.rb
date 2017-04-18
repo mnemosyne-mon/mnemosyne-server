@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Mnemosyne
   module Types
     class PreciseDateTime < ActiveRecord::Type::Value
