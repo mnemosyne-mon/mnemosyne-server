@@ -16,6 +16,11 @@ ActiveRecord::Schema.define(version: 20170418073911) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
+  create_table "activities", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "applications", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",    null: false
@@ -35,7 +40,7 @@ ActiveRecord::Schema.define(version: 20170418073911) do
 
   create_table "traces", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "application_id", null: false
-    t.uuid     "transaction_id", null: false
+    t.uuid     "activity_id",    null: false
     t.uuid     "origin_id"
     t.string   "name",           null: false
     t.bigint   "start",          null: false
@@ -43,13 +48,6 @@ ActiveRecord::Schema.define(version: 20170418073911) do
     t.jsonb    "meta"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-  end
-
-  create_table "transactions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.bigint   "start",      null: false
-    t.bigint   "stop",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end

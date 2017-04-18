@@ -5,5 +5,7 @@ module ConsumerSpecBehavior
     described_class.new
   end
 
-  def publish(data); end
+  def publish(data)
+    consumer.process(data)
+  end
 end

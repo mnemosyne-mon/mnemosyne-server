@@ -8,11 +8,12 @@ class Trace < ApplicationRecord
 
   attribute :id, ::Mnemosyne::Types::UUID4.new
   attribute :origin_id, ::Mnemosyne::Types::UUID4.new
-  attribute :transaction_id, ::Mnemosyne::Types::UUID4.new
+  attribute :activity_id, ::Mnemosyne::Types::UUID4.new
 
   has_many :spans, -> { order('start') }
 
   belongs_to :application
+  belongs_to :activity
 
   def app_name
     return application.name if application.name.present?

@@ -9,6 +9,8 @@ gem 'hutch', '~> 0.21'
 gem 'pg', '~> 0.15'
 
 gem 'uuid4', '~> 1.0'
+gem 'dry-types', '~> 0.9.4'
+gem 'dry-struct', '~> 0.2.1'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -49,4 +51,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'rspec', '~> 3.1'
   gem 'rspec-rails'
+  gem 'timecop'
 end
