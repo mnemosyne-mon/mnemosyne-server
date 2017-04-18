@@ -5,13 +5,16 @@ FactoryGirl.define do
     sequence(:name) {|n| "Spec Application ##{n}" }
   end
 
+  factory :activity do
+  end
+
   factory :trace do
     start { Time.zone.now }
     stop { Time.zone.now }
-    transaction_id { ::SecureRandom.uuid }
     name 'mnemosyne.test.trace'
 
     association :application
+    association :activity
   end
 
   factory :span do
