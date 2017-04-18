@@ -1,13 +1,13 @@
 .trace
-  h1= @trace.full_title
+  h1= trace.full_title
 
   .graph
     .span
-      span.info= @trace.name
+      span.info= trace.name
       span.bar
-        = ((@trace.stop - @trace.start).to_f * 1_000).round(3)
+        = ((trace.stop - trace.start).to_f * 1_000).round(3)
         ' ms
-    - @trace.spans.each do |span|
+    - trace.spans.each do |span|
       .span
         - if span.triggered_trace
           span.info= link_to span.title, trace_path(span.triggered_trace)

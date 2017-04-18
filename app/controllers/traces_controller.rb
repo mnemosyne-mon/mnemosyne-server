@@ -2,7 +2,7 @@
 
 class TracesController < ApplicationController
   def index
-    @traces = Trace
+    traces = Trace
       .joins(:spans)
       .includes(:spans)
       .includes(:application)
@@ -10,9 +10,13 @@ class TracesController < ApplicationController
       .order(start: :desc)
       .limit(200)
       .uniq
+
+    render locals: {traces: traces}
   end
 
   def show
-    @trace = Trace.find params[:id]
+    trace = Trace.find params[:id]
+
+    render locals: {trace: trace}
   end
 end
