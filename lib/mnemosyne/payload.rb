@@ -16,9 +16,7 @@ module Mnemosyne
     end
 
     ::Dry::Types.register 'uuid',
-      Dry::Types::Definition.new(UUID4).constructor do |val|
-        UUID4.try_convert(val)
-      end
+      Dry::Types::Definition.new(UUID4).constructor(UUID4.method(:try_convert))
 
     ::Dry::Types.register 'strict.uuid',
       ::Dry::Types['uuid'].constrained(type: UUID4)

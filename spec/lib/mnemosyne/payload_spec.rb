@@ -15,8 +15,8 @@ RSpec.describe ::Mnemosyne::Payload do
   end
 
   describe 'Types' do
-    describe 'Strict::UUID' do
-      subject { ::Dry::Types['strict.uuid'] }
+    describe 'UUID' do
+      subject { ::Mnemosyne::Payload::Types::UUID }
 
       it 'converts UUID to object' do
         expect(subject['cd4ea0e2-3d0d-4fb2-823e-5765e7b6783b']).to eq \
@@ -24,36 +24,18 @@ RSpec.describe ::Mnemosyne::Payload do
       end
 
       it 'raises on nil' do
-        expect { subject[nil] }.to raise_error TypeError, /Invalid UUID/
+        expect { subject[nil] }.to raise_error \
+          Dry::Types::ConstraintError, /nil must be an instance of UUID4/
       end
 
       it 'raises on invalid string' do
-        expect { subject['abc'] }.to raise_error TypeError, /Invalid UUID/
+        expect { subject['abc'] }.to raise_error \
+          Dry::Types::ConstraintError, /nil must be an instance of UUID4/
       end
 
       it 'raises on integer' do
-        expect { subject[5] }.to raise_error TypeError, /Invalid UUID/
-      end
-    end
-
-    describe 'Strict::UUID' do
-      subject { ::Dry::Types['uuid'] }
-
-      it 'converts UUID to object' do
-        expect(subject['cd4ea0e2-3d0d-4fb2-823e-5765e7b6783b']).to eq \
-          UUID4.new('cd4ea0e2-3d0d-4fb2-823e-5765e7b6783b')
-      end
-
-      it 'raises on nil' do
-        expect(subject[nil]).to eq nil
-      end
-
-      it 'raises on invalid string' do
-        expect(subject['abc']).to eq nil
-      end
-
-      it 'raises on integer' do
-        expect(subject[5]).to eq nil
+        expect { subject[5] }.to raise_error \
+          Dry::Types::ConstraintError, /nil must be an instance of UUID4/
       end
     end
   end
