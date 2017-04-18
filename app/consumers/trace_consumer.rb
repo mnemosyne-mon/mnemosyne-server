@@ -37,5 +37,7 @@ class TraceConsumer
         Span.create! _span
       end
     end
+  ensure
+    ::ActiveRecord::Base.clear_active_connections!
   end
 end

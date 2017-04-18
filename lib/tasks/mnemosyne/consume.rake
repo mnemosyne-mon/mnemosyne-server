@@ -13,6 +13,8 @@ namespace :mnemosyne do
     Rails.application.eager_load!
 
     Hutch::Config.set :mq_exchange, 'mnemosyne'
+    Hutch::Config.set :channel_prefetch, 25
+    Hutch::Config.set :consumer_pool_size, 25
 
     Hutch::Config.set :autoload_rails, true
     Hutch::Config.set :enable_http_api_use, false
