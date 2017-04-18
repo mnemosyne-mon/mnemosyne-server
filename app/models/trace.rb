@@ -6,6 +6,10 @@ class Trace < ApplicationRecord
   attribute :start, ::Mnemosyne::Types::PreciseDateTime.new
   attribute :stop, ::Mnemosyne::Types::PreciseDateTime.new
 
+  attribute :id, ::Mnemosyne::Types::UUID4.new
+  attribute :origin_id, ::Mnemosyne::Types::UUID4.new
+  attribute :transaction_id, ::Mnemosyne::Types::UUID4.new
+
   has_many :spans, -> { order('start') }
 
   belongs_to :application

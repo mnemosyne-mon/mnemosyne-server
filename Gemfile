@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gem 'puma', '~> 3.0'
@@ -6,6 +7,8 @@ gem 'rails', '~> 5.0.2'
 
 gem 'hutch', '~> 0.21'
 gem 'pg', '~> 0.15'
+
+gem 'uuid4', '~> 1.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
