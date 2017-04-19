@@ -15,7 +15,7 @@ class TraceConsumer
     try = 0
     begin
       ::Mnemosyne::Builder.create!(message.body)
-    rescue ActiveRecord::RecordNotUnique => err
+    rescue ActiveRecord::RecordNotUnique
       retry if (try += 1) < 2
       raise
     end
