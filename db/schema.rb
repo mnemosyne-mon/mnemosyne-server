@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418073911) do
+ActiveRecord::Schema.define(version: 20170419131923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 20170418073911) do
     t.jsonb    "meta"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_spans_on_name", using: :btree
+    t.index ["start"], name: "index_spans_on_start_asc", using: :btree
+    t.index ["start"], name: "index_spans_on_start_desc", order: { start: :desc }, using: :btree
+    t.index ["trace_id"], name: "index_spans_on_trace_id", using: :btree
   end
 
   create_table "traces", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -48,6 +52,10 @@ ActiveRecord::Schema.define(version: 20170418073911) do
     t.jsonb    "meta"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["name"], name: "index_traces_on_name", using: :btree
+    t.index ["origin_id"], name: "index_traces_on_origin_id", using: :btree
+    t.index ["start"], name: "index_traces_on_start_asc", using: :btree
+    t.index ["start"], name: "index_traces_on_start_desc", order: { start: :desc }, using: :btree
   end
 
 end
