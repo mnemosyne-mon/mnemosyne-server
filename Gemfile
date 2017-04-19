@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.2'
 
+gem 'bulk_insert', '~> 1.4'
 gem 'hutch', '~> 0.21'
 gem 'pg', '~> 0.15'
 

@@ -27,14 +27,16 @@ module Mnemosyne
             meta: payload[:meta]
         end
 
-        Array(payload[:span]).each do |span|
-          ::Span.create! \
-            id: span[:uuid],
-            name: span[:name],
-            trace: trace,
-            start: Integer(span[:start]),
-            stop: Integer(span[:stop]),
-            meta: span[:meta]
+        Span.bulk_insert do |worker|
+          Array(payload[:span]).each do |data|
+            worker.add \
+              id: data[:uuid],
+              name: data[:name],
+              trace_id: trace.id,
+              start: Integer(data[:start]),
+              stop: Integer(data[:stop]),
+              meta: data[:meta]
+          end
         end
       end
     end
