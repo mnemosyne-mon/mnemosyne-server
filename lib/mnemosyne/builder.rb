@@ -27,7 +27,9 @@ module Mnemosyne
             meta: payload[:meta]
         end
 
-        Span.bulk_insert do |worker|
+        # `Span.column_names` is required to force bulk insert plugin
+        # to process `id` column too.
+        Span.bulk_insert(*Span.column_names) do |worker|
           Array(payload[:span]).each do |data|
             worker.add \
               id: data[:uuid],
