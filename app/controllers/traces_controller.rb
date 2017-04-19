@@ -5,7 +5,7 @@ class TracesController < ApplicationController
     traces = Trace
       .includes(:spans)
       .includes(:application)
-      .where(name: 'app.web.request.rack')
+      .where(origin: nil)
       .order(start: :desc)
       .limit(200)
 
