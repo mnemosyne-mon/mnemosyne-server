@@ -11,7 +11,22 @@ module Mnemosyne
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def create!
+      activity = ::Activity.fetch payload.fetch(:transaction)
+      application = ::Application.fetch payload.fetch(:application)
+
       ActiveRecord::Base.transaction do
+        trace ||= begin
+          ::Trace.create! \
+            id: payload[:uuid],
+            origin_id: payload[:origin],
+            application: application,
+            activity: activity,
+            name: payload[:name],
+            start: Integer(payload[:start]),
+            stop: Integer(payload[:stop]),
+            meta: payload[:meta]
+        end
+
         Array(payload[:span]).each do |span|
           ::Span.create! \
             id: span[:uuid],
@@ -21,28 +36,6 @@ module Mnemosyne
             stop: Integer(span[:stop]),
             meta: span[:meta]
         end
-      end
-    end
-
-    def application
-      @application ||= ::Application.fetch payload.fetch(:application)
-    end
-
-    def activity
-      @activity ||= ::Activity.fetch payload.fetch(:transaction)
-    end
-
-    def trace
-      @trace ||= begin
-        ::Trace.create! \
-          id: payload[:uuid],
-          origin_id: payload[:origin],
-          application: application,
-          activity: activity,
-          name: payload[:name],
-          start: Integer(payload[:start]),
-          stop: Integer(payload[:stop]),
-          meta: payload[:meta]
       end
     end
 
