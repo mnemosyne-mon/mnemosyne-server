@@ -30,6 +30,10 @@ Style/Documentation:
 Style/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
+Style/NumericLiterals:
+  Exclude:
+    - '**/*_spec.rb'
+
 Style/RaiseArgs:
   EnforcedStyle: compact
 
@@ -59,3 +63,4 @@ Metrics/BlockLength:
 Metrics/LineLength:
   Exclude:
     - 'mnemosyne.gemspec'
+    - '**/*_spec.rb'

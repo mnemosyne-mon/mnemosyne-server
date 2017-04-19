@@ -3,47 +3,66 @@
 module Mnemosyne
   module Payload
     class << self
-      def new(payload, version: nil, **kwargs)
+      def new(payload, version: nil)
         version ||= payload.fetch(:version, 1)
 
         case version
           when 1
-            ::Mnemosyne::Payload::V1.new(payload, **kwargs)
+            ::Mnemosyne::Payload::V1.new(payload)
           else
             raise "Invalid payload version: #{version}"
         end
       end
     end
 
-    ::Dry::Types.register 'uuid',
-      Dry::Types::Definition.new(UUID4).constructor(UUID4.method(:try_convert))
-
-    ::Dry::Types.register 'strict.uuid',
-      ::Dry::Types['uuid'].constrained(type: UUID4)
-
     module Types
-      Name = ::Dry::Types['coercible.string']
-      UUID = ::Dry::Types['strict.uuid']
+      Name = ::Dry::Types::Definition.new(String)
+        .constructor do |input|
+          String(input).strip.tap do |str|
+            raise TypeError.new 'Must not be blank' if str.blank?
+          end
+        end
+
+      UUID = ::Dry::Types::Definition.new(UUID4)
+        .constructor do |input|
+          UUID4.try_convert(input) ||
+            (raise TypeError.new "Invalid UUID: #{input.inspect}")
+        end
+
+      NanoTime = ::Dry::Types::Definition.new(Time)
+        .constructor {|ts| ::Mnemosyne::Clock.to_time(ts) }
+
+      Meta = ::Dry::Types['hash']
     end
 
     class V1 < ::Dry::Struct::Value
-      attribute :application, Types::Name
-      attribute :activity, Types::UUID
-      attribute :platform, Types::Name
+      class Span < ::Dry::Struct::Value
+        constructor_type :strict_with_defaults
+
+        attribute :uuid, Types::UUID
+        attribute :name, Types::Name
+        attribute :start, Types::NanoTime
+        attribute :stop, Types::NanoTime
+        attribute :meta, Types::Meta.optional.default({})
+      end
 
       attr_reader :trace
       attr_reader :spans
 
-      def initalize(payload)
-        @application = Types::Name[payload[:application]]
-        @activity = Types::UUID[payload[:activity]]
-        @platform = Types::Name[payload[:platform]]
+      constructor_type :strict_with_defaults
 
-        @trace = payload.slice(:uuid, :origin, :name, :start, :stop, :meta)
-        @spans = Array(payload[:span]).map do |h|
-          h.slice(:uuid, :name, :start, :stop, :meta)
-        end
-      end
+      attribute :application, Types::Name
+      attribute :platform, Types::Name
+      attribute :activity, Types::UUID
+
+      attribute :uuid, Types::UUID
+      attribute :origin, Types::UUID.optional.default(nil)
+      attribute :name, Types::Name
+      attribute :start, Types::NanoTime
+      attribute :stop, Types::NanoTime
+      attribute :meta, Types::Meta.optional.default({})
+
+      attribute :span, ::Dry::Types['array'].member(Span).default([])
     end
   end
 end
