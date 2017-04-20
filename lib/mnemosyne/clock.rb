@@ -9,8 +9,7 @@ module Mnemosyne
       end
 
       def to_time(value)
-        time = Time.at(0).utc + Rational(value.to_i, 1_000_000_000)
-        time.localtime
+        Time.at(Rational(value.to_i, 1_000_000_000)).utc.localtime
       end
     end
   end
