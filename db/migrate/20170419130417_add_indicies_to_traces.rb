@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddIndiciesToTraces < ActiveRecord::Migration[5.0]
   def change
     add_index :traces, :name
@@ -8,7 +10,7 @@ class AddIndiciesToTraces < ActiveRecord::Migration[5.0]
       order: {start: :desc},
       using: :btree
 
-    add_index :traces, [:name, :start],
+    add_index :traces, %i(name start),
       name: 'index_traces_on_name_start_desc',
       order: {start: :desc},
       using: :btree
