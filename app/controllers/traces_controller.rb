@@ -6,8 +6,8 @@ class TracesController < ApplicationController
       .includes(:spans)
       .includes(:application)
       .where(origin: nil)
-      .order(start: :desc)
-      .limit(200)
+      .order(stop: :desc)
+      .limit(500)
 
     render locals: {traces: traces}
   end
