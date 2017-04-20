@@ -44,13 +44,12 @@ end
 group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
-
+  gem 'rspec-rails'
   gem 'rubocop', '~> 0.47.1'
 end
 
 group :test do
   gem 'factory_girl_rails'
   gem 'rspec', '~> 3.1'
-  gem 'rspec-rails'
   gem 'timecop'
 end
