@@ -13,9 +13,11 @@ class AddPlatformToActivities < ActiveRecord::Migration[5.0]
   def up
     add_column :activities, :platform_id, :uuid, null: true
 
-    # rubocop:disable Rails/SkipsModelValidations
-    Activity.where(platform_id: nil).update_all \
-      platform_id: Platform.default.id
+    if Activity.any?
+      # rubocop:disable Rails/SkipsModelValidations
+      Activity.where(platform_id: nil).update_all \
+        platform_id: Platform.default.id
+    end
 
     change_column :activities, :platform_id, :uuid, null: false
   end

@@ -13,9 +13,11 @@ class AddPlatformToApplication < ActiveRecord::Migration[5.0]
   def up
     add_column :applications, :platform_id, :uuid, null: true
 
-    # rubocop:disable Rails/SkipsModelValidations
-    Application.where(platform_id: nil).update_all \
-      platform_id: Platform.default.id
+    if Application.any?
+      # rubocop:disable Rails/SkipsModelValidations
+      Application.where(platform_id: nil).update_all \
+        platform_id: Platform.default.id
+    end
 
     change_column :applications, :platform_id, :uuid, null: false
   end
