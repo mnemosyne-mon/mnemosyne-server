@@ -16,6 +16,7 @@ class Trace < ApplicationRecord
   belongs_to :activity
 
   belongs_to :origin, class_name: Span
+  has_one :platform, through: :activity
 
   def app_name
     return application.name if application.name.present?

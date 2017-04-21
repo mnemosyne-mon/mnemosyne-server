@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
 FactoryGirl.define do
+  factory :platform do
+    sequence(:name) {|n| "platform/#{n}" }
+  end
+
   factory :application do
     sequence(:name) {|n| "Spec Application ##{n}" }
+    sequence(:original_name) {|n| "application/#{n}" }
+    association :platform
   end
 
   factory :activity do
+    association :platform
   end
 
   factory :trace do

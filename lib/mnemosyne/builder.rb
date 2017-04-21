@@ -11,8 +11,9 @@ module Mnemosyne
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def create!
-      activity = ::Activity.fetch payload.fetch(:transaction)
-      application = ::Application.fetch payload.fetch(:application)
+      platform = ::Platform.acquire payload.fetch(:platform)
+      activity = platform.activities.fetch payload.fetch(:transaction)
+      application = platform.applications.fetch payload.fetch(:application)
 
       ActiveRecord::Base.transaction do
         trace ||= begin
