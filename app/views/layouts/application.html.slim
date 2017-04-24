@@ -2,7 +2,8 @@ doctype html
 html
   head
     title Mnemosyne
-    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_pack_tag 'main'
+    = stylesheet_pack_tag 'main', media: 'all'
     = csrf_meta_tags
   body
     nav

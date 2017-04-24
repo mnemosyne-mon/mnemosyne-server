@@ -12,3 +12,5 @@
 !/log/.keep
 /tmp
 /spec/examples.txt
+/public/assets
+/node_modules

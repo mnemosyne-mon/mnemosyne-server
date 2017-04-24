@@ -3,6 +3,7 @@ AllCops:
     - 'vendor/**'
     - 'db/schema.rb'
     - 'bin/**'
+    - 'node_modules'
   TargetRubyVersion: 2.4
 
 Rails:
