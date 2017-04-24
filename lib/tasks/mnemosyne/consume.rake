@@ -13,6 +13,8 @@ namespace :mnemosyne do
 
     Rails.application.eager_load!
 
+    Hutch::Logging.logger = Rails.logger
+
     Hutch::Config.set :mq_exchange, 'mnemosyne'
     Hutch::Config.set :channel_prefetch, 25
     Hutch::Config.set :consumer_pool_size, 25
