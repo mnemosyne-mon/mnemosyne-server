@@ -22,4 +22,3 @@ class Platform < ApplicationRecord
     end
   end
 end
-
