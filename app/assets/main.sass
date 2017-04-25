@@ -78,24 +78,32 @@ ul.traces
     &:nth-child(2n+1)
       background-color: #f2f2f2
 
+    > div
+      display: table-cell
+
+    > div:first-child
+      width: 400px
+
+    > div:last-child
+      padding-right: 40px
+
   .bar
     margin: 2px 0 2px 0
     display: block
     height: 14px
-    background-color: #44A1D5
-    width: 100%
-    font-size: 10px
-    color: #fff
-    text-shadow: 0 0 1px #000
-    padding: 0 0 0 2px
+    line-height: 14px
+    background-color: #8ACAED
+    font-size: 11px
+    padding: 1px 0 0 4px
 
   .info
-    display: block
-    font-size: 10px
+    font-size: 12px
     text-overflow: ellipsis
-    // height: 28px
     overflow: hidden
-    color: #aaa
+    color: #777
+
+  a
+    text-decoration: none
 
 #main
-  padding: 10px 40px
+  padding: 5px 20px

@@ -3,16 +3,18 @@
 
   .graph
     .span
-      span.info= trace.name
-      span.bar
-        = ((trace.stop - trace.start).to_f * 1_000).round(3)
-        ' ms
-    - trace.spans.each do |span|
-      .span
-        - if span.triggered_trace
-          span.info= link_to span.title, trace_path(span.triggered_trace)
-        - else
-          span.info= span.title
-        span.bar(style=span.style)
-          = ((span.stop - span.start).to_f * 1_000).round(3)
+      div.info= trace.name
+      div
+        span.bar
+          = ((trace.stop - trace.start).to_f * 1_000).round(3)
           ' ms
+    - trace.spans.each do |span|
+      div
+        - if span.triggered_trace
+          div.info= link_to span.title, trace_path(span.triggered_trace)
+        - else
+          div.info= span.title
+        div
+          span.bar(style=span.style)
+            = ((span.stop - span.start).to_f * 1_000).round(3)
+            ' ms
