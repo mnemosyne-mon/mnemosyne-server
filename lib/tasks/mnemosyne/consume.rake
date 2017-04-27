@@ -15,7 +15,7 @@ namespace :mnemosyne do
 
     Hutch::Logging.logger = Rails.logger
 
-    config = Rails.application.config_for(:hutch)
+    config = Rails.application.config_for(:hutch).symbolize_keys
 
     ENV['QUEUE_IDENT'] ||= config[:ident] if config.key?(:ident)
 
