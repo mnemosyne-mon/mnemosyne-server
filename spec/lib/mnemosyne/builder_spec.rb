@@ -77,7 +77,7 @@ RSpec.describe ::Mnemosyne::Builder do
       subject { trace.application }
 
       example 'original name equals payload value' do
-        expect(subject.original_name).to eq 'Mnemosyne/Application'
+        expect(subject.name).to eq 'Mnemosyne/Application'
       end
 
       example 'correct platform is associated' do

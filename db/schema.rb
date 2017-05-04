@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425090844) do
+ActiveRecord::Schema.define(version: 20170504131755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,12 @@ ActiveRecord::Schema.define(version: 20170425090844) do
   end
 
   create_table "applications", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.string   "original_name"
-    t.uuid     "platform_id",   null: false
+    t.uuid     "platform_id", null: false
+    t.index ["platform_id", "name"], name: "index_applications_on_platform_id_and_name", unique: true, using: :btree
   end
 
   create_table "platforms", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -35,7 +36,7 @@ ActiveRecord::Schema.define(version: 20170425090844) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_platforms_on_name", using: :btree
+    t.index ["name"], name: "index_platforms_on_name", unique: true, using: :btree
   end
 
   create_table "spans", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

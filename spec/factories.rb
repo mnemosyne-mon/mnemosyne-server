@@ -6,8 +6,8 @@ FactoryGirl.define do
   end
 
   factory :application do
-    sequence(:name) {|n| "Spec Application ##{n}" }
-    sequence(:original_name) {|n| "application/#{n}" }
+    sequence(:title) {|n| "Spec Application ##{n}" }
+    sequence(:name) {|n| "application/#{n}" }
     association :platform
   end
 
