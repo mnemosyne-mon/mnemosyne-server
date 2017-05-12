@@ -16,5 +16,9 @@ module Mnemosyne
 
     config.paths.add 'lib', load_path: true, eager_load: true
     config.paths['config/locales'].unshift 'app/locales'
+
+    logger = ActiveSupport::Logger.new(STDOUT)
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
+    config.log_level = :info
   end
 end
