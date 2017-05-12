@@ -12,8 +12,6 @@ class TraceConsumer
   end
 
   def process(message)
-    return if message.body.fetch(:platform, 'default') == 'default'
-
     try = 0
     begin
       ::Mnemosyne::Builder.create!(message.body)
