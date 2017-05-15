@@ -12,7 +12,15 @@ const ManifestPlugin    = require('webpack-manifest-plugin')
 const { resolve } = require('path')
 const { env, paths, publicPath, loadersDir } = require('./configuration.js')
 
-console.log(publicPath)
+if(env.NODE_ENV === 'production') {
+  JAVASCRIPT_NAME = '[hash].js'
+  STYLESHEET_NAME = '[hash].css'
+  FILE_NAME = '[hash].[ext]'
+} else {
+  JAVASCRIPT_NAME = '[name].js'
+  STYLESHEET_NAME = '[name].css'
+  FILE_NAME = '[name].[ext]'
+}
 
 module.exports = {
   entry: {
@@ -21,8 +29,7 @@ module.exports = {
 
   output: {
     path: resolve(paths.output),
-    filename: '[name].js',
-    chunkFilename: '[name].[id].[chunkhash].js',
+    filename: JAVASCRIPT_NAME,
     publicPath
   },
 
@@ -31,7 +38,7 @@ module.exports = {
       test: /\.(jpg|jpeg|png|gif|svg|eot|ttf|woff|woff2)$/i,
       use: [{
         loader: 'file-loader',
-        options: { name: (env.NODE_ENV === 'production' ? '[name]-[hash].[ext]' : '[name].[ext]') }
+        options: { name: FILE_NAME }
       }]
     }, {
       test: /\.(scss|sass|css)$/i,
@@ -54,6 +61,8 @@ module.exports = {
           loader: 'sass-loader',
           options: {
             includePaths: [
+              resolve(paths.source),
+              resolve(paths.node_modules),
               require('bourbon').includePaths
             ]
           }
@@ -72,7 +81,7 @@ module.exports = {
 
   plugins: [
     new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
-    new ExtractTextPlugin(env.NODE_ENV === 'production' ? '[name]-[hash].css' : '[name].css'),
+    new ExtractTextPlugin(STYLESHEET_NAME),
     new ManifestPlugin({ fileName: paths.manifest, writeToFileEmit: true, publicPath }),
     new webpack.optimize.UglifyJsPlugin({sourceMap: true})
   ],
