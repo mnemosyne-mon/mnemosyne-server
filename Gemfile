@@ -2,8 +2,8 @@
 
 source 'https://rubygems.org'
 
-gem 'puma', '~> 3.0'
-gem 'rails', '~> 5.0.2'
+gem 'puma', '~> 3.7'
+gem 'rails', '~> 5.1.1'
 
 gem 'bulk_insert', '~> 1.4'
 gem 'hutch', '~> 0.21'
@@ -19,22 +19,10 @@ gem 'uuid4', '~> 1.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'slim'
-
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'coffee-rails', '~> 4.2'
-gem 'sass-rails', '~> 5.0'
-gem 'therubyracer', platforms: :ruby
-gem 'webpacker', git: 'https://github.com/rails/webpacker'
-
-gem 'jbuilder', '~> 2.5'
-gem 'jquery-rails'
-gem 'turbolinks', '~> 5'
-
-gem 'bourbon'
-gem 'neat'
+gem 'webpacker'
 
 group :development do
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
 
   gem 'spring'
@@ -43,10 +31,13 @@ group :development do
 end
 
 group :development, :test do
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
+
   gem 'pry'
   gem 'pry-byebug'
   gem 'rspec-rails'
-  gem 'rubocop', '~> 0.47.1'
+  gem 'rubocop', '~> 0.47'
 end
 
 group :test do

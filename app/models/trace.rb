@@ -15,7 +15,7 @@ class Trace < ApplicationRecord
   belongs_to :application
   belongs_to :activity
 
-  belongs_to :origin, class_name: Span
+  belongs_to :origin, class_name: Span, optional: true
   has_one :platform, through: :activity
 
   def app_name
