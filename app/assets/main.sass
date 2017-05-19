@@ -1,109 +1,19 @@
-@import 'bourbon'
+@import '~bourbon/bourbon'
 
-*
-  box-sizing: border-box
+@import '~bootstrap/variables'
+@import '~bootstrap/mixins'
 
-body
-  margin: 0
-  padding: 0
-  font-family: $helvetica
+$header-bg: $brand-primary
+$header-color: $white
 
-nav
-  padding: 1px 10px
-  border-bottom: 1px solid #ddd
-  background-image: linear-gradient(#fff, #f6f6f6)
+@import '~bootstrap/normalize'
+@import '~bootstrap/print'
 
-  h1
-    font-family: 'Open Sans', 'Droid Sans'
-    display: inline-block
-    margin: 0
-    padding: 0
+@import '~bootstrap/reboot'
+@import '~bootstrap/type'
+@import '~bootstrap/grid'
 
-  ul
-    margin: 0
-    padding: 0 0 0 40px
-    list-style: none
-    display: inline-block
+@import 'typography'
 
-  li
-    display: inline-block
-
-    a
-      display: block
-      text-decoration: none
-      font-weight: bold
-      color: #333
-      padding: 15px
-
-      &:hover
-        background-image: linear-gradient(#eee, #e5e5e5)
-
-ul.traces
-  margin: 0
-  padding: 0
-  display: table
-  list-style: none
-  width: 100%
-
-  li
-    margin: 0
-    padding: 0
-    display: table-row
-
-    &:hover
-      background-color: #eee
-
-    span
-      display: table-cell
-
-      a
-        display: block
-        padding: 3px 8px
-        text-decoration: none
-
-  .uuid
-    font-family: monospace
-
-.graph
-  margin: 0
-  padding: 0
-  display: table
-  width: 100%
-
-  > div
-    margin: 0
-    padding: 0
-    display: table-row
-
-    &:nth-child(2n+1)
-      background-color: #f2f2f2
-
-    > div
-      display: table-cell
-
-    > div:first-child
-      width: 400px
-
-    > div:last-child
-      padding-right: 40px
-
-  .bar
-    margin: 2px 0 2px 0
-    display: block
-    height: 14px
-    line-height: 14px
-    background-color: #8ACAED
-    font-size: 11px
-    padding: 1px 0 0 4px
-
-  .info
-    font-size: 12px
-    text-overflow: ellipsis
-    overflow: hidden
-    color: #777
-
-  a
-    text-decoration: none
-
-#main
-  padding: 5px 20px
+@import 'header'
+@import 'traces'

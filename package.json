@@ -20,6 +20,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "bourbon": "^4.3.4"
+    "bourbon": "^4.3.4",
+    "bootstrap": "^4.0.0-alpha.6"
   }
 }

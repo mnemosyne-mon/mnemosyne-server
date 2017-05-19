@@ -9,7 +9,7 @@ const csswring     = require('csswring')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ManifestPlugin    = require('webpack-manifest-plugin')
 
-const { resolve } = require('path')
+const { join, resolve } = require('path')
 const { env, paths, publicPath, loadersDir } = require('./configuration.js')
 
 if(env.NODE_ENV === 'production') {
@@ -46,12 +46,14 @@ module.exports = {
         use: [{
           loader: 'css-loader',
           options: {
+            sourceMap: true,
             minimize: env.NODE_ENV === 'production',
             importLoaders: 2
           }
         }, {
           loader: 'postcss-loader',
           options: {
+            sourceMap: true,
             plugins: () => [
               require('autoprefixer'),
               require('csswring')
@@ -60,11 +62,7 @@ module.exports = {
         }, {
           loader: 'sass-loader',
           options: {
-            includePaths: [
-              resolve(paths.source),
-              resolve(paths.node_modules),
-              require('bourbon').includePaths
-            ]
+            sourceMap: true
           }
         }]
       })
@@ -80,6 +78,12 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+      "$": "jquery",
+      "jquery": "jquery",
+      "jQuery": "jquery",
+      "window.jQuery": "jquery"
+    }),
     new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
     new ExtractTextPlugin(STYLESHEET_NAME),
     new ManifestPlugin({ fileName: paths.manifest, writeToFileEmit: true, publicPath }),
@@ -87,6 +91,10 @@ module.exports = {
   ],
 
   resolve: {
+    alias: {
+      bootstrap: 'bootstrap/scss',
+      bourbon: 'bourbon/app/assets/stylesheets'
+    },
     extensions: [
       '.coffee', '.js', '.sass', '.scss', '.css', '.png', '.svg', '.jpg'
     ],
