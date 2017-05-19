@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryGirl.define do # rubocop:disable BlockLength
   factory :platform do
     sequence(:name) {|n| "platform/#{n}" }
   end
@@ -22,6 +22,10 @@ FactoryGirl.define do
 
     association :application
     association :activity
+
+    after(:build) do |trace|
+      trace.platform = trace.activity.platform
+    end
   end
 
   factory :span do

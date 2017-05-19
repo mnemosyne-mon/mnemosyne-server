@@ -4,6 +4,13 @@ require 'rails_helper'
 
 RSpec.describe Trace, type: :model do
   let(:time) { Time.zone.now }
+  let(:trace) { build :trace }
+
+  describe '#platform' do
+    it 'equals activity platform' do
+      expect(trace.platform).to eq trace.activity.platform
+    end
+  end
 
   describe '#start' do
     it 'saves nanosecond datetimes' do
