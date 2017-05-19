@@ -20,7 +20,8 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
     "bourbon": "^4.3.4",
-    "bootstrap": "^4.0.0-alpha.6"
+    "timeago": "^1.5.4"
   }
 }

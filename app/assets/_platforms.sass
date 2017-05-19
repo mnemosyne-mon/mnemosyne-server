@@ -1,0 +1,37 @@
+@import 'panel'
+
+.platforms
+  .platform
+    @extend %panel
+
+    > h3
+      margin: 0
+      padding: 0
+
+      border-bottom: 1px solid #eee
+
+      > a
+        display: block
+        padding: 2rem 1rem
+        cursor: pointer
+
+    > div
+      display: flex
+      padding-bottom: 0.3rem
+
+      > .info
+        display: row
+        flex-grow: 1
+
+        > span
+          display: block
+          padding: 0.2rem
+
+          text-align: center
+          font-size: $small-font-size
+          color: $gray-light
+
+        > div
+          text-align: center
+
+

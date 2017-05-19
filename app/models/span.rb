@@ -7,7 +7,7 @@ class Span < ApplicationRecord
   attribute :stop, ::Mnemosyne::Types::PreciseDateTime.new
 
   belongs_to :trace
-  has_one :triggered_trace, foreign_key: :origin_id, class_name: :Trace
+  has_one :origin, foreign_key: :origin_id, class_name: :Trace
 
   def title
     case name
@@ -22,19 +22,5 @@ class Span < ApplicationRecord
       else
         "#{name} <#{meta.keys.join(', ')}>"
     end
-  end
-
-  def style
-    trace_duration = trace.duration
-
-    width = duration.to_f / trace_duration * 100
-
-    s_start = ::Mnemosyne::Clock.to_tick start
-    t_start = ::Mnemosyne::Clock.to_tick trace.start
-
-    offset = s_start - t_start
-    offset = offset.to_f / trace_duration * 100
-
-    "width: #{width}%; margin-left: #{offset}%"
   end
 end

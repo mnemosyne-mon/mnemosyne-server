@@ -1,17 +1,17 @@
-.trace
-  h1= trace.full_title
+.container-fluid.trace
+  h2= @trace.full_title
 
   .graph
     .span
-      div.info= trace.name
+      div.info= @trace.name
       div
         span.bar
-          = ((trace.stop - trace.start).to_f * 1_000).round(3)
+          = ((@trace.stop - @trace.start).to_f * 1_000).round(3)
           ' ms
-    - trace.spans.each do |span|
+    - @trace.spans.each do |span|
       div
-        - if span.triggered_trace
-          div.info= link_to span.title, trace_path(span.triggered_trace)
+        - if span.origin
+          div.info= link_to span.title, span.origin.self_path
         - else
           div.info= span.title
         div

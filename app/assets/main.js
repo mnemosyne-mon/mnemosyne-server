@@ -1,7 +1,5 @@
+import 'timeago'
 
-function fn() {
-    console.log('Testing')
-    // abc
-}
-
-document.addEventListener('DOMContentLoaded', fn, false)
+jQuery(document).ready(function() {
+  $('[data-time-ago]').timeago()
+})

@@ -18,8 +18,11 @@ gem 'uuid4', '~> 1.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'draper', '~> 3.0'
 gem 'slim'
 gem 'webpacker'
+
+gem 'rails-timeago'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'

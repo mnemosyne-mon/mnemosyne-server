@@ -1,8 +1,9 @@
-ul.traces
-  - traces.each do |trace|
-    li
-      span.uuid= link_to trace.activity_id.to_s(format: :base62), trace_path(trace)
-      span= link_to trace.app_name, trace_path(trace)
-      span= link_to trace.title, trace_path(trace)
-      span= link_to trace.start, trace_path(trace)
-      span= link_to "#{(trace.duration.to_f / 1_000_000).round(3)} ms", trace_path(trace)
+.container-fluid
+  ul.traces
+    - @traces.each do |trace|
+      li
+        span.uuid= link_to trace.activity_id.to_s(format: :base62), trace.self_path
+        span= link_to trace.app_name, trace.self_path
+        span= link_to trace.title, trace.self_path
+        span= link_to trace.start, trace.self_path
+        span= link_to "#{trace.duration_ms} ms", trace.self_path

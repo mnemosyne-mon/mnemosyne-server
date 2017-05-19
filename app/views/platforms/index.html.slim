@@ -1,4 +1,15 @@
-ul.platforms
-  - platforms.each do |platform|
-    li
-      span= platform.name
+.container
+  .platforms
+    - @platforms.each do |platform|
+      .platform
+        h3
+          = link_to platform.name, platform_path(platform)
+        div
+          .info
+            span Last Activity
+            div
+              = timeago_tag platform.traces.order(:created_at).last.created_at
+          .info
+            span Applications
+            div
+              = platform.applications.count
