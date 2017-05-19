@@ -14,13 +14,13 @@ begin
     task.fail_on_error = false
   end
 
-  task(:default).clear.enhance %i(rubocop spec)
+  task(:default).clear.enhance %i[rubocop spec]
 rescue LoadError # rubocop:disable HandleExceptions
   # noop
 end
 
 namespace :assets do
-  task(:clean) { }
+  task(:clean) {}
   task(:clobber) { Rake::Task['webpacker:clobber'].invoke }
   task(:precompile) { Rake::Task['webpacker:compile'].invoke }
 end
