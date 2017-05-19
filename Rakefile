@@ -18,3 +18,8 @@ begin
 rescue LoadError # rubocop:disable HandleExceptions
   # noop
 end
+
+namespace :assets do
+  task(:clobber) { Rake::Task['webpacker:clobber'].invoke }
+  task(:precompile) { Rake::Task['webpacker:compile'].invoke }
+end
