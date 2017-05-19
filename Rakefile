@@ -20,6 +20,7 @@ rescue LoadError # rubocop:disable HandleExceptions
 end
 
 namespace :assets do
+  task(:clean) { }
   task(:clobber) { Rake::Task['webpacker:clobber'].invoke }
   task(:precompile) { Rake::Task['webpacker:compile'].invoke }
 end
