@@ -22,6 +22,7 @@ module Mnemosyne
             origin_id: payload[:origin],
             application: application,
             activity: activity,
+            platform: platform,
             name: payload[:name],
             start: Integer(payload[:start]),
             stop: Integer(payload[:stop]),

@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class TracesController < ApplicationController
-  before_action :platform
+  include Concerns::PlatformScope
 
   def index
     @traces = Trace
+      .where(platform: platform)
       .includes(:spans)
       .includes(:application)
       .where(origin: nil)
@@ -15,6 +16,7 @@ class TracesController < ApplicationController
 
   def show
     @trace = Trace
+      .where(platform: platform)
       .find(params[:id])
       .decorate(context: context)
 
@@ -27,9 +29,5 @@ class TracesController < ApplicationController
     {
       platform: platform
     }
-  end
-
-  def platform
-    @platform = Platform.find UUID params[:platform_id]
   end
 end

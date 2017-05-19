@@ -7,7 +7,7 @@ class Platform < ApplicationRecord
 
   has_many :activities
   has_many :applications
-  has_many :traces, through: :applications
+  has_many :traces
 
   def title
     if (title = super).present?
@@ -18,7 +18,7 @@ class Platform < ApplicationRecord
   end
 
   def to_param
-    id.to_s(format: :base62)
+    name
   end
 
   class << self
