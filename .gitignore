@@ -14,4 +14,4 @@
 /spec/examples.txt
 /public/assets
 /node_modules
-/config/deploy
+/deploy
