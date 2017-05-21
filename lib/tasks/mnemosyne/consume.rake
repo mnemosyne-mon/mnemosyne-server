@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable BlockLength
 namespace :mnemosyne do
   desc 'Run hutch and consume messages from clients'
   task consume: :environment do
@@ -13,11 +14,31 @@ namespace :mnemosyne do
 
     Rails.application.eager_load!
 
+    Rails.logger.level = Logger::INFO
+
     Hutch::Logging.logger = Rails.logger
 
     config = Rails.application.config_for(:hutch).symbolize_keys
 
     ENV['QUEUE_IDENT'] ||= config[:ident] if config.key?(:ident)
+
+    def parse(uri)
+      amqp = AMQ::URI.parse(uri)
+
+      {
+        ssl: amqp[:ssl],
+        host: amqp[:host],
+        port: amqp[:port],
+        vhost: amqp[:vhost],
+        username: amqp[:user],
+        password: amqp[:pass]
+      }
+    end
+
+    config.reverse_merge! parse config[:uri] if config.key?(:uri)
+    config.merge! parse ENV['SERVER'] if ENV.key?('SERVER')
+
+    config[:exchange] = ENV['EXCHANGE'] || config[:exchange] || 'mnemosyne'
 
     Hutch::Config.set :mq_host, config[:host] if config.key?(:host)
     Hutch::Config.set :mq_port, config[:port] if config.key?(:port)
