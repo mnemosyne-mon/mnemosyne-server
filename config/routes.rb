@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   resources :platforms, only: %i[show], path: 'platform' do
     get 'traces', to: 'traces#index'
+    get 'errors', to: 'errors#index'
     get 'trace/:id', to: 'traces#show', as: 'trace'
   end
 
