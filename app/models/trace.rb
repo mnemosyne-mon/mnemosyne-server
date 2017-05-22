@@ -16,24 +16,4 @@ class Trace < ApplicationRecord
   belongs_to :activity
   belongs_to :platform
   belongs_to :origin, class_name: 'Span', optional: true
-
-  def app_name
-    return application.name if application.name.present?
-
-    application.original_name
-  end
-
-  def title
-    span = spans
-      .sort_by(&:start)
-      .find {|s| s.name =~ /^app\.controller\./ }
-
-    return span.title if span
-
-    name
-  end
-
-  def full_title
-    "#{app_name}: #{title}"
-  end
 end
