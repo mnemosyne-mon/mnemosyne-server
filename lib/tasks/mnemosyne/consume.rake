@@ -12,6 +12,9 @@ namespace :mnemosyne do
       config.eager_load = true
     end
 
+    STDOUT.sync = true
+    STDERR.sync = true
+
     Rails.application.eager_load!
 
     Rails.logger.level = Logger::INFO
