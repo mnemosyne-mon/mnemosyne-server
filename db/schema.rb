@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523163542) do
+ActiveRecord::Schema.define(version: 20170523170045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 20170523163542) do
     t.index ["origin_id", "start"], name: "index_traces_on_origin_start_desc", order: { start: :desc }, where: "(origin_id IS NULL)"
     t.index ["origin_id"], name: "index_traces_on_origin_id"
     t.index ["platform_id", "created_at"], name: "index_traces_on_platform_id_and_created_at"
+    t.index ["platform_id", "origin_id", "stop"], name: "index_traces_platform_original_stop_ordered", order: { stop: :desc }, where: "(origin_id IS NULL)"
+    t.index ["platform_id", "stop"], name: "index_traces_platform_stop_ordered", order: { stop: :desc }
     t.index ["platform_id"], name: "index_traces_on_platform_id"
     t.index ["start"], name: "index_traces_on_start_desc", order: { start: :desc }
   end
