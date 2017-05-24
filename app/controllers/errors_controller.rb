@@ -3,6 +3,5 @@
 class ErrorsController < ApplicationController
   include Concerns::PlatformScope
 
-  def index
-  end
+  def index; end
 end
