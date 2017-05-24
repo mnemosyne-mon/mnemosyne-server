@@ -10,7 +10,7 @@ class PlatformsController < ApplicationController
   end
 
   def show
-    @heatmap = ::Mnemosyne::Heatmap.new
+    @heatmap = ::Mnemosyne::Heatmap.new(platform.id)
   end
 
   private

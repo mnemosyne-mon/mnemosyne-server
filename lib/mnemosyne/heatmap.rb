@@ -4,7 +4,8 @@ module Mnemosyne
   class Heatmap
     using ::Mnemosyne::Refinements::Arel::Grouping
 
-    def initialize
+    def initialize(platform)
+      @platform = platform
       @column_name = :stop
       @start = Time.zone.now
     end
@@ -18,30 +19,29 @@ module Mnemosyne
     # Number of latency buckets
     #
     def latency_bucket_count
-      20
+      100
     end
 
     # Latency bucket size in microseconds
     #
     def latency_interval
-      10_000
+      20_000
+    end
+
+    def latency_start
+      0
     end
 
     # Number of time buckets
     #
     def time_bucket_count
-      30
+      260
     end
 
     # Size of each time bucket in seconds
     #
     def time_interval
-      60
-    end
-
-    def time_start
-      (@start.to_i / time_interval * time_interval) -
-        (time_interval * time_bucket_count)
+      600
     end
 
     # Iterate over each column
@@ -53,28 +53,38 @@ module Mnemosyne
     end
 
     def value_at(row, col)
-      if (field = data[[column_value_at(col), row_value_at(row)]])
+      if (field = data[[col, row]])
         field.first['count']
       else
         0
       end
     end
 
-    def row_value_at(idx)
-      idx * latency_interval
+    def latency_at(idx)
+      latency_start + idx * latency_interval
     end
 
-    def column_value_at(idx)
-      time_start + (idx * time_interval)
+    def time_at(idx)
+      @start - (time_bucket_count - idx) * time_interval
     end
 
     def data
-      @data ||= execute.group_by {|h| [h['time'], h['latency']] }
+      @data ||= begin
+        data = execute
+
+        @max_count = data.map {|h| h['count'] }.max
+        @max_count_sqrt = normalize(@max_count)
+        @data = data.group_by {|h| [h['time'], h['latency']] }
+      end
     end
 
-    private
+    def normalize(value)
+      Math.sqrt(Math.sqrt(Math.sqrt(value))) - 0.9
+    end
 
-    attr_reader :column_name, :timeseries, :latseries
+    # private
+
+    attr_reader :column_name, :timeseries, :latseries, :max_count_sqrt
 
     def execute
       ActiveRecord::Base.connection.execute(create_query.to_sql).to_a
@@ -87,32 +97,36 @@ module Mnemosyne
       ts_stop = ::Mnemosyne::Clock.to_tick(@start)
 
       ls_size = latency_interval * 1_000
-      ls_strt = 0
-      ls_stop = ls_size * latency_bucket_count
+      ls_strt = latency_start * 1_000
+      ls_stop = latency_start + ls_size * latency_bucket_count
 
       traces = Arel::Table.new(:traces)
       column = traces[column_name]
 
-      t_cte = Arel::Table.new(:t_0)
+      t_cte = Arel::Table.new(:buckets)
       s_cte = traces
         .project(
           traces[:id],
-          (column / ts_size * ts_size).as('ts'),
-          ((traces[:stop] - traces[:start]) / ls_size * ls_size).as('ls')
+          ((column - ts_strt) / ts_size).as('ts'),
+          ((traces[:stop] - traces[:start] - ls_strt) / ls_size).as('ls')
         )
         .where([
           column.gt(ts_strt),
           column.lteq(ts_stop),
           (traces[:stop] - traces[:start]).gt(ls_strt),
-          (traces[:stop] - traces[:start]).lteq(ls_stop)
+          (traces[:stop] - traces[:start]).lteq(ls_stop),
+          traces[:origin_id].eq(nil),
+          traces[:platform_id].eq(@platform.to_s)
         ].reduce(&:and))
 
       w_cte = Arel::Nodes::As.new(t_cte, s_cte)
 
       t_cte
         .project(
-          (t_cte[:ts] / 1_000_000_000).as('time'),
-          (t_cte[:ls] / 1_000).as('latency'),
+          # (t_cte[:ts] / 1_000_000_000).as('time'),
+          # (t_cte[:ls] / 1_000).as('latency'),
+          (t_cte[:ts]).as('time'),
+          (t_cte[:ls]).as('latency'),
           t_cte[:id].count.as('count')
         )
         .with(w_cte)
@@ -121,10 +135,6 @@ module Mnemosyne
     end
 
     Row = Struct.new(:heatmap, :row_index) do
-      def latency
-        row_index * heatmap.latency_interval
-      end
-
       def each
         heatmap.time_bucket_count.times do |i|
           yield Column.new heatmap, row_index, i
@@ -135,6 +145,10 @@ module Mnemosyne
     Column = Struct.new(:heatmap, :row_index, :column_index) do
       def value
         heatmap.value_at(row_index, column_index)
+      end
+
+      def weight
+        [255, ((heatmap.normalize(value) / heatmap.max_count_sqrt.to_f) * 255).to_i].min
       end
     end
   end

@@ -1,6 +1,18 @@
 table.heatmap
   - @heatmap.each do |row|
     tr
-      td = row.latency
+      td.legend-latency
+        - if row.row_index % 5 == 0
+          = "#{@heatmap.latency_at(row.row_index) / 1000}ms"
       - row.each do |field|
-        td = field.value
+        - unless field.value.zero?
+          td.value-count class='weight-#{field.weight}' title=field.value
+        - else
+          td.value-count class='weight-0'
+  tr
+    td
+    - @heatmap.time_bucket_count.times do |i|
+      td.legend-time
+        div
+          span= @heatmap.time_at(i).strftime('%H:%M:%S')
+

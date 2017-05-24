@@ -34,4 +34,57 @@
         > div
           text-align: center
 
+.heatmap
+  margin: 1rem
 
+  tr:first-child
+    td
+      border-top: 1px solid rgba(0, 0, 0, 0.1)
+
+  tr:nth-child(5n)
+    .value-count
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+
+  .value-count
+    text-align: right
+    font-size: 8px
+    padding: 0 2px
+    color: rgba(0, 0, 0, 0.4)
+    height: 4px
+    width: 8px
+
+    &:nth-child(5n+1)
+      border-right: 1px solid rgba(0, 0, 0, 0.1)
+
+    @for $i from 0 through 255
+      &.weight-#{$i}
+        background-color: rgba(#00f, $i / 255)
+
+        @if $i > 120
+          color: white
+
+  .legend-latency
+    font-size: 8px
+    position: relative
+    bottom: -7px
+
+  .legend-time
+    div
+      position: relative
+
+    span
+      display: none
+
+    &:nth-child(10n+1)
+      span
+        display: block
+
+    span
+      position: absolute
+      top: 0
+      right: -2px
+      padding: 4px 2px 0 0
+      border-right: 1px solid black
+
+      white-space: nowrap
+      font-size: 10px
