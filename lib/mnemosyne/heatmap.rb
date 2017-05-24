@@ -41,7 +41,7 @@ module Mnemosyne
     # Size of each time bucket in seconds
     #
     def time_interval
-      600
+      60
     end
 
     # Iterate over each column
