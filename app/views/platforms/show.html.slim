@@ -1,0 +1,6 @@
+table.heatmap
+  - @heatmap.each do |row|
+    tr
+      td = row.latency
+      - row.each do |field|
+        td = field.value
