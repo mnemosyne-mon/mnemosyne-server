@@ -39,7 +39,11 @@ class SpanDecorator < ApplicationDecorator
   def name_for_url(url, scheme)
     url = ::URI.parse(url)
     url.scheme = scheme
-    url.host = origin.first.application.name.split(%r{[/\s]+})[1].downcase
+
+    if (app = origin.first&.application)
+      url.host = app.name.split(%r{[/\s]+})[1].downcase
+    end
+
     url.port = nil
     url.to_s
   end
