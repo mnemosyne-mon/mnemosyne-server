@@ -14,6 +14,19 @@ class TracesController < ApplicationController
       .decorate(context: context)
   end
 
+  def heatmap
+    @traces = Trace
+      .where(platform: platform)
+      .where(origin: nil)
+
+    @heatmap = ::Mnemosyne::Heatmap.new(@traces)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @heatmap.as_json }
+    end
+  end
+
   def show
     @trace = Trace
       .where(platform: platform)
