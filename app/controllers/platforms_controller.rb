@@ -10,7 +10,7 @@ class PlatformsController < ApplicationController
   end
 
   def show
-    redirect_to platform_traces_url(platform)
+    #
   end
 
   private

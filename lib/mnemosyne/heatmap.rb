@@ -10,22 +10,36 @@ module Mnemosyne
       @start = Time.zone.now
     end
 
-    def as_json(*args)
+    def as_json(*args) # rubocop:disable MethodLength
       {
-        data: execute
+        x: {
+          range: [
+            time_at(0).iso8601(9),
+            time_at(time_bucket_count - 1).iso8601(9)
+          ],
+          length: time_bucket_count
+        },
+        y: {
+          range: [
+            latency_at(0),
+            latency_at(latency_bucket_count - 1)
+          ],
+          length: latency_bucket_count
+        },
+        values: execute
       }.as_json(*args)
     end
 
     # Number of latency buckets
     #
     def latency_bucket_count
-      100
+      80
     end
 
     # Latency bucket size in microseconds
     #
     def latency_interval
-      20_000
+      25_000
     end
 
     def latency_start
@@ -35,13 +49,13 @@ module Mnemosyne
     # Number of time buckets
     #
     def time_bucket_count
-      260
+      120
     end
 
     # Size of each time bucket in seconds
     #
     def time_interval
-      60
+      30
     end
 
     # Iterate over each column
@@ -72,9 +86,9 @@ module Mnemosyne
       @data ||= begin
         data = execute
 
-        @max_count = data.map {|h| h['count'] }.max
+        @max_count = data.map {|h| h['v'] }.max
         @max_count_sqrt = normalize(@max_count)
-        @data = data.group_by {|h| [h['time'], h['latency']] }
+        @data = data.group_by {|h| [h['x'], h['y']] }
       end
     end
 
@@ -120,9 +134,9 @@ module Mnemosyne
 
       t_cte
         .project(
-          (t_cte[:ts]).as('time'),
-          (t_cte[:ls]).as('latency'),
-          t_cte[:id].count.as('count')
+          (t_cte[:ts]).as('x'),
+          (t_cte[:ls]).as('y'),
+          t_cte[:id].count.as('v')
         )
         .with(w_cte)
         .group(t_cte[:ts], t_cte[:ls])

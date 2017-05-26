@@ -67,11 +67,24 @@ module.exports = {
         }]
       })
     }, {
+      test: /\.(ls)$/i,
+      use: [{
+        loader: 'livescript-loader'
+      }]
+    }, {
       test: /\.(js)$/i,
+      exclude: /node_modules/,
       use: [{
         loader: 'babel-loader',
         options: {
-          presets: ['env']
+          presets: [
+            ['env', {
+              targets: {browsers: ['last 1 chrome versions']},
+              modules: false,
+              loose: true,
+              debug: true
+            }]
+          ]
         }
       }]
     }]
@@ -86,8 +99,7 @@ module.exports = {
     }),
     new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
     new ExtractTextPlugin(STYLESHEET_NAME),
-    new ManifestPlugin({ fileName: paths.manifest, writeToFileEmit: true, publicPath }),
-    new webpack.optimize.UglifyJsPlugin({sourceMap: true})
+    new ManifestPlugin({ fileName: paths.manifest, writeToFileEmit: true, publicPath })
   ],
 
   resolve: {
