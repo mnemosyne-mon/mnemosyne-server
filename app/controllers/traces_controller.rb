@@ -4,18 +4,18 @@ class TracesController < ApplicationController
   include Concerns::PlatformScope
 
   def index
-    @traces = Trace
+    @traces = Trace.all
       .where(platform: platform)
+      .where(origin: nil)
       .includes(:spans)
       .includes(:application)
-      .where(origin: nil)
       .order(stop: :desc)
       .limit(500)
       .decorate(context: context)
   end
 
   def heatmap
-    @traces = Trace
+    @traces = Trace.all
       .where(platform: platform)
       .where(origin: nil)
 

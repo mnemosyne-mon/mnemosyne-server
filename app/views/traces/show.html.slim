@@ -1,6 +1,9 @@
 .container-fluid.trace
   h2= @trace.full_title
 
+  .information
+    = @trace.render_information
+
   .graph
     .span
       div.info= @trace.name
@@ -9,11 +12,11 @@
           = ((@trace.stop - @trace.start).to_f * 1_000).round(3)
           ' ms
     - @trace.spans.each do |span|
-      div
+      .span
         - if span.origin
-          div.info= link_to span.title, span.origin.self_path
+          div.info= link_to span.name, span.origin.self_path
         - else
-          div.info= span.title
+          div.info= span.name
         div
           span.bar(style=span.style)
             = ((span.stop - span.start).to_f * 1_000).round(3)

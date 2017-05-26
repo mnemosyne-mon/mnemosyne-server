@@ -16,4 +16,13 @@ class SpanDecorator < ApplicationDecorator
 
     "width: #{width}%; margin-left: #{offset}%"
   end
+
+  def title
+    case name
+      when 'app.controller.request.rails'
+        "#{meta['controller']}##{meta['action']}"
+      else
+        name
+    end
+  end
 end

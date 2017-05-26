@@ -4,6 +4,28 @@
   h2
     margin-bottom: 1rem
 
+  .information
+    display: table
+    width: 100%
+    margin: 1rem 0
+
+    border-spacing: 2px
+
+    section
+      display: table-cell
+
+    h4
+      font-size: 100%
+      font-weight: bold
+      background-color: #eee
+      padding: 3px 6px
+      margin: 0
+
+    p
+      padding: 3px 6px
+      margin: 0
+      background-color: #fafafa
+
 ul.traces
   margin: 0
   padding: 0
@@ -36,7 +58,7 @@ ul.traces
   display: table
   width: 100%
 
-  > div
+  .span
     margin: 0
     padding: 0
     display: table-row
@@ -46,12 +68,16 @@ ul.traces
 
     > div
       display: table-cell
+      padding: 0 0 0 4px
 
     > div:first-child
-      width: 400px
+      width: 300px
 
     > div:last-child
       padding-right: 40px
+
+    &:hover
+      background-color: #DFEBF2
 
   .bar
     margin: 2px 0 2px 0
@@ -67,6 +93,7 @@ ul.traces
     text-overflow: ellipsis
     overflow: hidden
     color: #777
+    cursor: pointer
 
   a
     text-decoration: none

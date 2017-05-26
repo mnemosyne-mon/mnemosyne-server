@@ -13,9 +13,18 @@ class TraceDecorator < ApplicationDecorator
       .sort_by(&:start)
       .find {|s| s.name =~ /^app\.controller\./ }
 
-    return span.title if span
+    if span && (title = span.title)
+      return title
+    end
 
-    name
+    trace_title || name
+  end
+
+  def trace_title
+    case name
+      when 'app.web.request.rack'
+        meta['path']
+    end
   end
 
   def full_title
@@ -28,5 +37,14 @@ class TraceDecorator < ApplicationDecorator
 
   def self_path
     h.platform_trace_path(context[:platform], self)
+  end
+
+  def render_information
+    case name
+      when 'app.web.request.rack'
+        h.render 'traces/web/rack'
+      else
+        'Nothing'
+    end
   end
 end

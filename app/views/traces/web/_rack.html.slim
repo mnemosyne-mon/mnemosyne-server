@@ -1,0 +1,17 @@
+- if !(meta = @trace.meta).empty?
+  - if meta.key?('method')
+    section
+      h4 Method
+      p= meta['method']
+
+  - if meta.key?('path')
+    section
+      h4 Path
+      p= meta['path']
+
+  - if meta.key?('query')
+    section
+      h4 Query String
+      p= meta['query']
+- else
+  p Trace metadata missing
