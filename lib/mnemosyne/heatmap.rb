@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Mnemosyne
-  class Heatmap
+  class Heatmap # rubocop:disable ClassLength
     using ::Mnemosyne::Refinements::Arel::Grouping
 
-    def initialize(platform)
-      @platform = platform
+    def initialize(traces)
+      @traces = traces
       @column_name = :stop
       @start = Time.zone.now
     end
@@ -104,9 +104,8 @@ module Mnemosyne
       column = traces[column_name]
 
       t_cte = Arel::Table.new(:buckets)
-      s_cte = traces
+      s_cte = @traces.select(:id).arel
         .project(
-          traces[:id],
           ((column - ts_strt) / ts_size).as('ts'),
           ((traces[:stop] - traces[:start] - ls_strt) / ls_size).as('ls')
         )
@@ -114,17 +113,13 @@ module Mnemosyne
           column.gt(ts_strt),
           column.lteq(ts_stop),
           (traces[:stop] - traces[:start]).gt(ls_strt),
-          (traces[:stop] - traces[:start]).lteq(ls_stop),
-          traces[:origin_id].eq(nil),
-          traces[:platform_id].eq(@platform.to_s)
+          (traces[:stop] - traces[:start]).lteq(ls_stop)
         ].reduce(&:and))
 
       w_cte = Arel::Nodes::As.new(t_cte, s_cte)
 
       t_cte
         .project(
-          # (t_cte[:ts] / 1_000_000_000).as('time'),
-          # (t_cte[:ls] / 1_000).as('latency'),
           (t_cte[:ts]).as('time'),
           (t_cte[:ls]).as('latency'),
           t_cte[:id].count.as('count')
