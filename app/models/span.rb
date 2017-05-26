@@ -7,5 +7,5 @@ class Span < ApplicationRecord
   attribute :stop, ::Mnemosyne::Types::PreciseDateTime.new
 
   belongs_to :trace
-  has_one :origin, foreign_key: :origin_id, class_name: :Trace
+  has_many :origin, foreign_key: :origin_id, class_name: :Trace
 end

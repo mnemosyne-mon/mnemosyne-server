@@ -15,10 +15,10 @@
     - @trace.spans.each do |span|
       .span
         div.info data-popover-data=span.meta.to_json
-          - if span.origin
-              = link_to span.name, span.origin.self_path
+          - if span.origin.any?
+              = link_to span.title, span.origin.first.self_path
           - else
-              = span.name
+              = span.title
         div
           span.bar(style=span.style)
             = ((span.stop - span.start).to_f * 1_000).round(3)

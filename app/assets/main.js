@@ -21,6 +21,14 @@ jQuery(document).ready(function() {
       $list.addClass('span-details')
 
       for(let [key, value] of Object.entries(meta)) {
+        if(Array.isArray(value)) {
+          value = value.join('\n')
+        }
+
+        if(value instanceof Object) {
+          value = JSON.stringify(value, null, 2)
+        }
+
         $list.append($(`<dt>${key}</dt><dd>${value}</dd>`))
       }
 

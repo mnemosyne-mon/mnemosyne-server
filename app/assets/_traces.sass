@@ -27,13 +27,16 @@
       background-color: #fafafa
 
 .popover
-  max-width: 40em
+  max-width: 70%
 
 .span-details
   font-size: 0.8rem
 
   dd
     font-family: monospace
+    overflow: auto
+    max-height: 200px
+    white-space: pre
 
 ul.traces
   margin: 0
@@ -80,7 +83,7 @@ ul.traces
       padding: 0 0 0 4px
 
     > div:first-child
-      width: 300px
+      width: 400px
 
     > div:last-child
       padding-right: 40px
@@ -103,6 +106,9 @@ ul.traces
     overflow: hidden
     color: #777
     cursor: pointer
+    white-space: nowrap
+    overflow: hidden
+    max-width: 400px
 
   a
     text-decoration: none

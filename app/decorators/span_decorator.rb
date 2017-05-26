@@ -21,8 +21,26 @@ class SpanDecorator < ApplicationDecorator
     case name
       when 'app.controller.request.rails'
         "#{meta['controller']}##{meta['action']}"
+      when 'external.run.acfs'
+        "acfs.run"
+      when 'external.http.acfs'
+        "#{name_for_url(meta['url'], 'acfs')}"
+      when 'external.http.restify'
+        "#{name_for_url(meta['url'], 'restify')}"
+      when 'view.render.template.rails'
+        "#{name} #{meta['identifier'].gsub(%r{^.*/app/views/}, '')}"
       else
         name
     end
+  end
+
+  private
+
+  def name_for_url(url, scheme)
+    url = ::URI.parse(url)
+    url.scheme = scheme
+    url.host = origin.first.application.name.split(%r{[/\s]+})[1].downcase
+    url.port = nil
+    url.to_s
   end
 end
