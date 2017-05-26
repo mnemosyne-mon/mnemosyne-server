@@ -25,6 +25,7 @@
     "d3": "^4.9.1",
     "d3-selection-multi": "^1.0.1",
     "livescript-loader": "^0.1.6",
+    "tether": "^1.4.0",
     "timeago": "^1.5.4"
   }
 }

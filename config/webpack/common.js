@@ -92,10 +92,11 @@ module.exports = {
 
   plugins: [
     new webpack.ProvidePlugin({
-      "$": "jquery",
-      "jquery": "jquery",
-      "jQuery": "jquery",
-      "window.jQuery": "jquery"
+      '$': 'jquery',
+      'jquery': 'jquery',
+      'jQuery': 'jquery',
+      'window.jQuery': 'jquery',
+      'Tether': 'tether'
     }),
     new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
     new ExtractTextPlugin(STYLESHEET_NAME),
@@ -104,7 +105,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      bootstrap: 'bootstrap/scss',
+      // bootstrap: 'bootstrap/scss',
       bourbon: 'bourbon/app/assets/stylesheets'
     },
     extensions: [

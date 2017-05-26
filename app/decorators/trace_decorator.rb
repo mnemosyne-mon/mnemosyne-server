@@ -36,7 +36,7 @@ class TraceDecorator < ApplicationDecorator
   end
 
   def self_path
-    h.platform_trace_path(context[:platform], self)
+    h.trace_path(context[:platform], self)
   end
 
   def render_information

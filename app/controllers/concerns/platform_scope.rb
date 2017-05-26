@@ -8,7 +8,7 @@ module Concerns
       before_action :platform
 
       def platform
-        @platform ||= ::Platform.where(name: params[:platform_id]).take!
+        @platform ||= ::Platform.where(name: params[:platform]).take!
       end
     end
   end
