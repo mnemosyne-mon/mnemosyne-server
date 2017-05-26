@@ -14,6 +14,10 @@ import {
 } from 'd3-axis'
 
 import {
+  timeMinute
+} from 'd3-time'
+
+import {
   timeFormat
 } from 'd3-time-format'
 
@@ -71,6 +75,7 @@ export async function heatmap(el) {
 
   let axisX = axisBottom(scaleX)
     .tickFormat(timeFormat('%I:%M:%S'))
+    .ticks(timeMinute.every(10))
   let axisY = axisLeft(scaleY)
     .tickFormat((x) => `${x} ms`)
     .ticks(3)
