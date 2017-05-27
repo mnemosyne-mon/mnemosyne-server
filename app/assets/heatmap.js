@@ -98,9 +98,15 @@ export async function heatmap(el) {
 
   let heatmap = svg.append('g')
   let group = heatmap.append('g')
-  let counter = 1;
+  let lastY = 0;
 
   for(let {x, y, v} of data) {
+    if(y != lastY) {
+      group = heatmap.append('g')
+      group.classed(`hm-row-${y}`, true)
+      lastY = y
+    }
+
     group
       .append('rect')
       .attrs({
@@ -111,12 +117,5 @@ export async function heatmap(el) {
         fill: scaleZ(v),
         title: v
       })
-
-    if(counter % 400 == 0) {
-      group = heatmap.append('g')
-      counter = 1
-    } else {
-      counter += 1
-    }
   }
 }
