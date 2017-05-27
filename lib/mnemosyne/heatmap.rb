@@ -7,7 +7,7 @@ module Mnemosyne
     def initialize(traces)
       @traces = traces
       @column_name = :stop
-      @start = Time.zone.now
+      @start = Time.zone.now.change(sec: 0, usec: 0)
     end
 
     def as_json(*args) # rubocop:disable MethodLength
@@ -15,14 +15,14 @@ module Mnemosyne
         x: {
           range: [
             time_at(0).iso8601(9),
-            time_at(time_bucket_count - 1).iso8601(9)
+            time_at(time_bucket_count).iso8601(9)
           ],
           length: time_bucket_count
         },
         y: {
           range: [
             latency_at(0),
-            latency_at(latency_bucket_count - 1)
+            latency_at(latency_bucket_count)
           ],
           length: latency_bucket_count
         },
@@ -33,13 +33,13 @@ module Mnemosyne
     # Number of latency buckets
     #
     def latency_bucket_count
-      80
+      79
     end
 
-    # Latency bucket size in microseconds
+    # Latency bucket size in nanoseconds
     #
     def latency_interval
-      25_000
+      25_000_000
     end
 
     def latency_start
@@ -49,13 +49,13 @@ module Mnemosyne
     # Number of time buckets
     #
     def time_bucket_count
-      120
+      96
     end
 
-    # Size of each time bucket in seconds
+    # Size of each time bucket in nanoseconds
     #
     def time_interval
-      30
+      37_500_000_000
     end
 
     # Iterate over each column
@@ -75,11 +75,14 @@ module Mnemosyne
     end
 
     def latency_at(idx)
-      latency_start + idx * latency_interval
+      (latency_start + idx * latency_interval) / 1_000
     end
 
     def time_at(idx)
-      @start - (time_bucket_count - idx) * time_interval
+      offset = ::Mnemosyne::Clock.to_tick(@start)
+      tindex = time_bucket_count - idx
+
+      ::Mnemosyne::Clock.to_time(offset - tindex * time_interval)
     end
 
     def data
@@ -106,12 +109,12 @@ module Mnemosyne
 
     # rubocop:disable MethodLength, AbcSize, LineLength
     def create_query
-      ts_size = time_interval * 1_000_000_000
-      ts_strt = ::Mnemosyne::Clock.to_tick(@start - (time_interval * time_bucket_count))
+      ts_size = time_interval
       ts_stop = ::Mnemosyne::Clock.to_tick(@start)
+      ts_strt = ::Mnemosyne::Clock.to_tick(@start) - (time_interval * time_bucket_count)
 
-      ls_size = latency_interval * 1_000
-      ls_strt = latency_start * 1_000
+      ls_size = latency_interval
+      ls_strt = latency_start
       ls_stop = latency_start + ls_size * latency_bucket_count
 
       traces = Arel::Table.new(:traces)

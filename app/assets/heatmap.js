@@ -32,7 +32,7 @@ import {
 import 'd3-selection-multi'
 
 export async function heatmap(el) {
-  let height = 400
+  let height = 395
   let margin = {
     left: 1,
     top: 1,
@@ -45,7 +45,7 @@ export async function heatmap(el) {
   }
 
   let $el = select(el)
-  let width = $el.node().offsetWidth - margin.left - margin.right - offset.left
+  let width = $el.node().offsetWidth - margin.left - margin.right - offset.left - 1
 
   console.log(width)
 
@@ -74,37 +74,29 @@ export async function heatmap(el) {
       .attr('transform', `translate(${margin.left + offset.left}, ${margin.top})`)
 
   let axisX = axisBottom(scaleX)
-    .tickFormat(timeFormat('%I:%M:%S'))
+    .tickFormat(timeFormat('%H:%M'))
     .ticks(timeMinute.every(10))
   let axisY = axisLeft(scaleY)
     .tickFormat((x) => `${x} ms`)
     .ticks(3)
 
   svg.append('g')
-    .attr('transform', `translate(0,${height + 1})`)
-    .call((g) => {
-      g.call(axisX)
-      g.selectAll('.domain').remove()
-      g.selectAll('.tick text').style('text-anchor', 'middle')
-    })
+    .attr('transform', `translate(0,${height})`)
+    .call(axisX)
 
   svg.append('g')
     .attr('transform', 'translate(0, 0)')
-    .call((g) => {
-      g.call(axisY)
-      g.selectAll('.domain').remove()
-      g.selectAll('.tick line').remove()
-    })
+    .call(axisY)
 
   let heatmap = svg
     .append('g')
     .classed('hm-data', true)
 
-  let group = heatmap.append('g')
-  let lastY = 0;
+  let group = undefined
+  let lastY = 0
 
   for(let {x, y, v} of data) {
-    if(y != lastY) {
+    if(!group || y != lastY) {
       group = heatmap.append('g')
       group.classed(`hm-row-${y}`, true)
       lastY = y
@@ -113,12 +105,12 @@ export async function heatmap(el) {
     group
       .append('rect')
       .attrs({
-        x: Math.round(0 + x * bucketWidth),
+        x: Math.round(1 + x * bucketWidth),
         y: height - bucketHeight - y * bucketHeight,
         width: Math.round(bucketWidth),
         height: bucketHeight,
         fill: scaleZ(v),
-        title: v
+        title: v,
       })
   }
 
