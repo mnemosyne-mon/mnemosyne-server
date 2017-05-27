@@ -96,7 +96,10 @@ export async function heatmap(el) {
       g.selectAll('.tick line').remove()
     })
 
-  let heatmap = svg.append('g')
+  let heatmap = svg
+    .append('g')
+    .classed('hm-data', true)
+
   let group = heatmap.append('g')
   let lastY = 0;
 
@@ -118,4 +121,12 @@ export async function heatmap(el) {
         title: v
       })
   }
+
+  let hm_back = heatmap
+    .append('rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('fill', 'transparent')
+
+  hm_back.on('click', (x) => console.log(x))
 }
