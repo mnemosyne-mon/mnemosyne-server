@@ -21,6 +21,7 @@ module.exports = merge(common, {
     host: devServer.host,
     port: devServer.port,
     contentBase: resolve(paths.output, paths.entry),
+    proxy: {'/': 'http://localhost:9000'},
     publicPath
   }
 })
