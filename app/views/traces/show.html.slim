@@ -1,25 +1,26 @@
-.container-fluid.trace
-  h2= @trace.full_title
+.container-fluid
+  .trace
+    h2= @trace.full_title
 
-  .information
-    = @trace.render_information
+    .information
+      = @trace.render_information
 
-  .graph
-    .span
-      div.info
-        = @trace.name
-      div
-        span.bar
-          = ((@trace.stop - @trace.start).to_f * 1_000).round(3)
-          ' ms
-    - @trace.spans.each do |span|
+    .graph
       .span
-        div.info data-popover-data=span.meta.to_json
-          - if span.origin.any?
-              = link_to span.title, span.origin.first.self_path
-          - else
-              = span.title
+        div.info
+          = @trace.name
         div
-          span.bar(style=span.style)
-            = ((span.stop - span.start).to_f * 1_000).round(3)
+          span.bar
+            = ((@trace.stop - @trace.start).to_f * 1_000).round(3)
             ' ms
+      - @trace.spans.each do |span|
+        .span
+          div.info data-popover-data=span.meta.to_json
+            - if span.origin.any?
+                = link_to span.title, span.origin.first.self_path
+            - else
+                = span.title
+          div
+            span.bar(style=span.style)
+              = ((span.stop - span.start).to_f * 1_000).round(3)
+              ' ms
