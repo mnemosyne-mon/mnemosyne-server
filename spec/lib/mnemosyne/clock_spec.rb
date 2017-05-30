@@ -7,8 +7,16 @@ RSpec.describe ::Mnemosyne::Clock do
   let(:time) { Time.at(Rational(tick, 1_000_000_000)).utc }
 
   describe '.to_tick' do
-    it 'returns nanosecond-precise time stamp' do
-      expect(::Mnemosyne::Clock.to_tick(time)).to eq(tick)
+    subject { ::Mnemosyne::Clock.to_tick(time) }
+    context 'with time' do
+      it 'returns nanosecond-precise time stamp' do
+        is_expected.to eq(tick)
+      end
+    end
+
+    context 'with duration' do
+      let(:time) { ::ActiveSupport::Duration.seconds(30.75) }
+      it { is_expected.to eq 30_750_000_000 }
     end
   end
 

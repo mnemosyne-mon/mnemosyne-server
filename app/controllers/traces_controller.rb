@@ -19,7 +19,17 @@ class TracesController < ApplicationController
       .where(platform: platform)
       .where(origin: nil)
 
-    @heatmap = ::Mnemosyne::Heatmap.new(@traces)
+    @heatmap = ::Mnemosyne::Heatmap.new @traces, \
+      time: {
+        stop: Time.zone.now,
+        duration: 1.hour,
+        size: 96
+      },
+      latency: {
+        start: 0,
+        interval: 25_000_000,
+        size: 79
+      }
 
     respond_to do |format|
       format.html

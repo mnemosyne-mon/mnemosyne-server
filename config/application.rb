@@ -32,5 +32,8 @@ module Mnemosyne
     logger = ActiveSupport::Logger.new(STDOUT)
     config.logger = ActiveSupport::TaggedLogging.new(logger)
     config.log_level = :info
+
+    config.time_zone = 'Europe/Berlin'
+    config.active_record.default_timezone = :utc
   end
 end

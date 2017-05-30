@@ -4,58 +4,32 @@ module Mnemosyne
   class Heatmap # rubocop:disable ClassLength
     using ::Mnemosyne::Refinements::Arel::Grouping
 
-    def initialize(traces)
+    def initialize(traces, time: {}, latency: {})
       @traces = traces
       @column_name = :stop
-      @start = Time.zone.now.change(sec: 0, usec: 0)
+
+      @tseries = TimeSeries.new(**time)
+      @lseries = LatencySeries.new(**latency)
     end
 
     def as_json(*args) # rubocop:disable MethodLength
       {
-        x: {
+        time: {
           range: [
-            time_at(0).iso8601(9),
-            time_at(time_bucket_count).iso8601(9)
+            @tseries.start.iso8601(9),
+            @tseries.stop.iso8601(9)
           ],
-          length: time_bucket_count
+          size: @tseries.size
         },
-        y: {
+        latency: {
           range: [
-            latency_at(0),
-            latency_at(latency_bucket_count)
+            @lseries.start,
+            @lseries.stop
           ],
-          length: latency_bucket_count
+          size: @lseries.size
         },
         values: execute
       }.as_json(*args)
-    end
-
-    # Number of latency buckets
-    #
-    def latency_bucket_count
-      79
-    end
-
-    # Latency bucket size in nanoseconds
-    #
-    def latency_interval
-      25_000_000
-    end
-
-    def latency_start
-      0
-    end
-
-    # Number of time buckets
-    #
-    def time_bucket_count
-      96
-    end
-
-    # Size of each time bucket in nanoseconds
-    #
-    def time_interval
-      37_500_000_000
     end
 
     # Iterate over each column
@@ -64,25 +38,6 @@ module Mnemosyne
       latency_bucket_count.times.reverse_each do |i|
         yield Row.new self, i
       end
-    end
-
-    def value_at(row, col)
-      if (field = data[[col, row]])
-        field.first['count']
-      else
-        0
-      end
-    end
-
-    def latency_at(idx)
-      (latency_start + idx * latency_interval) / 1_000
-    end
-
-    def time_at(idx)
-      offset = ::Mnemosyne::Clock.to_tick(@start)
-      tindex = time_bucket_count - idx
-
-      ::Mnemosyne::Clock.to_time(offset - tindex * time_interval)
     end
 
     def data
@@ -101,7 +56,7 @@ module Mnemosyne
 
     # private
 
-    attr_reader :column_name, :timeseries, :latseries, :max_count_sqrt
+    attr_reader :column_name, :max_count_sqrt
 
     def execute
       ActiveRecord::Base.connection.execute(create_query.to_sql).to_a
@@ -109,13 +64,13 @@ module Mnemosyne
 
     # rubocop:disable MethodLength, AbcSize, LineLength
     def create_query
-      ts_size = time_interval
-      ts_stop = ::Mnemosyne::Clock.to_tick(@start)
-      ts_strt = ::Mnemosyne::Clock.to_tick(@start) - (time_interval * time_bucket_count)
+      tstart = Clock.to_tick(@tseries.start)
+      tstop = Clock.to_tick(@tseries.stop)
+      tsize = Clock.to_tick(@tseries.interval)
 
-      ls_size = latency_interval
-      ls_strt = latency_start
-      ls_stop = latency_start + ls_size * latency_bucket_count
+      lstart = @lseries.start
+      lstop = @lseries.stop
+      lsize = @lseries.interval
 
       traces = Arel::Table.new(:traces)
       column = traces[column_name]
@@ -123,14 +78,14 @@ module Mnemosyne
       t_cte = Arel::Table.new(:buckets)
       s_cte = @traces.select(:id).arel
         .project(
-          ((column - ts_strt) / ts_size).as('ts'),
-          ((traces[:stop] - traces[:start] - ls_strt) / ls_size).as('ls')
+          ((column - tstart) / tsize).as('ts'),
+          ((traces[:stop] - traces[:start] - lstart) / lsize).as('ls')
         )
         .where([
-          column.gt(ts_strt),
-          column.lteq(ts_stop),
-          (traces[:stop] - traces[:start]).gt(ls_strt),
-          (traces[:stop] - traces[:start]).lteq(ls_stop)
+          column.gt(tstart),
+          column.lteq(tstop),
+          (traces[:stop] - traces[:start]).gt(lstart),
+          (traces[:stop] - traces[:start]).lteq(lstop)
         ].reduce(&:and))
 
       w_cte = Arel::Nodes::As.new(t_cte, s_cte)

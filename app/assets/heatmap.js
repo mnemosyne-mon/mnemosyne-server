@@ -47,21 +47,22 @@ export async function heatmap(el) {
   let $el = select(el)
   let width = $el.node().offsetWidth - margin.left - margin.right - offset.left - 1
 
-  console.log(width)
+  let url = new URL(el.dataset.source)
+  url.searchParams.append('tbs', Math.floor(width / 6))
 
-  let response = await fetch(el.dataset.source),
+  let response = await fetch(url),
     json = await response.json(),
     data = json['values']
 
-  let bucketWidth = width / json.x.length
-  let bucketHeight = height / json.y.length
+  let bucketWidth = width / json['time']['size']
+  let bucketHeight = height / json['latency']['size']
 
   let scaleX = scaleTime()
     .range([0, width])
-    .domain(json.x.range.map((x) => Date.parse(x)))
+    .domain(json['time']['range'].map((x) => Date.parse(x)))
   let scaleY = scaleLinear()
     .range([height, 0])
-    .domain(json.y.range.map((x) => x / 1000))
+    .domain(json['latency']['range'].map((x) => x / 1000))
   let scaleZ = scaleLog()
     .range(['#CFE9FF', '#0275D8'])
     .domain([1, max(data, (x) => x.v)])
