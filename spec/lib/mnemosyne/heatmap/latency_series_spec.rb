@@ -42,29 +42,26 @@ RSpec.describe ::Mnemosyne::Heatmap::LatencySeries do
 
   describe '#interval' do
     subject { series.interval }
+    let(:interval) { 25_000_000 }
 
-    context 'is calculated from duration and buckets (I)' do
-      let(:kwargs) { {duration: 1.hour, buckets: 6} }
-      it { is_expected.to eq ::Mnemosyne::Clock.to_tick(10.minutes) }
-    end
+    context 'with interval given' do
+      let(:kwargs) { {interval: interval} }
 
-    context 'is calculated from duration and buckets (I)' do
-      let(:kwargs) { {duration: 1.hour, buckets: 96} }
-      it { is_expected.to eq ::Mnemosyne::Clock.to_tick(37.5.seconds) }
+      it { is_expected.to eq interval }
     end
   end
 
   describe '#at' do
     let(:idx) { 0 }
-    let(:kwargs) { {buckets: 10, last: time, duration: 1.hour} }
+    let(:kwargs) { {interval: 10, size: 10} }
     subject { series.at(idx) }
 
     it 'returns first bucket' do
-      expect(series.at(0).value).to eq series.first
+      expect(series.at(0).value).to eq series.start
     end
 
     it 'returns last bucket' do
-      expect(series.at(9).last).to eq series.last
+      expect(series.at(9).last).to eq series.stop
     end
 
     describe 'out of bounds' do

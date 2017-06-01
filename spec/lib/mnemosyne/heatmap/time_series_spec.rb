@@ -90,12 +90,12 @@ RSpec.describe ::Mnemosyne::Heatmap::TimeSeries do
 
     context 'is calculated from duration and size (I)' do
       let(:kwargs) { {duration: 1.hour, size: 6} }
-      it { is_expected.to eq ::Mnemosyne::Clock.to_tick(10.minutes) }
+      it { is_expected.to eq 10.minutes }
     end
 
     context 'is calculated from duration and size (I)' do
       let(:kwargs) { {duration: 1.hour, size: 96} }
-      it { is_expected.to eq ::Mnemosyne::Clock.to_tick(37.5.seconds) }
+      it { is_expected.to eq 37.5.seconds }
     end
   end
 

@@ -19,6 +19,21 @@ module Mnemosyne
         @interval = interval
       end
       # rubocop:enable all
+
+      protected
+
+      def bucket_at(idx)
+        r0 = start + (idx * interval)
+        r1 = (idx + 1) == size ? stop : r0 + interval
+
+        Bucket.new r0, r1
+      end
+
+      Bucket = Struct.new(:first, :last) do
+        def value
+          first
+        end
+      end
     end
   end
 end
