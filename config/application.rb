@@ -26,7 +26,7 @@ module Mnemosyne
     config.session_store :cookie_store, key: '_mnemosyne'
     config.action_dispatch.cookies_serializer = :json
 
-    config.paths.add 'lib', load_path: true, eager_load: true
+    config.paths.add 'lib', load_path: true, eager_load: true, autoload: true
     config.paths['config/locales'].unshift 'app/locales'
 
     logger = ActiveSupport::Logger.new(STDOUT)
