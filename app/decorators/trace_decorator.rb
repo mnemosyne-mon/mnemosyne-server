@@ -4,19 +4,32 @@ class TraceDecorator < ApplicationDecorator
   decorates_association :spans
   decorates_association :application
 
+  def as_json(**kwargs)
+    {
+      id: id.to_s,
+      name: name,
+      start: start.iso8601(9),
+      stop: stop.iso8601(9),
+
+      activity_id: activity_id.to_s,
+      platform_id: platform_id.to_s,
+      origin_id: origin_id&.to_s,
+
+      meta: {
+        path: meta['path'],
+        query: meta['query'],
+        method: meta['method'],
+        host: meta.dig('headers', 'Host'),
+        user_agent: meta.dig('headers', 'User-Agent')
+      }.compact
+    }.compact.as_json(**kwargs)
+  end
+
   def app_name
     application.name
   end
 
   def title
-    span = spans
-      .sort_by(&:start)
-      .find {|s| s.name =~ /^app\.controller\./ }
-
-    if span && (title = span.title)
-      return title
-    end
-
     trace_title || name
   end
 

@@ -35,5 +35,13 @@ module Mnemosyne
 
     config.time_zone = 'Europe/Berlin'
     config.active_record.default_timezone = :utc
+
+    initializer 'activesupport.time_precision' do
+      ::ActiveSupport::JSON::Encoding.time_precision = 9
+    end
+
+    initializer 'patch.draper-streaming' do
+      ::Draper::CollectionDecorator.include ::Mnemosyne::Streaming::Collection
+    end
   end
 end

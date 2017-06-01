@@ -19,6 +19,9 @@ gem 'uuid4', '~> 1.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'draper', '~> 3.0'
+gem 'has_scope', '~> 0.7.1'
+gem 'oj'
+gem 'responders', '~> 2.4'
 gem 'slim'
 gem 'webpacker'
 
