@@ -23,7 +23,7 @@ class TracesController < ApplicationController
       time: {
         stop: Time.zone.now,
         duration: 1.hour,
-        size: 96
+        size: params.fetch(:tbs, 96).to_i
       },
       latency: {
         start: 0,

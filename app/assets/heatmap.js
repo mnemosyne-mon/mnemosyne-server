@@ -48,7 +48,7 @@ export async function heatmap(el) {
   let width = $el.node().offsetWidth - margin.left - margin.right - offset.left - 1
 
   let url = new URL(el.dataset.source)
-  url.searchParams.append('tbs', Math.floor(width / 6))
+  url.searchParams.append('tbs', Math.floor(width / 8) + 1)
 
   let response = await fetch(url),
     json = await response.json(),
@@ -62,7 +62,7 @@ export async function heatmap(el) {
     .domain(json['time']['range'].map((x) => Date.parse(x)))
   let scaleY = scaleLinear()
     .range([height, 0])
-    .domain(json['latency']['range'].map((x) => x / 1000))
+    .domain(json['latency']['range'].map((x) => x / 1000000))
   let scaleZ = scaleLog()
     .range(['#CFE9FF', '#0275D8'])
     .domain([1, max(data, (x) => x.v)])
