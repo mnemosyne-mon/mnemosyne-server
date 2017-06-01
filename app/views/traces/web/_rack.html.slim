@@ -13,5 +13,11 @@
     section
       h4 Query String
       p= meta['query']
+
+  - if meta['headers']&.key?('User-Agent')
+    section
+      h4 User-Agent
+      p= meta['headers']['User-Agent']
+
 - else
   p Trace metadata missing

@@ -7,7 +7,7 @@
 
     .graph
       .span
-        div.info
+        div.info data-popover-data=@trace.meta.to_json
           = @trace.name
         div
           span.bar
