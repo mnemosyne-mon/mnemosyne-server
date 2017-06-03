@@ -20,6 +20,7 @@ module.exports = merge(common, {
   devServer: {
     host: devServer.host,
     port: devServer.port,
+    disableHostCheck: true,
     contentBase: resolve(paths.output, paths.entry),
     proxy: {'/': 'http://localhost:9001'},
     publicPath
