@@ -15,7 +15,7 @@ const { env, paths, publicPath, loadersDir } = require('./configuration.js')
 if(env.NODE_ENV === 'production') {
   JAVASCRIPT_NAME = '[hash].js'
   STYLESHEET_NAME = '[hash].css'
-  FILE_NAME = '[hash].[ext]'
+  FILE_NAME = '[path][hash].[ext]'
 } else {
   JAVASCRIPT_NAME = '[name].js'
   STYLESHEET_NAME = '[name].css'
