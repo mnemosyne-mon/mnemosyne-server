@@ -8,6 +8,7 @@
     "csswring": "^5.1.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
+    "image-webpack-loader": "^3.3.1",
     "js-yaml": "^3.8.3",
     "node-sass": "^4.5.2",
     "path-complete-extname": "^0.1.0",
@@ -24,7 +25,6 @@
     "bourbon": "^4.3.4",
     "d3": "^4.9.1",
     "d3-selection-multi": "^1.0.1",
-    "livescript-loader": "^0.1.6",
     "tether": "^1.4.0",
     "timeago": "^1.5.4"
   }

@@ -19,12 +19,12 @@ if(env.NODE_ENV === 'production') {
 } else {
   JAVASCRIPT_NAME = '[name].js'
   STYLESHEET_NAME = '[name].css'
-  FILE_NAME = '[name].[ext]'
+  FILE_NAME = '[path][name].[ext]'
 }
 
 module.exports = {
   entry: {
-    main: ['main.js', 'main.sass']
+    main: ['manifest.js', 'main.js', 'main.sass']
   },
 
   output: {
@@ -35,10 +35,19 @@ module.exports = {
 
   module: {
     rules: [{
-      test: /\.(jpg|jpeg|png|gif|svg|eot|ttf|woff|woff2)$/i,
+      test: /\.(ico|eot|ttf|woff|woff2)$/i,
       use: [{
         loader: 'file-loader',
-        options: { name: FILE_NAME }
+        options: { name: FILE_NAME, context: paths.source }
+      }]
+    }, {
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      use: [{
+        loader: 'file-loader',
+        options: { name: FILE_NAME, context: paths.source }
+      },{
+        loader: 'image-webpack-loader',
+        options: {}
       }]
     }, {
       test: /\.(scss|sass|css)$/i,
@@ -66,11 +75,6 @@ module.exports = {
           }
         }]
       })
-    }, {
-      test: /\.(ls)$/i,
-      use: [{
-        loader: 'livescript-loader'
-      }]
     }, {
       test: /\.(js)$/i,
       exclude: /node_modules/,
