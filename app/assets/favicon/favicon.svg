@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg height="64" version="1.1" viewBox="0 0 16.933332 16.933332" width="64" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <metadata>
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g transform="translate(0 -280.07)">
+    <rect fill="#fff" height="14.817" style="color-rendering:auto;color:#000000;isolation:auto;mix-blend-mode:normal;shape-rendering:auto;solid-color:#000000;image-rendering:auto" width="14.817" x="1.0583" y="281.12"/>
+    <g fill="#0275d8" stroke-width="0">
+      <path d="m4 0c-2.216 0-4 1.784-4 4v56c0 2.216 1.784 4 4 4h56c2.216 0 4-1.784 4-4v-56c0-2.216-1.784-4-4-4zm16.453 12h23.094l11.547 20-11.547 20h-23.094l-11.547-20z" style="color-rendering:auto;color:#000000;isolation:auto;mix-blend-mode:normal;shape-rendering:auto;solid-color:#000000;image-rendering:auto" transform="matrix(.26458 0 0 .26458 0 280.07)"/>
+      <rect height="1.0583" ry="0" style="color-rendering:auto;color:#000000;isolation:auto;mix-blend-mode:normal;shape-rendering:auto;solid-color:#000000;image-rendering:auto" width="5.2917" x="3.175" y="284.3"/>
+      <rect height="1.0583" ry="0" style="color-rendering:auto;color:#000000;isolation:auto;mix-blend-mode:normal;shape-rendering:auto;solid-color:#000000;image-rendering:auto" width="10.054" x="1.5875" y="286.42"/>
+      <rect height="1.0583" ry="0" style="color-rendering:auto;color:#000000;isolation:auto;mix-blend-mode:normal;shape-rendering:auto;solid-color:#000000;image-rendering:auto" width="7.4083" x="7.4083" y="290.65"/>
+      <rect height="1.0583" ry="0" style="color-rendering:auto;color:#000000;isolation:auto;mix-blend-mode:normal;shape-rendering:auto;solid-color:#000000;image-rendering:auto" width="6.35" x="5.2917" y="288.53"/>
+    </g>
+    <path d="m15.188 288.53-3.3607 5.8208h-6.721l-3.3607-5.8208 3.3607-5.8208h6.7213z" display="none" fill="#fff" stroke-width="0" style="color-rendering:auto;color:#000000;isolation:auto;mix-blend-mode:normal;shape-rendering:auto;solid-color:#000000;image-rendering:auto" transform="matrix(1.1022 0 0 1.0909 -.86542 -26.231)"/>
+  </g>
+</svg>
