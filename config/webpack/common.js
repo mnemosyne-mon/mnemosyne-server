@@ -87,8 +87,7 @@ module.exports = {
             ['env', {
               targets: {browsers: ['last 1 chrome versions']},
               modules: false,
-              loose: true,
-              debug: true
+              loose: true
             }]
           ]
         }
