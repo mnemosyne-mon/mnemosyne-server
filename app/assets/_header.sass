@@ -1,3 +1,5 @@
+@import 'functions'
+
 #header
   background-color: $header-bg
   color: $header-color
@@ -23,22 +25,27 @@
       background-size: 48px 48px
       background-position: 0.5rem 50%
 
+      border-right: 1px solid contrast($header-bg, 10%)
+
       +hover-focus
         text-decoration: none
         background-color: darken($header-bg, 3%)
 
     > ul
       display: flex
-      flex-direction: row
       flex-wrap: nowrap
+      flex-grow: 1
       align-items: center
       padding-left: 0
       margin-bottom: 0
       list-style: none
 
+      &.secondary
+        justify-content: flex-end
+
       > li > a
         display: inline-block
-        padding: 15px .8rem
+        padding: 15px 1rem
         line-height: 24px
         color: $header-color
 

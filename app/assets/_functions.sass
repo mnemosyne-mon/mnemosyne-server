@@ -1,0 +1,6 @@
+
+@function contrast($color, $percent)
+  @if (lightness($color) > 50)
+    @return mix(black, $color, $percent)
+  @else
+    @return mix(white, $color, $percent)

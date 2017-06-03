@@ -17,11 +17,12 @@ html lang=I18n.locale
   body
     header#header
       nav
-        = link_to root_url, class: 'brand' do
+        = link_to root_path, class: 'brand' do
           = 'Mnemosyne'
 
         ul
           li=link_to 'APM', platform_path(@platform)
           li=link_to 'Traces', traces_path(@platform)
+          li=link_to 'Applications', applications_path(@platform)
           li=link_to 'Errors', errors_path(@platform)
     = yield

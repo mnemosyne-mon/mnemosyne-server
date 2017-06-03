@@ -60,4 +60,8 @@ class TraceDecorator < ApplicationDecorator
         'Nothing'
     end
   end
+
+  def duration_text
+    format "%.2f ms", duration_ms
+  end
 end

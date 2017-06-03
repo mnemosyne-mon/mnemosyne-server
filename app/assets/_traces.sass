@@ -58,11 +58,18 @@ ul.traces
 
     span
       display: table-cell
+      white-space: nowrap
 
       a
         display: block
         padding: 3px 8px
         text-decoration: none
+
+      &.duration
+        text-align: right
+
+      &.duration, &.start, &.application
+        width: 1%
 
   .uuid
     font-family: monospace
