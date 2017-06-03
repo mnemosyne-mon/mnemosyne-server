@@ -23,6 +23,7 @@ module Mnemosyne
             application: application,
             activity: activity,
             platform: platform,
+            hostname: payload[:hostname],
             name: payload[:name],
             start: Integer(payload[:start]),
             stop: Integer(payload[:stop]),

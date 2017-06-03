@@ -16,6 +16,7 @@ RSpec.describe ::Mnemosyne::Builder do
         transaction: '4c6d1d78-3eec-4ac8-9720-80baff80e1f8',
         application: 'Mnemosyne/Application',
         platform: 'my-platform',
+        hostname: 'services-1',
         name: 'example.trace.mnemosyne',
         start: 0,
         stop: 1_000_000_000,
@@ -107,6 +108,10 @@ RSpec.describe ::Mnemosyne::Builder do
 
       example 'stop time equals payload value' do
         expect(subject.stop).to eq Time.at(1).utc
+      end
+
+      example 'hostname equals payload value' do
+        expect(subject.hostname).to eq 'services-1'
       end
 
       example 'correct activity is associated' do
