@@ -1,5 +1,3 @@
-import 'favicon/android-chrome-192x192.png'
-import 'favicon/android-chrome-512x512.png'
 import 'favicon/apple-touch-icon.png'
 import 'favicon/favicon.ico'
 import 'favicon/favicon.svg'

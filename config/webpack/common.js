@@ -27,6 +27,8 @@ module.exports = {
     main: ['manifest.js', 'main.js', 'main.sass']
   },
 
+  context: resolve(paths.source),
+
   output: {
     path: resolve(paths.output),
     filename: JAVASCRIPT_NAME,
@@ -38,13 +40,13 @@ module.exports = {
       test: /\.(ico|eot|ttf|woff|woff2)$/i,
       use: [{
         loader: 'file-loader',
-        options: { name: FILE_NAME, context: paths.source }
+        options: { name: FILE_NAME }
       }]
     }, {
       test: /\.(jpe?g|png|gif|svg)$/i,
       use: [{
         loader: 'file-loader',
-        options: { name: FILE_NAME, context: paths.source }
+        options: { name: FILE_NAME }
       },{
         loader: 'image-webpack-loader',
         options: {}
