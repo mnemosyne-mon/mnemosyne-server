@@ -12,13 +12,10 @@ class TraceConsumer
   end
 
   def process(message)
-    try = 0
-    begin
-      ::Mnemosyne::Builder.create!(message.body)
-    rescue ActiveRecord::RecordNotUnique
-      retry if (try += 1) < 2
-      raise
-    end
+    ::Mnemosyne::Builder.create!(message.body)
+  rescue ActiveRecord::RecordNotUnique
+    retry if !@retry && (@retry = true)
+    raise
   ensure
     ::ActiveRecord::Base.clear_active_connections!
   end
