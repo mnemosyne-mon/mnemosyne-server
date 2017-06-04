@@ -4,11 +4,11 @@ module Mnemosyne
   module Payload
     class << self
       def new(payload, version: nil)
-        version ||= payload.fetch(:version, 1)
+        version ||= payload.fetch('version', 1)
 
         case version
           when 1
-            ::Mnemosyne::Payload::V1.new(payload)
+            ::Mnemosyne::Payload::V1.new(payload.symbolize_keys)
           else
             raise "Invalid payload version: #{version}"
         end
@@ -32,7 +32,7 @@ module Mnemosyne
       NanoTime = ::Dry::Types::Definition.new(Time)
         .constructor {|ts| ::Mnemosyne::Clock.to_time(ts) }
 
-      Meta = ::Dry::Types['hash']
+      Meta = ::Dry::Types['hash'].optional.default({})
     end
 
     class V1 < ::Dry::Struct::Value
@@ -43,26 +43,26 @@ module Mnemosyne
         attribute :name, Types::Name
         attribute :start, Types::NanoTime
         attribute :stop, Types::NanoTime
-        attribute :meta, Types::Meta.optional.default({})
+        attribute :meta, Types::Meta
       end
-
-      attr_reader :trace
-      attr_reader :spans
 
       constructor_type :strict_with_defaults
 
       attribute :application, Types::Name
       attribute :platform, Types::Name
-      attribute :activity, Types::UUID
+      attribute :hostname, Types::Name
+      attribute :transaction, Types::UUID
+      alias activity transaction
 
       attribute :uuid, Types::UUID
       attribute :origin, Types::UUID.optional.default(nil)
       attribute :name, Types::Name
       attribute :start, Types::NanoTime
       attribute :stop, Types::NanoTime
-      attribute :meta, Types::Meta.optional.default({})
+      attribute :meta, Types::Meta
 
       attribute :span, ::Dry::Types['array'].member(Span).default([])
+      alias spans span
     end
   end
 end

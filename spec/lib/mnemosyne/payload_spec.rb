@@ -44,18 +44,19 @@ RSpec.describe ::Mnemosyne::Payload do
     context 'with parses and cleans valid payload (I)' do
       let(:payload) do
         {
-          application: ' Rails/Application  ',
-          platform: "default\r\n",
-          activity: '768416c3-9246-4206-99ce-71c9bdbeda3f',
-          uuid: 'ef89fab2-cfe6-4c1d-9b23-4f977349efc6',
-          name: 'app.web.request.rack',
-          start: 1492599143552673058,
-          stop: 1492599151622173813,
-          span: [{
-            uuid: '25ed4c6a-4123-49ce-9899-da3588772bb8',
-            name: 'app.web.controller.rails',
-            start: 0,
-            stop: 0
+          'application' => ' Rails/Application  ',
+          'hostname' => 'services-1',
+          'platform' => "default\r\n",
+          'transaction' => '768416c3-9246-4206-99ce-71c9bdbeda3f',
+          'uuid' => 'ef89fab2-cfe6-4c1d-9b23-4f977349efc6',
+          'name' => 'app.web.request.rack',
+          'start' => 1492599143552673058,
+          'stop' => 1492599151622173813,
+          'span' => [{
+            'uuid' => '25ed4c6a-4123-49ce-9899-da3588772bb8',
+            'name' => 'app.web.controller.rails',
+            'start' => 0,
+            'stop' => 0
           }]
         }
       end
@@ -63,6 +64,7 @@ RSpec.describe ::Mnemosyne::Payload do
       it 'contains frozen payload data' do
         expect(subject.application).to eq 'Rails/Application'
         expect(subject.platform).to eq 'default'
+        expect(subject.hostname).to eq 'services-1'
 
         expect(subject.activity).to eq \
           UUID4('768416c3-9246-4206-99ce-71c9bdbeda3f')
