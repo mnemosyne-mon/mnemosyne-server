@@ -22,6 +22,10 @@ class TracesController < ApplicationController
     scope.limit [0, [value.to_i, 100_000].min].max
   end
 
+  has_scope :application do |_, scope, value|
+    scope.where application_id: UUID4(value)
+  end
+
   def index
     @traces = Trace.all
       .where(platform: platform)

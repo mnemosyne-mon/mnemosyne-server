@@ -1,4 +1,11 @@
 .container-fluid
+  .filter
+    form path="" method="GET"
+      select name="application"
+        - @platform.applications.each do |application|
+          option value="#{application.id}" = application.name
+      input type="submit"
+.container-fluid
   ul.traces
     - @traces.each do |trace|
       li
