@@ -26,6 +26,10 @@ class TracesController < ApplicationController
     scope.where application_id: UUID4(value)
   end
 
+  has_scope :hostname do |_, scope, value|
+    scope.where hostname: value
+  end
+
   def index
     @traces = Trace.all
       .where(platform: platform)
