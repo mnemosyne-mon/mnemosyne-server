@@ -1,42 +1,29 @@
 import 'timeago'
-import 'tether'
-import 'bootstrap/js/src/popover'
 
-import { heatmap } from 'heatmap'
+import {
+  render
+} from 'react-dom'
+
+import {
+  createElement
+} from 'react'
+
+import * as components from 'components/index'
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('script[data-component').forEach((el) => {
+    let component = components[el.dataset.component]
+    let props = JSON.parse(el.innerHTML)
+    let newNode = document.createElement('div')
+
+    el.parentNode.replaceChild(newNode, el)
+
+    render(createElement(component, props), newNode)
+
+    console.log(newNode, component, props)
+  })
+})
 
 jQuery(document).ready(function() {
   $('[data-time-ago]').timeago()
-
-  $('#heatmap').each((_, el) => {
-    heatmap(el)
-  })
-
-  $('[data-popover-data]').each((_, el) => {
-    let $el = $(el)
-    let meta = $el.data('popover-data')
-
-    if(!jQuery.isEmptyObject(meta)) {
-
-      let $list = $('<dl></dl>')
-      $list.addClass('span-details')
-
-      for(let [key, value] of Object.entries(meta)) {
-        if(Array.isArray(value)) {
-          value = value.join('\n')
-        }
-
-        if(value instanceof Object) {
-          value = JSON.stringify(value, null, 2)
-        }
-
-        $list.append($(`<dt>${key}</dt><dd>${value}</dd>`))
-      }
-
-      $el.popover({
-        trigger: 'click hover',
-        content: $list.get(0),
-        html: true
-      })
-    }
-  })
 })

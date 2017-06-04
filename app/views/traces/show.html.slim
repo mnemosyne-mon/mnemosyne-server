@@ -1,10 +1,8 @@
+script type='application/json' data-component="TraceView"
+  = raw @trace.props
+
 .container-fluid
   .trace
-    h2= @trace.full_title
-
-    .information
-      = @trace.render_information
-
     .graph
       .span
         div.info data-popover-data=@trace.meta.to_json

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TraceDecorator < ApplicationDecorator
+class TraceDecorator < BaseDecorator
   decorates_association :spans
   decorates_association :application
 
@@ -10,6 +10,7 @@ class TraceDecorator < ApplicationDecorator
       name: name,
       start: start.iso8601(9),
       stop: stop.iso8601(9),
+      hostname: hostname,
 
       activity_id: activity_id.to_s,
       platform_id: platform_id.to_s,
@@ -63,5 +64,38 @@ class TraceDecorator < ApplicationDecorator
 
   def duration_text
     format "%.2f ms", duration_ms
+  end
+
+  def props
+    {
+      routes: {
+        traces_url: h.traces_url
+      },
+      trace: {
+        uuid: id.to_s,
+        name: name,
+        start: start,
+        hostname: hostname,
+        origin_uuid: origin_id,
+        origin_url: origin_url,
+        meta: {
+          path: meta['path'],
+          query: meta['query'],
+          method: meta['method'],
+          host: meta.dig('headers', 'Host'),
+          user_agent: meta.dig('headers', 'User-Agent')
+        }.compact,
+        application: application.as_json
+      },
+      spans: spans
+    }.to_json
+  end
+
+  private
+
+  def origin_url
+    return unless origin
+
+    h.trace_url platform, origin.trace
   end
 end

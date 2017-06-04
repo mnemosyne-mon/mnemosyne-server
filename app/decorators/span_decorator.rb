@@ -1,32 +1,47 @@
 # frozen_string_literal: true
 
-class SpanDecorator < ApplicationDecorator
+class SpanDecorator < BaseDecorator
   decorates_association :origin
 
-  def style
-    trace_duration = trace.duration
+  def as_json(*) # rubocop:disable MethodLength
+    {
+      uuid: id.to_s,
+      name: name,
+      title: title,
+      start: start.iso8601(9),
+      stop: stop.iso8601(9),
+      metric: {
+        width: width,
+        offset: offset
+      }
+    }
+  end
 
-    width = duration.to_f / trace_duration * 100
+  def width
+    duration.to_f / trace.duration * 100
+  end
 
+  def offset
     s_start = ::Mnemosyne::Clock.to_tick start
     t_start = ::Mnemosyne::Clock.to_tick trace.start
 
-    offset = s_start - t_start
-    offset = offset.to_f / trace_duration * 100
+    (s_start - t_start).to_f / trace.duration * 100
+  end
 
+  def style
     "width: #{width}%; margin-left: #{offset}%"
   end
 
-  def title
+  def title # rubocop:disable MethodLength
     case name
       when 'app.controller.request.rails'
         "#{meta['controller']}##{meta['action']}"
       when 'external.run.acfs'
-        "acfs.run"
+        'acfs.run'
       when 'external.http.acfs'
-        "#{name_for_url(meta['url'], 'acfs')}"
+        name_for_url(meta['url'], 'acfs')
       when 'external.http.restify'
-        "#{name_for_url(meta['url'], 'restify')}"
+        name_for_url(meta['url'], 'restify')
       when 'view.render.template.rails'
         "#{name} #{meta['identifier'].gsub(%r{^.*/app/views/}, '')}"
       else

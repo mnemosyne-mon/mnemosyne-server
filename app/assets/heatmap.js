@@ -29,6 +29,10 @@ import {
   max
 } from 'd3-array'
 
+import {
+  drag
+} from 'd3-drag'
+
 import 'd3-selection-multi'
 
 export async function heatmap(el) {
@@ -121,5 +125,20 @@ export async function heatmap(el) {
     .attr('height', height)
     .attr('fill', 'transparent')
 
-  hm_back.on('click', (x) => console.log(x))
+  function dragstart(e) {
+    console.log('start', e)
+  }
+
+  function dragging(e) {
+    console.log('drag', e)
+  }
+
+  function dragstop(e) {
+    console.log('end', e)
+  }
+
+  hm_back.call(drag()
+    .on('start', dragstart)
+    .on('drag', dragging)
+    .on('end', dragstop));
 }

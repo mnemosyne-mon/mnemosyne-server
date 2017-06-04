@@ -2,8 +2,9 @@
   .filter
     form path="" method="GET"
       select name="application"
+        option value="" Any
         - @platform.applications.each do |application|
-          option value="#{application.id}" = application.name
+          option value="#{application.id}" selected=("selected" if params[:application] == application.id) = application.name
       input type="submit"
 .container-fluid
   ul.traces

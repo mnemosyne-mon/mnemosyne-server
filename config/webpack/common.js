@@ -78,7 +78,23 @@ module.exports = {
         }]
       })
     }, {
-      test: /\.(js)$/i,
+      test: /\.jsx?$/i,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ['env', {
+              targets: {browsers: ['last 1 chrome versions']},
+              modules: false,
+              loose: true
+            }],
+            'react'
+          ]
+        }
+      }]
+    }, {
+      test: /\.coffee$/i,
       exclude: /node_modules/,
       use: [{
         loader: 'babel-loader',
@@ -91,6 +107,8 @@ module.exports = {
             }]
           ]
         }
+      }, {
+        loader: 'coffee-loader'
       }]
     }]
   },

@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-class ApplicationDecorator < Draper::Decorator
+class ApplicationDecorator < BaseDecorator
   delegate_all
 
-  def to_json(*args)
-    ::Oj.dump as_json(*args), mode: :strict
+  def as_json(*)
+    {
+      uuid: id.to_s,
+      name: name
+    }
   end
 end

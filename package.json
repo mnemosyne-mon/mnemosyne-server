@@ -3,6 +3,9 @@
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "coffee-loader": "https://github.com/webpack-contrib/coffee-loader.git#0ea4d6a",
+    "coffeescript": "next",
     "compression-webpack-plugin": "^0.4.0",
     "css-loader": "^0.28.0",
     "csswring": "^5.1.1",
@@ -25,7 +28,10 @@
     "bourbon": "^4.3.4",
     "d3": "^4.9.1",
     "d3-selection-multi": "^1.0.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "tether": "^1.4.0",
-    "timeago": "^1.5.4"
+    "timeago": "^1.5.4",
+    "urijs": "^1.18.10"
   }
 }
