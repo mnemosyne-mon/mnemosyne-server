@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class ApplicationDecorator < BaseDecorator
+class PlatformDecorator < BaseDecorator
   delegate_all
 
-  def serialize(*)
+  def serialize(**_)
     export do |out|
       out[:uuid] = id
       out[:name] = name

@@ -68,7 +68,7 @@ class TracesController < ApplicationController
       .find(params[:id])
       .decorate(context: context)
 
-    render
+    respond_with @trace
   end
 
   private

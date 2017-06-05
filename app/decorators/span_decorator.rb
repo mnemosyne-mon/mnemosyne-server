@@ -3,18 +3,23 @@
 class SpanDecorator < BaseDecorator
   decorates_association :origin
 
-  def as_json(*) # rubocop:disable MethodLength
-    {
-      uuid: id.to_s,
-      name: name,
-      title: title,
-      start: start.iso8601(9),
-      stop: stop.iso8601(9),
-      metric: {
+  def serialize(**_) # rubocop:disable MethodLength, AbcSize
+    export do |json|
+      json[:uuid] = id
+      json[:name] = name
+      json[:title] = title
+      json[:start] = start.iso8601(9)
+      json[:stop] = stop.iso8601(9)
+      json[:duration] = duration / 1_000_000.0
+
+      json[:metric] = {
         width: width,
         offset: offset
       }
-    }
+
+      json[:traces] = traces.map(&:id)
+      json[:meta] = meta
+    end
   end
 
   def width
@@ -28,11 +33,7 @@ class SpanDecorator < BaseDecorator
     (s_start - t_start).to_f / trace.duration * 100
   end
 
-  def style
-    "width: #{width}%; margin-left: #{offset}%"
-  end
-
-  def title # rubocop:disable MethodLength
+  def title # rubocop:disable MethodLength, AbcSize
     case name
       when 'app.controller.request.rails'
         "#{meta['controller']}##{meta['action']}"
@@ -55,7 +56,7 @@ class SpanDecorator < BaseDecorator
     url = ::URI.parse(url)
     url.scheme = scheme
 
-    if (app = origin.first&.application)
+    if (app = traces.first&.application)
       url.host = app.name.split(%r{[/\s]+})[1].downcase
     end
 

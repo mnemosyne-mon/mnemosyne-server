@@ -21,15 +21,19 @@
     margin: 1rem 0
     width: 100%
 
-    border-top: 1px solid #ccc
-    border-left: 1px solid #ccc
-
     > div
       display: flex
       width: 25%
 
-      border-right: 1px solid #ccc
-      border-bottom: 1px solid #ccc
+      border: 1px solid #ccc
+      border-top-width: 0
+      border-left-width: 0
+
+      &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4)
+        border-top-width: 1px
+
+      &:nth-child(5n), &:first-child
+        border-left-width: 1px
 
       > h4, > a
         line-height: 1.4rem

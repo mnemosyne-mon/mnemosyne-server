@@ -4,11 +4,11 @@ module Mnemosyne
   module Payload
     class << self
       def new(payload, version: nil)
-        version ||= payload.fetch('version', 1)
+        version ||= payload.fetch('version', 1).to_i
 
         case version
           when 1
-            ::Mnemosyne::Payload::V1.new(payload.symbolize_keys)
+            ::Mnemosyne::Payload::V1.new(payload)
           else
             raise "Invalid payload version: #{version}"
         end

@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-class ApplicationDecorator < BaseDecorator
+class ActivityDecorator < BaseDecorator
   delegate_all
 
-  def serialize(*)
+  def serialize(**kwargs)
     export do |out|
       out[:uuid] = id
-      out[:name] = name
     end
   end
 end
