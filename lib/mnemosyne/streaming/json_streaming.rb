@@ -16,11 +16,15 @@ module Mnemosyne
           **kwargs,
           &method(:_stream_json_fallback)
 
-        headers['Cache-Control'] ||= 'no-cache'
-        headers['Transfer-Encoding'] = 'chunked'
-        headers.delete('Content-Length')
+        if kwargs[:stream]
+          headers['Cache-Control'] ||= 'no-cache'
+          headers['Transfer-Encoding'] = 'chunked'
+          headers.delete('Content-Length')
 
-        Rack::Chunked::Body.new(encoder)
+          Rack::Chunked::Body.new(encoder)
+        else
+          encoder.read
+        end
       end
       # rubocop:enable all
 
