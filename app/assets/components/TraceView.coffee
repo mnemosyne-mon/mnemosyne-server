@@ -62,4 +62,4 @@ class Header extends Component
       $ 'a',
         href: this.context.routes.t_url(id: this.props.uuid)
         $ 'span', this.props.uuid
-        $ 'small', '(Perma link)'
+        $ 'small', '(direct link)'
