@@ -3,7 +3,9 @@ import {
   createElement as $
 } from './core'
 
-import URIJS from 'urijs'
+import URI from 'urijs'
+import 'urijs/src/URITemplate'
+
 import PropTypes from 'prop-types'
 
 import './TraceView.sass'
@@ -17,7 +19,12 @@ makeRoutes = (routes) ->
 
   for key in Object.keys(routes)
     helpers[key] = do(uri = routes[key]) ->
-      (query = {}) => URIJS(uri).query(query).toString()
+      (data = {}) =>
+        URI.expand uri, (x) ->
+            prop = data[x]
+            delete data[x]
+            prop
+          .query(data)
 
   helpers
 

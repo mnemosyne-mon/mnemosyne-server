@@ -7,14 +7,14 @@ class TracesController < ApplicationController
   respond_to :html, :json
 
   has_scope :origin, default: nil, allow_blank: true do |_, scope, value|
-    if value == 'any'
+    if value == 'any' || value.nil?
       scope
     elsif (uuid = UUID4.try_convert(value))
       scope.where(origin_id: uuid.to_s)
-    elsif value.nil? || value == 'null' || value == 'none'
+    elsif value == 'null' || value == 'none'
       scope.where(origin: nil)
     else
-      raise 'abc'
+      raise "Invalid origin: #{value}"
     end
   end
 
@@ -28,6 +28,14 @@ class TracesController < ApplicationController
 
   has_scope :hostname do |_, scope, value|
     scope.where hostname: value
+  end
+
+  has_scope :wm do |_, scope, value|
+    scope.where("meta->>'method' IN (?)", value.split(',').map(&:strip))
+  end
+
+  has_scope :wp do |_, scope, value|
+    scope.where('meta @> ?', {path: value}.to_json)
   end
 
   def index

@@ -24,32 +24,40 @@ class WebMeta extends Component
     routes: PropTypes.object
 
   render: ->
+    { routes } = this.context
+    { meta } = this.props
+
     $ 'section', className: 'traceinfo',
       $ Field,
-        title: 'Method',
-        value: this.props.meta['method']
-        href: this.context.routes.traces_url(method: this.props.meta['method'])
+        title: 'Method'
+        value: meta['method']
+        href: routes.traces_url(wm: meta['method'])
       $ Field,
-        title: 'Domain',
-        value: this.props.meta['host']
+        title: 'Domain'
+        value: meta['host']
+        href: routes.traces_url(wh: meta['host']) if meta['host']?
       $ Field,
-        title: 'User Agent',
-        value: this.props.meta['user_agent']
+        title: 'User Agent'
+        value: meta['user_agent']
       $ Field,
-        title: 'Controller',
-        value: this.props.meta['controller']
+        title: 'Controller'
+        value: meta['controller']
+        href: routes.traces_url(wc: meta['controller']) if meta['controller']?
       $ Field,
-        title: 'Status',
-        value: this.props.meta['status']
+        title: 'Status'
+        value: meta['status']
+        href: routes.traces_url(ws: meta['status']) if meta['status']?
       $ Field,
-        title: 'Path',
-        value: this.props.meta['path']
+        title: 'Path'
+        value: meta['path']
+        href: routes.traces_url(wp: meta['path']) if meta['path']?
       $ Field,
-        title: 'Query',
-        value: this.props.meta['query']
+        title: 'Query'
+        value: meta['query']
       $ Field,
-        title: 'Action',
-        value: this.props.meta['action']
+        title: 'Action'
+        value: meta['action']
+        href: routes.traces_url(wa: meta['action']) if meta['action']?
 
 
 class JobMeta extends Component

@@ -49,7 +49,7 @@ class TraceDecorator < BaseDecorator
 
   def routes
     {
-      traces_url: h.traces_url
+      traces_url: h.traces_url + '{/id}'
     }
   end
 
