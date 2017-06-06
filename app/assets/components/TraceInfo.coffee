@@ -11,7 +11,7 @@ export class TraceInfo extends Component
     routes: PropTypes.object
 
   render: ->
-    { start, application, origin_uuid, origin_url, hostname } = this.props.trace
+    { start, application, origin, hostname } = this.props.trace
 
     $ 'section', className: 'traceinfo',
       $ Field,
@@ -23,8 +23,8 @@ export class TraceInfo extends Component
         href: this.context.routes.traces_url(application: application['uuid'])
       $ Field,
         title: 'Origin',
-        value: origin_uuid
-        href: origin_url
+        value: origin?['uuid']
+        href: this.context.routes.traces_url(application: origin['trace']) if origin?
       $ Field,
         title: 'Hostname',
         value: hostname,
@@ -43,4 +43,4 @@ export class Field extends Component
         if value
           $ 'a', title: value, href: href, value
         else
-          $ 'a', className: 'empty', '<undefined>'
+          $ 'a', className: 'empty', '<none>'
