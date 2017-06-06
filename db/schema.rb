@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170603211656) do
+ActiveRecord::Schema.define(version: 20170606170146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,10 @@ ActiveRecord::Schema.define(version: 20170603211656) do
     t.datetime "updated_at", null: false
     t.uuid "platform_id", null: false
     t.string "hostname", null: false
+    t.index "((meta ->> 'method'::text))", name: "index_traces_filter_meta_method"
+    t.index ["application_id"], name: "index_traces_on_application_id"
     t.index ["hostname"], name: "index_traces_on_hostname"
+    t.index ["meta"], name: "index_traces_filter_meta", using: :gin
     t.index ["name", "start"], name: "index_traces_on_name_start_desc", order: { start: :desc }
     t.index ["name"], name: "index_traces_on_name"
     t.index ["origin_id", "start"], name: "index_traces_on_origin_start_desc", order: { start: :desc }, where: "(origin_id IS NULL)"
