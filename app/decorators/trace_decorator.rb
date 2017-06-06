@@ -45,7 +45,8 @@ class TraceDecorator < BaseDecorator
 
   def routes
     {
-      traces_url: h.traces_url + '{/id}'
+      t_url: h.t_url_rfc6570,
+      traces_url: h.trace_url_rfc6570.partial_expand(platform: platform.to_param)
     }
   end
 

@@ -23,7 +23,7 @@ export class TraceGraph extends Component
   renderName: (node) ->
     if node.traces?.length > 0
       $ 'a',
-        href: this.context.routes.traces_url() + '/' + node.traces[0]
+        href: this.context.routes.traces_url(id: node.traces[0])
         node.title || node.name
     else
       node.title || node.name

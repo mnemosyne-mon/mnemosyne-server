@@ -39,11 +39,12 @@ export class TraceView extends Component
     }
 
   render: ->
+    console.log(this.props.routes)
     { trace, spans } = this.props
 
     $ 'section', className: 'traceview',
       $ Header,
-        id: this.props['trace']['uuid']
+        uuid: this.props['trace']['uuid']
       $ 'div', className: 'container-fluid',
         $ TraceInfo, trace: trace
         $ TraceMeta, trace: trace
@@ -52,7 +53,13 @@ export class TraceView extends Component
 
 
 class Header extends Component
+  @contextTypes =
+    routes: PropTypes.object
+
   render: ->
     $ 'header',
       $ 'h2', 'Trace Details'
-      $ 'span', this.props.id
+      $ 'a',
+        href: this.context.routes.t_url(id: this.props.uuid)
+        $ 'span', this.props.uuid
+        $ 'small', '(Perma link)'
