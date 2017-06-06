@@ -24,7 +24,7 @@ export class TraceInfo extends Component
       $ Field,
         title: 'Origin',
         value: origin?['uuid']
-        href: this.context.routes.traces_url(id: origin['trace']) if origin?
+        href: this.context.routes.traces_url(id: origin['trace']) if origin?['trace']?
       $ Field,
         title: 'Hostname',
         value: hostname,

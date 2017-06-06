@@ -22,12 +22,8 @@ class TraceDecorator < BaseDecorator
       out[:platform] = platform.serialize(**kwargs)
       out[:application] = application.serialize(**kwargs)
 
-      if origin
-        out[:origin] = {
-          uuid: origin.id,
-          trace: origin.trace_id
-        }
-      end
+      out[:origin] = {uuid: origin_id}
+      out[:origin][:trace] = origin.trace_id if origin
 
       out[:meta] = {
         path: meta['path'],
