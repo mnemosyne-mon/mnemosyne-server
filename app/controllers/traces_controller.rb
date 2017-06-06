@@ -40,6 +40,18 @@ class TracesController < ApplicationController
     scope.where('meta @> ?', {path: value}.to_json)
   end
 
+  has_scope :ws do |_, scope, value|
+    scope.where('meta @> ?', {status: value}.to_json)
+  end
+
+  has_scope :ls do |_, scope, value|
+    scope.where('(stop - start) >= ?', value.to_f * 1_000_000)
+  end
+
+  has_scope :le do |_, scope, value|
+    scope.where('(stop - start) < ?', value.to_f * 1_000_000)
+  end
+
   def index
     @traces = Trace.all
       .where(platform: platform)
@@ -82,7 +94,7 @@ class TracesController < ApplicationController
   end
 
   def default_origin_value
-    if (%w[origin application hostname wm wp] & params.keys).any?
+    if (%w[origin application hostname wm wp ws] & params.keys).any?
       'any'
     else
       'none'
