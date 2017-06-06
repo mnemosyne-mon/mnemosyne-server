@@ -6,12 +6,14 @@ class TracesController < ApplicationController
 
   respond_to :html, :json
 
-  has_scope :origin, default: nil, allow_blank: true do |_, scope, value|
-    if value == 'any' || value.nil?
+  has_scope :origin, default: nil, allow_blank: true do |cr, scope, value|
+    value = cr.default_origin_value if value.nil?
+
+    if value == 'any'
       scope
     elsif (uuid = UUID4.try_convert(value))
       scope.where(origin_id: uuid.to_s)
-    elsif value == 'null' || value == 'none'
+    elsif value.nil? || value == 'null' || value == 'none'
       scope.where(origin: nil)
     else
       raise "Invalid origin: #{value}"
@@ -77,6 +79,14 @@ class TracesController < ApplicationController
       .decorate(context: context)
 
     respond_with @trace
+  end
+
+  def default_origin_value
+    if (%w[origin application hostname wm wp] & params.keys).any?
+      'any'
+    else
+      'none'
+    end
   end
 
   private
