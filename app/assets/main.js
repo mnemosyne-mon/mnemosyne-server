@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     el.parentNode.replaceChild(newNode, el)
 
     render(createElement(component, props), newNode)
-
-    console.log(newNode, component, props)
   })
 })
 

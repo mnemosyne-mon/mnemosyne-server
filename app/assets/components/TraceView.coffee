@@ -41,8 +41,6 @@ export class TraceView extends Component
   render: ->
     { trace, spans } = this.props
 
-    console.log(trace, spans)
-
     $ 'section', className: 'traceview',
       $ Header,
         id: this.props['trace']['uuid']
