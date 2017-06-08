@@ -20,7 +20,7 @@ class TracesController < ApplicationController
     end
   end
 
-  has_scope :limit, default: 500, allow_blank: true do |_, scope, value|
+  has_scope :limit, default: 200, allow_blank: true do |_, scope, value|
     scope.limit [0, [value.to_i, 100_000].min].max
   end
 
