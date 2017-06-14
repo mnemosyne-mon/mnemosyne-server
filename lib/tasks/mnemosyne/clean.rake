@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+$stdout.sync = true
+$stderr.sync = true
+
 # rubocop:disable BlockLength
 namespace :mnemosyne do
   desc 'Clean up old traces and spans'
