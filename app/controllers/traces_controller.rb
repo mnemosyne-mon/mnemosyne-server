@@ -85,10 +85,15 @@ class TracesController < ApplicationController
   end
 
   def show
-    @trace = Trace
-      .where(platform: platform)
-      .find(params[:id])
-      .decorate(context: context)
+    @trace = trace.decorate(context: context)
+
+    respond_with @trace
+  end
+
+  def update
+    @trace = trace
+    @trace.update! store: params[:store]
+    @trace = @trace.decorate(context: context)
 
     respond_with @trace
   end
@@ -102,6 +107,12 @@ class TracesController < ApplicationController
   end
 
   private
+
+  def trace
+    Trace
+      .where(platform: platform)
+      .find(params[:id])
+  end
 
   def context
     {

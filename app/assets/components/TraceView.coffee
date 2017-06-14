@@ -3,6 +3,9 @@ import {
   createElement as $
 } from './core'
 
+import IconStar from 'react-icons/fa/star'
+import IconStarOff from 'react-icons/fa/star-o'
+
 import URI from 'urijs'
 import 'urijs/src/URITemplate'
 
@@ -44,7 +47,7 @@ export class TraceView extends Component
 
     $ 'section', className: 'traceview',
       $ Header,
-        uuid: this.props['trace']['uuid']
+        trace: this.props.trace
       $ 'div', className: 'container-fluid',
         $ TraceInfo, trace: trace
         $ TraceMeta, trace: trace
@@ -56,10 +59,43 @@ class Header extends Component
   @contextTypes =
     routes: PropTypes.object
 
+  toggleSave: ->
+    { trace } = this.props
+
+    token = document.querySelector('meta[name="csrf-token"]').content
+    url = this.context.routes.traces_url(id: trace.uuid)
+
+    response = await fetch url,
+      method: 'PATCH'
+      credentials: 'same-origin'
+      headers:
+        'Accept': 'application/json'
+        'Content-Type': 'application/json'
+        'X-CSRF-Token': token
+      body: JSON.stringify store: !trace.store
+
+    if response.ok
+      location.reload()
+
   render: ->
+    { trace } = this.props
+
     $ 'header',
-      $ 'h2', 'Trace Details'
+      $ 'h2',
+        if trace.store
+          $ 'a',
+            href: '#'
+            onClick: => this.toggleSave()
+            title: 'Trace saved'
+            $ IconStar
+        else
+          $ 'a',
+            href: '#'
+            onClick: => this.toggleSave()
+            title: 'Save trace'
+            $ IconStarOff
+        'Trace Details'
       $ 'a',
-        href: this.context.routes.t_url(id: this.props.uuid)
-        $ 'span', this.props.uuid
+        href: this.context.routes.t_url(id: trace.uuid)
+        $ 'span', trace.uuid
         $ 'small', '(direct link)'

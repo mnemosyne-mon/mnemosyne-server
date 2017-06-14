@@ -17,6 +17,7 @@ class TraceDecorator < BaseDecorator
       out[:stop]     = stop.iso8601(9)
       out[:hostname] = hostname
       out[:duration] = duration / 1_000_000.0
+      out[:store]    = store
 
       out[:activity] = activity.serialize(**kwargs)
       out[:platform] = platform.serialize(**kwargs)

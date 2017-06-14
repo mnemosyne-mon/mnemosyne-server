@@ -11,9 +11,36 @@
 
       font-size: 1.4rem
 
-    a
+      > a
+        margin: 0 0.5rem 0 0
+        // padding: 0.2em 0.4em 0.15em
+        padding: 0.1em 0.4em
+        display: inline-block
+
+        border: 1px solid transparent
+        background-color: transparent
+        border-radius: 1px
+
+        color: inherit
+
+        &:hover
+          border-color: #ccc
+          background-color: #fff
+          box-shadow: 0 0 1px rgba(0, 0, 0, 0.1)
+
+        &:active
+          border-color: #a9a9a9
+          background-color: #e2e2e2
+          box-shadow: 0 0 2px rgba(0, 0, 0, 0.1) inset
+
+        > svg
+          fill: #F9C81A
+          position: relative
+          top: -0.1em
+
+    > a
       display: inline-block
-      margin: 0 0 0 2rem
+      margin: 0 0 0 1rem
 
       span
         margin-right: 0.5rem

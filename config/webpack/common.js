@@ -79,7 +79,6 @@ module.exports = {
       })
     }, {
       test: /\.jsx?$/i,
-      exclude: /node_modules/,
       use: [{
         loader: 'babel-loader',
         options: {
