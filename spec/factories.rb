@@ -16,15 +16,33 @@ FactoryGirl.define do # rubocop:disable BlockLength
   end
 
   factory :trace do
-    start { Time.zone.now }
+    start { Time.zone.now - 2.seconds }
     stop { Time.zone.now }
     name 'mnemosyne.test.trace'
+    hostname 'host-0'
 
     association :application
     association :activity
 
     after(:build) do |trace|
       trace.platform = trace.activity.platform
+    end
+
+    trait :w_spans do
+      after(:create) do |trace|
+        (4 + rand(30)).times do |i|
+          interval = [
+            trace.start + Rational(rand(trace.duration), 1_000_000_000),
+            trace.start + Rational(rand(trace.duration), 1_000_000_000)
+          ]
+
+          create :span,
+            trace: trace,
+            start: interval.min,
+            stop: interval.max,
+            meta: {index: i}
+        end
+      end
     end
   end
 

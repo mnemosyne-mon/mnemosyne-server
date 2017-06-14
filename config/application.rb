@@ -43,5 +43,12 @@ module Mnemosyne
     initializer 'patch.draper-streaming' do
       ::Draper::CollectionDecorator.include ::Mnemosyne::Streaming::Collection
     end
+
+    initializer 'patch.intervalstyle' do
+      require 'active_record/connection_adapters/postgresql_adapter'
+
+      ::ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend \
+        ::Mnemosyne::Patches::IntervalStyle
+    end
   end
 end

@@ -16,4 +16,15 @@ class Trace < ApplicationRecord
   belongs_to :activity
   belongs_to :platform
   belongs_to :origin, class_name: 'Span', optional: true
+
+  class << self
+    def retention(period, time = Time.zone.now)
+      period = ::Mnemosyne::Types::Duration.new.cast_value(period)
+      tlimit = time - period
+
+      where t[:stop].lt(tlimit).and(t[:store].eq(false))
+    end
+
+    alias t arel_table
+  end
 end

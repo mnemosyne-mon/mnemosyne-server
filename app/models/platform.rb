@@ -2,6 +2,7 @@
 
 class Platform < ApplicationRecord
   attribute :id, ::Mnemosyne::Types::UUID4.new
+  attribute :retention_period, ::Mnemosyne::Types::Duration.new
 
   validates :name, presence: true
 
