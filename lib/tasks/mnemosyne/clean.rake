@@ -41,7 +41,8 @@ namespace :mnemosyne do
       end
 
       if dry
-        logger.info " --> Would delete approximately #{ctraces} traces; #{cspans} spans"
+        logger.info \
+          " --> Would delete approximately #{ctraces} traces; #{cspans} spans"
       else
         logger.info " --> Deleted #{ctraces} traces; #{cspans} spans"
       end
