@@ -57,10 +57,36 @@ class TraceDecorator < BaseDecorator
       when 'app.web.request.rack'
         :web
       when 'app.job.perform.sidekiq'
-        :job
+        :background
+      when 'app.messaging.receive.msgr'
+        :background
       else
         :unknown
     end
+  end
+
+  def type_icon # rubocop:disable MethodLength
+    case type
+      when :web
+        h.tag.i \
+          'class': %w[fa fa-globe],
+          'title': 'Web Request',
+          'aria-hidden': 'true'
+      when :background
+        h.tag.i \
+          'class': %w[fa fa-tasks],
+          'title': 'Background Job',
+          'aria-hidden': 'true'
+      else
+        h.tag.i \
+          'class': %w[fa fa-question],
+          'title': 'Unknown',
+          'aria-hidden': 'true'
+    end
+  end
+
+  def status
+    meta['status'] || ''
   end
 
   def title
