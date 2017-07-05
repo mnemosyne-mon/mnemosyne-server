@@ -89,6 +89,10 @@ class TraceDecorator < BaseDecorator
     meta['status'] || ''
   end
 
+  def method
+    meta['method'] || ''
+  end
+
   def title
     trace_title || name
   end

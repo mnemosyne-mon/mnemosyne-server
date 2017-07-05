@@ -12,6 +12,7 @@
       li
         span.type= link_to trace.type_icon, trace.self_path
         span.application= link_to trace.application.title, trace.self_path
+        span.method= link_to trace.method, trace.self_path
         span.status= link_to trace.status, trace.self_path
         span= link_to trace.title, trace.self_path
         span.start= link_to l(trace.start, format: :index), trace.self_path
