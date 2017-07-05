@@ -9,4 +9,8 @@ class ApplicationDecorator < BaseDecorator
       out[:name] = name
     end
   end
+
+  def title
+    super || name
+  end
 end

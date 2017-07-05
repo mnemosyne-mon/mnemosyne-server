@@ -63,10 +63,6 @@ class TraceDecorator < BaseDecorator
     end
   end
 
-  def app_name
-    application.name
-  end
-
   def title
     trace_title || name
   end

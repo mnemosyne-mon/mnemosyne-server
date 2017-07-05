@@ -10,7 +10,7 @@
   ul.traces
     - @traces.each do |trace|
       li
-        span.application= link_to trace.app_name, trace.self_path
+        span.application= link_to trace.application.title, trace.self_path
         span= link_to trace.title, trace.self_path
         span.start= link_to l(trace.start, format: :index), trace.self_path
         span.duration= link_to trace.duration_text, trace.self_path
