@@ -30,6 +30,7 @@ class TraceDecorator < BaseDecorator
         path: meta['path'],
         query: meta['query'],
         method: meta['method'],
+        status: meta['status'],
         host: meta.dig('headers', 'Host'),
         user_agent: meta.dig('headers', 'User-Agent')
       }.compact
