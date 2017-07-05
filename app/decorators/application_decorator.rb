@@ -7,6 +7,7 @@ class ApplicationDecorator < BaseDecorator
     export do |out|
       out[:uuid] = id
       out[:name] = name
+      out[:title] = title
     end
   end
 

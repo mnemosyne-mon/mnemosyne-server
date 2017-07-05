@@ -19,7 +19,7 @@ export class TraceInfo extends Component
         value: new Date(start)
       $ Field,
         title: 'Application',
-        value: application['name']
+        value: application['title']
         href: this.context.routes.traces_url(application: application['uuid'])
       $ Field,
         title: 'Origin',
