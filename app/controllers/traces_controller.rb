@@ -41,7 +41,7 @@ class TracesController < ApplicationController
   end
 
   has_scope :ws do |_, scope, value|
-    scope.where('meta @> ?', {status: value}.to_json)
+    scope.where('meta @> ?', {status: value.to_i}.to_json)
   end
 
   has_scope :ls do |_, scope, value|
