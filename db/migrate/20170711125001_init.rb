@@ -61,6 +61,7 @@ class Init < ActiveRecord::Migration[5.1]
       t.jsonb   :meta
 
       t.uuid :application_id, null: false
+      t.uuid :activity_id, null: false
       t.uuid :platform_id, null: false
       t.uuid :origin_id
 
