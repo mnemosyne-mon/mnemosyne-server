@@ -52,5 +52,9 @@ FactoryGirl.define do # rubocop:disable BlockLength
     name 'mnemosyne.test.span'
 
     association :trace
+
+    after(:build) do |span|
+      span.platform_id = span.trace.platform_id
+    end
   end
 end

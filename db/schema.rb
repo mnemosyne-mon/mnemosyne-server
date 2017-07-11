@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20170711125001) do
     t.boolean "store", default: false, null: false
     t.jsonb "meta"
     t.uuid "application_id", null: false
+    t.uuid "activity_id", null: false
     t.uuid "platform_id", null: false
     t.uuid "origin_id"
     t.datetime "created_at", null: false

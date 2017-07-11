@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Trace < ApplicationRecord
+  self.primary_key = 'id'
+
   include Duration
 
   attribute :start, ::Mnemosyne::Types::PreciseDateTime.new
