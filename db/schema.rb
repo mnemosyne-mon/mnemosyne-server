@@ -10,76 +10,75 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614154144) do
+ActiveRecord::Schema.define(version: 20170711125001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
+  enable_extension "pgcrypto"
+  enable_extension "timescaledb"
 
-  create_table "activities", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "platform_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "platform_id", null: false
   end
 
-  create_table "applications", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
+    t.string "name", null: false
+    t.uuid "platform_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.uuid "platform_id", null: false
     t.index ["platform_id", "name"], name: "index_applications_on_platform_id_and_name", unique: true
   end
 
-  create_table "platforms", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "name"
+  create_table "platforms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
+    t.string "name", null: false
+    t.interval "retention_period", default: "P14D"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.interval "retention_period", default: "P30D"
     t.index ["name"], name: "index_platforms_on_name", unique: true
   end
 
-  create_table "spans", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "trace_id", null: false
+  create_table "spans", id: false, force: :cascade do |t|
+    t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
     t.string "name", null: false
     t.bigint "start", null: false
     t.bigint "stop", null: false
     t.jsonb "meta"
+    t.uuid "trace_id", null: false
+    t.uuid "platform_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_spans_on_name"
+    t.index ["platform_id", "stop"], name: "spans_platform_id_stop_idx", order: { stop: :desc }
     t.index ["start"], name: "index_spans_on_start"
+    t.index ["stop"], name: "spans_stop_idx", order: { stop: :desc }
     t.index ["trace_id"], name: "index_spans_on_trace_id"
   end
 
-  create_table "traces", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "application_id", null: false
-    t.uuid "activity_id", null: false
-    t.uuid "origin_id"
+  create_table "traces", id: false, force: :cascade do |t|
+    t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
     t.string "name", null: false
+    t.string "hostname", null: false
     t.bigint "start", null: false
     t.bigint "stop", null: false
+    t.boolean "store", default: false, null: false
     t.jsonb "meta"
+    t.uuid "application_id", null: false
+    t.uuid "platform_id", null: false
+    t.uuid "origin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "platform_id", null: false
-    t.string "hostname", null: false
-    t.boolean "store", default: false, null: false
-    t.index "((meta ->> 'method'::text))", name: "index_traces_filter_meta_method"
-    t.index ["application_id"], name: "index_traces_on_application_id"
+    t.index "((meta ->> 'method'::text))", name: "idx_traces_filter_method"
     t.index ["hostname"], name: "index_traces_on_hostname"
-    t.index ["meta"], name: "index_traces_filter_meta", using: :gin
-    t.index ["name", "start"], name: "index_traces_on_name_start_desc", order: { start: :desc }
+    t.index ["meta"], name: "index_traces_on_meta", using: :gin
     t.index ["name"], name: "index_traces_on_name"
-    t.index ["origin_id", "start"], name: "index_traces_on_origin_start_desc", order: { start: :desc }, where: "(origin_id IS NULL)"
-    t.index ["origin_id", "stop"], name: "index_traces_on_origin_stop_desc", order: { stop: :desc }, where: "(origin_id IS NULL)"
     t.index ["origin_id"], name: "index_traces_on_origin_id"
-    t.index ["platform_id", "created_at"], name: "index_traces_on_platform_id_and_created_at"
-    t.index ["platform_id", "origin_id", "stop"], name: "index_traces_platform_original_stop_ordered", order: { stop: :desc }, where: "(origin_id IS NULL)"
-    t.index ["platform_id", "stop"], name: "index_traces_platform_stop_ordered", order: { stop: :desc }
+    t.index ["platform_id", "stop"], name: "traces_platform_id_stop_idx", order: { stop: :desc }
     t.index ["platform_id"], name: "index_traces_on_platform_id"
-    t.index ["start"], name: "index_traces_on_start_desc", order: { start: :desc }
+    t.index ["stop"], name: "index_traces_on_stop", order: { stop: :desc }
   end
 
 end

@@ -38,6 +38,7 @@ module Mnemosyne
               id: data[:uuid],
               name: data[:name],
               trace_id: trace.id,
+              platform_id: trace.platform_id,
               start: Integer(data[:start]),
               stop: Integer(data[:stop]),
               meta: data[:meta]
