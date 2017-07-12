@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Mnemosyne
+module Server
   module Patches
     module IntervalStyle
       def configure_connection

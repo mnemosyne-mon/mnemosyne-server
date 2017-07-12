@@ -2,12 +2,12 @@
 
 require 'spec_helper'
 
-RSpec.describe ::Mnemosyne::Clock do
+RSpec.describe ::Server::Clock do
   let(:tick) { 1_492_522_002_637_612_303 }
   let(:time) { Time.at(Rational(tick, 1_000_000_000)).utc }
 
   describe '.to_tick' do
-    subject { ::Mnemosyne::Clock.to_tick(time) }
+    subject { ::Server::Clock.to_tick(time) }
     context 'with time' do
       it 'returns nanosecond-precise time stamp' do
         is_expected.to eq(tick)
@@ -21,7 +21,7 @@ RSpec.describe ::Mnemosyne::Clock do
   end
 
   describe '.to_time' do
-    subject { ::Mnemosyne::Clock.to_time(tick) }
+    subject { ::Server::Clock.to_time(tick) }
 
     it 'returns nanosecond-precise time' do
       expect(subject.to_i).to eq 1_492_522_002

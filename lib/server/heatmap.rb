@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Mnemosyne
+module Server
   class Heatmap # rubocop:disable ClassLength
-    using ::Mnemosyne::Refinements::Arel::Grouping
+    using ::Server::Refinements::Arel::Grouping
 
     def initialize(traces, time: {}, latency: {})
       @traces = traces

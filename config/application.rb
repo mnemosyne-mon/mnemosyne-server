@@ -18,7 +18,7 @@ require 'action_view/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Mnemosyne
+module Server
   class Application < Rails::Application
     config.load_defaults 5.1
 
@@ -41,14 +41,14 @@ module Mnemosyne
     end
 
     initializer 'patch.draper-streaming' do
-      ::Draper::CollectionDecorator.include ::Mnemosyne::Streaming::Collection
+      ::Draper::CollectionDecorator.include ::Server::Streaming::Collection
     end
 
     initializer 'patch.intervalstyle' do
       require 'active_record/connection_adapters/postgresql_adapter'
 
       ::ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend \
-        ::Mnemosyne::Patches::IntervalStyle
+        ::Server::Patches::IntervalStyle
     end
   end
 end

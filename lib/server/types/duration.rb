@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Mnemosyne
+module Server
   module Types
     class Duration < ActiveRecord::Type::Value
       def type

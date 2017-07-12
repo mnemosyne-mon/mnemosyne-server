@@ -12,7 +12,7 @@ class TraceConsumer
   end
 
   def process(message)
-    ::Mnemosyne::Builder.create!(message.body)
+    ::Server::Builder.create!(message.body)
   rescue ActiveRecord::RecordNotUnique
     retry if !@retry && (@retry = true)
     raise

@@ -5,8 +5,8 @@ class Span < ApplicationRecord
 
   include Duration
 
-  attribute :start, ::Mnemosyne::Types::PreciseDateTime.new
-  attribute :stop, ::Mnemosyne::Types::PreciseDateTime.new
+  attribute :start, ::Server::Types::PreciseDateTime.new
+  attribute :stop, ::Server::Types::PreciseDateTime.new
 
   belongs_to :trace
   belongs_to :platform

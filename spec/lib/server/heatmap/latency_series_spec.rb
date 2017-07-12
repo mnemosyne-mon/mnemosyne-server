@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ::Mnemosyne::Heatmap::LatencySeries do
+RSpec.describe ::Server::Heatmap::LatencySeries do
   let(:kwargs) { {} }
   let(:series) { described_class.new(**kwargs) }
 

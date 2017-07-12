@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Mnemosyne
+module Server
   module Clock
     class << self
       def to_tick(time)

@@ -5,12 +5,12 @@ class Trace < ApplicationRecord
 
   include Duration
 
-  attribute :start, ::Mnemosyne::Types::PreciseDateTime.new
-  attribute :stop, ::Mnemosyne::Types::PreciseDateTime.new
+  attribute :start, ::Server::Types::PreciseDateTime.new
+  attribute :stop, ::Server::Types::PreciseDateTime.new
 
-  attribute :id, ::Mnemosyne::Types::UUID4.new
-  attribute :origin_id, ::Mnemosyne::Types::UUID4.new
-  attribute :activity_id, ::Mnemosyne::Types::UUID4.new
+  attribute :id, ::Server::Types::UUID4.new
+  attribute :origin_id, ::Server::Types::UUID4.new
+  attribute :activity_id, ::Server::Types::UUID4.new
 
   has_many :spans, -> { order('start') }
 
@@ -21,7 +21,7 @@ class Trace < ApplicationRecord
 
   class << self
     def retention(period, time = Time.zone.now)
-      period = ::Mnemosyne::Types::Duration.new.cast_value(period)
+      period = ::Server::Types::Duration.new.cast_value(period)
       tlimit = time - period
 
       where t[:stop].lt(tlimit).and(t[:store].eq(false))

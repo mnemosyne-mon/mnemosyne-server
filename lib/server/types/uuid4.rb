@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Mnemosyne
+module Server
   module Types
     class UUID4 < ActiveRecord::Type::Value
       def serialize(value)

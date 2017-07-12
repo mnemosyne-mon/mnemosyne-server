@@ -2,7 +2,7 @@
 
 class TracesController < ApplicationController
   include Concerns::PlatformScope
-  include ::Mnemosyne::Streaming::JSONStreaming
+  include ::Server::Streaming::JSONStreaming
 
   respond_to :html, :json
 
@@ -69,7 +69,7 @@ class TracesController < ApplicationController
       .where(platform: platform)
       .where(origin: nil)
 
-    @heatmap = ::Mnemosyne::Heatmap.new @traces, \
+    @heatmap = ::Server::Heatmap.new @traces, \
       time: {
         stop: Time.zone.now,
         duration: 1.hour,

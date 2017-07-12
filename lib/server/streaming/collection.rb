@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Mnemosyne
+module Server
   module Streaming
     module Collection
       def to_json_stream(out, encoder:, **kwargs) # rubocop:disable MethodLength

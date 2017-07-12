@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ::Mnemosyne::Heatmap::TimeSeries do
+RSpec.describe ::Server::Heatmap::TimeSeries do
   let(:kwargs) { {} }
   let(:series) { described_class.new(**kwargs) }
   let(:time) { Time.zone.local(2017, 5, 30, 14, 46, 7.4647384) }

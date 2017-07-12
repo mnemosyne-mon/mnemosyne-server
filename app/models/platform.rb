@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Platform < ApplicationRecord
-  attribute :id, ::Mnemosyne::Types::UUID4.new
-  attribute :retention_period, ::Mnemosyne::Types::Duration.new
+  attribute :id, ::Server::Types::UUID4.new
+  attribute :retention_period, ::Server::Types::Duration.new
 
   validates :name, presence: true
 

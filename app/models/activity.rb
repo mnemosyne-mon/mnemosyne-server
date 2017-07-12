@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Activity < ApplicationRecord
-  attribute :id, ::Mnemosyne::Types::UUID4.new
+  attribute :id, ::Server::Types::UUID4.new
 
-  attribute :platform_id, ::Mnemosyne::Types::UUID4.new
+  attribute :platform_id, ::Server::Types::UUID4.new
 
   has_many :traces
   belongs_to :platform

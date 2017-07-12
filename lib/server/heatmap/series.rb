@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Mnemosyne
+module Server
   class Heatmap
     class Series
       attr_reader :first

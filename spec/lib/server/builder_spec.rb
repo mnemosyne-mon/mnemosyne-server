@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ::Mnemosyne::Builder do
+RSpec.describe ::Server::Builder do
   let(:payload) { {} }
   let(:builder) { described_class.new(payload) }
 
