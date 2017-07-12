@@ -33,7 +33,7 @@ class Init < ActiveRecord::Migration[5.1]
     end
 
     create_table :spans, id: false do |t|
-      t.uuid    :id,       null: false, default: 'gen_random_uuid()'
+      t.uuid :id, null: false, default: 'gen_random_uuid()'
 
       t.string :name,     null: false
       t.bigint :start,    null: false
