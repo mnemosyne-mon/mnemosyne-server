@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712074135) do
+ActiveRecord::Schema.define(version: 20170717153926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170712074135) do
     t.uuid "platform_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_spans_on_id"
     t.index ["name"], name: "index_spans_on_name"
     t.index ["platform_id", "stop"], name: "spans_platform_id_stop_idx", order: { stop: :desc }
     t.index ["start"], name: "index_spans_on_start"
