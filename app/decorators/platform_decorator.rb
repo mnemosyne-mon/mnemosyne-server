@@ -3,6 +3,8 @@
 class PlatformDecorator < BaseDecorator
   delegate_all
 
+  decorates_association :applications
+
   def serialize(**_)
     export do |out|
       out[:uuid] = id
