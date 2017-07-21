@@ -42,3 +42,5 @@ export class TraceGraph extends Component
       className: 'tg-bar'
       title: duration
       style: style
+      if node.duration > 10
+        $ 'span', node.duration.toFixed(2)
