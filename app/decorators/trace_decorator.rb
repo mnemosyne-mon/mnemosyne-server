@@ -41,14 +41,19 @@ class TraceDecorator < BaseDecorator
     {
       routes: routes,
       trace: serialize,
-      spans: spans.map(&:serialize)
+      spans: object.spans
+        .includes(:traces, :trace)
+        .limit(1000)
+        .decorate
+        .map(&:serialize)
     }.to_json
   end
 
   def routes
     {
       t_url: h.t_url_rfc6570,
-      traces_url: h.trace_url_rfc6570.partial_expand(platform: platform.to_param)
+      traces_url: \
+        h.trace_url_rfc6570.partial_expand(platform: platform.to_param)
     }
   end
 
