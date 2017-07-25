@@ -32,21 +32,19 @@ export class TraceGraph extends Component
     $ 'div',
       key: node.uuid
       className: 'selected' if selected
-      $ 'div', className: 'tg-info', this.renderName(node)
+      onClick: => this.props.onSelect(node['uuid'])
+      $ 'div',
+        className: 'tg-info',
+        this.renderName(node)
       $ 'div', this.renderBar(node)
 
   renderName: (node) ->
-    $ 'a',
-      href: "#sm-#{node['uuid']}"
-      onClick: => this.props.onSelect(node['uuid'])
+    if node.traces?.length > 0
+      $ 'a',
+        href: this.context.routes.traces_url(id: node.traces[0])
+        node.title || node.name
+    else
       node.title || node.name
-
-    # if node.traces?.length > 0
-    #   $ 'a',
-    #     href: this.context.routes.traces_url(id: node.traces[0])
-    #     node.title || node.name
-    # else
-    #   node.title || node.name
 
   renderBar: (node) ->
     style = {}
