@@ -39,12 +39,28 @@ export class TraceView extends Component
 
   constructor: (props) ->
     super(props)
+
     this.state = {}
+
+    this.__onHashChange = this.onHashChange.bind(this)
 
   getChildContext: ->
     {
       routes: makeRoutes(this.props.routes)
     }
+
+  componentDidMount: ->
+    this.onHashChange()
+    window.addEventListener 'hashchange', this.__onHashChange
+
+  componentWillUnmount: ->
+    window.removeEventListener 'hashchange', this.__onHashChange
+
+  onHashChange: (e) ->
+    if window.location.hash.startsWith('#sm-')
+      this.select window.location.hash.slice(4)
+    else
+      this.setState selection: null
 
   select: (uuid) ->
     if this.props.trace['uuid'] == uuid

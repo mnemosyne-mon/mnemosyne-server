@@ -11,17 +11,6 @@ export class TraceGraph extends Component
   @contextTypes =
     routes: PropTypes.object
 
-  constructor: (props) ->
-    super(props)
-
-  componentDidMount: ->
-    if window.location.hash.startsWith('#sm-')
-      uuid = window.location.hash.slice(4)
-
-      for node in this.props.nodes
-        if node['uuid'] == uuid
-          this.props.onSelect?(uuid)
-
   render: ->
     $ 'section', className: 'tracegraph',
       this.props.nodes.map this.renderNode.bind(this)
