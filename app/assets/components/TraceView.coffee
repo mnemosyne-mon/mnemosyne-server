@@ -16,6 +16,7 @@ import './TraceView.sass'
 import { TraceInfo } from './TraceInfo'
 import { TraceMeta } from './TraceMeta'
 import { TraceGraph } from './TraceGraph'
+import { SpanMeta } from './SpanMeta'
 
 makeRoutes = (routes) ->
   helpers = Object.create(null)
@@ -36,10 +37,23 @@ export class TraceView extends Component
   @childContextTypes =
     routes: PropTypes.object
 
+  constructor: (props) ->
+    super(props)
+    this.state = {}
+
   getChildContext: ->
     {
       routes: makeRoutes(this.props.routes)
     }
+
+  select: (uuid) ->
+    if this.props.trace['uuid'] == uuid
+      this.setState selection: this.props.trace
+    else
+      for span in this.props.spans
+        if span['uuid'] == uuid
+          this.setState selection: span
+          break
 
   render: ->
     console.log(this.props.routes)
@@ -51,8 +65,15 @@ export class TraceView extends Component
       $ 'div', className: 'container-fluid',
         $ TraceInfo, trace: trace
         $ TraceMeta, trace: trace
-      $ 'div', className: 'container-fluid',
-        $ TraceGraph, nodes: [trace, spans...]
+      $ 'div', className: 'container-fluid traceview-main',
+        $ TraceGraph,
+          nodes: [trace, spans...],
+          selection: this.state.selection?['uuid']
+          onSelect: this.select.bind(this)
+        if this.state.selection?
+          $ SpanMeta,
+            node: this.state.selection
+            onCloseRequest: => this.setState selection: null
 
 
 class Header extends Component

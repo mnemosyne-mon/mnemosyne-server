@@ -11,22 +11,42 @@ export class TraceGraph extends Component
   @contextTypes =
     routes: PropTypes.object
 
+  constructor: (props) ->
+    super(props)
+
+  componentDidMount: ->
+    if window.location.hash.startsWith('#sm-')
+      uuid = window.location.hash.slice(4)
+
+      for node in this.props.nodes
+        if node['uuid'] == uuid
+          this.props.onSelect?(uuid)
+
   render: ->
     $ 'section', className: 'tracegraph',
       this.props.nodes.map this.renderNode.bind(this)
 
   renderNode: (node) ->
-    $ 'div', key: node.uuid,
+    selected = this.props.selection == node['uuid']
+
+    $ 'div',
+      key: node.uuid
+      className: 'selected' if selected
       $ 'div', className: 'tg-info', this.renderName(node)
       $ 'div', this.renderBar(node)
 
   renderName: (node) ->
-    if node.traces?.length > 0
-      $ 'a',
-        href: this.context.routes.traces_url(id: node.traces[0])
-        node.title || node.name
-    else
+    $ 'a',
+      href: "#sm-#{node['uuid']}"
+      onClick: => this.props.onSelect(node['uuid'])
       node.title || node.name
+
+    # if node.traces?.length > 0
+    #   $ 'a',
+    #     href: this.context.routes.traces_url(id: node.traces[0])
+    #     node.title || node.name
+    # else
+    #   node.title || node.name
 
   renderBar: (node) ->
     style = {}

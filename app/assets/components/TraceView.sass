@@ -45,6 +45,76 @@
       span
         margin-right: 0.5rem
 
+  .traceview-main
+    display: flex
+
+    > section
+      flex-grow: 1
+
+  .traceview-sm
+    flex-grow: 0 !important
+    width: 40%
+
+    background-color: white
+    border-left: 4px solid #eee
+    padding: 0 1rem
+    position: relative
+
+    > section
+      padding: 1rem 0
+
+    .sm-close
+      position: absolute
+      top: 0
+      right: 0.8rem
+      font-size: 200%
+      color: #ddd
+
+      &:hover
+        color: #999
+
+    table
+      width: 100%
+
+      th, td
+        border: 1px solid #ccc
+        line-height: 1.4rem
+        font-size: 0.7rem
+
+      th
+        text-align: right
+        margin: 0
+        width: 90px
+        padding: 2px 0.5rem
+
+        color: #555
+        background: #f6f6f6
+
+      td
+        background: #fff
+        width: 100%
+        margin: 0
+        padding: 2px 0.4rem
+        text-overflow: ellipsis
+        overflow: hidden
+        white-space: nowrap
+
+    dl
+      dt, dd
+        padding: 0 0.3rem
+
+      dt
+        border-bottom: 1px solid #ccc
+        font-variant: small-caps
+
+      dd
+        padding-top: 0.2rem
+        font: 90% monospace
+        word-wrap: break-word
+
+    .empty
+      color: #bbb
+
   .traceinfo
     display: flex
     flex-wrap: wrap
