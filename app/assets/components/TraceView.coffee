@@ -56,7 +56,6 @@ export class TraceView extends Component
           break
 
   render: ->
-    console.log(this.props.routes)
     { trace, spans } = this.props
 
     $ 'section', className: 'traceview',
