@@ -108,9 +108,25 @@
         font-variant: small-caps
 
       dd
-        padding-top: 0.2rem
+        padding: 0.2rem 0.3rem
         font: 90% monospace
+        overflow: auto
+        white-space: pre
         word-wrap: break-word
+        max-height: 50vh
+
+        &::-webkit-scrollbar
+          width: 12px
+          height: 12px
+
+        &::-webkit-scrollbar-thumb
+          -webkit-border-radius: 10px
+          border-radius: 6px
+          background-color: #eee
+          border: 2px solid #fff
+
+        &:hover::-webkit-scrollbar-thumb
+          background-color: #aaa
 
     .empty
       color: #bbb
