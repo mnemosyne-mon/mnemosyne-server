@@ -26,13 +26,17 @@ export class TraceGraph extends Component
     $ 'section', className: 'tracegraph',
       this.props.nodes.map this.renderNode.bind(this)
 
+  select: (uuid) ->
+    window.location.hash = "#sm-#{uuid}"
+    this.props.onSelect(uuid)
+
   renderNode: (node) ->
     selected = this.props.selection == node['uuid']
 
     $ 'div',
       key: node.uuid
       className: 'selected' if selected
-      onClick: => this.props.onSelect(node['uuid'])
+      onClick: => this.select(node['uuid'])
       $ 'div',
         className: 'tg-info',
         this.renderName(node)
