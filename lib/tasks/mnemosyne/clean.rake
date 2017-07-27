@@ -12,32 +12,35 @@ namespace :mnemosyne do
 
     logger.level = :info
 
+    time = Time.zone.now
+
     Platform.all.each do |platform|
       logger.info "==== Cleanup #{platform.name} ===="
       logger.info " [I] Retention period: #{platform.retention_period.inspect}"
 
-      tscope = platform.traces.retention \
-        platform.retention_period, Time.zone.now
-
       ctraces = 0
       cspans = 0
 
-      while tscope.any?
-        traces = tscope.pluck(:id)
+      ActiveRecord::Base.transaction do
+        traces = platform
+          .traces
+          .retention(platform.retention_period, time)
 
-        traces.each_slice(10_000) do |slice|
-          ActiveRecord::Base.transaction do
-            if dry
-              ctraces += slice.size
-              cspans += Span.where(trace_id: slice).count
-            else
-              ctraces += Trace.where(id: slice).delete_all
-              cspans += Span.where(trace_id: slice).delete_all
-            end
-          end
+        spans = Span
+          .retention(platform.retention_period, time)
+          .where(trace_id: traces.select(:id))
+
+        # Spans *must* be deleted before traces as condition clauses will
+        # otherwise not match anything anymore and all spans will be left
+        # dangling.
+
+        if dry
+          cspans = spans.count
+          ctraces = traces.count
+        else
+          cspans = spans.delete_all
+          ctraces = traces.delete_all
         end
-
-        tscope = [] if dry
       end
 
       if dry

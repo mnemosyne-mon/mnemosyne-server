@@ -12,4 +12,15 @@ class Span < ApplicationRecord
   belongs_to :platform
 
   has_many :traces, foreign_key: :origin_id, class_name: :Trace
+
+  class << self
+    def retention(period, time = Time.zone.now)
+      period = ::Server::Types::Duration.new.cast_value(period)
+      tlimit = time - period
+
+      where t[:stop].lt(tlimit)
+    end
+
+    alias t arel_table
+  end
 end
