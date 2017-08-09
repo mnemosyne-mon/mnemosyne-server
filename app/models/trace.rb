@@ -27,6 +27,12 @@ class Trace < ApplicationRecord
       where t[:stop].lt(tlimit).and(t[:store].eq(false))
     end
 
+    def range(start, stop = Time.zone.now)
+      start = stop - start if start.is_a?(ActiveSupport::Duration)
+
+      where t[:stop].gt(start).and(t[:stop].lteq(stop))
+    end
+
     alias t arel_table
   end
 end

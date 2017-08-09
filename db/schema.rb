@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20170721083554) do
     t.datetime "updated_at", null: false
     t.index ["id"], name: "index_spans_on_id"
     t.index ["name"], name: "index_spans_on_name"
-    t.index ["platform_id", "stop"], name: "spans_platform_id_stop_idx", order: { stop: :desc }
     t.index ["start"], name: "index_spans_on_start"
     t.index ["stop"], name: "spans_stop_idx", order: { stop: :desc }
     t.index ["trace_id"], name: "index_spans_on_trace_id"
@@ -80,7 +79,6 @@ ActiveRecord::Schema.define(version: 20170721083554) do
     t.index ["meta"], name: "index_traces_on_meta", using: :gin
     t.index ["name"], name: "index_traces_on_name"
     t.index ["origin_id"], name: "index_traces_on_origin_id"
-    t.index ["platform_id", "stop"], name: "traces_platform_id_stop_idx", order: { stop: :desc }
     t.index ["platform_id"], name: "index_traces_on_platform_id"
     t.index ["stop"], name: "index_traces_on_stop", order: { stop: :desc }
   end

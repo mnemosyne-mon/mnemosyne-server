@@ -52,11 +52,19 @@ class TracesController < ApplicationController
     scope.where('(stop - start) < ?', value.to_f * 1_000_000)
   end
 
+  FILTER_PARAMS = %w[origin application hostname wm wp ws ls le].freeze
+
   def index
-    @traces = Trace.all
-      .where(platform: platform)
+    @traces = platform.traces
+      .range(6.hours)
       .order(stop: :desc)
       .includes(:application)
+
+    # Force PostgreSQL to use filter indexes if filtered are specified
+    # instead of favoring the ordered stop index.
+    if (FILTER_PARAMS & params.keys).any? # rubocop:disable IfUnlessModifier
+      @traces = @traces.order(:id)
+    end
 
     @traces = apply_scopes @traces
     @traces = @traces.decorate(context: context)
@@ -65,8 +73,8 @@ class TracesController < ApplicationController
   end
 
   def heatmap
-    @traces = Trace.all
-      .where(platform: platform)
+    @traces = platform.traces
+      .range(6.hours)
       .where(origin: nil)
 
     @heatmap = ::Server::Heatmap.new @traces, \
