@@ -52,11 +52,14 @@ class TracesController < ApplicationController
     scope.where('(stop - start) < ?', value.to_f * 1_000_000)
   end
 
+  has_scope :rm, default: 1440, allow_blank: true do |ctl, scope, value|
+    scope.range([value.to_i.minutes, ctl.platform.retention_period].min)
+  end
+
   FILTER_PARAMS = %w[origin application hostname wm wp ws ls le].freeze
 
   def index
     @traces = platform.traces
-      .range(6.hours)
       .order(stop: :desc)
       .includes(:application)
 
@@ -74,7 +77,6 @@ class TracesController < ApplicationController
 
   def heatmap
     @traces = platform.traces
-      .range(6.hours)
       .where(origin: nil)
 
     @heatmap = ::Server::Heatmap.new @traces, \
