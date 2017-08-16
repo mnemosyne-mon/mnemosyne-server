@@ -32,7 +32,10 @@ class TraceDecorator < BaseDecorator
         method: meta['method'],
         status: meta['status'],
         host: meta.dig('headers', 'Host'),
-        user_agent: meta.dig('headers', 'User-Agent')
+        user_agent: meta.dig('headers', 'User-Agent'),
+        controller: meta.dig('controller'),
+        action: meta.dig('action'),
+        format: meta.dig('format')
       }.compact
     end
   end

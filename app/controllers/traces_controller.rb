@@ -44,6 +44,14 @@ class TracesController < ApplicationController
     scope.where('meta @> ?', {status: value.to_i}.to_json)
   end
 
+  has_scope :wc do |_, scope, value|
+    scope.where('meta @> ?', {controller: value}.to_json)
+  end
+
+  has_scope :wa do |_, scope, value|
+    scope.where('meta @> ?', {action: value}.to_json)
+  end
+
   has_scope :ls do |_, scope, value|
     scope.where('(stop - start) >= ?', value.to_f * 1_000_000)
   end
@@ -56,7 +64,7 @@ class TracesController < ApplicationController
     scope.range([value.to_i.minutes, ctl.platform.retention_period].min)
   end
 
-  FILTER_PARAMS = %w[origin application hostname wm wp ws ls le].freeze
+  FILTER_PARAMS = %w[origin application hostname wm wp ws wc wa ls le].freeze
 
   def index
     @traces = platform.traces
