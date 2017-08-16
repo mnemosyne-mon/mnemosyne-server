@@ -6,7 +6,9 @@ module Server
   module Pipeline
     module Metrics
       class Influx
-        def initialize(database, **kwargs)
+        def initialize(app, database, **kwargs)
+          @app = app
+
           if database.respond_to?(:write_point)
             @client = database
           else
@@ -54,7 +56,7 @@ module Server
               tags[:route] = payload.dig(:meta, :delivery_info, :routing_key)
           end
 
-          yield(payload)
+          @app.call(payload)
 
           return unless type
 
