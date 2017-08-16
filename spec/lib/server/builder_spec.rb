@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe ::Server::Builder do
   let(:payload) { {} }
-  let(:builder) { described_class.new(payload) }
+  let(:builder) { described_class.new }
 
-  subject { builder.create! }
+  subject { builder.call(payload) }
 
   context 'with payload (I)' do
     let(:payload) do
@@ -52,7 +52,7 @@ RSpec.describe ::Server::Builder do
     end
 
     describe 'platform' do
-      before { builder.create! }
+      before { builder.call(payload) }
       subject { trace.platform }
 
       example 'name equals payload value' do
@@ -61,7 +61,7 @@ RSpec.describe ::Server::Builder do
     end
 
     describe 'activity' do
-      before { builder.create! }
+      before { builder.call(payload) }
       subject { trace.activity }
 
       example 'UUID equals payload value' do
@@ -74,7 +74,7 @@ RSpec.describe ::Server::Builder do
     end
 
     describe 'application' do
-      before { builder.create! }
+      before { builder.call(payload) }
       subject { trace.application }
 
       example 'original name equals payload value' do
@@ -87,7 +87,7 @@ RSpec.describe ::Server::Builder do
     end
 
     describe 'trace' do
-      before { builder.create! }
+      before { builder.call(payload) }
       subject { trace }
 
       example 'UUID equals payload value' do
@@ -120,7 +120,7 @@ RSpec.describe ::Server::Builder do
     end
 
     describe 'span' do
-      before { builder.create! }
+      before { builder.call(payload) }
       subject { trace.spans.first }
 
       example 'UUID equals payload value' do

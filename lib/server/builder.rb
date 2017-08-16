@@ -2,15 +2,9 @@
 
 module Server
   class Builder
-    attr_reader :payload
-
-    def initialize(payload)
-      @payload = payload
-    end
-
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
-    def create!
+    def call(payload)
       platform = ::Platform.acquire payload.fetch(:platform)
       activity = platform.activities.fetch payload.fetch(:transaction)
       application = platform.applications.fetch payload.fetch(:application)
@@ -44,12 +38,6 @@ module Server
               meta: data[:meta]
           end
         end
-      end
-    end
-
-    class << self
-      def create!(payload)
-        new(payload).create!
       end
     end
   end

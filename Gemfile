@@ -26,6 +26,8 @@ gem 'responders', '~> 2.4'
 gem 'slim'
 gem 'webpacker'
 
+gem 'ibsciss-middleware', '~> 0.4.2'
+
 gem 'rails-timeago'
 
 gem 'mnemosyne-ruby', '~> 1.2'
