@@ -57,15 +57,15 @@ module Server
       if (config = pipeline['influx'])
         database = config.fetch('database')
         host     = config['host']
-        async    = config['async']
         username = config['username']
         password = config['password']
 
         kwargs = {
           host: host,
-          async: async,
+          async: true,
           username: username,
-          password: password
+          password: password,
+          time_precision: 'ns'
         }
 
         ::Server::Pipeline.default.use \
