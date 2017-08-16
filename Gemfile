@@ -26,6 +26,7 @@ gem 'responders', '~> 2.4'
 gem 'slim'
 gem 'webpacker'
 
+gem 'influxdb'
 gem 'ibsciss-middleware', '~> 0.4.2'
 
 gem 'rails-timeago'

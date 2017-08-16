@@ -12,7 +12,6 @@ module Server
       def default
         @default ||= ::Middleware::Builder.new(runner_class: Runner) do |b|
           b.use ::Server::Pipeline::Rails::ActionController
-          b.use ::Server::Builder.new
         end
       end
     end

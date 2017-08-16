@@ -1,0 +1,10 @@
+# Configure additional pipeline steps
+
+development:
+  # Collect and send metrics to InfluxDB
+  # influx:
+  #   database: mnemosyne
+  #   host: http://localhost:8086/
+  #   async: true
+
+production:

@@ -50,5 +50,23 @@ module Server
       ::ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend \
         ::Server::Patches::IntervalStyle
     end
+
+    initializer 'pipeline' do |app|
+      pipeline = app.config_for('pipeline')
+
+      if (config = pipeline['influx'])
+        database = config.fetch('database')
+        host     = config.fetch('host')
+        async    = config.fetch('async')
+
+        kwargs = {
+          host: host,
+          async: async
+        }
+
+        ::Server::Pipeline.default.use \
+          ::Server::Pipeline::Metrics::Influx, database, **kwargs
+      end
+    end
   end
 end
