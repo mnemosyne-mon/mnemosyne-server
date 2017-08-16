@@ -56,10 +56,10 @@ module Server
 
       if (config = pipeline['influx'])
         database = config.fetch('database')
-        host     = config.fetch('host')
-        async    = config.fetch('async')
-        username = config.fetch('username')
-        password = config.fetch('password')
+        host     = config['host']
+        async    = config['async']
+        username = config['username']
+        password = config['password']
 
         kwargs = {
           host: host,
