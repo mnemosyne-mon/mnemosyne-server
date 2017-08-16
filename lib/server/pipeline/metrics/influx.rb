@@ -6,14 +6,16 @@ module Server
   module Pipeline
     module Metrics
       class Influx
-        def initialize(app, database, **kwargs)
-          @app = app
-
+        def initialize(database, **kwargs)
           if database.respond_to?(:write_point)
             @client = database
           else
             @client = ::InfluxDB::Client.new(database.to_s, **kwargs)
           end
+        end
+
+        def name
+          ::Server::Pipeline::Metrics::Influx
         end
 
         # rubocop:disable AbcSize
@@ -56,7 +58,7 @@ module Server
               tags[:route] = payload.dig(:meta, :delivery_info, :routing_key)
           end
 
-          @app.call(payload)
+          yield(payload)
 
           return unless type
 

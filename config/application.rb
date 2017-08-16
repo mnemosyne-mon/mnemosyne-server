@@ -69,7 +69,7 @@ module Server
         }
 
         ::Server::Pipeline.default.use \
-          ::Server::Pipeline::Metrics::Influx, database, **kwargs
+          ::Server::Pipeline::Metrics::Influx.new(database, **kwargs)
       end
     end
   end
