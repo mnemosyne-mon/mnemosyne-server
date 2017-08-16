@@ -58,10 +58,14 @@ module Server
         database = config.fetch('database')
         host     = config.fetch('host')
         async    = config.fetch('async')
+        username = config.fetch('username')
+        password = config.fetch('password')
 
         kwargs = {
           host: host,
-          async: async
+          async: async,
+          username: username,
+          password: password
         }
 
         ::Server::Pipeline.default.use \
