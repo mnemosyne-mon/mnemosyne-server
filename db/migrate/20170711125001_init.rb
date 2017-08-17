@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class Init < ActiveRecord::Migration[5.1]
-  def change
+  # rubocop:disable AbcSize
+  # rubocop:disable GuardClause
+  # rubocop:disable MethodLength
+  def up
     enable_extension 'plpgsql'
     enable_extension 'pgcrypto'
-    enable_extension 'timescaledb'
+    enable_extension 'timescaledb' if timescaledb?
 
     create_table :activities, id: :uuid do |t|
       t.uuid :platform_id, null: false
@@ -76,16 +79,22 @@ class Init < ActiveRecord::Migration[5.1]
       t.index "((meta ->> 'method'::text))", name: 'idx_traces_filter_method'
     end
 
-    execute <<-SQL.strip_heredoc
-      SELECT create_hypertable(
-        'traces'::regclass, 'stop'::name,
-        chunk_time_interval => 21600000000000);
-    SQL
+    if timescaledb?
+      execute <<-SQL.strip_heredoc
+        SELECT create_hypertable(
+          'traces'::regclass, 'stop'::name,
+          chunk_time_interval => 21600000000000);
+      SQL
 
-    execute <<-SQL.strip_heredoc
-      SELECT create_hypertable(
-        'spans'::regclass, 'stop'::name,
-        chunk_time_interval => 21600000000000);
-    SQL
+      execute <<-SQL.strip_heredoc
+        SELECT create_hypertable(
+          'spans'::regclass, 'stop'::name,
+          chunk_time_interval => 21600000000000);
+      SQL
+    end
+  end
+
+  def timescaledb?
+    !%w[off false 0].include?(ENV['TIMESCALEDB'])
   end
 end
