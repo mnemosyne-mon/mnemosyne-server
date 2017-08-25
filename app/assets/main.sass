@@ -1,14 +1,17 @@
 @import '~bourbon/bourbon'
 
+$font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+@import '~bootstrap/scss/functions'
 @import '~bootstrap/scss/variables'
 @import '~bootstrap/scss/mixins'
 
 $header-bg: #444
 $header-color: $white
 $header-border-width: 3px
-$header-border-color: $brand-primary
+$header-border-color: theme-color("primary")
 
-@import '~bootstrap/scss/normalize'
+@import '~bootstrap/scss/reboot'
 @import '~bootstrap/scss/print'
 
 @import '~bootstrap/scss/reboot'
