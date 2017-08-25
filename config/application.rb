@@ -36,19 +36,19 @@ module Server
     config.time_zone = 'Europe/Berlin'
     config.active_record.default_timezone = :utc
 
+    initializer 'patch' do
+      require 'patch/all'
+
+      # Force new ConnectionPool after patching
+      ::ActiveRecord::Base.establish_connection
+    end
+
     initializer 'activesupport.time_precision' do
       ::ActiveSupport::JSON::Encoding.time_precision = 9
     end
 
-    initializer 'patch.draper-streaming' do
+    initializer 'patch.draper.streaming' do
       ::Draper::CollectionDecorator.include ::Server::Streaming::Collection
-    end
-
-    initializer 'patch.intervalstyle' do
-      require 'active_record/connection_adapters/postgresql_adapter'
-
-      ::ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend \
-        ::Server::Patches::IntervalStyle
     end
 
     initializer 'pipeline' do |app|
