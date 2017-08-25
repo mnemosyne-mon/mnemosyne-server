@@ -1,13 +1,12 @@
-// Note: You must restart bin/webpack-watcher for changes to take effect
+// Note: You must restart bin/webpack-dev-server for changes to take effect
 
 const merge = require('webpack-merge')
-const common = require('./common.js')
 
-const { resolve } = require('path')
-const { devServer, publicPath, paths } = require('./configuration.js')
+const sharedConfig = require('./shared.js')
+const { settings, output } = require('./configuration.js')
 
-module.exports = merge(common, {
-  devtool: 'sourcemap',
+module.exports = merge(sharedConfig, {
+  devtool: 'cheap-eval-source-map',
 
   stats: {
     errorDetails: true
@@ -18,11 +17,25 @@ module.exports = merge(common, {
   },
 
   devServer: {
-    host: devServer.host,
-    port: devServer.port,
-    disableHostCheck: true,
-    contentBase: resolve(paths.output, paths.entry),
+    // host: devServer.host,
+    // port: devServer.port,
+    // disableHostCheck: true,
+    // contentBase: resolve(paths.output, paths.entry),
+    // proxy: {'/': 'http://localhost:9001'},
+    // publicPath
+
+    clientLogLevel: 'none',
+    https: settings.dev_server.https,
+    host: settings.dev_server.host,
+    port: settings.dev_server.port,
     proxy: {'/': 'http://localhost:9001'},
-    publicPath
+    contentBase: output.path,
+    publicPath: output.publicPath,
+    compress: true,
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    historyApiFallback: true,
+    watchOptions: {
+      ignored: /node_modules/
+    }
   }
 })

@@ -315,7 +315,7 @@ DEPENDENCIES
   timecop
   uuid4 (~> 1.0)
   web-console (>= 3.3.0)
-  webpacker
+  webpacker (~> 2.0)
 
 BUNDLED WITH
    1.15.4

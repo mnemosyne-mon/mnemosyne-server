@@ -10,7 +10,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ManifestPlugin    = require('webpack-manifest-plugin')
 
 const { join, resolve } = require('path')
-const { env, paths, publicPath, loadersDir } = require('./configuration.js')
+const { env, settings, output, loadersDir } = require('./configuration.js')
 
 if(env.NODE_ENV === 'production') {
   JAVASCRIPT_NAME = '[hash].js'
@@ -27,12 +27,12 @@ module.exports = {
     main: ['manifest.js', 'main.js', 'main.sass']
   },
 
-  context: resolve(paths.source),
+  context: resolve(settings.source),
 
   output: {
-    path: resolve(paths.output),
+    path: resolve(settings.output),
     filename: JAVASCRIPT_NAME,
-    publicPath
+    publicPath: output.publicPath
   },
 
   module: {
@@ -122,7 +122,7 @@ module.exports = {
     }),
     new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
     new ExtractTextPlugin(STYLESHEET_NAME),
-    new ManifestPlugin({ fileName: paths.manifest, writeToFileEmit: true, publicPath })
+    new ManifestPlugin({ fileName: settings.manifest, writeToFileEmit: true, publicPath: output.publicPath })
   ],
 
   resolve: {
@@ -134,12 +134,12 @@ module.exports = {
       '.coffee', '.js', '.sass', '.scss', '.css', '.png', '.svg', '.jpg'
     ],
     modules: [
-      resolve(paths.source),
-      resolve(paths.node_modules)
+      resolve(settings.source),
+      'node_modules'
     ]
   },
 
   resolveLoader: {
-    modules: [paths.node_modules]
+    modules: ['node_modules']
   }
 }

@@ -24,10 +24,10 @@ gem 'oj'
 gem 'rails-rfc6570', '~> 2.0'
 gem 'responders', '~> 2.4'
 gem 'slim'
-gem 'webpacker'
+gem 'webpacker', '~> 2.0'
 
-gem 'influxdb'
 gem 'ibsciss-middleware', '~> 0.4.2'
+gem 'influxdb'
 
 gem 'rails-timeago'
 

@@ -1,6 +1,6 @@
-// Note: You must restart bin/webpack-watcher for changes to take effect
+// Note: You must restart bin/webpack-dev-server for changes to take effect
 
 const merge = require('webpack-merge')
-const common = require('./common.js')
+const sharedConfig = require('./shared.js')
 
-module.exports = merge(common, {})
+module.exports = merge(sharedConfig, {})
