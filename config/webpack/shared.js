@@ -13,18 +13,18 @@ const { join, resolve } = require('path')
 const { env, settings, output, loadersDir } = require('./configuration.js')
 
 if(env.NODE_ENV === 'production') {
-  JAVASCRIPT_NAME = '[hash].js'
-  STYLESHEET_NAME = '[hash].css'
-  FILE_NAME = '[path][hash].[ext]'
+  JAVASCRIPT_NAME = '[chunkhash:20].js'
+  STYLESHEET_NAME = '[contenthash:20].css'
+  FILE_NAME       = '[hash:20].[ext]'
 } else {
   JAVASCRIPT_NAME = '[name].js'
   STYLESHEET_NAME = '[name].css'
-  FILE_NAME = '[path][name].[ext]'
+  FILE_NAME       = '[path][name].[ext]'
 }
 
 module.exports = {
   entry: {
-    main: ['manifest.js', 'main.js', 'main.sass']
+    application: ['manifest.js', 'main.js', 'main.sass']
   },
 
   context: resolve(settings.source),
