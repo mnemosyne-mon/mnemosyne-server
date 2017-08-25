@@ -49,6 +49,7 @@ module Patch
       synchronize do
         @available.delete_aged(@idle_timeout) do |conn|
           @connections.delete(conn)
+          conn.disconnect!
         end
       end
     end
