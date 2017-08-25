@@ -40,6 +40,7 @@ module Patch
       synchronize do
         super.tap do |stat|
           stat[:idle_timeout] = @idle_timeout
+          stat[:janitor_frequency] = @janitor && @janitor.frequency
         end
       end
     end
