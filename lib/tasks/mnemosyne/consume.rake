@@ -42,6 +42,7 @@ namespace :mnemosyne do
     config.merge! parse ENV['SERVER'] if ENV.key?('SERVER')
 
     config[:exchange] = ENV['EXCHANGE'] || config[:exchange] || 'mnemosyne'
+    config[:pool] = ENV['POOL']&.to_i || config[:pool] || 5
 
     Hutch::Config.set :mq_host, config[:host] if config.key?(:host)
     Hutch::Config.set :mq_port, config[:port] if config.key?(:port)
@@ -50,8 +51,8 @@ namespace :mnemosyne do
     Hutch::Config.set :mq_password, config[:password] if config.key?(:password)
     Hutch::Config.set :mq_exchange, config.fetch(:exchange, 'mnemosyne')
 
-    Hutch::Config.set :channel_prefetch, config.fetch(:pool, 5)
-    Hutch::Config.set :consumer_pool_size, config.fetch(:pool, 5)
+    Hutch::Config.set :channel_prefetch, config[:pool]
+    Hutch::Config.set :consumer_pool_size, config[:pool]
 
     Hutch::Config.set :publisher_confirms, \
       config.fetch(:publisher_confirms, true)
