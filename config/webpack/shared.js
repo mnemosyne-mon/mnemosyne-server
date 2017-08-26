@@ -55,6 +55,11 @@ module.exports = {
       test: /\.(scss|sass|css)$/i,
       use: ExtractTextPlugin.extract({
         use: [{
+          loader: 'cache-loader',
+          options: {
+            cacheDirectory: resolve('tmp/cache/webpack')
+          }
+        }, {
           loader: 'css-loader',
           options: {
             sourceMap: true,
@@ -80,6 +85,11 @@ module.exports = {
     }, {
       test: /\.jsx?$/i,
       use: [{
+        loader: 'cache-loader',
+        options: {
+          cacheDirectory: resolve('tmp/cache/webpack')
+        }
+      }, {
         loader: 'babel-loader',
         options: {
           presets: [
@@ -96,6 +106,11 @@ module.exports = {
       test: /\.coffee$/i,
       exclude: /node_modules/,
       use: [{
+        loader: 'cache-loader',
+        options: {
+          cacheDirectory: resolve('tmp/cache/webpack')
+        }
+      }, {
         loader: 'babel-loader',
         options: {
           presets: [
@@ -122,7 +137,11 @@ module.exports = {
     }),
     new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
     new ExtractTextPlugin(STYLESHEET_NAME),
-    new ManifestPlugin({ fileName: settings.manifest, writeToFileEmit: true, publicPath: output.publicPath })
+    new ManifestPlugin({
+      fileName: settings.manifest,
+      writeToFileEmit: true,
+      publicPath: output.publicPath
+    })
   ],
 
   resolve: {
