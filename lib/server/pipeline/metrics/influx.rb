@@ -29,18 +29,26 @@ module Server
           tags = {
             platform: payload[:platform],
             hostname: payload[:hostname],
-            application: payload[:application],
+            application: payload[:application]
           }
 
           case payload[:name]
             when 'app.web.request.rack'
               type = 'web'
 
-              tags[:action] = payload.dig(:meta, :action)
               tags[:format] = payload.dig(:meta, :format)
               tags[:method] = payload.dig(:meta, :method)
               tags[:status] = payload.dig(:meta, :status)
-              tags[:controller] = payload.dig(:meta, :controller)
+
+              action = payload.dig(:meta, :action)
+              controller = payload.dig(:meta, :controller)
+
+              if action && controller
+                tags[:action] = action
+                tags[:controller] = controller
+
+                tags[:instance] = "#{controller}##{action}"
+              end
 
             when 'app.job.perform.sidekiq'
               type = 'background'
@@ -56,6 +64,8 @@ module Server
               tags[:consumer] = payload.dig(:meta, :route, :consumer)
               tags[:action] = payload.dig(:meta, :route, :action)
               tags[:route] = payload.dig(:meta, :delivery_info, :routing_key)
+
+              tags[:instance] = "#{tags[:consumer]}##{tags[:action]}"
           end
 
           yield(payload)
