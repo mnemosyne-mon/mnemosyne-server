@@ -8,9 +8,5 @@ class Activity < ApplicationRecord
   has_many :traces
   belongs_to :platform
 
-  class << self
-    def fetch(uuid)
-      find_or_create_by id: uuid
-    end
-  end
+  upsert_keys %i[id platform_id]
 end

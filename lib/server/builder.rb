@@ -5,9 +5,15 @@ module Server
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def call(payload)
-      platform = ::Platform.acquire payload.fetch(:platform)
-      activity = platform.activities.fetch payload.fetch(:transaction)
-      application = platform.applications.fetch payload.fetch(:application)
+      platform = ::Platform.upsert name: payload.fetch(:platform)
+
+      activity = ::Activity.upsert \
+        id: payload.fetch(:transaction),
+        platform_id: platform.id
+
+      application = ::Application.upsert \
+        name: payload.fetch(:application),
+        platform_id: platform.id
 
       ActiveRecord::Base.transaction do
         trace ||= begin

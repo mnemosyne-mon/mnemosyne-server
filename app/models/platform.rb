@@ -10,6 +10,8 @@ class Platform < ApplicationRecord
   has_many :applications
   has_many :traces
 
+  upsert_keys %i[name]
+
   def title
     if (title = super).present?
       title
@@ -20,11 +22,5 @@ class Platform < ApplicationRecord
 
   def to_param
     name
-  end
-
-  class << self
-    def acquire(name)
-      find_or_create_by name: name
-    end
   end
 end
