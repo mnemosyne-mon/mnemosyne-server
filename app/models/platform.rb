@@ -23,4 +23,10 @@ class Platform < ApplicationRecord
   def to_param
     name
   end
+
+  class << self
+    def fetch(name:)
+      find_by(name: name) || upsert(name: name)
+    end
+  end
 end

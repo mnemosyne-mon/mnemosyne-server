@@ -9,4 +9,13 @@ class Activity < ApplicationRecord
   belongs_to :platform
 
   upsert_keys %i[id platform_id]
+
+  class << self
+    def fetch(id:, platform:)
+      platform = platform.id if platform.respond_to?(:id)
+
+      find_by(id: id) ||
+        upsert(id: id, platform_id: platform)
+    end
+  end
 end

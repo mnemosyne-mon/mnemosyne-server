@@ -9,4 +9,13 @@ class Application < ApplicationRecord
   def name
     super || original_name
   end
+
+  class << self
+    def fetch(name:, platform:)
+      platform = platform.id if platform.respond_to?(:id)
+
+      find_by(name: name, platform_id: platform) ||
+        upsert(name: name, platform_id: platform)
+    end
+  end
 end
