@@ -14,13 +14,22 @@ namespace :mnemosyne do
     max    = ActiveSupport::Duration.parse(Platform.maximum(:retention_period))
     cutoff = Server::Clock.to_tick(Time.zone.now - max)
 
+    logger.info do
+      "Dropping chunks older then #{Server::Clock.to_time(cutoff)}..."
+    end
+
     ActiveRecord::Base.connection.execute <<-SQL
       SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'traces', 'public');
       SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'spans', 'public');
     SQL
 
-    logger.info do
-      "Dropped chunks older then #{Server::Clock.to_time(cutoff)}..."
-    end
+    logger.info { ' ==== [DONE]' }
+    logger.info { 'Deleting unreferenced activities...' }
+
+    ActiveRecord::Base.connection.execute <<-SQL
+      DELETE FROM activities WHERE id NOT IN (SELECT activity_id FROM traces) ;
+    SQL
+
+    logger.info { ' ==== [DONE]' }
   end
 end
