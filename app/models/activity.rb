@@ -8,14 +8,13 @@ class Activity < ApplicationRecord
   has_many :traces
   belongs_to :platform
 
-  upsert_keys %i[id platform_id]
+  upsert_keys %i[id]
 
   class << self
     def fetch(id:, platform:)
       platform = platform.id if platform.respond_to?(:id)
 
-      find_by(id: id) ||
-        upsert(id: id, platform_id: platform)
+      find_by(id: id) || upsert(id: id, platform_id: platform)
     end
   end
 end
