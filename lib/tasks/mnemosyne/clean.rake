@@ -19,17 +19,23 @@ namespace :mnemosyne do
     end
 
     ActiveRecord::Base.connection.execute <<-SQL
-      SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'traces', 'public');
-      SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'spans', 'public');
+      SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'traces', NULL);
+      SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'spans', NULL);
     SQL
 
-    logger.info { ' ==== [DONE]' }
+    logger.info do
+      "Dropping chunks older then #{Server::Clock.to_time(cutoff)}... [DONE]"
+    end
+
+    ActiveRecord::Base.connection.disconnect!
+    ActiveRecord::Base.establish_connection
+
     logger.info { 'Deleting unreferenced activities...' }
 
     ActiveRecord::Base.connection.execute <<-SQL
       DELETE FROM activities WHERE id NOT IN (SELECT activity_id FROM traces) ;
     SQL
 
-    logger.info { ' ==== [DONE]' }
+    logger.info { 'Deleting unreferenced activities... [DONE]' }
   end
 end
