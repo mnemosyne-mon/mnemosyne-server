@@ -8,6 +8,7 @@ namespace :mnemosyne do
   task clean: :environment do
     logger = Rails.logger
     logger.level = :info
+    logger.auto_flushing = true
 
     return if Platform.all.empty?
 
@@ -18,7 +19,7 @@ namespace :mnemosyne do
       "Dropping chunks older then #{Server::Clock.to_time(cutoff)}..."
     end
 
-    ActiveRecord::Base.connection.execute <<-SQL
+    ActiveRecord::Base.connection.execute <<~SQL
       SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'traces', NULL);
       SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'spans', NULL);
     SQL
@@ -32,8 +33,13 @@ namespace :mnemosyne do
 
     logger.info { 'Deleting unreferenced activities...' }
 
-    ActiveRecord::Base.connection.execute <<-SQL
-      DELETE FROM activities WHERE id NOT IN (SELECT activity_id FROM traces) ;
+    ActiveRecord::Base.connection.execute <<~SQL
+      DELETE FROM activities
+      WHERE NOT EXISTS(
+        SELECT 1
+        FROM traces
+        WHERE activity_id = activities.id
+      );
     SQL
 
     logger.info { 'Deleting unreferenced activities... [DONE]' }
