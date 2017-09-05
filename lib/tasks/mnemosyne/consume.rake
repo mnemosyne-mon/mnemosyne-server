@@ -17,8 +17,6 @@ namespace :mnemosyne do
 
     Rails.application.eager_load!
 
-    Rails.logger.level = Logger::INFO
-
     Hutch::Logging.logger = Rails.logger
 
     config = Rails.application.config_for(:hutch).symbolize_keys

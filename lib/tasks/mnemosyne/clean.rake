@@ -8,7 +8,6 @@ namespace :mnemosyne do
   task clean: :environment do
     logger = Rails.logger
     logger.level = :info
-    logger.auto_flushing = true
 
     return if Platform.all.empty?
 
