@@ -3,6 +3,7 @@
 class Trace < ApplicationRecord
   self.primary_key = 'id'
 
+  extend Concerns::Range
   include Duration
 
   attribute :start, ::Server::Types::PreciseDateTime.new
@@ -25,12 +26,6 @@ class Trace < ApplicationRecord
       tlimit = time - period
 
       where t[:stop].lt(tlimit).and(t[:store].eq(false))
-    end
-
-    def range(start, stop = Time.zone.now)
-      start = stop - start if start.is_a?(ActiveSupport::Duration)
-
-      where t[:stop].gt(start).and(t[:stop].lteq(stop))
     end
 
     alias t arel_table
