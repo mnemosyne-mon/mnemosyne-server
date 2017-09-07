@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+RComponent = React.Component
+
 dumpCN = (cx) ->
   if Array.isArray(cx)
     cx
@@ -23,6 +25,6 @@ export createElement = (element, props, children...) ->
 
   React.createElement element, props, children...
 
-export class Component extends React.Component
+export class Component extends RComponent
   constructor: ->
     super()

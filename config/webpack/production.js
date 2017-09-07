@@ -5,35 +5,32 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 
-const CompressionPlugin     = require('compression-webpack-plugin')
-const ClosureCompilerPlugin = require('webpack-closure-compiler')
+const CompressionPlugin = require('compression-webpack-plugin')
+const ClosureCompiler   = require('google-closure-compiler-js').webpack
 
 const sharedConfig = require('./shared.js')
 
 module.exports = merge(sharedConfig, {
   devtool: 'source-map',
-  // stats: 'normal',
-
   plugins: [
     // new webpack.optimize.UglifyJsPlugin({
     //   minimize: true,
     //   sourceMap: true,
-
     //   compress: {
     //     warnings: false
     //   },
-
     //   output: {
     //     comments: false
     //   }
     // }),
-    new ClosureCompilerPlugin({
+    new ClosureCompiler({
       compiler: {
-        language_in: 'ECMASCRIPT6',
-        language_out: 'ECMASCRIPT6',
-        compilation_level: 'ADVANCED'
-      },
-      concurrency: 3,
+        languageIn: 'ECMASCRIPT_NEXT',
+        languageOut: 'ECMASCRIPT_NEXT',
+        compilationLevel: 'ADVANCED',
+        formatting: 'PRETTY_PRINT',
+        warningLevel: 'QUIET',
+      }
     }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
