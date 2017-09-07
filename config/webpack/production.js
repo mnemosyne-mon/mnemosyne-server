@@ -13,22 +13,11 @@ const sharedConfig = require('./shared.js')
 module.exports = merge(sharedConfig, {
   devtool: 'source-map',
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({
-    //   minimize: true,
-    //   sourceMap: true,
-    //   compress: {
-    //     warnings: false
-    //   },
-    //   output: {
-    //     comments: false
-    //   }
-    // }),
     new ClosureCompiler({
-      compiler: {
-        languageIn: 'ECMASCRIPT_NEXT',
-        languageOut: 'ECMASCRIPT_NEXT',
-        compilationLevel: 'ADVANCED',
-        formatting: 'PRETTY_PRINT',
+      options: {
+        languageIn: 'ECMASCRIPT_2017',
+        languageOut: 'ECMASCRIPT_2017',
+        compilationLevel: 'SIMPLE',
         warningLevel: 'QUIET',
       }
     }),
