@@ -4,7 +4,9 @@
 
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const CompressionPlugin = require('compression-webpack-plugin')
+
+const CompressionPlugin     = require('compression-webpack-plugin')
+const ClosureCompilerPlugin = require('webpack-closure-compiler')
 
 const sharedConfig = require('./shared.js')
 
@@ -25,6 +27,14 @@ module.exports = merge(sharedConfig, {
     //     comments: false
     //   }
     // }),
+    new ClosureCompilerPlugin({
+      compiler: {
+        language_in: 'ECMASCRIPT6',
+        language_out: 'ECMASCRIPT6',
+        compilation_level: 'ADVANCED'
+      },
+      concurrency: 3,
+    }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',

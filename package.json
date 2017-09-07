@@ -35,6 +35,7 @@
     "react-icons": "^2.2.5",
     "tether": "^1.4.0",
     "timeago": "^1.5.4",
-    "urijs": "^1.18.10"
+    "urijs": "^1.18.10",
+    "webpack-closure-compiler": "^2.1.5"
   }
 }
