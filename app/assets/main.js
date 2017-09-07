@@ -10,7 +10,9 @@ import {
 
 import * as components from 'components/index'
 
-document.addEventListener('DOMContentLoaded', () => {
+function initalize() {
+  $('[data-time-ago]').timeago()
+
   document.querySelectorAll('script[data-component]').forEach((el) => {
     let component = components[el.dataset.component]
     let props = {}
@@ -38,8 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     render(createElement(component, props), node)
   })
-})
+}
 
-jQuery(document).ready(function() {
-  $('[data-time-ago]').timeago()
-})
+if (document.readyState === "complete" ||
+    document.readyState === "loaded" ||
+    document.readyState === "interactive") {
+  initalize()
+} else {
+  document.addEventListener('DOMContentLoaded', initalize)
+}

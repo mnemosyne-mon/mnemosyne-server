@@ -11,7 +11,7 @@ html lang=I18n.locale
     link rel="icon" type="images/png" sizes="16x16" href=asset_pack_path('favicon/favicon-16x16.png')
     link rel="mask-item" color="#0275d8" href=asset_pack_path('favicon/safari-pinned-tab.svg')
     meta name="theme-color" content="#333333"
-    = javascript_pack_tag 'application'
+    = javascript_pack_tag 'application', async: true
     = stylesheet_pack_tag 'application', media: 'all'
     = csrf_meta_tags
   body
