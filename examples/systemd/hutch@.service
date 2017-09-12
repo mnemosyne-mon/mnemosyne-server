@@ -1,0 +1,15 @@
+[Unit]
+Description=Mnemosyne Trace Consumer
+After=network.target
+StopWhenUnneeded=true
+PartOf=hutch.target
+
+[Service]
+Type=simple
+Environment=RAILS_ENV=production
+WorkingDirectory=/home/mnemosyne/application/current
+ExecStart=/usr/bin/bundle exec rake mnemosyne:consume
+Restart=always
+
+[Install]
+WantedBy=hutch.target

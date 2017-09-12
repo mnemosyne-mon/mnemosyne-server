@@ -1,0 +1,15 @@
+[Unit]
+Description=Puma HTTP Server
+After=network.target
+Requires=puma.socket
+
+[Service]
+Type=simple
+Environment=RAILS_ENV=production
+Environment=RAILS_MAX_THREADS=32
+WorkingDirectory=/home/mnemosyne/application/current
+ExecStart=/home/mnemosyne/application/current/bin/puma -C config/puma.rb -w 3 -t 8:32 -b unix:///tmp/mnemosyne/puma.socket
+Restart=always
+
+[Install]
+WantedBy=default.target

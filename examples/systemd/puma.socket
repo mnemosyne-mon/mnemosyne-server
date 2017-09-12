@@ -1,0 +1,12 @@
+[Unit]
+Description=Puma Socket
+
+[Socket]
+ListenStream=/tmp/mnemosyne/puma.socket
+
+NoDelay=true
+ReusePort=true
+Backlog=1024
+
+[Install]
+WantedBy=sockets.target

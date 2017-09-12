@@ -1,0 +1,13 @@
+[Unit]
+Description=Mnemosyne cleanup task
+
+[Service]
+Type=simple
+Environment=RAILS_ENV=production
+WorkingDirectory=/home/mnemosyne/application/current
+ExecStart=/home/mnemosyne/application/current/bin/rake mnemosyne:clean
+Restart=on-failure
+RestartSec=60s
+
+[Install]
+WantedBy=default.target

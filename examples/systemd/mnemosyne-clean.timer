@@ -1,0 +1,9 @@
+[Unit]
+Description=Run menmosyne clean up task removing data according to retention policy
+
+[Timer]
+OnCalendar=*-*-* 00:00:00
+Unit=mnemosyne-clean.service
+
+[Install]
+WantedBy=timers.target
