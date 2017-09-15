@@ -59,7 +59,9 @@ module Server
     attr_reader :column_name, :max_count_sqrt
 
     def execute
-      ActiveRecord::Base.connection.execute(create_query.to_sql).to_a
+      ActiveRecord::Base.connection
+        .select_all(create_query, nil, @traces.where_clause.binds)
+        .to_hash
     end
 
     # rubocop:disable MethodLength, AbcSize, LineLength

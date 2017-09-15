@@ -8,6 +8,10 @@ import {
   createElement
 } from 'react'
 
+import {
+  heatmap
+} from 'heatmap'
+
 import * as components from 'components/index'
 
 function initalize() {
@@ -40,6 +44,8 @@ function initalize() {
 
     render(createElement(component, props), node)
   })
+
+  document.querySelectorAll('#heatmap').forEach((el) => heatmap(el))
 }
 
 if (document.readyState === "complete" ||
