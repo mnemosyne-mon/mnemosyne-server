@@ -14,6 +14,7 @@ html lang=I18n.locale
     = javascript_pack_tag 'application', async: true
     = stylesheet_pack_tag 'application', media: 'all'
     = csrf_meta_tags
+    = yield :head
   body
     header#header
       nav

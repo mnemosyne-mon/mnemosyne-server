@@ -35,7 +35,7 @@ import {
 
 import 'd3-selection-multi'
 
-export async function heatmap(el) {
+async function heatmap(el) {
   let height = 395
   let margin = {
     left: 1,
@@ -141,4 +141,16 @@ export async function heatmap(el) {
     .on('start', dragstart)
     .on('drag', dragging)
     .on('end', dragstop));
+}
+
+function initialize() {
+  document.querySelectorAll('#heatmap').forEach((el) => heatmap(el))
+}
+
+if (document.readyState === "complete" ||
+    document.readyState === "loaded" ||
+    document.readyState === "interactive") {
+  initialize()
+} else {
+  document.addEventListener('DOMContentLoaded', initialize)
 }

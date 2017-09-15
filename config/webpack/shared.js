@@ -22,9 +22,20 @@ if(env.NODE_ENV === 'production') {
   FILE_NAME       = '[path][name].[ext]'
 }
 
+const babelPresets = [
+  ['minify'],
+  ['env', {
+    targets: {browsers: ['last 1 chrome versions']},
+    modules: false,
+    loose: true
+  }],
+  ['react']
+]
+
 module.exports = {
   entry: {
-    application: ['manifest.js', 'main.js', 'main.sass']
+    application: ['manifest.js', 'main.js', 'main.sass'],
+    heatmap: ['heatmap.js']
   },
 
   context: resolve(settings.source),
@@ -91,16 +102,7 @@ module.exports = {
         }
       }, {
         loader: 'babel-loader',
-        options: {
-          presets: [
-            ['env', {
-              targets: {browsers: ['last 1 chrome versions']},
-              modules: false,
-              loose: true
-            }],
-            'react'
-          ]
-        }
+        options: { presets: babelPresets }
       }]
     }, {
       test: /\.coffee$/i,
@@ -112,15 +114,7 @@ module.exports = {
         }
       }, {
         loader: 'babel-loader',
-        options: {
-          presets: [
-            ['env', {
-              targets: {browsers: ['last 1 chrome versions']},
-              modules: false,
-              loose: true
-            }]
-          ]
-        }
+        options: { presets: babelPresets }
       }, {
         loader: 'coffee-loader'
       }]
