@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable ClassLength
 class TracesController < ApplicationController
   include Concerns::PlatformScope
   include ::Server::Streaming::JSONStreaming
@@ -83,9 +84,9 @@ class TracesController < ApplicationController
     respond_with @traces
   end
 
+  # rubocop:disable MethodLength
   def heatmap
-    @traces = platform.traces
-      .where(origin: nil)
+    @traces = apply_scopes platform.traces
 
     @heatmap = ::Server::Heatmap.new @traces, \
       time: {
@@ -101,6 +102,7 @@ class TracesController < ApplicationController
 
     respond_with @heatmap
   end
+  # rubocop:enable all
 
   def show
     @trace = trace.decorate(context: context)

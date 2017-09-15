@@ -5,7 +5,7 @@ module Server
     using ::Server::Refinements::Arel::Grouping
 
     def initialize(traces, time: {}, latency: {})
-      @traces = traces
+      @traces = traces.unscope(:order, :limit, :select)
       @column_name = :stop
 
       @tseries = TimeSeries.new(**time)

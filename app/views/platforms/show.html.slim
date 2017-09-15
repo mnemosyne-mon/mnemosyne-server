@@ -3,4 +3,4 @@
 
 .container-fluid
   .heatmap-box
-    div#heatmap data-source=heatmap_url(@platform, format: :json)
+    div#heatmap data-source=heatmap_url(@platform, format: :json, **request.params.slice(*TracesController::FILTER_PARAMS).symbolize_keys)
