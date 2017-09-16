@@ -22,15 +22,6 @@ if(env.NODE_ENV === 'production') {
   FILE_NAME       = '[path][name].[ext]'
 }
 
-const babelPresets = [
-  ['minify'],
-  ['env', {
-    targets: {browsers: ['last 1 chrome versions']},
-    modules: false,
-    loose: true
-  }]
-]
-
 module.exports = {
   entry: {
     application: ['manifest.js', 'main.js', 'main.sass'],
@@ -102,7 +93,13 @@ module.exports = {
       }, {
         loader: 'babel-loader',
         options: {
-          presets: babelPresets,
+          presets: [
+            ['env', {
+              targets: {browsers: ['last 1 chrome versions']},
+              modules: false,
+              loose: true
+            }]
+          ],
           plugins: [
             ['babel-plugin-transform-react-jsx', {pragma: 'h'}]
           ]
@@ -118,7 +115,15 @@ module.exports = {
         }
       }, {
         loader: 'babel-loader',
-        options: { presets: babelPresets }
+        options: {
+          presets: [
+            ['env', {
+              targets: {browsers: ['last 1 chrome versions']},
+              modules: false,
+              loose: true
+            }]
+          ]
+        }
       }, {
         loader: 'coffee-loader'
       }]

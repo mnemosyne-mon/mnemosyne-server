@@ -5,6 +5,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 
+const MinifyPlugin = require('babel-minify-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 
 const sharedConfig = require('./shared.js')
@@ -12,6 +13,9 @@ const sharedConfig = require('./shared.js')
 module.exports = merge(sharedConfig, {
   devtool: 'source-map',
   plugins: [
+    new MinifyPlugin({}, {
+      test: /\.jsx?$/i
+    }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
