@@ -61,8 +61,8 @@ class TracesController < ApplicationController
     scope.where('(stop - start) < ?', value.to_f * 1_000_000)
   end
 
-  has_scope :rm, default: 1440, allow_blank: true do |ctl, scope, value|
-    scope.range([value.to_i.minutes, ctl.platform.retention_period].min)
+  has_scope :rm, allow_blank: true do |ctl, scope, _|
+    scope.range(ctl.range)
   end
 
   FILTER_PARAMS = %w[origin application hostname wm wp ws wc wa ls le].freeze
@@ -88,16 +88,18 @@ class TracesController < ApplicationController
   def heatmap
     @traces = apply_scopes platform.traces
 
+    max = @traces.maximum('(stop - start)')
+
     @heatmap = ::Server::Heatmap.new @traces, \
       time: {
         stop: Time.zone.now,
-        duration: 1.hour,
+        duration: range,
         size: params.fetch(:tbs, 96).to_i
       },
       latency: {
         start: 0,
-        interval: 25_000_000,
-        size: 79
+        interval: (max / 99.0),
+        size: 100
       }
 
     respond_with @heatmap
@@ -123,6 +125,22 @@ class TracesController < ApplicationController
       'any'
     else
       'none'
+    end
+  end
+
+  def range
+    @range ||= begin
+      param = params.fetch(:rm, 1440).to_s.upcase
+
+      if (value = Integer(param) rescue nil)
+        value = value.minutes
+      elsif (value = ActiveSupport::Duration.parse("PT#{param}") rescue nil)
+        # noop
+      else
+        value = 6.hours
+      end
+
+      [value, platform.retention_period].min
     end
   end
 
