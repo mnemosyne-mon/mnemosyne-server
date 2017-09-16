@@ -2,15 +2,9 @@ import {
   Component,
   createElement as $
 } from './core'
-
-import PropTypes from 'prop-types'
-
 import './TraceGraph.sass'
 
 export class TraceGraph extends Component
-  @contextTypes =
-    routes: PropTypes.object
-
   render: ->
     $ 'section', className: 'tracegraph',
       this.props.nodes.map this.renderNode.bind(this)

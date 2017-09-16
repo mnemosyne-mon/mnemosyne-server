@@ -28,8 +28,7 @@ const babelPresets = [
     targets: {browsers: ['last 1 chrome versions']},
     modules: false,
     loose: true
-  }],
-  ['react']
+  }]
 ]
 
 module.exports = {
@@ -102,7 +101,12 @@ module.exports = {
         }
       }, {
         loader: 'babel-loader',
-        options: { presets: babelPresets }
+        options: {
+          presets: babelPresets,
+          plugins: [
+            ['babel-plugin-transform-react-jsx', {pragma: 'h'}]
+          ]
+        },
       }]
     }, {
       test: /\.coffee$/i,

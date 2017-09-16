@@ -3,13 +3,11 @@ import {
   createElement as $
 } from './core'
 
-import IconStar from 'react-icons/fa/star'
-import IconStarOff from 'react-icons/fa/star-o'
+import IconStar from 'preact-icons/fa/star'
+import IconStarOff from 'preact-icons/fa/star-o'
 
 import URI from 'urijs'
 import 'urijs/src/URITemplate'
-
-import PropTypes from 'prop-types'
 
 import './TraceView.sass'
 
@@ -34,9 +32,6 @@ makeRoutes = (routes) ->
 
 
 export class TraceView extends Component
-  @childContextTypes =
-    routes: PropTypes.object
-
   constructor: (props) ->
     super(props)
 
@@ -92,9 +87,6 @@ export class TraceView extends Component
 
 
 class Header extends Component
-  @contextTypes =
-    routes: PropTypes.object
-
   toggleSave: ->
     { trace } = this.props
 

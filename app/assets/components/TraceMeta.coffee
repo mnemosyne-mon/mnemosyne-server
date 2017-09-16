@@ -4,7 +4,6 @@ import {
 } from './core'
 
 import URIJS from 'urijs'
-import PropTypes from 'prop-types'
 
 import { Field } from './TraceInfo'
 
@@ -20,9 +19,6 @@ export class TraceMeta extends Component
 
 
 class WebMeta extends Component
-  @contextTypes =
-    routes: PropTypes.object
-
   render: ->
     { routes } = this.context
     { meta } = this.props
@@ -61,9 +57,6 @@ class WebMeta extends Component
 
 
 class JobMeta extends Component
-  @contextTypes =
-    routes: PropTypes.object
-
   render: ->
     $ 'section', className: 'traceinfo',
       $ Field,

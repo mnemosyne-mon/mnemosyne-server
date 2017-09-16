@@ -3,7 +3,7 @@ import {
   createElement as $
 } from './core'
 
-import IconClose from 'react-icons/fa/close'
+import IconClose from 'preact-icons/fa/close'
 
 export class SpanMeta extends Component
   render: ->

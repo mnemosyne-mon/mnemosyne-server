@@ -1,30 +1,14 @@
-import * as React from 'react'
+import * as Preact from 'preact'
 
-RComponent = React.Component
-
-dumpCN = (cx) ->
-  if Array.isArray(cx)
-    cx
-      .map dumpCN
-      .join ' '
-  else if cx? && typeof cx == 'object'
-    Object.entries(cx)
-      .filter ([k, v]) -> v
-      .map ([k, _]) -> k
-      .join ' '
-  else
-    cx
+VNode = Preact.h('a', null).constructor
 
 export createElement = (element, props, children...) ->
-  if props?
-    if React.isValidElement(props) || typeof props != 'object'
-      children.unshift props
-      props = {}
+  if props? && (typeof props != 'object' || props instanceof VNode)
+    children.unshift props
+    props = {}
 
-    props.className = dumpCN(props.className)
+  Preact.h element, props, ...children
 
-  React.createElement element, props, children...
-
-export class Component extends RComponent
+export class Component extends Preact.Component
   constructor: ->
     super()

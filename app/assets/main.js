@@ -1,14 +1,16 @@
 import 'timeago'
 
 import {
+  h,
   render
-} from 'react-dom'
+} from 'preact'
 
-import {
-  createElement
-} from 'react'
+import { TraceView, TimeHeader } from 'components/index'
 
-import * as components from 'components/index'
+const components = {
+  TraceView: TraceView,
+  TimeHeader: TimeHeader
+}
 
 function initalize() {
   $('[data-time-ago]').timeago()
@@ -38,7 +40,7 @@ function initalize() {
       node = document.querySelector(el.dataset.target)
     }
 
-    render(createElement(component, props), node)
+    render(h(component, props), node.parentElement, node)
   })
 }
 

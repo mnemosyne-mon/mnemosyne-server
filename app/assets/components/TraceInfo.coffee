@@ -3,13 +3,7 @@ import {
   createElement as $
 } from './core'
 
-import PropTypes from 'prop-types'
-
-
 export class TraceInfo extends Component
-  @contextTypes =
-    routes: PropTypes.object
-
   render: ->
     { start, application, origin, hostname } = this.props.trace
 
