@@ -80,10 +80,8 @@ async function heatmap(el) {
 
   let axisX = axisBottom(scaleX)
     .tickFormat(timeFormat('%H:%M'))
-    .ticks(timeMinute.every(10))
   let axisY = axisLeft(scaleY)
     .tickFormat((x) => `${x} ms`)
-    .ticks(3)
 
   svg.append('g')
     .attr('transform', `translate(0,${height})`)
