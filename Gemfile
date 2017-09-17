@@ -34,6 +34,8 @@ gem 'rails-timeago'
 
 gem 'mnemosyne-ruby', '~> 1.2'
 
+gem 'bootsnap', require: false
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
