@@ -61,7 +61,7 @@ class TracesController < ApplicationController
     scope.where('(stop - start) < ?', value.to_f * 1_000_000)
   end
 
-  has_scope :rm, allow_blank: true do |ctl, scope, _|
+  has_scope :rm, default: true, allow_blank: true do |ctl, scope, _|
     scope.range(ctl.range)
   end
 
