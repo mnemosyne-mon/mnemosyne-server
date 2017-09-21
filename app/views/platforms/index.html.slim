@@ -8,10 +8,7 @@
           .info
             span Last Activity
             div
-              - if platform.traces.any?
-                = timeago_tag platform.traces.order(:stop).last.stop
-              - else
-                span None
+              = platform.last_activity_tag
           .info
             span Applications
             div

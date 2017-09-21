@@ -4,7 +4,7 @@ class PlatformsController < ApplicationController
   before_action :platform, only: %i[show]
 
   def index
-    @platforms = Platform.all
+    @platforms = Platform.all.decorate
 
     render layout: 'global'
   end
