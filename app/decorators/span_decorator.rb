@@ -57,7 +57,8 @@ class SpanDecorator < BaseDecorator
     url.scheme = scheme
 
     if (app = traces.first&.application)
-      url.host = app.name.split(%r{[/\s]+})[1].downcase
+      names = app.name.split(%r{[/\s]+})
+      url.host = (names[1] || names[0]).downcase
     end
 
     url.port = nil
