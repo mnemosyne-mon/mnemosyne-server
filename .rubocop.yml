@@ -6,30 +6,41 @@ AllCops:
     - 'node_modules/**/*'
   TargetRubyVersion: 2.4
 
+
 Rails:
   Enabled: true
 
 Rails/FilePath:
   Enabled: false
 
-Style/AlignParameters:
+
+Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
-Style/BracesAroundHashParameters:
-  EnforcedStyle: context_dependent
-
-Style/CaseIndentation:
+Layout/CaseIndentation:
   EnforcedStyle: end
   SupportedStyles:
     - case
     - end
   IndentOneStep: true
 
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/SpaceInsideBlockBraces:
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: no_space
+  SpaceBeforeBlockParameters: false
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+
 Style/Documentation:
   Enabled: false
-
-Style/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
 
 Style/NumericLiterals:
   Exclude:
@@ -49,13 +60,6 @@ Style/Semicolon:
 Style/SignalException:
   EnforcedStyle: only_raise
 
-Style/SpaceInsideBlockBraces:
-  EnforcedStyle: space
-  EnforcedStyleForEmptyBraces: no_space
-  SpaceBeforeBlockParameters: false
-
-Style/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
 
 Metrics/BlockLength:
   Exclude:
