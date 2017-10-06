@@ -315,7 +315,7 @@ DEPENDENCIES
   responders (~> 2.4)
   rspec (~> 3.1)
   rspec-rails
-  rubocop (~> 0.47)
+  rubocop (~> 0.50.0)
   selenium-webdriver
   slim
   spring
@@ -327,4 +327,4 @@ DEPENDENCIES
   webpacker (~> 2.0)
 
 BUNDLED WITH
-   1.15.4
+   1.16.0.pre.3

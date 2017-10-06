@@ -4,6 +4,7 @@ AllCops:
     - 'db/schema.rb'
     - 'bin/**/*'
     - 'node_modules/**/*'
+    - 'deploy/**/*'
   TargetRubyVersion: 2.4
 
 
