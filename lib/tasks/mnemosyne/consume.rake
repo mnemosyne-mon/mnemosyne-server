@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable BlockLength
 namespace :mnemosyne do
   desc 'Run hutch and consume messages from clients'
   task consume: :environment do

@@ -135,7 +135,7 @@ class TraceDecorator < BaseDecorator
   end
 
   def duration_text
-    format "%.2f ms", duration_ms
+    format '%.2f ms', duration_ms
   end
 
   private

@@ -13,6 +13,9 @@ Rails:
 Rails/FilePath:
   Enabled: false
 
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
 
 Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
@@ -39,6 +42,9 @@ Layout/SpaceInsideHashLiteralBraces:
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 
+Style/ConditionalAssignment:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
@@ -64,6 +70,7 @@ Style/SignalException:
 Metrics/BlockLength:
   Exclude:
     - '**/*_spec.rb'
+    - '**/*.rake'
 
 Metrics/LineLength:
   Exclude:

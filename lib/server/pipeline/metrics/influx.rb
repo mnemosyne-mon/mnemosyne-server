@@ -20,6 +20,7 @@ module Server
 
         # rubocop:disable AbcSize
         # rubocop:disable MethodLength
+        # rubocop:disable CyclomaticComplexity
         def call(payload)
           values = {
             total: ::Server::Clock
@@ -80,6 +81,7 @@ module Server
 
           @client.write_point(type, data, 'ns')
         end
+        # rubocop:enable all
       end
     end
   end

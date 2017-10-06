@@ -3,8 +3,6 @@
 module Server
   class Heatmap
     class Series
-      attr_reader :first
-      attr_reader :last
       attr_reader :size
       attr_reader :start
       attr_reader :stop

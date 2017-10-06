@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Server
-  class Heatmap # rubocop:disable ClassLength
+  class Heatmap
     using ::Server::Refinements::Arel::Grouping
 
     def initialize(traces, time: {}, latency: {})

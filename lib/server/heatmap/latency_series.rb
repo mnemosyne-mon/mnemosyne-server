@@ -11,7 +11,7 @@ module Server
         interval: 25_000_000,
         size: 79
       )
-        stop = start + size * interval unless stop
+        stop ||= start + size * interval
         interval = Rational((stop - start), size).to_i
 
         super(start, stop, size)

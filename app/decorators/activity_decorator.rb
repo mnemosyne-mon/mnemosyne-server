@@ -3,7 +3,7 @@
 class ActivityDecorator < BaseDecorator
   delegate_all
 
-  def serialize(**kwargs)
+  def serialize(**_kwargs)
     export do |out|
       out[:uuid] = id
     end
