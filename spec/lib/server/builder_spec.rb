@@ -25,6 +25,21 @@ RSpec.describe ::Server::Builder do
           name: 'example.span.mnemosyne',
           start: 100_000_000,
           stop: 200_000_000
+        }],
+        errors: [{
+          type: 'RuntimeError',
+          text: 'error message',
+          stacktrace: [{
+            file: '(pry)',
+            line: '2',
+            call: 'm',
+            raw: "(pry):2:in `m'"
+          }, {
+            file: '/home/jan/.rvm/gems/ruby-2.4.2/gems/pry-0.10.4/lib/pry/pry_instance.rb',
+            line: '355',
+            call: 'eval',
+            raw: "/home/jan/.rvm/gems/ruby-2.4.2/gems/pry-0.10.4/lib/pry/pry_instance.rb:355:in `eval'"
+          }]
         }]
       }
     end
@@ -49,6 +64,10 @@ RSpec.describe ::Server::Builder do
 
     it 'creates span' do
       expect { subject }.to change(Span, :count).from(0).to(1)
+    end
+
+    it 'creates failure' do
+      expect { subject }.to change(Failure, :count).from(0).to(1)
     end
 
     describe 'platform' do
@@ -141,6 +160,35 @@ RSpec.describe ::Server::Builder do
 
       example 'correct trace is associated' do
         expect(subject.trace.id).to eq 'cd25562f-42e6-48e6-9f3b-08632da38921'
+      end
+    end
+
+    describe 'failures' do
+      before { builder.call(payload) }
+      subject { trace.failures.first }
+
+      example 'type equals payload value' do
+        expect(subject.type).to eq 'RuntimeError'
+      end
+
+      example 'text equals payload value' do
+        expect(subject.text).to eq 'error message'
+      end
+
+      example 'correct trace is associated' do
+        expect(subject.trace.id).to eq 'cd25562f-42e6-48e6-9f3b-08632da38921'
+      end
+
+      example 'stacktrace equals payload value' do
+        expect(subject.stacktrace).to eq [{
+          'file' => '(pry)',
+          'line' => 2,
+          'call' => 'm'
+        }, {
+          'file' => '/home/jan/.rvm/gems/ruby-2.4.2/gems/pry-0.10.4/lib/pry/pry_instance.rb',
+          'line' => 355,
+          'call' => 'eval'
+        }]
       end
     end
   end

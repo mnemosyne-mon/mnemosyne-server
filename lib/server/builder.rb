@@ -44,6 +44,15 @@ module Server
               meta: data[:meta]
           end
         end
+
+        payload.fetch(:errors, []).each do |error|
+          Failure.create! \
+            type: error.fetch(:type),
+            text: error.fetch(:text),
+            trace: trace,
+            platform: platform,
+            stacktrace: error.fetch(:stacktrace)
+        end
       end
     end
   end

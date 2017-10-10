@@ -9,7 +9,7 @@ namespace :mnemosyne do
     logger = Rails.logger
     logger.level = :info
 
-    return if Platform.all.empty?
+    next if Platform.all.empty?
 
     max    = ActiveSupport::Duration.parse(Platform.maximum(:retention_period))
     cutoff = Server::Clock.to_tick(Time.zone.now - max)
@@ -42,5 +42,18 @@ namespace :mnemosyne do
     SQL
 
     logger.info { 'Deleting unreferenced activities... [DONE]' }
+
+    logger.info { 'Deleting unreferenced failures...' }
+
+    ActiveRecord::Base.connection.execute <<~SQL
+      DELETE FROM failures
+      WHERE NOT EXISTS(
+        SELECT 1
+        FROM traces
+        WHERE id = failures.trace_id
+      );
+    SQL
+
+    logger.info { 'Deleting unreferenced failures... [DONE]' }
   end
 end

@@ -14,6 +14,7 @@ class Trace < ApplicationRecord
   attribute :activity_id, ::Server::Types::UUID4.new
 
   has_many :spans, -> { order('start') }
+  has_many :failures
 
   belongs_to :application
   belongs_to :activity

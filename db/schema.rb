@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920224318) do
+ActiveRecord::Schema.define(version: 20171010160545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20170920224318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["platform_id", "name"], name: "index_applications_on_platform_id_and_name", unique: true
+  end
+
+  create_table "failures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type", null: false
+    t.text "text", null: false
+    t.jsonb "stacktrace", null: false
+    t.uuid "trace_id", null: false
+    t.uuid "platform_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "platforms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
