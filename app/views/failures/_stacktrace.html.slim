@@ -1,0 +1,9 @@
+table.stacktrace
+  - stacktrace.each do |l|
+    tr
+      td.file
+        span= l['file'].split('/')[0..-2].join('/')
+        span= '/' + l['file'].split('/')[-1]
+      td.line= l['line']
+      td.call= l['call']
+

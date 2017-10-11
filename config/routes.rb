@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :traces, only: %i[index show update]
     resources :spans, only: %i[show]
     resources :applications, only: %i[index]
-    resources :errors, only: %i[index]
+    resources :failures, only: %i[index show]
   end
 
   root to: 'platforms#index'

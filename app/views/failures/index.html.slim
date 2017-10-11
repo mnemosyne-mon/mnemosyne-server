@@ -1,0 +1,8 @@
+.container-fluid
+  ul.failures
+    - @failures.each do |failure|
+      li
+        span.type= link_to failure.type_icon, failure.self_path
+        span.type= link_to failure.type, failure.self_path
+        span.text= link_to failure.subject, failure.self_path
+        span.date= link_to l(failure.date, format: :index), failure.self_path

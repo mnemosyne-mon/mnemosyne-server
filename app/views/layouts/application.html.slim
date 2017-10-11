@@ -24,8 +24,8 @@ html lang=I18n.locale
         ul
           li = link_to 'APM', platform_path(@platform)
           li = link_to 'Traces', traces_path(@platform)
-          li = link_to 'Applications', applications_path(@platform)
-          li = link_to 'Errors', errors_path(@platform)
+          / li = link_to 'Applications', applications_path(@platform)
+          li = link_to 'Failures', failures_path(@platform)
 
         ul.secondary
           li

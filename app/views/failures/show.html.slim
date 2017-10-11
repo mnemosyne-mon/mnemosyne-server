@@ -1,0 +1,26 @@
+section.failure
+  header
+    h2 Failure
+
+  .container-fluid
+    section.info
+      div
+        h4 Recorded
+        a = l @failure.date
+      div
+        h4 Application
+        a = @failure.application_name
+      div
+        h4 Origin
+        = link_to @failure.trace_id, @failure.trace_path
+      div
+        h4 Hostname
+        = link_to @failure.hostname, @failure.index_path(hostname: @failure.hostname)
+
+  .container-fluid
+    .panel
+      h3 = @failure.type
+      hr
+      pre = @failure.text
+      hr
+      pre = @failure.render_stacktrace

@@ -9,6 +9,7 @@ class Platform < ApplicationRecord
   has_many :activities
   has_many :applications
   has_many :traces
+  has_many :failures
 
   upsert_keys %i[name]
 

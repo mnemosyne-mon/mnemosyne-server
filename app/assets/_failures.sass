@@ -1,0 +1,129 @@
+ul.failures
+  margin: 0
+  display: table
+  list-style: none
+  width: 100%
+
+  padding: 1rem
+  background: #fff
+
+  li
+    margin: 0
+    padding: 0
+    display: table-row
+
+    &:hover
+      background-color: #eee
+
+    span
+      display: table-cell
+      white-space: nowrap
+
+      a
+        display: block
+        padding: 3px 8px
+        text-decoration: none
+
+      &.duration
+        text-align: right
+
+      &.type, &.method, &.status, &.duration, &.start, &.application
+        width: 1%
+
+  .uuid
+    font-family: monospace
+
+.failure
+  header
+    padding: 0.5rem 1rem
+
+    background-color: #f5f5f5
+    border-bottom: 1px solid #ddd
+
+    h2
+      margin: 0
+      display: inline-block
+
+      font-size: 1.4rem
+
+  .stacktrace
+    font-size: 90%
+    width: 100%
+
+    tr
+      td.file, td.call
+        width: 50%
+
+      td.file
+        text-align: right
+
+        span:first-child
+          color: #666
+          font-size: 90%
+
+        &::after
+          color: #666
+          content: ': '
+
+      td.line
+        text-align: right
+        color: #1F5B34
+
+        &::after
+          color: #666
+          content: ': in '
+
+  .panel
+    background-color: #fff
+    padding: 1rem
+
+  .info
+    display: flex
+    flex-wrap: wrap
+    margin: 1rem 0
+    width: 100%
+
+    > div
+      display: flex
+      width: 25%
+
+      border: 1px solid #ccc
+      border-top-width: 0
+      border-left-width: 0
+
+      &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4)
+        border-top-width: 1px
+
+      &:nth-child(5n), &:first-child
+        border-left-width: 1px
+
+      > h4, > a
+        line-height: 1.4rem
+        font-size: 0.7rem
+
+      > h4
+        text-align: right
+        margin: 0
+        min-width: 80px
+        padding: 2px 0.4rem
+
+        color: #555
+        background: #f6f6f6
+
+      > a
+        background: #fff
+        width: 100%
+        margin: 0
+        padding: 2px 0.4rem
+        text-overflow: ellipsis
+        overflow: hidden
+        white-space: nowrap
+
+        &.empty
+          color: #999
+
+      @media (max-width: 1024px)
+        flex-direction: column
+
+        > h4
+          text-align: left
