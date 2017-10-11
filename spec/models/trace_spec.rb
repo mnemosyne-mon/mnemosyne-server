@@ -4,7 +4,31 @@ require 'rails_helper'
 
 RSpec.describe Trace, type: :model do
   let(:time) { Time.zone.now }
-  let(:trace) { build :trace }
+  let(:trace) { create(:trace, **attributes) }
+
+  let(:attributes) { {} }
+
+  subject { trace }
+
+  describe '#id' do
+    subject { super().id }
+    it { expect(subject).to be_a ::UUID4 }
+  end
+
+  describe '#platform_id' do
+    subject { super().platform_id }
+    it { expect(subject).to be_a ::UUID4 }
+  end
+
+  describe '#activity_id' do
+    subject { super().platform_id }
+    it { expect(subject).to be_a ::UUID4 }
+  end
+
+  describe '#application_id' do
+    subject { super().platform_id }
+    it { expect(subject).to be_a ::UUID4 }
+  end
 
   describe '#platform' do
     it 'equals activity platform' do
@@ -13,72 +37,70 @@ RSpec.describe Trace, type: :model do
   end
 
   describe '#start' do
-    it 'saves nanosecond datetimes' do
-      create :trace, start: time
-
-      expect(Trace.first.start).to eq time
-    end
+    let(:attributes) { {start: time} }
+    subject { super().start }
 
     it 'saves nanoseconds' do
-      create :trace, start: ::Mnemosyne::Clock.to_tick(time)
-
-      expect(Trace.first.start).to eq time
+      expect(subject).to eq time
     end
   end
 
   describe '#stop' do
-    it 'saves nanosecond datetimes' do
-      create :trace, stop: time
-
-      expect(Trace.first.stop).to eq time
-    end
+    let(:attributes) { {stop: time} }
+    subject { super().stop }
 
     it 'saves nanoseconds' do
-      create :trace, stop: ::Mnemosyne::Clock.to_tick(time)
-
-      expect(Trace.first.stop).to eq time
+      expect(subject).to eq time
     end
   end
 
   describe '#duration' do
-    it 'returns duration in nanoseconds' do
-      create :trace, start: time, stop: time + Rational(5000, 1_000_000_000)
+    let(:attributes) do
+      {start: time, stop: time + Rational(5000, 1_000_000_000)}
+    end
 
-      expect(Trace.first.duration).to eq 5000
+    subject { super().duration }
+
+    it 'returns duration in nanoseconds' do
+      expect(subject).to eq 5000
     end
   end
 
-  describe '.retention' do
-    let(:period) { ::ActiveSupport::Duration.parse('P30D') }
-    let(:time) { Time.zone.now }
-    let(:tlimit) { time - period }
+  describe '<class>' do
+    subject { Trace }
 
-    subject { Trace.retention(period, time) }
+    describe '.retention' do
+      let(:period) { ::ActiveSupport::Duration.parse('P30D') }
+      let(:time) { Time.zone.now }
+      let(:tlimit) { time - period }
 
-    let!(:tr0) do
-      create :trace, :w_spans, start: tlimit - 30, stop: tlimit - 29.8
-    end
+      subject { super().retention(period, time) }
 
-    let!(:tn0) do
-      create :trace, :w_spans, start: tlimit - 4, stop: tlimit + 5
-    end
-
-    let!(:tn1) do
-      create :trace, :w_spans, start: tlimit + 2, stop: tlimit + 4
-    end
-
-    it 'scopes traces outside of retention period' do
-      expect(subject.pluck(:id)).to match_array [tr0.id]
-    end
-
-    context 'with stored trace' do
-      let!(:tr1) do
-        create :trace, :w_spans,
-          start: tlimit - 20, stop: tlimit - 10, store: true
+      let!(:tr0) do
+        create :trace, :w_spans, start: tlimit - 30, stop: tlimit - 29.8
       end
 
-      it 'does not scope stored traces' do
+      let!(:tn0) do
+        create :trace, :w_spans, start: tlimit - 4, stop: tlimit + 5
+      end
+
+      let!(:tn1) do
+        create :trace, :w_spans, start: tlimit + 2, stop: tlimit + 4
+      end
+
+      it 'scopes traces outside of retention period' do
         expect(subject.pluck(:id)).to match_array [tr0.id]
+      end
+
+      context 'with stored trace' do
+        let!(:tr1) do
+          create :trace, :w_spans,
+            start: tlimit - 20, stop: tlimit - 10, store: true
+        end
+
+        it 'does not scope stored traces' do
+          expect(subject.pluck(:id)).to match_array [tr0.id]
+        end
       end
     end
   end

@@ -3,5 +3,15 @@
 require 'spec_helper'
 
 RSpec.describe Platform, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:platform) { create :platform }
+
+  describe '#id' do
+    subject { platform.id }
+    it { expect(subject).to be_a ::UUID4 }
+  end
+
+  describe '#retention_period' do
+    subject { platform.retention_period }
+    it { expect(subject).to be_a ::ActiveSupport::Duration }
+  end
 end

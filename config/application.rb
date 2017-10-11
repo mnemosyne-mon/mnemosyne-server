@@ -51,6 +51,11 @@ module Server
       ::Draper::CollectionDecorator.include ::Server::Streaming::Collection
     end
 
+    initializer 'activerecord.types' do
+      ActiveRecord::Type.register :uuid, ::Server::Types::UUID4, override: true
+      ActiveRecord::Type.register :interval, ::Server::Types::Duration
+    end
+
     initializer 'pipeline' do |app|
       pipeline = app.config_for('pipeline')
 

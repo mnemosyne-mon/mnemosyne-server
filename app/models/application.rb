@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Application < ApplicationRecord
+  attribute :id, :uuid
+  attribute :platform_id, :uuid
+
   has_many :traces
   belongs_to :platform
 

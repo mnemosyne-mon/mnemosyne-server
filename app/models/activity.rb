@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Activity < ApplicationRecord
-  attribute :id, ::Server::Types::UUID4.new
-
-  attribute :platform_id, ::Server::Types::UUID4.new
+  attribute :id, :uuid
+  attribute :platform_id, :uuid
 
   has_many :traces
   belongs_to :platform

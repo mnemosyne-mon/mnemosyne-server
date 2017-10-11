@@ -6,12 +6,11 @@ class Trace < ApplicationRecord
   extend Concerns::Model::Range
   include Concerns::Model::Duration
 
+  attribute :id, :uuid
+  attribute :platform_id, :uuid
+
   attribute :start, ::Server::Types::PreciseDateTime.new
   attribute :stop, ::Server::Types::PreciseDateTime.new
-
-  attribute :id, ::Server::Types::UUID4.new
-  attribute :origin_id, ::Server::Types::UUID4.new
-  attribute :activity_id, ::Server::Types::UUID4.new
 
   has_many :spans, -> { order('start') }
   has_many :failures

@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe Application, type: :model do
-  let(:application) { create :application }
+RSpec.describe Activity, type: :model do
+  let(:activity) { create :activity }
 
-  subject { application }
+  subject { activity }
 
   describe '#id' do
     subject { super().id }

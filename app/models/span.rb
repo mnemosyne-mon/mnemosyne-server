@@ -6,6 +6,11 @@ class Span < ApplicationRecord
   extend Concerns::Model::Range
   include Concerns::Model::Duration
 
+  attribute :id, :uuid
+  attribute :trace_id, :uuid
+  attribute :platform_id, :uuid
+  attribute :application_id, :uuid
+
   attribute :start, ::Server::Types::PreciseDateTime.new
   attribute :stop, ::Server::Types::PreciseDateTime.new
 
