@@ -1,31 +1,50 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do # rubocop:disable BlockLength
+# rubocop:disable BlockLength
+FactoryGirl.define do
   factory :platform do
     sequence(:name) {|n| "platform/#{n}" }
   end
 
   factory :application do
+    transient do
+      platform { create :platform }
+    end
+
     sequence(:title) {|n| "Spec Application ##{n}" }
     sequence(:name) {|n| "application/#{n}" }
-    association :platform
+
+    after(:build) do |a, e|
+      a.platform = e.platform
+    end
   end
 
   factory :activity do
-    association :platform
+    transient do
+      platform { create :platform }
+    end
+
+    after(:build) do |a, e|
+      a.platform = e.platform
+    end
   end
 
   factory :trace do
+    transient do
+      platform { create :platform }
+      application { create :application, platform: platform }
+      activity { create :activity, platform: platform }
+    end
+
     start { Time.zone.now - 2.seconds }
     stop { Time.zone.now }
     name 'mnemosyne.test.trace'
     hostname 'host-0'
 
-    association :application
-    association :activity
-
-    after(:build) do |trace|
-      trace.platform = trace.activity.platform
+    after(:build) do |t, e|
+      t.platform = e.platform
+      t.activity = e.activity
+      t.application = e.application
     end
 
     trait :w_spans do
@@ -55,6 +74,39 @@ FactoryGirl.define do # rubocop:disable BlockLength
 
     after(:build) do |span|
       span.platform_id = span.trace.platform_id
+    end
+  end
+
+  factory :failure do
+    transient do
+      platform nil
+      application nil
+      activity nil
+      stop nil
+
+      trace do
+        create(:trace, **{
+          platform: platform,
+          application: application,
+          activity: activity,
+          stop: stop
+        }.compact)
+      end
+    end
+
+    type 'RuntimeError'
+    text 'Error Message'
+    stacktrace []
+
+    after(:build) do |f, e|
+      e.trace.tap do |trace|
+        f.trace = trace
+        f.platform = trace.platform
+        f.application = trace.application
+
+        f.stop = trace.stop
+        f.hostname = trace.hostname
+      end
     end
   end
 end

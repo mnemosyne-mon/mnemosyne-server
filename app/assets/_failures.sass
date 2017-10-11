@@ -1,37 +1,57 @@
-ul.failures
-  margin: 0
-  display: table
-  list-style: none
-  width: 100%
-
-  padding: 1rem
+.failures
   background: #fff
+  padding: 1em
 
-  li
-    margin: 0
-    padding: 0
-    display: table-row
+  table
+    width: 100%
+    max-width: 100%
 
-    &:hover
-      background-color: #eee
+    tr:hover
+      td
+        background-color: #eee
 
-    span
-      display: table-cell
-      white-space: nowrap
+    th
+      border-bottom: 1px solid #eee
+      font-size: 75%
+      font-weight: normal
+      text-align: center
+      text-transform: uppercase
+
+    td
+      max-width: 0
+      vertical-align: top
+
+      &.date
+        width: 80px
+
+      &.count
+        width: 50px
+        text-align: right
+
+      &.application
+        width: 120px
+        text-align: right
+
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+
+      &.details
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+
+        span
+          display: block
+
+          &:last-child
+            font-family: monospace
+            font-size: 90%
+            color: #888
 
       a
         display: block
-        padding: 3px 8px
-        text-decoration: none
-
-      &.duration
-        text-align: right
-
-      &.type, &.method, &.status, &.duration, &.start, &.application
-        width: 1%
-
-  .uuid
-    font-family: monospace
+        padding: 0 0.5em
 
 .failure
   header

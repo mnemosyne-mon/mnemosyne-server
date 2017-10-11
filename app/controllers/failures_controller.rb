@@ -17,16 +17,23 @@ class FailuresController < ApplicationController
   end
 
   def index
-    @failures = platform
-      .failures
-      .joins(:trace)
-      .order('traces.stop DESC')
+    @failures = FailureGroup
+      .where(platform: platform)
+      .includes(:application, :platform)
 
     @failures = apply_scopes @failures
-    @failures = @failures.decorate
+    @failures = @failures.decorate(context: context)
   end
 
   def show
     @failure = platform.failures.find(params[:id]).decorate
+  end
+
+  private
+
+  def context
+    {
+      platform: platform
+    }
   end
 end
