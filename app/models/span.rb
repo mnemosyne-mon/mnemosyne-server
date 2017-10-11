@@ -3,8 +3,8 @@
 class Span < ApplicationRecord
   self.primary_key = 'id'
 
-  extend Concerns::Range
-  include Duration
+  extend Concerns::Model::Range
+  include Concerns::Model::Duration
 
   attribute :start, ::Server::Types::PreciseDateTime.new
   attribute :stop, ::Server::Types::PreciseDateTime.new

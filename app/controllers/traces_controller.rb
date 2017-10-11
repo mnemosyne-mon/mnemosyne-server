@@ -2,7 +2,9 @@
 
 # rubocop:disable ClassLength
 class TracesController < ApplicationController
-  include Concerns::PlatformScope
+  include Concerns::Controller::Platform
+  include Concerns::Controller::Range
+
   include ::Server::Streaming::JSONStreaming
 
   respond_to :html, :json
@@ -61,8 +63,8 @@ class TracesController < ApplicationController
     scope.where('(stop - start) < ?', value.to_f * 1_000_000)
   end
 
-  has_scope :rm, default: true, allow_blank: true do |ctl, scope, _|
-    scope.range(ctl.range)
+  has_scope :rm, default: true, allow_blank: true do |controller, scope, _|
+    scope.range(controller.range)
   end
 
   FILTER_PARAMS = %w[origin application hostname wm wp ws wc wa ls le].freeze
@@ -128,22 +130,6 @@ class TracesController < ApplicationController
     end
   end
 
-  def range
-    @range ||= begin
-      param = params.fetch(:rm, 1440).to_s.upcase
-
-      if (value = try_to_i(param))
-        value = value.minutes
-      elsif (value = try_to_duration("PT#{param}"))
-        # noop
-      else
-        value = 6.hours
-      end
-
-      [value, platform.retention_period].min
-    end
-  end
-
   private
 
   def trace
@@ -156,17 +142,5 @@ class TracesController < ApplicationController
     {
       platform: platform
     }
-  end
-
-  def try_to_i(str, base = 10)
-    Integer(str, base)
-  rescue ArgumentError
-    nil
-  end
-
-  def try_to_duration(str)
-    ActiveSupport::Duration.parse("PT#{str}")
-  rescue ArgumentError
-    nil
   end
 end
