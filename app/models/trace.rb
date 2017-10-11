@@ -8,6 +8,7 @@ class Trace < ApplicationRecord
 
   attribute :id, :uuid
   attribute :platform_id, :uuid
+  attribute :application_id, :uuid
 
   attribute :start, ::Server::Types::PreciseDateTime.new
   attribute :stop, ::Server::Types::PreciseDateTime.new
