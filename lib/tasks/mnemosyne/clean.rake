@@ -21,6 +21,7 @@ namespace :mnemosyne do
     ActiveRecord::Base.connection.execute <<~SQL
       SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'traces', NULL);
       SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'spans', NULL);
+      SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'failures', NULL);
     SQL
 
     logger.info do
@@ -42,18 +43,5 @@ namespace :mnemosyne do
     SQL
 
     logger.info { 'Deleting unreferenced activities... [DONE]' }
-
-    logger.info { 'Deleting unreferenced failures...' }
-
-    ActiveRecord::Base.connection.execute <<~SQL
-      DELETE FROM failures
-      WHERE NOT EXISTS(
-        SELECT 1
-        FROM traces
-        WHERE id = failures.trace_id
-      );
-    SQL
-
-    logger.info { 'Deleting unreferenced failures... [DONE]' }
   end
 end

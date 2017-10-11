@@ -4,6 +4,7 @@ class Failure < ApplicationRecord
   self.inheritance_column = '__no_column'
 
   attribute :id, ::Server::Types::UUID4.new
+  attribute :stop, ::Server::Types::PreciseDateTime.new
 
   validates :type, presence: true
   validates :text, presence: true
@@ -11,6 +12,7 @@ class Failure < ApplicationRecord
 
   belongs_to :trace
   belongs_to :platform
+  belongs_to :application
 
   def stacktrace=(stacktrace)
     self[:stacktrace] = Array(stacktrace).map(&method(:sl_conv)).reject(&:nil?)

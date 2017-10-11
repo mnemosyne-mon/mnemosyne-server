@@ -2,8 +2,9 @@
 
 module Server
   class Builder
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable AbcSize
+    # rubocop:disable MethodLength
+    # rubocop:disable BlockLength
     def call(payload)
       platform = ::Platform.fetch name: payload.fetch(:platform)
 
@@ -49,8 +50,11 @@ module Server
           Failure.create! \
             type: error.fetch(:type),
             text: error.fetch(:text),
+            stop: trace.stop,
             trace: trace,
-            platform: platform,
+            hostname: trace.hostname,
+            platform: trace.platform,
+            application: trace.application,
             stacktrace: error.fetch(:stacktrace)
         end
       end

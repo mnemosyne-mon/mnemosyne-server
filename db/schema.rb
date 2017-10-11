@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010160545) do
+ActiveRecord::Schema.define(version: 20171011132432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,14 +33,24 @@ ActiveRecord::Schema.define(version: 20171010160545) do
     t.index ["platform_id", "name"], name: "index_applications_on_platform_id_and_name", unique: true
   end
 
-  create_table "failures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "failures", id: false, force: :cascade do |t|
+    t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
     t.string "type", null: false
     t.text "text", null: false
+    t.string "hostname", null: false
     t.jsonb "stacktrace", null: false
     t.uuid "trace_id", null: false
     t.uuid "platform_id", null: false
+    t.uuid "application_id", null: false
+    t.bigint "stop", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["application_id"], name: "index_failures_on_application_id"
+    t.index ["hostname"], name: "index_failures_on_hostname"
+    t.index ["platform_id"], name: "index_failures_on_platform_id"
+    t.index ["stop"], name: "index_failures_on_stop", order: { stop: :desc }
+    t.index ["trace_id"], name: "index_failures_on_trace_id"
+    t.index ["type"], name: "index_failures_on_type"
   end
 
   create_table "platforms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

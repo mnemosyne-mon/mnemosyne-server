@@ -8,16 +8,18 @@ class FailuresController < ApplicationController
   end
 
   has_scope :application do |_, scope, value|
-    scope.joins(:trace).where traces: {application_id: UUID4(value)}
+    scope.where application_id: UUID4(value)
   end
 
   has_scope :hostname do |_, scope, value|
-    scope.joins(:trace).where traces: {hostname: value}
+    scope.where hostname: value
   end
 
   def index
     @failures = platform
       .failures
+      .joins(:trace)
+      .order('traces.stop DESC')
 
     @failures = apply_scopes @failures
     @failures = @failures.decorate

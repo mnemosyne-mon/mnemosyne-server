@@ -175,8 +175,20 @@ RSpec.describe ::Server::Builder do
         expect(subject.text).to eq 'error message'
       end
 
+      example 'hostname equals payload value' do
+        expect(subject.hostname).to eq 'services-1'
+      end
+
       example 'correct trace is associated' do
-        expect(subject.trace.id).to eq 'cd25562f-42e6-48e6-9f3b-08632da38921'
+        expect(subject.trace_id).to eq 'cd25562f-42e6-48e6-9f3b-08632da38921'
+      end
+
+      example 'correct trace is associated' do
+        expect(subject.application_id).to eq trace.application.id
+      end
+
+      example 'correct platform is associated' do
+        expect(subject.platform_id).to eq trace.platform.id
       end
 
       example 'stacktrace equals payload value' do
