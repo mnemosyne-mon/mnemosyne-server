@@ -15,6 +15,12 @@ RSpec.describe Trace, type: :model do
     it { expect(subject).to be_a ::UUID4 }
   end
 
+  describe '#origin_id' do
+    let(:attributes) { {origin: create(:span)} }
+    subject { super().origin_id }
+    it { expect(subject).to be_a ::UUID4 }
+  end
+
   describe '#platform_id' do
     subject { super().platform_id }
     it { expect(subject).to be_a ::UUID4 }

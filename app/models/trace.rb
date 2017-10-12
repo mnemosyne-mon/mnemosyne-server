@@ -7,6 +7,7 @@ class Trace < ApplicationRecord
   include Concerns::Model::Duration
 
   attribute :id, :uuid
+  attribute :origin_id, :uuid
   attribute :platform_id, :uuid
   attribute :application_id, :uuid
 
