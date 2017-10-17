@@ -19,9 +19,9 @@ namespace :mnemosyne do
     end
 
     ActiveRecord::Base.connection.execute <<~SQL
-      SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'traces', NULL);
-      SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'spans', NULL);
-      SELECT _timescaledb_internal.drop_chunks_older_than(#{cutoff}, 'failures', NULL);
+      SELECT drop_chunks(#{cutoff}, 'traces', NULL);
+      SELECT drop_chunks(#{cutoff}, 'spans', NULL);
+      SELECT drop_chunks(#{cutoff}, 'failures', NULL);
     SQL
 
     logger.info do
