@@ -16,6 +16,17 @@ namespace :mnemosyne do
 
     Rails.application.eager_load!
 
+    case ENV.fetch('LOG_LEVEL')
+      when 'debug'
+        Rails.logger.level = Logger::DEBUG
+      when 'info'
+        Rails.logger.level = Logger::INFO
+      when 'warn'
+        Rails.logger.level = Logger::WARN
+      when 'error'
+        Rails.logger.level = Logger::ERROR
+    end
+
     Hutch::Logging.logger = Rails.logger
 
     config = Rails.application.config_for(:hutch).symbolize_keys
