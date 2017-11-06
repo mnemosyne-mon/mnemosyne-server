@@ -32,8 +32,7 @@ module.exports = {
 
   output: {
     path: resolve(settings.output),
-    filename: JAVASCRIPT_NAME,
-    publicPath: output.publicPath
+    filename: JAVASCRIPT_NAME
   },
 
   module: {
