@@ -38,6 +38,10 @@ module Server
 
     config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/').to_s
 
+    config.action_controller.asset_host = lambda {|_, request|
+      "#{request.protocol}#{request.host_with_port}#{request.headers['HTTP_X_RELATIVE_URL_ROOT']}"
+    }
+
     initializer 'patch' do
       require 'patch/all'
 
