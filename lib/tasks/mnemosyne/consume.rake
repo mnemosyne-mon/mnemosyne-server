@@ -16,7 +16,7 @@ namespace :mnemosyne do
 
     Rails.application.eager_load!
 
-    case ENV.fetch('LOG_LEVEL')
+    case ENV.fetch('LOG_LEVEL', 'warn')
       when 'debug'
         Rails.logger.level = Logger::DEBUG
       when 'info'
