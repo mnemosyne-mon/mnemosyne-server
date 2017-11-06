@@ -36,6 +36,8 @@ module Server
     config.time_zone = 'Europe/Berlin'
     config.active_record.default_timezone = :utc
 
+    config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/').to_s
+
     initializer 'patch' do
       require 'patch/all'
 
