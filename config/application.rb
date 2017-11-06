@@ -41,7 +41,7 @@ module Server
     config.action_controller.asset_host = proc {|_, request|
       if request
         [
-          request.protocol,
+          '//',
           request.host_with_port,
           request.headers['HTTP_X_RELATIVE_URL_ROOT']
         ].join
