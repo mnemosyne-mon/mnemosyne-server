@@ -187,7 +187,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails-rfc6570 (2.0.0)
+    rails-rfc6570 (2.1.0)
       actionpack (>= 4.2, < 5.2)
       addressable (~> 2.3)
     rails-timeago (2.16.0)
@@ -310,7 +310,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 3.7)
   rails (~> 5.1.1)
-  rails-rfc6570 (~> 2.0)
+  rails-rfc6570 (~> 2.1)
   rails-timeago
   responders (~> 2.4)
   rspec (~> 3.1)
@@ -327,4 +327,4 @@ DEPENDENCIES
   webpacker (~> 2.0)
 
 BUNDLED WITH
-   1.16.0.pre.3
+   1.16.0
