@@ -54,7 +54,7 @@ async function heatmap(el) {
   let url = new URL(el.dataset.source)
   url.searchParams.append('tbs', Math.floor(width / 8) + 1)
 
-  let response = await fetch(url),
+  let response = await fetch(url, {credentials: 'same-origin'}),
     json = await response.json(),
     data = json['values']
 
