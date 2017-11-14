@@ -30,7 +30,8 @@ module Server
           tags = {
             platform: payload[:platform],
             hostname: payload[:hostname],
-            application: payload[:application]
+            application: payload[:application],
+            errors: payload.dig(:errors).present?
           }
 
           case payload[:name]
