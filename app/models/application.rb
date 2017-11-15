@@ -14,6 +14,14 @@ class Application < ApplicationRecord
   end
 
   class << self
+    def resolve(value)
+      if (uuid = UUID4.try_convert(value))
+        find_by(id: uuid)
+      else
+        find_by(name: value.to_s)
+      end
+    end
+
     def fetch(name:, platform:)
       platform = platform.id if platform.respond_to?(:id)
 
