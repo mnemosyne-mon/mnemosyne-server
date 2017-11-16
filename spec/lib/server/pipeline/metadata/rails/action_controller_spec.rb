@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ::Server::Pipeline::Rails::ActionController do
+RSpec.describe ::Server::Pipeline::Metadata::Rails::ActionController do
   let(:payload) do
     {
       span: [{

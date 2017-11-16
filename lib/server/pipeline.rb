@@ -11,7 +11,9 @@ module Server
 
       def default
         @default ||= ::Middleware::Builder.new(runner_class: Runner) do |b|
-          b.use ::Server::Pipeline::Rails::ActionController
+          b.use ::Server::Pipeline::Metadata::Grape::Endpoint
+          b.use ::Server::Pipeline::Metadata::Rails::ActionController
+          b.use ::Server::Pipeline::Metadata::Rails::ActiveJob
         end
       end
     end
