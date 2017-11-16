@@ -45,11 +45,13 @@ module Server
               action = payload.dig(:meta, :action)
               controller = payload.dig(:meta, :controller)
 
-              if action && controller
-                tags[:action] = action
-                tags[:controller] = controller
+              tags[:action] = action if action
+              tags[:controller] = controller if controller
 
+              if controller && action
                 tags[:instance] = "#{controller}##{action}"
+              elsif controller
+                tags[:instance] = controller
               end
 
             when 'app.job.perform.sidekiq'
