@@ -12,11 +12,24 @@ module Patch
     def run
       return unless frequency
 
-      Thread.new(frequency, pool) do |t, p|
-        loop do
-          sleep t
-          p.remove_idle
-        end
+      thread.run
+    end
+
+    def thread
+      if @thread.nil? || !@thread.status
+        # Recreate thread if nil or dead
+        @thread = Thread.new(frequency, pool) {|*args| _loop(*args) }
+      end
+
+      @thread
+    end
+
+    private
+
+    def _loop(frequency, pool)
+      loop do
+        sleep frequency
+        pool.remove_idle
       end
     end
   end
@@ -29,7 +42,6 @@ module Patch
 
       @janitor = Janitor.new \
         self, spec.config.fetch(:janitor_frequency, 30).to_f
-      @janitor.run
     end
 
     def queue
@@ -52,6 +64,10 @@ module Patch
           conn.disconnect!
         end
       end
+    end
+
+    def checkin(*)
+      super.tap { @janitor.run }
     end
   end
 
