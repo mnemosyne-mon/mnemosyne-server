@@ -63,8 +63,8 @@ class TracesController < ApplicationController
     scope.where('(stop - start) < ?', value.to_f * 1_000_000)
   end
 
-  has_scope :rm, default: true, allow_blank: true do |controller, scope, _|
-    scope.range(controller.range)
+  has_scope :range, default: true, allow_blank: true do |controller, scope, _|
+    scope.range controller.range
   end
 
   FILTER_PARAMS = %w[origin application hostname wm wp ws wc wa ls le].freeze

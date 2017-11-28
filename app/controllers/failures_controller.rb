@@ -17,7 +17,7 @@ class FailuresController < ApplicationController
   end
 
   has_scope :range, default: true, allow_blank: true do |controller, scope, _|
-    scope.range(controller.range)
+    scope.range controller.range
   end
 
   def index

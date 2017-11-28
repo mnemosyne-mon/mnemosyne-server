@@ -7,7 +7,7 @@ module Concerns
 
       def range
         @range ||= begin
-          param = params.fetch(:rm, 1440).to_s.upcase
+          param = params.fetch(:range, 1440).to_s.upcase
 
           if (value = try_to_i(param))
             value = value.minutes
