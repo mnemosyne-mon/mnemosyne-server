@@ -123,7 +123,7 @@ class TracesController < ApplicationController
   end
 
   def default_origin_value
-    if (%w[origin application hostname wm wp ws] & params.keys).any?
+    if (FILTER_PARAMS & params.keys).any?
       'any'
     else
       'none'
