@@ -16,6 +16,10 @@ class FailuresController < ApplicationController
     scope.where hostname: value
   end
 
+  has_scope :range, default: true, allow_blank: true do |controller, scope, _|
+    scope.range(controller.range)
+  end
+
   def index
     @failures = FailureGroup
       .where(platform: platform)
