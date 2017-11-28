@@ -14,6 +14,7 @@ class FailureGroup < ApplicationRecord
 
   attribute :first_occurrence_at, ::Server::Types::PreciseDateTime.new
   attribute :last_occurrence_at, ::Server::Types::PreciseDateTime.new
+  attribute :stop, ::Server::Types::PreciseDateTime.new
 
   belongs_to :platform
   belongs_to :application
