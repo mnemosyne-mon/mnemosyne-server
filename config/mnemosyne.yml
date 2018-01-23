@@ -17,7 +17,7 @@ common: &common
   # hostname:
 
 development:
-  enabled: false
+  enabled: true
   <<: *common
 
 test:
