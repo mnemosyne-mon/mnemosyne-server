@@ -3,7 +3,9 @@
 class PlatformDecorator < BaseDecorator
   delegate_all
 
-  decorates_association :applications
+  def applications
+    object.applications.decorate.sort_by(&:title)
+  end
 
   def serialize(**_)
     export do |out|
