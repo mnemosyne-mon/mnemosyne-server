@@ -21,6 +21,14 @@ class FailureGroupDecorator < BaseDecorator
     h.failure_path context[:platform], id: ids.last
   end
 
+  def first_path
+    h.failure_path context[:platform], id: ids.first
+  end
+
+  def last_path
+    h.failure_path context[:platform], id: ids.last
+  end
+
   def trace_path
     h.trace_path context[:platform], trace_id
   end

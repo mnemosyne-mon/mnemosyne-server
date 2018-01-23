@@ -11,11 +11,11 @@
       - @failures.each do |group|
         tr
           td.first-date.date
-            = link_to group.self_path do
+            = link_to group.first_path do
               = l group.first_occurrence_at, format: :index
 
           td.last-date.date
-            = link_to group.self_path do
+            = link_to group.last_path do
               - if group.count > 1
                 = l group.last_occurrence_at, format: :index
 
