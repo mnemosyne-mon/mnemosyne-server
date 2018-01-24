@@ -136,7 +136,6 @@ module.exports = {
       'jquery': 'jquery',
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
-      'Tether': 'tether'
     }),
     new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
     new ExtractTextPlugin(STYLESHEET_NAME),

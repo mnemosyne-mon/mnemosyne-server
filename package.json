@@ -11,7 +11,7 @@
     "babel-preset-react": "^6.24.1",
     "cache-loader": "^1.0.3",
     "coffee-loader": "^0.8.0",
-    "coffeescript": "next",
+    "coffeescript": "^2.1.1",
     "compression-webpack-plugin": "^0.4.0",
     "css-loader": "^0.28.0",
     "csswring": "^5.1.1",
@@ -30,15 +30,15 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "^4.0.0",
     "bourbon": "^4.3.4",
     "d3": "^4.9.1",
     "d3-selection-multi": "^1.0.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
+    "popper.js": "^1.12.9",
     "preact": "^8.2.5",
     "preact-icons": "^2.2.5",
-    "tether": "^1.4.0",
     "timeago": "^1.5.4",
     "urijs": "^1.18.10"
   }
