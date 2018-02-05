@@ -23,7 +23,7 @@ module Patch
       synchronize do
         return if @num_waiting.positive? || @queue.empty?
 
-        yield @queue.pop.conn while @queue.last.age > max_age
+        yield @queue.pop.conn while @queue.last && @queue.last.age > max_age
       end
     end
 

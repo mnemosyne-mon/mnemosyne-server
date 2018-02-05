@@ -2,6 +2,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 25
+  port: 5432
 
 development:
   <<: *default
