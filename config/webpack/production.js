@@ -11,10 +11,10 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const sharedConfig = require('./shared.js')
 
 module.exports = merge(sharedConfig, {
-  devtool: 'source-map',
   plugins: [
     new MinifyPlugin({}, {
-      test: /\.jsx?$/i
+      test: /\.jsx?$/i,
+      sourceMap: false,
     }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
