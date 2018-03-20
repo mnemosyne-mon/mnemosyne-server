@@ -40,11 +40,6 @@ RSpec.describe FailureGroup, type: :model do
 
       # Both traces must have different activities
       expect(traces.map(&:activity_id).uniq.size).to eq 2
-
-      traces.map(&:activity).tap do |activities|
-        # Both activities must belong to same platform
-        expect(activities.map(&:platform_id).uniq).to eq [platform.id]
-      end
     end
   end
 

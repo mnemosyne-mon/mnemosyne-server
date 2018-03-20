@@ -8,10 +8,6 @@ module Server
     def call(payload)
       platform = ::Platform.fetch name: payload.fetch(:platform)
 
-      activity = ::Activity.fetch \
-        id: payload.fetch(:transaction),
-        platform: platform.id
-
       application = ::Application.fetch \
         name: payload.fetch(:application),
         platform: platform.id
@@ -22,7 +18,7 @@ module Server
             id: payload[:uuid],
             origin_id: payload[:origin],
             application: application,
-            activity: activity,
+            activity_id: payload[:transaction],
             platform: platform,
             hostname: payload[:hostname],
             name: payload[:name],

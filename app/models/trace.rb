@@ -10,6 +10,7 @@ class Trace < ApplicationRecord
   attribute :origin_id, :uuid
   attribute :platform_id, :uuid
   attribute :application_id, :uuid
+  attribute :activity_id, :uuid
 
   attribute :start, ::Server::Types::PreciseDateTime.new
   attribute :stop, ::Server::Types::PreciseDateTime.new
@@ -18,7 +19,6 @@ class Trace < ApplicationRecord
   has_many :failures
 
   belongs_to :application
-  belongs_to :activity
   belongs_to :platform
   belongs_to :origin, class_name: 'Span', optional: true
 

@@ -27,19 +27,13 @@ RSpec.describe Trace, type: :model do
   end
 
   describe '#activity_id' do
-    subject { super().platform_id }
+    subject { super().activity_id }
     it { expect(subject).to be_a ::UUID4 }
   end
 
   describe '#application_id' do
     subject { super().platform_id }
     it { expect(subject).to be_a ::UUID4 }
-  end
-
-  describe '#platform' do
-    it 'equals activity platform' do
-      expect(trace.platform).to eq trace.activity.platform
-    end
   end
 
   describe '#start' do

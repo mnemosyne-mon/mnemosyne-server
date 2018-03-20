@@ -46,10 +46,6 @@ RSpec.describe ::Server::Builder do
 
     let(:trace) { Trace.find payload.fetch(:uuid) }
 
-    it 'creates activity' do
-      expect { subject }.to change(Activity, :count).from(0).to(1)
-    end
-
     it 'creates platform' do
       expect { subject }.to change(Platform, :count).from(0).to(1)
     end
@@ -81,14 +77,10 @@ RSpec.describe ::Server::Builder do
 
     describe 'activity' do
       before { builder.call(payload) }
-      subject { trace.activity }
+      subject { trace.activity_id }
 
       example 'UUID equals payload value' do
-        expect(subject.id).to eq '4c6d1d78-3eec-4ac8-9720-80baff80e1f8'
-      end
-
-      example 'correct platform is associated' do
-        expect(subject.platform.name).to eq 'my-platform'
+        expect(subject).to eq '4c6d1d78-3eec-4ac8-9720-80baff80e1f8'
       end
     end
 
@@ -134,7 +126,7 @@ RSpec.describe ::Server::Builder do
       end
 
       example 'correct activity is associated' do
-        expect(subject.activity.id).to eq '4c6d1d78-3eec-4ac8-9720-80baff80e1f8'
+        expect(subject.activity_id).to eq '4c6d1d78-3eec-4ac8-9720-80baff80e1f8'
       end
     end
 

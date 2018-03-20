@@ -2,6 +2,8 @@
 
 # rubocop:disable BlockLength
 FactoryGirl.define do
+  sequence(:uuid) { UUID(SecureRandom.uuid) }
+
   factory :platform do
     sequence(:name) {|n| "platform/#{n}" }
   end
@@ -19,21 +21,11 @@ FactoryGirl.define do
     end
   end
 
-  factory :activity do
-    transient do
-      platform { create :platform }
-    end
-
-    after(:build) do |a, e|
-      a.platform = e.platform
-    end
-  end
-
   factory :trace do
     transient do
       platform { create :platform }
       application { create :application, platform: platform }
-      activity { create :activity, platform: platform }
+      activity_id { generate(:uuid) }
     end
 
     start { Time.zone.now - 2.seconds }
@@ -43,8 +35,8 @@ FactoryGirl.define do
 
     after(:build) do |t, e|
       t.platform = e.platform
-      t.activity = e.activity
       t.application = e.application
+      t.activity_id = e.activity_id
     end
 
     trait :w_spans do
@@ -81,14 +73,14 @@ FactoryGirl.define do
     transient do
       platform nil
       application nil
-      activity nil
+      activity_id nil
       stop nil
 
       trace do
         create(:trace, **{
           platform: platform,
           application: application,
-          activity: activity,
+          activity_id: activity_id,
           stop: stop
         }.compact)
       end

@@ -27,21 +27,5 @@ namespace :mnemosyne do
     logger.info do
       "Dropping chunks older then #{Server::Clock.to_time(cutoff)}... [DONE]"
     end
-
-    ActiveRecord::Base.connection.disconnect!
-    ActiveRecord::Base.establish_connection
-
-    logger.info { 'Deleting unreferenced activities...' }
-
-    ActiveRecord::Base.connection.execute <<~SQL
-      DELETE FROM activities
-      WHERE NOT EXISTS(
-        SELECT 1
-        FROM traces
-        WHERE activity_id = activities.id
-      );
-    SQL
-
-    logger.info { 'Deleting unreferenced activities... [DONE]' }
   end
 end
