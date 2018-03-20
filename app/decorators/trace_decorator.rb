@@ -19,7 +19,7 @@ class TraceDecorator < BaseDecorator
       out[:duration] = duration / 1_000_000.0
       out[:store]    = store
 
-      out[:activity] = activity.serialize(**kwargs)
+      out[:activity] = {uuid: activity_id}
       out[:platform] = platform.serialize(**kwargs)
       out[:application] = application.serialize(**kwargs)
 
