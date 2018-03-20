@@ -26,17 +26,7 @@ class TraceDecorator < BaseDecorator
       out[:origin] = {uuid: origin_id}
       out[:origin][:trace] = origin.trace_id if origin
 
-      out[:meta] = {
-        path: meta['path'],
-        query: meta['query'],
-        method: meta['method'],
-        status: meta['status'],
-        host: meta.dig('headers', 'Host'),
-        user_agent: meta.dig('headers', 'User-Agent'),
-        controller: meta.dig('controller'),
-        action: meta.dig('action'),
-        format: meta.dig('format')
-      }.compact
+      out[:meta] = metainfo
     end
   end
 
@@ -59,6 +49,25 @@ class TraceDecorator < BaseDecorator
       traces_url: \
         h.trace_url_rfc6570.partial_expand(platform: platform.to_param)
     }
+  end
+
+  def metainfo
+    case type
+      when :web
+        {
+          path: meta['path'],
+          query: meta['query'],
+          method: meta['method'],
+          status: meta['status'],
+          host: meta.dig('headers', 'Host'),
+          user_agent: meta.dig('headers', 'User-Agent'),
+          controller: meta.dig('controller'),
+          action: meta.dig('action'),
+          format: meta.dig('format')
+        }
+      else
+        meta
+    end.compact
   end
 
   def type
@@ -110,6 +119,10 @@ class TraceDecorator < BaseDecorator
     case name
       when 'app.web.request.rack'
         meta['path']
+      when 'app.messaging.receive.msgr'
+        meta.dig('delivery_info', 'routing_key')
+      when 'app.job.perform.sidekiq'
+        meta['worker']
     end
   end
 
