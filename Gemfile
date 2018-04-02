@@ -56,7 +56,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'rspec', '~> 3.1'
   gem 'timecop'
 end

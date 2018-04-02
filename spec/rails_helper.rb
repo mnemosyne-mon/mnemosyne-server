@@ -9,7 +9,7 @@ end
 
 require 'spec_helper'
 require 'rspec/rails'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
 #
 Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f }
@@ -27,7 +27,7 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   config.filter_rails_from_backtrace!
 end

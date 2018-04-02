@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # rubocop:disable BlockLength
-FactoryGirl.define do
+FactoryBot.define do
   sequence(:uuid) { UUID(SecureRandom.uuid) }
 
   factory :platform do
