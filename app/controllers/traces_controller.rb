@@ -133,9 +133,7 @@ class TracesController < ApplicationController
   private
 
   def trace
-    Trace
-      .where(platform: platform)
-      .find(params[:id])
+    Trace.find(params[:id])
   end
 
   def context
