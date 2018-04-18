@@ -131,6 +131,7 @@ GEM
     inflecto (0.0.2)
     influxdb (0.5.3)
     json (2.1.0)
+    kgio (2.11.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -200,6 +201,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.2.2)
       rake
+    raindrops (0.19.0)
     rake (12.3.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
@@ -268,6 +270,9 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.3.0)
+    unicorn (5.4.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     uuid4 (1.3.2)
       base62-rb (~> 0.3.0)
     web-console (3.5.1)
@@ -321,6 +326,7 @@ DEPENDENCIES
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
   timecop
+  unicorn (~> 5.4)
   uuid4 (~> 1.0)
   web-console (>= 3.3.0)
   webpacker (~> 2.0)
