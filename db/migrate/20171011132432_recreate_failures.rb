@@ -35,7 +35,7 @@ class RecreateFailures < ActiveRecord::Migration[5.1]
     execute <<-SQL.strip_heredoc
       SELECT create_hypertable(
         'failures'::regclass, 'stop'::name,
-        chunk_time_interval => 21600000000000);
+        chunk_time_interval => 86400000000000);
     SQL
   end
 

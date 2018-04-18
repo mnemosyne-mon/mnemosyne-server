@@ -83,13 +83,13 @@ class Init < ActiveRecord::Migration[5.1]
       execute <<-SQL.strip_heredoc
         SELECT create_hypertable(
           'traces'::regclass, 'stop'::name,
-          chunk_time_interval => 21600000000000);
+          chunk_time_interval => 86400000000000);
       SQL
 
       execute <<-SQL.strip_heredoc
         SELECT create_hypertable(
           'spans'::regclass, 'stop'::name,
-          chunk_time_interval => 21600000000000);
+          chunk_time_interval => 86400000000000);
       SQL
     end
   end
