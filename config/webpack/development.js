@@ -24,7 +24,7 @@ module.exports = merge(environment, {
     port: config.dev_server.port,
     proxy: {'/': 'http://localhost:9001'},
     contentBase: config.output,
-    publicPath: config.publicPath,
+    publicPath: output.publicPath,
     compress: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     historyApiFallback: true,
