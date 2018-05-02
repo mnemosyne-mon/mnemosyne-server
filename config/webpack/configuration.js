@@ -21,8 +21,6 @@ function formatPublicPath(host = '', path = '') {
   return `${formattedHost}/${formattedPath}/`
 }
 
-console.log(formatPublicPath(env.ASSET_HOST, config.public))
-
 const output = {
   path: resolve('public', config.public),
   publicPath: formatPublicPath(env.ASSET_HOST, config.public)

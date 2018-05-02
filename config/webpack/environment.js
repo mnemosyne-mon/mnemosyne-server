@@ -15,7 +15,6 @@ module.exports = {
 
   output: {
     path: output.path,
-    publicPath: output.publicPath,
     filename: devMode ? '[name].js' : '[chunkhash:20].js'
   },
 
