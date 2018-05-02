@@ -6,8 +6,7 @@ gem 'puma', '~> 3.7'
 gem 'unicorn', '~> 5.4'
 gem 'rails', '~> 5.2.0'
 
-gem 'active_record_upsert', '~> 0.7.0', \
-  git: 'https://github.com/jesjos/active_record_upsert'
+gem 'active_record_upsert', '~> 0.8.0'
 
 gem 'bulk_insert', '~> 1.4'
 gem 'hutch', '~> 0.21'
