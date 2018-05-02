@@ -1,12 +1,13 @@
 // Note: You must restart bin/webpack-dev-server for changes to take effect
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 const merge = require('webpack-merge')
 
-const sharedConfig = require('./shared.js')
-const { settings, output } = require('./configuration.js')
+const environment = require('./environment.js')
+const { config, output } = require('./configuration.js')
 
-module.exports = merge(sharedConfig, {
-  devtool: 'source-map',
+module.exports = merge(environment, {
+  mode: 'development',
 
   stats: {
     errorDetails: true
@@ -17,20 +18,13 @@ module.exports = merge(sharedConfig, {
   },
 
   devServer: {
-    // host: devServer.host,
-    // port: devServer.port,
-    // disableHostCheck: true,
-    // contentBase: resolve(paths.output, paths.entry),
-    // proxy: {'/': 'http://localhost:9001'},
-    // publicPath
-
     clientLogLevel: 'none',
-    https: settings.dev_server.https,
-    host: settings.dev_server.host,
-    port: settings.dev_server.port,
+    https: false,
+    host: config.dev_server.host,
+    port: config.dev_server.port,
     proxy: {'/': 'http://localhost:9001'},
-    contentBase: output.path,
-    publicPath: output.publicPath,
+    contentBase: config.output,
+    publicPath: config.publicPath,
     compress: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     historyApiFallback: true,
