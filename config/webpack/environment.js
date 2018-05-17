@@ -2,7 +2,7 @@
 const webpack = require('webpack')
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const WebpackAssetsManifest = require('webpack-assets-manifest')
+const ManifestPlugin       = require('webpack-manifest-plugin')
 
 const { join, resolve } = require('path')
 const { config, env, devMode, output } = require('./configuration')
@@ -127,10 +127,10 @@ module.exports = {
       filename: devMode ? '[name].css' : '[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
-    new WebpackAssetsManifest({
-      output: join(output.path, 'manifest.json'),
-      publicPath: output.publicPath,
-      writeToDisk: true
+    new ManifestPlugin({
+      fileName: 'manifest.json',
+      writeToFileEmit: true,
+      publicPath: output.publicPath
     })
   ],
 
