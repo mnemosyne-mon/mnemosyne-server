@@ -9,7 +9,7 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const environment = require('./environment.js')
 
 module.exports = merge(environment, {
-  mode: 'production',
+  mode: 'none',
 
   plugins: [
     new MinifyPlugin({}, {
