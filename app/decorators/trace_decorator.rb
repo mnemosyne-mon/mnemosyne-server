@@ -35,8 +35,9 @@ class TraceDecorator < BaseDecorator
       routes: routes,
       trace: serialize,
       spans: object.spans
+        .includes(:trace, :traces, scope: Trace.after(start))
+        .includes(traces: [:application])
         .range(start, stop)
-        .includes(:trace, traces: [:application])
         .limit(5000)
         .decorate
         .map(&:serialize)

@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320131652) do
+ActiveRecord::Schema.define(version: 2018_03_20_131652) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "pgcrypto"
+  enable_extension "plpgsql"
   enable_extension "timescaledb"
 
   create_table "applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20180320131652) do
     t.index ["hostname"], name: "index_failures_on_hostname"
     t.index ["id"], name: "index_failures_on_id"
     t.index ["platform_id"], name: "index_failures_on_platform_id"
-    t.index ["stop"], name: "index_failures_on_stop", order: { stop: :desc }
+    t.index ["stop"], name: "index_failures_on_stop", order: :desc
     t.index ["trace_id"], name: "index_failures_on_trace_id"
     t.index ["type"], name: "index_failures_on_type"
   end
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20180320131652) do
     t.index ["id"], name: "index_spans_on_id"
     t.index ["name"], name: "index_spans_on_name"
     t.index ["start"], name: "index_spans_on_start"
-    t.index ["stop"], name: "spans_stop_idx", order: { stop: :desc }
+    t.index ["stop"], name: "spans_stop_idx", order: :desc
     t.index ["trace_id"], name: "index_spans_on_trace_id"
   end
 
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20180320131652) do
     t.index ["name"], name: "index_traces_on_name"
     t.index ["origin_id"], name: "index_traces_on_origin_id"
     t.index ["platform_id"], name: "index_traces_on_platform_id"
-    t.index ["stop"], name: "index_traces_on_stop", order: { stop: :desc }
+    t.index ["stop"], name: "index_traces_on_stop", order: :desc
   end
 
 end

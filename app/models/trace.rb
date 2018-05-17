@@ -23,6 +23,10 @@ class Trace < ApplicationRecord
   belongs_to :origin, class_name: 'Span', optional: true
 
   class << self
+    def after(time)
+      where t[:stop].gteq(time)
+    end
+
     def retention(period, time = Time.zone.now)
       period = ::Server::Types::Duration.new.cast_value(period)
       tlimit = time - period
