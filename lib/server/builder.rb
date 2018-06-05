@@ -51,7 +51,7 @@ module Server
             hostname: trace.hostname,
             platform: trace.platform,
             application: trace.application,
-            stacktrace: error.fetch(:stacktrace)
+            stacktrace: error.fetch(:stacktrace, [])
         end
       end
     end
