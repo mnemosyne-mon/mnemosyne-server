@@ -60,7 +60,7 @@ module Server
 
     def execute
       ActiveRecord::Base.connection
-        .select_all(create_query, nil, @traces.where_clause.binds)
+        .select_all(create_query)
         .to_hash
     end
 
