@@ -38,7 +38,7 @@ class TraceDecorator < BaseDecorator
         .includes(:trace, :traces, scope: Trace.after(start))
         .includes(traces: [:application])
         .range(start, stop)
-        .limit(5000)
+        .limit(10000)
         .decorate
         .map(&:serialize)
     }.to_json
