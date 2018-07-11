@@ -35,6 +35,10 @@ class TracesController < ApplicationController
     scope.where hostname: value
   end
 
+  has_scope :name do |_, scope, value|
+    scope.where name: value.to_s
+  end
+
   has_scope :wm do |_, scope, value|
     scope.where("meta->>'method' IN (?)", value.split(',').map(&:strip))
   end
