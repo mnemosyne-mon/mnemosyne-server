@@ -9,8 +9,7 @@ const { config, env, devMode, output } = require('./configuration')
 
 module.exports = {
   entry: {
-    application: ['manifest.js', 'main.js', 'main.sass'],
-    heatmap: 'heatmap.js'
+    application: ['manifest.js', 'main.js', 'main.sass']
   },
 
   output: {

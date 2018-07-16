@@ -90,28 +90,6 @@ class TracesController < ApplicationController
     respond_with @traces
   end
 
-  # rubocop:disable MethodLength
-  def heatmap
-    @traces = apply_scopes platform.traces
-
-    max = @traces.maximum('(stop - start)')
-
-    @heatmap = ::Server::Heatmap.new @traces, \
-      time: {
-        stop: Time.zone.now,
-        duration: range,
-        size: params.fetch(:tbs, 96).to_i
-      },
-      latency: {
-        start: 0,
-        interval: (max / 99.0),
-        size: 100
-      }
-
-    respond_with @heatmap
-  end
-  # rubocop:enable all
-
   def show
     @trace = trace.decorate(context: context)
 

@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   get '/platform/:id', to: 'platforms#show', as: 'platform'
 
   scope path: '/platform/:platform' do
-    get 'traces/heatmap', to: 'traces#heatmap', as: 'heatmap'
-
     resources :traces, only: %i[index show update]
     resources :spans, only: %i[show]
     resources :applications, only: %i[index]
