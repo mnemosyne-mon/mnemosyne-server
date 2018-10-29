@@ -1,4 +1,8 @@
 .container
+  form.tracesearch action=search_path
+    input type="search" name="id" placeholder="Paste a trace ID here..."
+    button type="submit" Go
+
   .platforms
     - @platforms.each do |platform|
       .platform

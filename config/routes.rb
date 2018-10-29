@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get '/t', to: 'root#trace', as: 'search'
   get '/t/:id', to: 'root#trace', as: 't'
   get '/platform/:id', to: 'platforms#show', as: 'platform'
 
