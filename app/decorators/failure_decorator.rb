@@ -10,6 +10,7 @@ class FailureDecorator < BaseDecorator
       out['uuid'] = id
       out['type'] = type
       out['text'] = text
+      out['path'] = self_path
     end
   end
 

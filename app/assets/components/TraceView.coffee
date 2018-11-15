@@ -13,6 +13,7 @@ import './TraceView.sass'
 
 import { TraceInfo } from './TraceInfo'
 import { TraceMeta } from './TraceMeta'
+import { TraceFailures } from './TraceFailures'
 import { TraceGraph } from './TraceGraph'
 import { SpanMeta } from './SpanMeta'
 
@@ -67,7 +68,7 @@ export class TraceView extends Component
           break
 
   render: ->
-    { trace, spans } = this.props
+    { trace, spans, failures } = this.props
 
     $ 'section', className: 'traceview',
       $ Header,
@@ -75,6 +76,9 @@ export class TraceView extends Component
       $ 'div', className: 'container-fluid',
         $ TraceInfo, trace: trace
         $ TraceMeta, trace: trace
+      if failures.length > 0
+        $ 'div', className: 'container-fluid',
+          $ TraceFailures, failures: failures
       $ 'div', className: 'container-fluid traceview-main',
         $ TraceGraph,
           nodes: [trace, spans...],

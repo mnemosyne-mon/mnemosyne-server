@@ -34,6 +34,7 @@ class TraceDecorator < BaseDecorator
     {
       routes: routes,
       trace: serialize,
+      failures: object.failures.decorate.as_json,
       spans: object.spans
         .includes(:trace, :traces, scope: Trace.after(start))
         .includes(traces: [:application])

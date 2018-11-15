@@ -1,3 +1,6 @@
+@import '~bootstrap/scss/functions'
+@import '~bootstrap/scss/variables'
+
 .traceview
   header
     padding: 0.5rem 1rem
@@ -181,6 +184,41 @@
 
         > h4
           text-align: left
+
+  .tracefailures
+    margin: 1rem 0
+    border: 1px solid theme-color-level('danger', -8)
+    color: theme-color-level('danger', 6)
+
+    > *
+      margin: .5rem
+
+    p
+      font-weight: bold
+
+    ul
+      margin: 0
+      padding-left: 0
+
+    li
+      list-style: none
+      padding: .25rem .5rem
+      background-color: theme-color-level('danger', -10)
+
+      &:nth-of-type(2n+1)
+        background-color: theme-color-level('danger', -9)
+
+    a
+      color: theme-color-level('danger', 9)
+      &:hover
+        text-decoration: underline
+
+    span
+      display: inline-block
+
+      font-family: monospace
+      font-size: .8em
+      margin-left: 1em
 
   .spanview
     margin: 1rem
