@@ -58,7 +58,18 @@
     background-color: white
     border-left: 4px solid #eee
     padding: 0 1rem
+
     position: relative
+
+    // If possible, don't scroll the trace details panel
+    @supports(position: sticky)
+      position: sticky
+      top: 4px
+      align-self: flex-start // Required to make sticky work with flexbox
+
+      // If the contents are too high for the viewport, allow scrolling inside
+      max-height: 90vh
+      overflow: auto
 
     > section
       padding: 1rem 0
