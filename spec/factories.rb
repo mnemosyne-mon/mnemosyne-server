@@ -30,8 +30,8 @@ FactoryBot.define do
 
     start { Time.zone.now - 2.seconds }
     stop { Time.zone.now }
-    name 'mnemosyne.test.trace'
-    hostname 'host-0'
+    name { 'mnemosyne.test.trace' }
+    hostname { 'host-0' }
 
     after(:build) do |t, e|
       t.platform = e.platform
@@ -60,7 +60,7 @@ FactoryBot.define do
   factory :span do
     start { Time.zone.now }
     stop { Time.zone.now }
-    name 'mnemosyne.test.span'
+    name { 'mnemosyne.test.span' }
 
     association :trace
 
@@ -71,10 +71,10 @@ FactoryBot.define do
 
   factory :failure do
     transient do
-      platform nil
-      application nil
-      activity_id nil
-      stop nil
+      platform { nil }
+      application { nil }
+      activity_id { nil }
+      stop { nil }
 
       trace do
         create(:trace, **{
@@ -86,9 +86,9 @@ FactoryBot.define do
       end
     end
 
-    type 'RuntimeError'
-    text 'Error Message'
-    stacktrace []
+    type { 'RuntimeError' }
+    text { 'Error Message' }
+    stacktrace { [] }
 
     after(:build) do |f, e|
       e.trace.tap do |trace|
