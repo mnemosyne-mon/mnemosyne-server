@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
+# rubocop:disable AbcSize
+# rubocop:disable GuardClause
+
 class Init < ActiveRecord::Migration[5.1]
-  # rubocop:disable AbcSize
-  # rubocop:disable GuardClause
-  # rubocop:disable MethodLength
   def up
     enable_extension 'plpgsql'
     enable_extension 'pgcrypto'

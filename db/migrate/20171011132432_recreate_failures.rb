@@ -2,7 +2,6 @@
 
 class RecreateFailures < ActiveRecord::Migration[5.1]
   # rubocop:disable AbcSize
-  # rubocop:disable MethodLength
   def up
     drop_table :failures
 
