@@ -3,17 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe Application, type: :model do
-  let(:application) { create :application }
-
-  subject { application }
+  subject(:application) { create :application }
 
   describe '#id' do
-    subject { super().id }
-    it { expect(subject).to be_a ::UUID4 }
+    subject { application.id }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 
   describe '#platform_id' do
-    subject { super().platform_id }
-    it { expect(subject).to be_a ::UUID4 }
+    subject { application.platform_id }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 end

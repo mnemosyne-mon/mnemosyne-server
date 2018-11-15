@@ -5,8 +5,6 @@ require 'rails_helper'
 RSpec.describe ::Server::Pipeline do
   let(:pipeline) { described_class }
 
-  subject { pipeline.call(1) }
-
   it 'calls pipeline processors in order' do
     expect(::Server::Pipeline::Metadata::Grape::Endpoint).to \
       receive(:call).with(1).and_yield(2)
@@ -20,6 +18,6 @@ RSpec.describe ::Server::Pipeline do
     expect_any_instance_of(::Server::Builder).to \
       receive(:call).with(4)
 
-    subject
+    pipeline.call(1)
   end
 end

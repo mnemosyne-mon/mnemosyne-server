@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 
 if Rails.env.production?
   abort 'The Rails environment is running in production mode!'
@@ -11,7 +11,6 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'factory_bot_rails'
 
-#
 Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f }
 
 # Checks for pending migration and applies them before tests are run.

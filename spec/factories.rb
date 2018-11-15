@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable BlockLength
 FactoryBot.define do
   sequence(:uuid) { UUID(SecureRandom.uuid) }
 
@@ -41,10 +40,10 @@ FactoryBot.define do
 
     trait :w_spans do
       after(:create) do |trace|
-        (4 + rand(30)).times do |i|
+        rand(4..33).times do |i|
           interval = [
             trace.start + Rational(rand(trace.duration), 1_000_000_000),
-            trace.start + Rational(rand(trace.duration), 1_000_000_000)
+            trace.start + Rational(rand(trace.duration), 1_000_000_000),
           ]
 
           create :span,
@@ -81,7 +80,7 @@ FactoryBot.define do
           platform: platform,
           application: application,
           activity_id: activity_id,
-          stop: stop
+          stop: stop,
         }.compact)
       end
     end

@@ -7,11 +7,13 @@ RSpec.describe Platform, type: :model do
 
   describe '#id' do
     subject { platform.id }
-    it { expect(subject).to be_a ::UUID4 }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 
   describe '#retention_period' do
     subject { platform.retention_period }
-    it { expect(subject).to be_a ::ActiveSupport::Duration }
+
+    it { is_expected.to be_a ::ActiveSupport::Duration }
   end
 end

@@ -3,21 +3,23 @@
 require 'rails_helper'
 
 RSpec.describe Failure, type: :model do
+  subject { failure }
+
   let(:failure) { create(:failure, **attributes) }
   let(:attributes) { {} }
-
-  subject { failure }
 
   describe '<factory>' do
     let(:trace) { failure.trace }
 
     context '#platform' do
       subject { failure.platform.id }
+
       it { is_expected.to eq trace.platform.id }
     end
 
     context '#application' do
       subject { failure.application.id }
+
       it { is_expected.to eq trace.application.id }
     end
 
@@ -25,7 +27,7 @@ RSpec.describe Failure, type: :model do
       let(:platform) { create :platform }
       let(:attributes) { {platform: platform} }
 
-      it { expect { failure }.to change(Platform, :count).from(0).to(1)  }
+      it { expect { failure }.to change(Platform, :count).from(0).to(1) }
 
       it { expect(failure.platform.id).to eq platform.id }
       it { expect(trace.platform.id).to eq platform.id }
@@ -44,21 +46,25 @@ RSpec.describe Failure, type: :model do
 
   describe '#id' do
     subject { super().id }
-    it { expect(subject).to be_a ::UUID4 }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 
   describe '#trace_id' do
     subject { super().trace_id }
-    it { expect(subject).to be_a ::UUID4 }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 
   describe '#platform_id' do
     subject { super().platform_id }
-    it { expect(subject).to be_a ::UUID4 }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 
   describe '#application_id' do
     subject { super().application_id }
-    it { expect(subject).to be_a ::UUID4 }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 end

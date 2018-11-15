@@ -6,21 +6,21 @@ RSpec.describe ::Server::Pipeline::Metadata::Grape::Endpoint do
   let(:payload) do
     {
       span: [{
-        name: 'example.trace.mnemosyne'
+        name: 'example.trace.mnemosyne',
       }, {
         name: 'app.controller.request.grape',
         meta: {
           endpoint: 'API::V2::Endpoint',
-          format: 'json'
-        }
-      }]
+          format: 'json',
+        },
+      }],
     }
   end
 
-  subject { described_class.call(payload) {|env| return env } }
+  subject(:call) { described_class.call(payload) {|env| return env } }
 
   it 'extracts endpoint information' do
-    expect(subject[:meta]).to eq \
+    expect(call[:meta]).to eq \
       controller: 'API::V2::Endpoint',
       format: 'json'
   end

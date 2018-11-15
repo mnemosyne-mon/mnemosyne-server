@@ -3,11 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe FailureGroup, type: :model do
+  subject { FailureGroup.all.first }
+
   let(:platform) { create :platform }
   let(:application) { create :application, platform: platform }
 
-  let(:first_stop) { ::Server::Clock.to_time(1507739483732049213) }
-  let(:last_stop) { ::Server::Clock.to_time(1507739558924858253) }
+  let(:first_stop) { ::Server::Clock.to_time(1_507_739_483_732_049_213) }
+  let(:last_stop) { ::Server::Clock.to_time(1_507_739_558_924_858_253) }
 
   let!(:failures) do
     Array.new(2).each_with_index.map do |_, i|
@@ -19,10 +21,6 @@ RSpec.describe FailureGroup, type: :model do
         application: application
     end
   end
-
-  let(:failure_group) { FailureGroup.all.first }
-
-  subject { failure_group }
 
   before do
     # Preconditions
@@ -45,36 +43,43 @@ RSpec.describe FailureGroup, type: :model do
 
   describe '#type' do
     subject { super().type }
-    it { expect(subject).to eq 'Error::Class' }
+
+    it { is_expected.to eq 'Error::Class' }
   end
 
   describe '#text' do
     subject { super().text }
-    it { expect(subject).to eq 'Error class message text' }
+
+    it { is_expected.to eq 'Error class message text' }
   end
 
   describe '#count' do
     subject { super().count }
-    it { expect(subject).to eq 2 }
+
+    it { is_expected.to eq 2 }
   end
 
   describe '#first_occurrence_at' do
     subject { super().first_occurrence_at }
-    it { expect(subject).to eq first_stop }
+
+    it { is_expected.to eq first_stop }
   end
 
   describe '#last_occurrence_at' do
     subject { super().last_occurrence_at }
-    it { expect(subject).to eq last_stop }
+
+    it { is_expected.to eq last_stop }
   end
 
   describe '#platform_id' do
     subject { super().platform_id }
-    it { expect(subject).to be_a ::UUID4 }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 
   describe '#application_id' do
     subject { super().application_id }
-    it { expect(subject).to be_a ::UUID4 }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 end

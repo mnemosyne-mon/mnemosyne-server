@@ -3,55 +3,58 @@
 require 'rails_helper'
 
 RSpec.describe Span, type: :model do
-  let(:time) { Time.zone.now }
-  let(:span) { create(:span, **attributes) }
+  subject(:span) { create(:span, **attributes) }
 
+  let(:time) { Time.zone.now }
   let(:attributes) { {} }
 
-  subject { span }
-
   describe '#id' do
-    subject { super().id }
-    it { expect(subject).to be_a ::UUID4 }
+    subject { span.id }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 
   describe '#trace_id' do
-    subject { super().trace_id }
-    it { expect(subject).to be_a ::UUID4 }
+    subject { span.trace_id }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 
   describe '#platform_id' do
-    subject { super().platform_id }
-    it { expect(subject).to be_a ::UUID4 }
+    subject { span.platform_id }
+
+    it { is_expected.to be_a ::UUID4 }
   end
 
   describe '#start' do
+    subject(:start) { span.start }
+
     let(:attributes) { {start: time} }
-    subject { super().start }
 
     it 'saves nanoseconds' do
-      expect(subject).to eq time
+      expect(start).to eq time
     end
   end
 
   describe '#stop' do
+    subject(:stop) { span.stop }
+
     let(:attributes) { {stop: time} }
-    subject { super().stop }
 
     it 'saves nanoseconds' do
-      expect(subject).to eq time
+      expect(stop).to eq time
     end
   end
 
   describe '#duration' do
+    subject(:duration) { span.duration }
+
     let(:attributes) do
       {start: time, stop: time + Rational(5000, 1_000_000_000)}
     end
 
-    subject { super().duration }
-
     it 'returns duration in nanoseconds' do
-      expect(subject).to eq 5000
+      expect(duration).to eq 5000
     end
   end
 end
