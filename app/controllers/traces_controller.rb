@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable ClassLength
 class TracesController < ApplicationController
   include Concerns::Controller::Platform
   include Concerns::Controller::Range
@@ -120,7 +119,7 @@ class TracesController < ApplicationController
 
   def context
     {
-      platform: platform
+      platform: platform,
     }
   end
 end

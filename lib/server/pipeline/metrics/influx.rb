@@ -7,11 +7,11 @@ module Server
     module Metrics
       class Influx
         def initialize(database, **kwargs)
-          if database.respond_to?(:write_point)
-            @client = database
-          else
-            @client = ::InfluxDB::Client.new(database.to_s, **kwargs)
-          end
+          @client = if database.respond_to?(:write_point)
+                      database
+                    else
+                      ::InfluxDB::Client.new(database.to_s, **kwargs)
+                    end
         end
 
         def name
@@ -24,14 +24,14 @@ module Server
         def call(payload)
           values = {
             total: ::Server::Clock
-              .to_seconds(payload[:stop] - payload[:start]).to_f
+              .to_seconds(payload[:stop] - payload[:start]).to_f,
           }
 
           tags = {
             platform: payload[:platform],
             hostname: payload[:hostname],
             application: payload[:application],
-            errors: payload.dig(:errors).present?
+            errors: payload.dig(:errors).present?,
           }
 
           case payload[:name]
@@ -79,7 +79,7 @@ module Server
           data = {
             tags: tags,
             values: values,
-            timestamp: payload[:stop]
+            timestamp: payload[:stop],
           }
 
           @client.write_point(type, data, 'ns')

@@ -9,9 +9,7 @@ class PlatformsController < ApplicationController
     render layout: 'global'
   end
 
-  def show
-    #
-  end
+  def show; end
 
   private
 

@@ -6,10 +6,10 @@ class Platform < ApplicationRecord
 
   validates :name, presence: true
 
-  has_many :activities
-  has_many :applications
-  has_many :traces
-  has_many :failures
+  has_many :activities, dependent: :destroy
+  has_many :applications, dependent: :destroy
+  has_many :traces, dependent: :destroy
+  has_many :failures, dependent: :destroy
 
   upsert_keys %i[name]
 

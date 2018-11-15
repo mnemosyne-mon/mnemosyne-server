@@ -26,13 +26,13 @@ class Failure < ApplicationRecord
 
   private
 
-  def sl_conv(sl)
-    return nil unless sl.respond_to?(:[])
+  def sl_conv(stackline)
+    return nil unless stackline.respond_to?(:[])
 
     {
-      file: sl[:file].to_s,
-      line: sl[:line].to_i,
-      call: sl[:call].to_s
+      file: stackline[:file].to_s,
+      line: stackline[:line].to_i,
+      call: stackline[:call].to_s,
     }
   end
 end

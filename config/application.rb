@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require File.expand_path('../boot', __FILE__)
+require File.expand_path('boot', __dir__)
 
 require 'rails'
 # Pick the frameworks you want:
@@ -43,7 +43,7 @@ module Server
         [
           '//',
           request.host_with_port,
-          request.headers['HTTP_X_RELATIVE_URL_ROOT']
+          request.headers['HTTP_X_RELATIVE_URL_ROOT'],
         ].join
       end
     }
@@ -82,7 +82,7 @@ module Server
           async: true,
           username: username,
           password: password,
-          time_precision: 'ns'
+          time_precision: 'ns',
         }
 
         ::Server::Pipeline.default.use \

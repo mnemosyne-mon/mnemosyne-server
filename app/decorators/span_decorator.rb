@@ -3,7 +3,7 @@
 class SpanDecorator < BaseDecorator
   decorates_association :origin
 
-  def serialize(**_) # rubocop:disable MethodLength, AbcSize
+  def serialize(**) # rubocop:disable MethodLength, AbcSize
     export do |json|
       json[:uuid] = id
       json[:name] = name
@@ -14,7 +14,7 @@ class SpanDecorator < BaseDecorator
 
       json[:metric] = {
         width: width,
-        offset: offset
+        offset: offset,
       }
 
       json[:traces] = traces.map(&:id)

@@ -42,7 +42,7 @@ namespace :mnemosyne do
         port: amqp[:port],
         vhost: amqp[:vhost],
         username: amqp[:user],
-        password: amqp[:pass]
+        password: amqp[:pass],
       }
     end
 

@@ -5,7 +5,7 @@ class FailureDecorator < BaseDecorator
 
   decorates_association :trace
 
-  def serialize(**_)
+  def serialize(**)
     export do |out|
       out['uuid'] = id
       out['type'] = type

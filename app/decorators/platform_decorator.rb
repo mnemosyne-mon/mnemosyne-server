@@ -7,7 +7,7 @@ class PlatformDecorator < BaseDecorator
     object.applications.decorate.sort_by(&:title)
   end
 
-  def serialize(**_)
+  def serialize(**)
     export do |out|
       out[:uuid] = id
       out[:name] = name

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable ClassLength
 class TraceDecorator < BaseDecorator
   decorates_association :spans
   decorates_association :application
@@ -30,6 +29,7 @@ class TraceDecorator < BaseDecorator
     end
   end
 
+  # rubocop:disable MethodLength
   def props
     {
       routes: routes,
@@ -38,20 +38,23 @@ class TraceDecorator < BaseDecorator
         .includes(:trace, :traces, scope: Trace.after(start))
         .includes(traces: [:application])
         .range(start, stop)
-        .limit(10000)
+        .limit(10_000)
         .decorate
-        .map(&:serialize)
+        .map(&:serialize),
     }.to_json
   end
+  # rubocop:enable all
 
   def routes
     {
       t_url: h.t_url_rfc6570,
       traces_url: \
-        h.trace_url_rfc6570.partial_expand(platform: platform.to_param)
+        h.trace_url_rfc6570.partial_expand(platform: platform.to_param),
     }
   end
 
+  # rubocop:disable AbcSize
+  # rubocop:disable MethodLength
   def metainfo
     case type
       when :web
@@ -64,12 +67,13 @@ class TraceDecorator < BaseDecorator
           user_agent: meta.dig('headers', 'User-Agent'),
           controller: meta.dig('controller'),
           action: meta.dig('action'),
-          format: meta.dig('format')
+          format: meta.dig('format'),
         }
       else
         meta
     end.compact
   end
+  # rubocop:enable all
 
   def type
     case name
