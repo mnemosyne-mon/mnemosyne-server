@@ -10,7 +10,7 @@ gem 'active_record_upsert', '~> 0.8.0'
 
 gem 'bulk_insert', '~> 1.4'
 gem 'hutch', '~> 0.21'
-gem 'pg', '~> 0.15'
+gem 'pg', '~> 1.0'
 
 gem 'dry-struct', '~> 0.2.1'
 gem 'dry-types', '~> 0.9.4'
