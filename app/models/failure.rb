@@ -12,7 +12,6 @@ class Failure < ApplicationRecord
   attribute :stop, ::Server::Types::PreciseDateTime.new
 
   validates :type, presence: true
-  validates :text, presence: true
   validates :stop, presence: true
   validates :hostname, presence: true
 
