@@ -11,7 +11,7 @@ module Concerns
 
           if (value = try_to_i(param))
             value = value.minutes
-          elsif (value = try_to_duration("PT#{param}"))
+          elsif (value = try_to_duration(param))
             # noop
           else
             value = 6.hours
