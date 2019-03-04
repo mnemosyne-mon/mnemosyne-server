@@ -11,7 +11,7 @@
     "babel-minify-webpack-plugin": "^0.3.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.3.1",
     "bourbon": "^4.3.4",
     "cache-loader": "^1.2.2",
     "coffee-loader": "^0.9.0",
@@ -23,7 +23,7 @@
     "d3-selection-multi": "^1.0.1",
     "file-loader": "^1.1.11",
     "font-awesome": "^4.7.0",
-    "image-webpack-loader": "^4.2.0",
+    "image-webpack-loader": "^4.6.0",
     "jquery": "^3.2.1",
     "js-yaml": "^3.11.0",
     "mini-css-extract-plugin": "^0.4.0",
@@ -37,7 +37,7 @@
     "timeago": "^1.5.4",
     "urijs": "^1.18.10",
     "webpack": "^4.6",
-    "webpack-cli": "^2.0.15",
+    "webpack-cli": "^3.1.0",
     "webpack-manifest-plugin": "https://github.com/jgraichen/webpack-manifest-plugin#931c6bf5c2e768ea93b330e05d6d25beae63ce90",
     "webpack-merge": "^4.1.2"
   }
