@@ -27,7 +27,7 @@ gem 'oj'
 gem 'rails-rfc6570', '~> 2.1'
 gem 'responders', '~> 2.4'
 gem 'slim'
-gem 'webpacker', '~> 2.0'
+gem 'webpacker', '~> 4.0'
 
 gem 'ibsciss-middleware', '~> 0.4.2'
 gem 'influxdb'
