@@ -1,5 +1,7 @@
 # Mnemosyne
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8505a536f17145b2a9d129fd0fa3980e)](https://app.codacy.com/app/jgraichen/mnemosyne-server?utm_source=github.com&utm_medium=referral&utm_content=jgraichen/mnemosyne-server&utm_campaign=Badge_Grade_Dashboard)
+
 ## Consume client messages
 
 ```
