@@ -21,7 +21,7 @@ gem 'uuid4', '~> 1.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'draper', '~> 3.0'
+gem 'draper', '~> 3.1'
 gem 'has_scope', '~> 0.7.1'
 gem 'oj'
 gem 'rails-rfc6570', '~> 2.1'
