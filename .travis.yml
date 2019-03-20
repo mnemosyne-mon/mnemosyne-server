@@ -1,21 +1,24 @@
-dist: trusty
-sudo: false
+dist: xenial
 language: ruby
-cache: bundler
+cache:
+  - bundler
+  - npm
 bundler_args: --without development
 rvm:
-  - '2.4.1'
+  - 2.6.1
 env:
   - TIMESCALEDB=false
 addons:
-  postgresql: '9.6'
+  postgresql: 11
 before_install:
   - gem update --system
   - gem install bundler
   - bundle config github.https true
 before_script:
+  - bundle exec yarn:install
   - bundle exec rails db:create:all
   - bundle exec rails db:migrate
 script:
+  - bundle exec rake assets:precompile
   - bundle exec rake rubocop
   - bundle exec rake spec
