@@ -15,7 +15,7 @@ before_install:
   - gem install bundler
   - bundle config github.https true
 before_script:
-  - bundle exec yarn:install
+  - bundle exec rails yarn:install
   - bundle exec rails db:create:all
   - bundle exec rails db:migrate
 script:
