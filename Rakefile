@@ -24,3 +24,12 @@ namespace :assets do
   task(:clobber) { Rake::Task['webpacker:clobber'].invoke }
   task(:precompile) { Rake::Task['webpacker:compile'].invoke }
 end
+
+namespace :yarn do
+  Rake::Task['yarn:install'].clear
+
+  desc 'Install all JavaScript dependencies as specified via Yarn'
+  task :install do
+    system('./bin/yarn install --no-progress')
+  end
+end
