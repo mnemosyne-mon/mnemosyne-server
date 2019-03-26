@@ -48,7 +48,6 @@ module.exports = {
         loader: 'css-loader',
         options: {
           sourceMap: true,
-          minimize: !devMode,
           importLoaders: 2
         }
       }, {
@@ -76,14 +75,14 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
-            ['env', {
+            ['@babel/preset-env', {
               targets: {browsers: ['last 1 chrome versions']},
               modules: false,
               loose: true
             }]
           ],
           plugins: [
-            ['babel-plugin-transform-react-jsx', {pragma: 'h'}]
+            ['@babel/plugin-transform-react-jsx', {pragma: 'h'}]
           ]
         },
       }]
@@ -99,7 +98,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
-            ['env', {
+            ['@babel/preset-env', {
               targets: {browsers: ['last 1 chrome versions']},
               modules: false,
               loose: true
