@@ -16,7 +16,7 @@ devDependencies:
   babel-minify-webpack-plugin: 0.3.1
   babel-plugin-transform-react-jsx: 6.24.1
   babel-preset-env: 1.7.0
-  cache-loader: 1.2.5
+  cache-loader: 2.0.1
   coffee-loader: 0.9.0
   coffeescript: 2.3.2
   compression-webpack-plugin: 1.1.12
@@ -1518,19 +1518,20 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-AKcdTnFSWATd5/GCPRxr2ChwIJ85CeyrEyjRHlKxQ56d4XJMGym0uAiKn0xbLOGOl3+yRpOTi484dVCEc5AUzQ==
-  /cache-loader/1.2.5:
+  /cache-loader/2.0.1:
     dependencies:
       loader-utils: 1.2.3
       mkdirp: 0.5.1
       neo-async: 2.6.0
-      schema-utils: 0.4.7
+      normalize-path: 3.0.0
+      schema-utils: 1.0.0
     dev: true
     engines:
-      node: '>= 4.8 < 5.0.0 || >= 5.10'
+      node: '>= 6.9.0'
     peerDependencies:
-      webpack: ^2.0.0 || ^3.0.0 || ^4.0.0
+      webpack: ^4.0.0
     resolution:
-      integrity: sha512-enWKEQ4kO3YreDFd7AtVRjtJBmNiqh/X9hVDReu0C4qm8gsGmySkwuWtdc+N5O+vq5FzxL1mIZc30NyXCB7o/Q==
+      integrity: sha512-V99T3FOynmGx26Zom+JrVBytLBsmUCzVG2/4NnUKgvXN4bEV42R1ERl1IyiH/cvFIDA1Ytq2lPZ9tXDSahcQpQ==
   /cacheable-request/2.1.4:
     dependencies:
       clone-response: 1.0.2
@@ -8115,7 +8116,7 @@ specifiers:
   babel-plugin-transform-react-jsx: ^6.24.1
   babel-preset-env: ^1.6.1
   bootstrap: ^4.3.1
-  cache-loader: ^1.2.2
+  cache-loader: ^2.0.1
   coffee-loader: ^0.9.0
   coffeescript: ^2.3.0
   compression-webpack-plugin: ^1.1.11
