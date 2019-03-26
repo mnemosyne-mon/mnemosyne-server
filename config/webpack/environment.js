@@ -56,8 +56,7 @@ module.exports = {
         options: {
           sourceMap: true,
           plugins: () => [
-            require('autoprefixer')({browsers: ['last 1 chrome versions']}),
-            require('csswring')
+            require('autoprefixer')({browsers: ['last 1 chrome versions']})
           ]
         }
       }, {
