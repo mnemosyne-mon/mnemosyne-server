@@ -113,12 +113,6 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jquery': 'jquery',
-      'jQuery': 'jquery',
-      'window.jQuery': 'jquery',
-    }),
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[hash].css',
