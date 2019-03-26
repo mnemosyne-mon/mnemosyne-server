@@ -26,7 +26,7 @@ devDependencies:
   js-yaml: 3.13.0
   mini-css-extract-plugin: 0.5.0
   node-sass: 4.11.0
-  postcss-loader: 2.1.6
+  postcss-loader: 3.0.0
   sass-loader: 7.1.0
   style-loader: 0.23.1
   webpack: 4.29.6
@@ -5983,17 +5983,17 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha512-V5JBLzw406BB8UIfsAWSK2KSwIJ5yoEIVFb4gVkXci0QdKgA24jLmHZ/ghe/GgX0lJ0/D1uUK1ejhzEY94MChQ==
-  /postcss-loader/2.1.6:
+  /postcss-loader/3.0.0:
     dependencies:
       loader-utils: 1.2.3
-      postcss: 6.0.23
+      postcss: 7.0.14
       postcss-load-config: 2.0.0
-      schema-utils: 0.4.7
+      schema-utils: 1.0.0
     dev: true
     engines:
-      node: '>= 4'
+      node: '>= 6'
     resolution:
-      integrity: sha512-hgiWSc13xVQAq25cVw80CH0l49ZKlAnU1hKPOdRrNj89bokRr/bZF2nT+hebPPF9c9xs8c3gw3Fr2nxtmXYnNg==
+      integrity: sha512-cLWoDEY5OwHcAjDnkyRQzAXfs2jrKjXpO/HQFcc5b5u/r7aa471wdmChmwfnv7x2u840iat/wi0lQ5nbRgSkUA==
   /postcss-merge-idents/2.1.7:
     dependencies:
       has: 1.0.3
@@ -6708,15 +6708,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
-  /schema-utils/0.4.7:
-    dependencies:
-      ajv: 6.10.0
-      ajv-keywords: 3.4.0_ajv@6.10.0
-    dev: true
-    engines:
-      node: '>= 4'
-    resolution:
-      integrity: sha512-v/iwU6wvwGK8HbU9yi3/nhGzP0yGSuhQMzL6ySiec1FSrZZDkhm4noOSWzrNFo/jEc+SJY6jRTwuwbSXJPDUnQ==
   /schema-utils/1.0.0:
     dependencies:
       ajv: 6.10.0
@@ -8091,7 +8082,7 @@ specifiers:
   mini-css-extract-plugin: ^0.5.0
   node-sass: ^4.9.0
   popper.js: ^1.12.9
-  postcss-loader: ^2.1.4
+  postcss-loader: ^3.0.0
   preact: ^8.2.5
   preact-icon-base: ^2.0.6
   preact-icons: ^2.2.5
