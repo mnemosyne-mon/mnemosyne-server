@@ -34,7 +34,6 @@
     "preact-icons": "^2.2.5",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.23.1",
-    "timeago": "^1.5.4",
     "urijs": "^1.18.10",
     "webpack": "^4.6",
     "webpack-cli": "^3.1.0",

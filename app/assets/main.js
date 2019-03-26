@@ -1,5 +1,3 @@
-import 'timeago'
-
 import {
   h,
   render
@@ -13,8 +11,6 @@ const components = {
 }
 
 function initalize() {
-  $('[data-time-ago]').timeago()
-
   document.querySelectorAll('script[data-component]').forEach((el) => {
     let component = components[el.dataset.component]
     let props = {}
