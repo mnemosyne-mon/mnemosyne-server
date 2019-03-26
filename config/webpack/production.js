@@ -17,7 +17,6 @@ module.exports = merge(environment, {
       sourceMap: false,
     }),
     new CompressionPlugin({
-      asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.(js|css|html|json|ico|svg|eot|otf|ttf)$/
     })
