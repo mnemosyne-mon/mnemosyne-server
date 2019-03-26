@@ -32,8 +32,6 @@ gem 'webpacker', '~> 2.0'
 gem 'ibsciss-middleware', '~> 0.4.2'
 gem 'influxdb'
 
-gem 'rails-timeago'
-
 gem 'mnemosyne-ruby', '~> 1.2'
 
 gem 'bootsnap', require: false
