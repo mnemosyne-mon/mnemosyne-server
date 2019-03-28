@@ -20,6 +20,10 @@ class FailuresController < ApplicationController
     scope.range controller.range
   end
 
+  has_scope :text do |_, scope, value|
+    scope.where('text ~* ?', value)
+  end
+
   def index
     @failures = FailureGroup
       .where(platform: platform)
