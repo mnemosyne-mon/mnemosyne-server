@@ -18,6 +18,8 @@ require 'action_view/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require 'csv'
+
 module Server
   class Application < Rails::Application
     config.load_defaults 5.1
@@ -66,6 +68,19 @@ module Server
     initializer 'activerecord.types' do
       ActiveRecord::Type.register :uuid, ::Server::Types::UUID4, override: true
       ActiveRecord::Type.register :interval, ::Server::Types::Duration
+    end
+
+    initializer 'actioncontroller.renderer.csv' do
+      ::ActionController::Renderers.add :csv do |list, _opts|
+        send_data(
+          CSV.generate do |csv|
+            list.each do |row|
+              csv << row.as_csv
+            end
+          end,
+          type: Mime[:csv]
+        )
+      end
     end
 
     initializer 'pipeline' do |app|

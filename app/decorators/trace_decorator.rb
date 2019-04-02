@@ -7,6 +7,10 @@ class TraceDecorator < BaseDecorator
   decorates_association :platform
   decorates_association :origin
 
+  def as_csv(**kwargs)
+    as_json(**kwargs).values
+  end
+
   def serialize(**kwargs) # rubocop:disable MethodLength, AbcSize
     export do |out|
       out[:uuid]     = id

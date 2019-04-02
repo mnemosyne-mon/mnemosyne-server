@@ -7,6 +7,7 @@ class TracesController < ApplicationController
   include ::Server::Streaming::JSONStreaming
 
   respond_to :html, :json
+  respond_to :csv, only: :index
 
   has_scope :origin, default: nil, allow_blank: true do |cr, scope, value|
     value = cr.default_origin_value if value.nil?
