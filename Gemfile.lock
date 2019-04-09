@@ -57,7 +57,7 @@ GEM
     ast (2.4.0)
     base62-rb (0.3.1)
     bindex (0.5.0)
-    bootsnap (1.4.2)
+    bootsnap (1.4.3)
       msgpack (~> 1.0)
     builder (3.2.3)
     bulk_insert (1.7.0)
