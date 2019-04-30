@@ -163,7 +163,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     oj (3.7.12)
     parallel (1.17.0)
-    parser (2.6.2.1)
+    parser (2.6.3.0)
       ast (~> 2.4.0)
     pg (1.1.4)
     pry (0.12.2)
@@ -172,7 +172,6 @@ GEM
     pry-byebug (3.7.0)
       byebug (~> 11.0)
       pry (~> 0.10)
-    psych (3.1.0)
     public_suffix (3.0.3)
     puma (3.12.1)
     rack (2.0.7)
@@ -238,11 +237,10 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.67.2)
+    rubocop (0.68.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
-      psych (>= 3.1.0)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.6)
@@ -327,7 +325,7 @@ DEPENDENCIES
   responders (~> 2.4)
   rspec (~> 3.1)
   rspec-rails
-  rubocop (~> 0.67.2)
+  rubocop (~> 0.68.0)
   rubocop-rspec (~> 1.32)
   selenium-webdriver
   slim
