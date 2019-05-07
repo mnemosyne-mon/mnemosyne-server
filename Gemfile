@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'puma', '~> 3.12'
 gem 'rails', '~> 5.2.0'
-gem 'unicorn', '~> 5.4'
+gem 'unicorn', '~> 5.5'
 
 gem 'active_record_upsert', '~> 0.9.5'
 

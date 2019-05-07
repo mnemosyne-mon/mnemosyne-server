@@ -277,7 +277,7 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.5.0)
-    unicorn (5.5.0)
+    unicorn (5.5.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     uuid4 (1.3.2)
@@ -333,7 +333,7 @@ DEPENDENCIES
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
   timecop
-  unicorn (~> 5.4)
+  unicorn (~> 5.5)
   uuid4 (~> 1.0)
   web-console (>= 3.3.0)
   webpacker (~> 2.0)
