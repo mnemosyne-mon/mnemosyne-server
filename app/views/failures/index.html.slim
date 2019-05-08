@@ -1,4 +1,13 @@
 .container-fluid
+  .filter
+    form path="" method="GET"
+      select name="application"
+        option value="" Any
+        - @platform.decorate.applications.each do |application|
+          option value="#{application.id}" selected=("selected" if params[:application] == application.id) = application.title
+      input type="submit"
+
+.container-fluid
   .failures
     table
       tr
