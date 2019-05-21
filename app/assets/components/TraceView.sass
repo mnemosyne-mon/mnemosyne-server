@@ -165,30 +165,31 @@
       &:nth-child(5n), &:first-child
         border-left-width: 1px
 
-      > h4, > a
+      > h4, > a, > p
         line-height: 1.4rem
         font-size: 0.7rem
+        margin: 0
+        padding: 2px 0.4rem
 
       > h4
         text-align: right
-        margin: 0
         min-width: 80px
-        padding: 2px 0.4rem
-
         color: #555
         background: #f6f6f6
 
-      > a
+      > a, > p
         background: #fff
         width: 100%
-        margin: 0
-        padding: 2px 0.4rem
         text-overflow: ellipsis
         overflow: hidden
         white-space: nowrap
 
-        &.empty
-          color: #999
+      > a.empty
+        color: #999
+
+      a.external
+        padding-left: 5px
+        padding-right: 5px
 
       @media (max-width: 1024px)
         flex-direction: column
