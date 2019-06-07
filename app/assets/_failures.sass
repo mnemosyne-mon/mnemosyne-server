@@ -31,15 +31,7 @@
         width: 120px
         text-align: right
 
-        overflow: hidden
-        text-overflow: ellipsis
-        white-space: nowrap
-
       &.details
-        overflow: hidden
-        text-overflow: ellipsis
-        white-space: nowrap
-
         span
           display: block
 
@@ -51,6 +43,11 @@
       a
         display: block
         padding: 0 0.5em
+
+        width: 0
+        min-width: 100%
+        overflow: hidden
+        // white-space: nowrap
 
 .failure
   header
