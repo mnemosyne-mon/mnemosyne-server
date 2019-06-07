@@ -36,5 +36,8 @@
     "preact-icon-base": "^2.0.6",
     "preact-icons": "^2.2.5",
     "urijs": "^1.18.10"
-  }
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ]
 }

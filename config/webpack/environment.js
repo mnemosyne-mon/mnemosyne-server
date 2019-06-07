@@ -55,7 +55,7 @@ module.exports = {
         options: {
           sourceMap: true,
           plugins: () => [
-            require('autoprefixer')({browsers: ['last 1 chrome versions']})
+            require('autoprefixer')
           ]
         }
       }, {
@@ -76,7 +76,6 @@ module.exports = {
         options: {
           presets: [
             ['@babel/preset-env', {
-              targets: {browsers: ['last 1 chrome versions']},
               modules: false,
               loose: true
             }]
@@ -99,7 +98,6 @@ module.exports = {
         options: {
           presets: [
             ['@babel/preset-env', {
-              targets: {browsers: ['last 1 chrome versions']},
               modules: false,
               loose: true
             }]
