@@ -50,6 +50,12 @@ module Server
       end
     }
 
+    initializer 'sentry' do |app|
+      Raven.configure do |config|
+        config.sanitize_fields = app.config.filter_parameters.map(&:to_s)
+      end
+    end
+
     initializer 'patch' do
       require 'patch/all'
 
