@@ -69,6 +69,8 @@ namespace :mnemosyne do
     Hutch::Config.set :enable_http_api_use, false
     Hutch::Config.set :daemonise, false
 
+    Hutch::Config[:error_handlers] << Hutch::ErrorHandlers::Sentry.new
+
     Hutch::CLI.new.run([])
   end
 end
