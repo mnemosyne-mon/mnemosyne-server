@@ -22,7 +22,7 @@
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.23.1",
-    "webpack": "^4.34",
+    "webpack": "^4.35",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.2",
     "webpack-manifest-plugin": "https://github.com/jgraichen/webpack-manifest-plugin#931c6bf5c2e768ea93b330e05d6d25beae63ce90",
