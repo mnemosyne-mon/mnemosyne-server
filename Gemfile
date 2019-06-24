@@ -25,7 +25,7 @@ gem 'draper', '~> 3.1'
 gem 'has_scope', '~> 0.7.1'
 gem 'oj'
 gem 'rails-rfc6570', '~> 2.1'
-gem 'responders', '~> 2.4'
+gem 'responders', '~> 3.0'
 gem 'slim'
 gem 'webpacker', '~> 2.0'
 
