@@ -14,7 +14,7 @@ gem 'pg', '~> 1.0'
 
 gem 'dry-struct', '~> 1.0.0'
 gem 'dry-types', '~> 1.1.0'
-gem 'uuid4', '~> 1.0'
+gem 'uuid4', '~> 1.3'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
