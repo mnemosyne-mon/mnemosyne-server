@@ -32,7 +32,7 @@
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "popper.js": "^1.15.0",
-    "preact": "^8.2.5",
+    "preact": "^8.5.0",
     "preact-icon-base": "^2.0.6",
     "preact-icons": "^2.2.5",
     "urijs": "^1.18.10"
