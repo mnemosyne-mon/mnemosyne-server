@@ -1,0 +1,25 @@
+doctype html
+html lang=I18n.locale
+  head
+    title = yield :title
+
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="theme-color" content="#333333"
+
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', crossorigin: 'anonymous'
+    = javascript_include_tag 'application', crossorigin: 'anonymous', async: true
+
+    link rel="apple-touch-icon" sizes="180x180" href=asset_url('favicon/apple-touch-icon.png')
+    link rel="icon" type="images/x-icon" sizes="any" href=asset_url('favicon/favicon.ico')
+    link rel="icon" type="images/svg+xml" sizes="any" href=asset_url('favicon/favicon.svg')
+    link rel="icon" type="images/png" sizes="32x32" href=asset_url('favicon/favicon-32x32.png')
+    link rel="icon" type="images/png" sizes="16x16" href=asset_url('favicon/favicon-16x16.png')
+    link rel="mask-item" color="#0275d8" href=asset_url('favicon/safari-pinned-tab.svg')
+    -# link rel="manifest" href=asset_url('favicon/manifest.json')
+
+    = yield :head
+
+  body
+    = yield

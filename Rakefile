@@ -20,9 +20,9 @@ rescue LoadError # rubocop:disable HandleExceptions
 end
 
 namespace :assets do
-  task(:clean) {}
-  task(:clobber) { Rake::Task['webpacker:clobber'].invoke }
-  task(:precompile) { Rake::Task['webpacker:compile'].invoke }
+  task precompile: %i[yarn:install] do
+    system('yarn run build')
+  end
 end
 
 namespace :yarn do
@@ -30,6 +30,6 @@ namespace :yarn do
 
   desc 'Install all JavaScript dependencies as specified via Yarn'
   task :install do
-    system('./bin/yarn install --no-progress')
+    system('yarn install --no-progress')
   end
 end
