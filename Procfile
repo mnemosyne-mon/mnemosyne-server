@@ -1,3 +1,3 @@
 web: bin/rails server --port 9001
-assets: bin/webpack-dev-server
+assets: yarn start
 consumer: bin/rake mnemosyne:consume
