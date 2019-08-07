@@ -1,8 +1,10 @@
 //
 
 module.exports = function(env = {}, argv) {
-  if(argv.mode === undefined) {
-    argv.mode = process.env.NODE_ENV || process.env.RAILS_ENV || 'development';
+  if(argv.mode === undefined &&
+      (process.env.NODE_ENV === 'production' ||
+       process.env.RAILS_ENV === 'production')) {
+    argv.mode = 'production';
   }
 
   if(env.dev === undefined) {
