@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'puma', '~> 4.0'
+gem 'puma', '~> 4.1'
 gem 'rails', '~> 5.2.0'
 gem 'unicorn', '~> 5.5'
 
