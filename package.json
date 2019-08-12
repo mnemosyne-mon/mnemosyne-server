@@ -22,7 +22,7 @@
     "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.7.0",
-    "sass-loader": "^7.0.1",
+    "sass-loader": "^7.2.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.39",
     "webpack-assets-manifest": "^3.1.1",
