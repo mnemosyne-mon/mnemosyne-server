@@ -1,0 +1,29 @@
+name: Ruby
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Setup
+      run: |
+        gem install bundler
+        bundle config github.https true
+        bundle install --jobs 4 --retry 3
+        bundle exec rails yarn:install
+        bundle exec rails db:create:all
+        bundle exec rails db:migrate
+    - name: Test
+      run: |
+        bundle exec rake assets:precompile
+        bundle exec rake rubocop
+        bundle exec rake spec
