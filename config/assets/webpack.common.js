@@ -4,6 +4,7 @@ const webpack = require('webpack');
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackAssetsManifest = require('webpack-assets-manifest');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const root = path.resolve(__dirname, '../../');
 
@@ -108,6 +109,7 @@ module.exports = function(env, argv) {
     },
 
     plugins: [
+      new CleanWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash].css'
       }),
