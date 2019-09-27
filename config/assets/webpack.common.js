@@ -15,7 +15,7 @@ module.exports = function(env, argv) {
       manifest: ['manifest.js']
     },
 
-    context: root,
+    context: path.resolve('app/assets'),
 
     output: {
       path: path.join(root, 'public/assets'),
@@ -43,13 +43,19 @@ module.exports = function(env, argv) {
           loader: 'file-loader',
           options: {
             name: env.dev ? '[path][name].[ext]' : '[name].[contenthash].[ext]',
-            publicPath: env.publicPath,
           }
         }]
       }, {
         test: /\.(scss|sass|css)$/i,
         use: [
-          MiniCssExtractPlugin.loader,
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            // CSS bundles must be compiled into the output top directory
+            // otherwise url(...) links will be wrong!
+            publicPath: ''
+          },
+        },
         {
           loader: 'cache-loader',
           options: {
