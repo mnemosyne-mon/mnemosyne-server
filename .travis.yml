@@ -5,7 +5,7 @@ cache:
   - npm
 bundler_args: --without development
 rvm:
-  - 2.6.1
+  - 2.6.4
 env:
   global:
   - PGPORT=5433
