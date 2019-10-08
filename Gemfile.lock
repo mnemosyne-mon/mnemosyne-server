@@ -99,7 +99,7 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.2)
       dry-equalizer (~> 0.2)
-    dry-struct (1.0.0)
+    dry-struct (1.1.0)
       dry-core (~> 0.4, >= 0.4.3)
       dry-equalizer (~> 0.2)
       dry-types (~> 1.0)
@@ -307,7 +307,7 @@ DEPENDENCIES
   bulk_insert (~> 1.4)
   capybara (~> 3.29)
   draper (~> 3.1)
-  dry-struct (~> 1.0.0)
+  dry-struct (~> 1.1.0)
   dry-types (~> 1.2.0)
   factory_bot_rails
   has_scope (~> 0.7.1)
