@@ -59,6 +59,6 @@ end
 
 group :test do
   gem 'factory_bot_rails'
-  gem 'rspec', '~> 3.1'
+  gem 'rspec', '~> 3.9'
   gem 'timecop'
 end
