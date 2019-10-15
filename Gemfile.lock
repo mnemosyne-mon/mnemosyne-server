@@ -163,7 +163,7 @@ GEM
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     oj (3.9.2)
-    parallel (1.17.0)
+    parallel (1.18.0)
     parser (2.6.5.0)
       ast (~> 2.4.0)
     pg (1.1.4)
@@ -242,7 +242,7 @@ GEM
       rspec-mocks (~> 3.9.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.0)
-    rubocop (0.75.0)
+    rubocop (0.75.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
@@ -327,7 +327,7 @@ DEPENDENCIES
   responders (~> 3.0)
   rspec (~> 3.9)
   rspec-rails
-  rubocop (~> 0.75.0)
+  rubocop (~> 0.75.1)
   rubocop-rspec (~> 1.35)
   selenium-webdriver
   sentry-raven (~> 2.11)
