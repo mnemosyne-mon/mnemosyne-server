@@ -33,7 +33,7 @@ gem 'ibsciss-middleware', '~> 0.4.2'
 gem 'influxdb'
 
 gem 'mnemosyne-ruby', '~> 1.7'
-gem 'sentry-raven', '~> 2.11'
+gem 'sentry-raven', '~> 2.12'
 
 gem 'bootsnap', require: false
 
