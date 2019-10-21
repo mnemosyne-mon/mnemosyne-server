@@ -38,7 +38,7 @@
     "preact": "^10.0.1",
     "preact-icon-base": "^2.0.6",
     "preact-icons": "^2.2.5",
-    "urijs": "^1.18.10"
+    "urijs": "^1.19.2"
   },
   "scripts": {
     "build": "webpack --config config/assets/webpack.config.js",
