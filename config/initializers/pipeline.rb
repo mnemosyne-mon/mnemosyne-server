@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'server/pipeline'
+
 pipeline = Rails.application.config_for('pipeline')
 
 if (config = pipeline['influx'])
