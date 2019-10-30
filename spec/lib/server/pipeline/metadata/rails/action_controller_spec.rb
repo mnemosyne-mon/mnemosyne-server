@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'server/pipeline'
 
 RSpec.describe ::Server::Pipeline::Metadata::Rails::ActionController do
   subject(:call) { el.call(payload) {|env| return env } }

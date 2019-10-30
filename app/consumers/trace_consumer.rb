@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'server/pipeline'
+
 class TraceConsumer
   include Hutch::Consumer
 

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'server/types/precise_date_time'
+
 class Failure < ApplicationRecord
   self.primary_key = 'id'
   self.inheritance_column = '__no_column'

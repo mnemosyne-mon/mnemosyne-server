@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
-module Concerns
-  module Controller
-    module Platform
-      extend ActiveSupport::Concern
+module Controller
+  module Platform
+    extend ActiveSupport::Concern
 
-      included do
-        before_action :platform
+    included do
+      before_action :platform
 
-        def platform
-          @platform ||= ::Platform.where(name: params[:platform]).take!
-        end
+      def platform
+        @platform ||= ::Platform.where(name: params[:platform]).take!
       end
     end
   end

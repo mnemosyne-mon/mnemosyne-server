@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SpansController < ApplicationController
-  include Concerns::Controller::Platform
+  include Controller::Platform
 
   def show
     @span = Span.find params[:id]

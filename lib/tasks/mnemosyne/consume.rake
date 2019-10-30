@@ -6,15 +6,10 @@ namespace :mnemosyne do
     require 'hutch'
     require 'hutch/cli'
 
-    Rails.application.configure do
-      config.cache_classes = true
-      config.eager_load = true
-    end
-
     STDOUT.sync = true
     STDERR.sync = true
 
-    Rails.application.eager_load!
+    Zeitwerk::Loader.eager_load_all
 
     case ENV.fetch('LOG_LEVEL', 'warn')
       when 'debug'

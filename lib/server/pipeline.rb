@@ -2,6 +2,12 @@
 
 require 'middleware'
 
+require 'server/builder'
+require 'server/pipeline/metadata/grape/endpoint'
+require 'server/pipeline/metadata/rails/action_controller'
+require 'server/pipeline/metadata/rails/active_job'
+require 'server/pipeline/metrics/influx'
+
 module Server
   module Pipeline
     class << self

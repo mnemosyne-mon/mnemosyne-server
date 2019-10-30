@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'puma', '~> 4.2'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 6.0.0'
 gem 'unicorn', '~> 5.5'
 
 gem 'active_record_upsert', '~> 0.9.5'
@@ -32,6 +32,7 @@ gem 'slim'
 gem 'ibsciss-middleware', '~> 0.4.2'
 gem 'influxdb'
 
+gem 'concurrent-ruby', '~> 1.0'
 gem 'mnemosyne-ruby', '~> 1.8'
 gem 'sentry-raven', '~> 2.12'
 

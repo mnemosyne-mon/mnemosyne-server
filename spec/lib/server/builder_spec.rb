@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'server/builder'
 
 RSpec.describe ::Server::Builder do
   subject(:call) { builder.call(payload) }

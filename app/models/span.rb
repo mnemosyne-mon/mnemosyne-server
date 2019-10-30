@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+require 'server/types/precise_date_time'
+
 class Span < ApplicationRecord
   self.primary_key = 'id'
 
-  extend Concerns::Model::Range
-  include Concerns::Model::Duration
+  extend Model::Range
+  include Model::Duration
 
   attribute :id, :uuid
   attribute :trace_id, :uuid

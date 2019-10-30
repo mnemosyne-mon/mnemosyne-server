@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'server/responder'
+
 class ApplicationController < ActionController::Base
   self.responder = ::Server::Responder
 

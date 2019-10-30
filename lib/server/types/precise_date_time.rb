@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'server/clock'
+
 module Server
   module Types
     class PreciseDateTime < ActiveRecord::Type::Value

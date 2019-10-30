@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require 'server/streaming/json_streaming'
+
 class TracesController < ApplicationController
-  include Concerns::Controller::Platform
-  include Concerns::Controller::Range
+  include Controller::Platform
+  include Controller::Range
 
   include ::Server::Streaming::JSONStreaming
 

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'server/types/precise_date_time'
+
 class FailureGroup < ApplicationRecord
   self.primary_key = 'id'
   self.table_name = 'failures'
@@ -7,7 +9,7 @@ class FailureGroup < ApplicationRecord
 
   default_scope { default }
 
-  extend Concerns::Model::Range
+  extend Model::Range
 
   attribute :platform_id, :uuid
   attribute :application_id, :uuid
