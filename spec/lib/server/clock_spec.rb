@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'server/clock'
 
 RSpec.describe ::Server::Clock do
   let(:tick) { 1_492_522_002_637_612_303 }

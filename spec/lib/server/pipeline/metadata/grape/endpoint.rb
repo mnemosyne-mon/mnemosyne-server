@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'server/pipeline'
 
 RSpec.describe ::Server::Pipeline::Metadata::Grape::Endpoint do
   let(:payload) do

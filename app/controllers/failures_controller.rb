@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class FailuresController < ApplicationController
-  include Concerns::Controller::Platform
-  include Concerns::Controller::Range
+  include Controller::Platform
+  include Controller::Range
 
   has_scope :limit, default: 200, allow_blank: true do |_, scope, value|
     scope.limit [0, [value.to_i, 100_000].min].max

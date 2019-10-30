@@ -322,6 +322,7 @@ DEPENDENCIES
   bootsnap
   bulk_insert (~> 1.4)
   capybara (~> 3.29)
+  concurrent-ruby (~> 1.0)
   draper (~> 3.1)
   dry-struct (~> 1.1.1)
   dry-types (~> 1.2.0)
