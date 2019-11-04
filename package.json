@@ -7,7 +7,7 @@
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/preset-env": "^7.6.3",
     "@gfx/zopfli": "^1.0.14",
-    "autoprefixer": "^9.7.0",
+    "autoprefixer": "^9.7.1",
     "babel-loader": "^8.0.6",
     "babel-minify-webpack-plugin": "^0.3.1",
     "cache-loader": "^4.1.0",
