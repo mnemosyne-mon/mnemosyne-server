@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/plugin-transform-react-jsx": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
     "@gfx/zopfli": "^1.0.14",
     "autoprefixer": "^9.7.1",
