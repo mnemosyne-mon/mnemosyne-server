@@ -6,6 +6,8 @@ $stderr.sync = true
 namespace :mnemosyne do
   desc 'Clean up old traces and spans'
   task clean: :environment do
+    require 'server/clock'
+
     logger = Rails.logger
     logger.level = :info
 
