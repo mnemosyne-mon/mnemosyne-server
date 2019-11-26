@@ -55,7 +55,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rubocop', '~> 0.76.0'
-  gem 'rubocop-rspec', '~> 1.35'
+  gem 'rubocop-rspec', '~> 1.37'
 end
 
 group :test do
