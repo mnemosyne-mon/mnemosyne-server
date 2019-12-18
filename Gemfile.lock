@@ -130,7 +130,7 @@ GEM
     factory_bot_rails (5.1.1)
       factory_bot (~> 5.1.0)
       railties (>= 4.2.0)
-    faraday (0.17.0)
+    faraday (0.17.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.11.3)
     globalid (0.4.2)
@@ -271,7 +271,7 @@ GEM
     selenium-webdriver (3.142.6)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    sentry-raven (2.12.3)
+    sentry-raven (2.13.0)
       faraday (>= 0.7.6, < 1.0)
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
@@ -347,7 +347,7 @@ DEPENDENCIES
   rubocop (~> 0.77.0)
   rubocop-rspec (~> 1.37)
   selenium-webdriver
-  sentry-raven (~> 2.12)
+  sentry-raven (~> 2.13)
   slim
   spring
   spring-commands-rspec
