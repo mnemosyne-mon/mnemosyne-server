@@ -53,7 +53,8 @@ module.exports = function(env, argv) {
           options: {
             // CSS bundles must be compiled into the output top directory
             // otherwise url(...) links will be wrong!
-            publicPath: ''
+            publicPath: '',
+            esModule: true,
           },
         },
         {
@@ -64,8 +65,9 @@ module.exports = function(env, argv) {
         }, {
           loader: 'css-loader',
           options: {
+            esModule: true,
+            importLoaders: 2,
             sourceMap: true,
-            importLoaders: 2
           }
         }, {
           loader: 'postcss-loader',
