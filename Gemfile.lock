@@ -177,7 +177,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     oj (3.10.2)
     parallel (1.19.1)
-    parser (2.7.0.1)
+    parser (2.7.0.2)
       ast (~> 2.4.0)
     pg (1.2.2)
     pry (0.12.2)
@@ -264,7 +264,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
-    rubocop-rspec (1.37.1)
+    rubocop-rspec (1.38.0)
       rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
     rubyzip (2.0.0)
@@ -296,7 +296,7 @@ GEM
     timecop (0.9.1)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
-    unicode-display_width (1.6.0)
+    unicode-display_width (1.6.1)
     unicorn (5.5.3)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -345,7 +345,7 @@ DEPENDENCIES
   rspec (~> 3.9)
   rspec-rails
   rubocop (~> 0.79.0)
-  rubocop-rspec (~> 1.37)
+  rubocop-rspec (~> 1.38)
   selenium-webdriver
   sentry-raven (~> 2.13)
   slim
