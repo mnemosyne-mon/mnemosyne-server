@@ -12,7 +12,7 @@ gem 'bulk_insert', '~> 1.4'
 gem 'hutch', '~> 0.27'
 gem 'pg', '~> 1.2'
 
-gem 'dry-struct', '~> 1.2.0'
+gem 'dry-struct', '~> 1.3.0'
 gem 'dry-types', '~> 1.3.0'
 gem 'uuid4', '~> 1.3'
 
