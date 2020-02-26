@@ -159,7 +159,7 @@ module.exports = function(env, argv) {
           }
 
           return {
-            key: extmod.reasons[0].userRequest,
+            key: entry.key, // extmod.reasons[0].userRequest,
             value: entry.value
           }
         }
