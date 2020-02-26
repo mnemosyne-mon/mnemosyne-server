@@ -12,7 +12,7 @@ module.exports = function(env, argv) {
   return {
     entry: {
       application: ['main.js', 'main.sass'],
-      manifest: ['manifest.js']
+      manifest: 'manifest.js'
     },
 
     context: path.resolve('app/assets'),
@@ -158,8 +158,12 @@ module.exports = function(env, argv) {
             return false
           }
 
+          let mod = extmod.modules.find(
+            (mod) => mod.assets[0] === original.value
+          )
+
           return {
-            key: entry.key, // extmod.reasons[0].userRequest,
+            key: path.normalize(mod.name),
             value: entry.value
           }
         }
