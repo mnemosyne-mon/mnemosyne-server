@@ -34,7 +34,7 @@ gem 'influxdb'
 
 gem 'concurrent-ruby', '~> 1.1'
 gem 'mnemosyne-ruby', '~> 1.9'
-gem 'sentry-raven', '~> 2.13'
+gem 'sentry-raven', '~> 3.0'
 
 gem 'bootsnap', require: false
 
