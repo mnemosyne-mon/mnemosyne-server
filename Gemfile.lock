@@ -139,11 +139,11 @@ GEM
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
-    hutch (0.27.0)
+    hutch (0.28.0)
       activesupport (>= 4.2, < 7)
-      bunny (>= 2.13, < 2.15)
+      bunny (>= 2.14, < 2.16)
       carrot-top (~> 0.0.7)
-      multi_json (~> 1.12)
+      multi_json (~> 1.14)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     ibsciss-middleware (0.4.2)
@@ -331,7 +331,7 @@ DEPENDENCIES
   dry-types (~> 1.4.0)
   factory_bot_rails
   has_scope (~> 0.7.1)
-  hutch (~> 0.27)
+  hutch (~> 0.28)
   ibsciss-middleware (~> 0.4.2)
   influxdb
   listen (>= 3.0.5, < 3.3)
