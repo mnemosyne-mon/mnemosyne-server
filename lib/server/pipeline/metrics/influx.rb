@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'influxdb'
+require 'server/clock'
 
 module Server
   module Pipeline
