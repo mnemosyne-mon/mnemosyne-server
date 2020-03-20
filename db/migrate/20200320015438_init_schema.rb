@@ -3,7 +3,7 @@ class InitSchema < ActiveRecord::Migration[6.0]
     # These are extensions that must be enabled in order to support this database
     enable_extension "pgcrypto"
     enable_extension "plpgsql"
-    enable_extension "timescaledb"
+    enable_extension "timescaledb" if timescaledb?
 
     create_table :applications, id: :uuid do |t|
       t.string "title"
