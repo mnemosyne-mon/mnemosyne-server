@@ -6,6 +6,7 @@ class TraceConsumer
   include Hutch::Consumer
 
   consume '#'
+  arguments 'x-queue-mode' => 'lazy'
 
   if ENV['QUEUE_IDENT'].present?
     queue_name "mnemosyne.server.#{ENV['QUEUE_IDENT'].strip}"
