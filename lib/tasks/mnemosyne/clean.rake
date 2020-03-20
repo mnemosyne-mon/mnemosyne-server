@@ -13,21 +13,23 @@ namespace :mnemosyne do
 
     next if Platform.all.empty?
 
-    max    = ActiveSupport::Duration.parse(Platform.maximum(:retention_period))
-    cutoff = Server::Clock.to_tick(Time.zone.now - max)
+    retention = Platform.maximum(:retention_period)
+    cutoff = Time.zone.now - ActiveSupport::Duration.parse(retention)
 
     logger.info do
-      "Dropping chunks older then #{Server::Clock.to_time(cutoff)}..."
+      "Dropping chunks older then #{cutoff}..."
     end
 
-    ActiveRecord::Base.connection.execute <<~SQL
-      SELECT drop_chunks(#{cutoff}, 'traces');
-      SELECT drop_chunks(#{cutoff}, 'spans');
-      SELECT drop_chunks(#{cutoff}, 'failures');
+    sql = ActiveRecord::Base.sanitize_sql([<<~SQL, interval: retention])
+      SELECT drop_chunks(interval :interval, 'traces');
+      SELECT drop_chunks(interval :interval, 'spans');
+      SELECT drop_chunks(interval :interval, 'failures');
     SQL
 
+    ActiveRecord::Base.connection.execute(sql)
+
     logger.info do
-      "Dropping chunks older then #{Server::Clock.to_time(cutoff)}... [DONE]"
+      "Dropping chunks older then #{cutoff}... [DONE]"
     end
   end
 end
