@@ -62,13 +62,13 @@ RSpec.describe FailureGroup, type: :model do
   describe '#first_occurrence_at' do
     subject { super().first_occurrence_at }
 
-    it { is_expected.to eq first_stop }
+    it { is_expected.to eq ::Server::Clock.to_time(1_507_739_483_732_049_000) }
   end
 
   describe '#last_occurrence_at' do
     subject { super().last_occurrence_at }
 
-    it { is_expected.to eq last_stop }
+    it { is_expected.to eq ::Server::Clock.to_time(1_507_739_558_924_858_000) }
   end
 
   describe '#platform_id' do

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'server/types/precise_date_time'
-
 class Span < ApplicationRecord
   self.primary_key = 'id'
 
@@ -12,9 +10,6 @@ class Span < ApplicationRecord
   attribute :trace_id, :uuid
   attribute :platform_id, :uuid
   attribute :application_id, :uuid
-
-  attribute :start, ::Server::Types::PreciseDateTime.new
-  attribute :stop, ::Server::Types::PreciseDateTime.new
 
   belongs_to :trace
   belongs_to :platform

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'server/types/precise_date_time'
-
 class Trace < ApplicationRecord
   self.primary_key = 'id'
 
@@ -13,9 +11,6 @@ class Trace < ApplicationRecord
   attribute :platform_id, :uuid
   attribute :application_id, :uuid
   attribute :activity_id, :uuid
-
-  attribute :start, ::Server::Types::PreciseDateTime.new
-  attribute :stop, ::Server::Types::PreciseDateTime.new
 
   has_many :spans, -> { order('start') }
   has_many :failures

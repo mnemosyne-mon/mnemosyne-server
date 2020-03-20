@@ -22,8 +22,8 @@ module Server
             platform: platform,
             hostname: payload[:hostname],
             name: payload[:name],
-            start: Integer(payload[:start]),
-            stop: Integer(payload[:stop]),
+            start: ::Server::Clock.to_time(Integer(payload[:start])),
+            stop: ::Server::Clock.to_time(Integer(payload[:stop])),
             meta: payload[:meta]
         end
 
@@ -36,8 +36,8 @@ module Server
               name: data[:name],
               trace_id: trace.id,
               platform_id: trace.platform_id,
-              start: Integer(data[:start]),
-              stop: Integer(data[:stop]),
+              start: ::Server::Clock.to_time(Integer(data[:start])),
+              stop: ::Server::Clock.to_time(Integer(data[:stop])),
               meta: data[:meta]
           end
         end

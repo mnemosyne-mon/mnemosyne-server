@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'server/types/precise_date_time'
-
 class Failure < ApplicationRecord
   self.primary_key = 'id'
   self.inheritance_column = '__no_column'
@@ -10,8 +8,6 @@ class Failure < ApplicationRecord
   attribute :trace_id, :uuid
   attribute :platform_id, :uuid
   attribute :application_id, :uuid
-
-  attribute :stop, ::Server::Types::PreciseDateTime.new
 
   validates :type, presence: true
   validates :stop, presence: true

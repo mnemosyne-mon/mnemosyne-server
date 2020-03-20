@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_20_131652) do
+ActiveRecord::Schema.define(version: 2020_03_20_015438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 2018_03_20_131652) do
     t.string "title"
     t.string "name", null: false
     t.uuid "platform_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["platform_id", "name"], name: "index_applications_on_platform_id_and_name", unique: true
   end
 
@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(version: 2018_03_20_131652) do
     t.uuid "trace_id", null: false
     t.uuid "platform_id", null: false
     t.uuid "application_id", null: false
-    t.bigint "stop", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "stop", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["application_id"], name: "index_failures_on_application_id"
     t.index ["hostname"], name: "index_failures_on_hostname"
     t.index ["id"], name: "index_failures_on_id"
@@ -51,25 +51,25 @@ ActiveRecord::Schema.define(version: 2018_03_20_131652) do
     t.string "title"
     t.string "name", null: false
     t.interval "retention_period", default: "P14D"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_platforms_on_name", unique: true
   end
 
   create_table "spans", id: false, force: :cascade do |t|
     t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
     t.string "name", null: false
-    t.bigint "start", null: false
-    t.bigint "stop", null: false
+    t.datetime "start", null: false
+    t.datetime "stop", null: false
     t.jsonb "meta"
     t.uuid "trace_id", null: false
     t.uuid "platform_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["id"], name: "index_spans_on_id"
     t.index ["name"], name: "index_spans_on_name"
     t.index ["start"], name: "index_spans_on_start"
-    t.index ["stop"], name: "spans_stop_idx", order: :desc
+    t.index ["stop"], name: "index_spans_on_stop", order: :desc
     t.index ["trace_id"], name: "index_spans_on_trace_id"
   end
 
@@ -77,17 +77,17 @@ ActiveRecord::Schema.define(version: 2018_03_20_131652) do
     t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
     t.string "name", null: false
     t.string "hostname", null: false
-    t.bigint "start", null: false
-    t.bigint "stop", null: false
+    t.datetime "start", null: false
+    t.datetime "stop", null: false
     t.boolean "store", default: false, null: false
     t.jsonb "meta"
     t.uuid "application_id", null: false
     t.uuid "activity_id", null: false
     t.uuid "platform_id", null: false
     t.uuid "origin_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index "((meta ->> 'method'::text))", name: "idx_traces_filter_method"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index "((meta ->> 'method'::text))", name: "index_traces_meta_method"
     t.index "((stop - start))", name: "index_traces_duration"
     t.index ["activity_id"], name: "index_traces_on_activity_id"
     t.index ["application_id"], name: "index_traces_on_application_id"
