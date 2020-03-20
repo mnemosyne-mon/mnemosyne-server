@@ -75,6 +75,12 @@ class InitSchema < ActiveRecord::Migration[6.0]
           'spans'::regclass, 'stop'::name,
           chunk_time_interval => interval '6h');
       SQL
+
+      execute <<-SQL.strip_heredoc
+        SELECT create_hypertable(
+          'failures'::regclass, 'stop'::name,
+          chunk_time_interval => interval '6h');
+      SQL
     end
   end
 
