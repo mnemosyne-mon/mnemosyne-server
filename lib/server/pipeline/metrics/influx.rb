@@ -7,12 +7,13 @@ module Server
   module Pipeline
     module Metrics
       class Influx
-        def initialize(database, **kwargs)
-          @client = if database.respond_to?(:write_point)
-                      database
-                    else
-                      ::InfluxDB::Client.new(database.to_s, **kwargs)
-                    end
+        def initialize(database:, **kwargs)
+          @client = ::InfluxDB::Client.new(
+            database.to_s,
+            async: true,
+            **kwargs,
+            time_precision: 'ns',
+          )
         end
 
         def name

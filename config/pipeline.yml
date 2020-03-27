@@ -1,10 +1,15 @@
 # Configure additional pipeline steps
 
 development:
-  # Collect and send metrics to InfluxDB
-  # influx:
-  #   database: mnemosyne
-  #   host: localhost
-  #   async: true
+  load:
+    # Collect and send metrics to InfluxDB
+    # - Metrics::Influx:
+    #     database: mnemosyne
+    #     host: localhost
+    #     async: true
+    #
+    # Ignore all traces with an origin UUID
+    # of `00000000-0000-0000-0000-000000000000`.
+    # - Filter::NullOrigin
 
 production:

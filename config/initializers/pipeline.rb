@@ -2,22 +2,25 @@
 
 require 'server/pipeline'
 
-pipeline = Rails.application.config_for('pipeline')
+config = Rails.application.config_for('pipeline')
 
-if (config = pipeline['influx'])
-  database = config.fetch('database')
-  host     = config['host']
-  username = config['username']
-  password = config['password']
-
-  kwargs = {
-    host: host,
-    async: true,
-    username: username,
-    password: password,
-    time_precision: 'ns',
-  }
-
-  ::Server::Pipeline.default.use \
-    ::Server::Pipeline::Metrics::Influx.new(database, **kwargs)
+config.fetch(:load, []).each do |processor|
+  case processor
+  when Hash
+    processor.each_pair do |name, config|
+      cls = ::Server::Pipeline.const_get(name.to_s)
+      ::Server::Pipeline.default.use cls.new(**config)
+    rescue => e
+      raise "Invalid pipeline configuration #{name}: #{e}"
+    end
+  when String
+    mod = ::Server::Pipeline.const_get(processor.to_s)
+    if mod.respond_to?(:call)
+      ::Server::Pipeline.default.use mod
+    else
+      raise "Invalid pipeline processor #{mod}: Does not respond to #call."
+    end
+  else
+    raise "Invalid pipeline configuration: #{processor}"
+  end
 end
