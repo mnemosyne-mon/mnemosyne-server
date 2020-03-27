@@ -8,7 +8,7 @@ module Server
 
         def call(payload)
           return if payload[:origin_id] == NULL_UUID
-          yield
+          yield(payload)
         end
 
         module_function :call
