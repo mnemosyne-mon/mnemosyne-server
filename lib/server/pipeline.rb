@@ -4,6 +4,7 @@ require 'middleware'
 
 require 'server/builder'
 require 'server/pipeline/filter/null_origin'
+require 'server/pipeline/filter/sample'
 require 'server/pipeline/metadata/grape/endpoint'
 require 'server/pipeline/metadata/rails/action_controller'
 require 'server/pipeline/metadata/rails/active_job'
