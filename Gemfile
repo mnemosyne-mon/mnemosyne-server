@@ -9,7 +9,7 @@ gem 'unicorn', '~> 5.5'
 gem 'active_record_upsert', '~> 0.9.5'
 
 gem 'bulk_insert', '~> 1.4'
-gem 'hutch', '~> 0.28'
+gem 'hutch', '~> 1.0'
 gem 'pg', '~> 1.2'
 
 gem 'dry-struct', '~> 1.3.0'
