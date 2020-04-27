@@ -4,7 +4,7 @@ require 'server/pipeline'
 
 config = Rails.application.config_for('pipeline')
 
-config.fetch(:load, []).each do |processor|
+config.fetch(:load, [])&.each do |processor|
   case processor
   when Hash
     processor.each_pair do |name, config|
