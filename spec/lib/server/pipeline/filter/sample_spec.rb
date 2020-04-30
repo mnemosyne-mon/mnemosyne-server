@@ -29,6 +29,22 @@ RSpec.describe ::Server::Pipeline::Filter::Sample do
         transaction: 'cca7e687-58d8-4fc9-a47b-5c623897076d'
       })).to yield_control
     end
+
+    it 'does not filter traces with errors even if they match' do
+      expect(mk_call({
+        transaction: '035c9059-238b-4f9e-9505-bc73f2ee39ed',
+        errors: [{
+          type: 'RuntimeError',
+          text: 'error message',
+          stacktrace: [{
+            file: '(pry)',
+            line: '2',
+            call: 'm',
+            raw: "(pry):2:in `m'",
+          }],
+        }],
+      })).to yield_control
+    end
   end
 
   describe 'platform filter' do
@@ -41,6 +57,26 @@ RSpec.describe ::Server::Pipeline::Filter::Sample do
 
     it 'does not filter traces of non-matching platforms' do
       expect(mk_call({platform: 'other'})).to yield_control
+    end
+  end
+
+  describe 'keep_errors option' do
+    let(:filter) { described_class.new(rate: 0.5, keep_errors: false) }
+
+    it 'does again filter matching traces with errors' do
+      expect(mk_call({
+        transaction: '035c9059-238b-4f9e-9505-bc73f2ee39ed',
+        errors: [{
+          type: 'RuntimeError',
+          text: 'error message',
+          stacktrace: [{
+            file: '(pry)',
+            line: '2',
+            call: 'm',
+            raw: "(pry):2:in `m'",
+          }],
+        }],
+      })).to_not yield_control
     end
   end
 end
