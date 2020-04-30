@@ -7,13 +7,14 @@ module Server
         MOD = (2 ** 122).freeze
         DIV = MOD.to_f.freeze
 
-        def initialize(rate: 1.0, platform: [])
+        def initialize(rate: 1.0, platform: [], keep_errors: true)
           @rate = rate
           @platform = platform
+          @keep_errors = keep_errors
         end
 
         def call(payload)
-          unless ignore?(payload)
+          if match_platform?(payload) && no_errors?(payload)
             num = (UUID4.try_convert(payload[:transaction]).to_i % MOD) / DIV
             return if num > @rate
           end
@@ -23,9 +24,14 @@ module Server
 
         private
 
-        def ignore?(payload)
-          return false if @platform.empty?
-          !@platform.include?(payload[:platform])
+        def match_platform?(payload)
+          return true if @platform.empty?
+          @platform.include?(payload[:platform])
+        end
+
+        def no_errors?(payload)
+          return true unless @keep_errors
+          !payload[:errors] || payload[:errors].empty?
         end
       end
     end
