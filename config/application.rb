@@ -28,7 +28,7 @@ module Server
     # the framework and any gems in your application.
 
     config.filter_parameters += [:password]
-    config.session_store :cookie_store, key: '_mnemosyne'
+    config.session_store :cookie_store, key: '_mnemosyne', same_site: :lax
     config.action_dispatch.cookies_serializer = :json
 
     config.paths['config/locales'].unshift 'app/locales'
