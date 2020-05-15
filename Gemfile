@@ -36,8 +36,6 @@ gem 'concurrent-ruby', '~> 1.1'
 gem 'mnemosyne-ruby', '~> 1.10'
 gem 'sentry-raven', '~> 3.0'
 
-gem 'bootsnap', require: false
-
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.3'
   gem 'web-console', '>= 3.3.0'
