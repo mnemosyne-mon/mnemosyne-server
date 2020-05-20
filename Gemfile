@@ -8,7 +8,7 @@ gem 'unicorn', '~> 5.5'
 
 gem 'active_record_upsert', '~> 0.9.5'
 
-gem 'bulk_insert', '~> 1.4'
+gem 'bulk_insert', '~> 1.8'
 gem 'hutch', '~> 1.0'
 gem 'pg', '~> 1.2'
 

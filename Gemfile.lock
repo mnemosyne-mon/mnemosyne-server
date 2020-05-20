@@ -70,7 +70,7 @@ GEM
     base62-rb (0.3.1)
     bindex (0.8.1)
     builder (3.2.4)
-    bulk_insert (1.7.0)
+    bulk_insert (1.8.0)
       activerecord (>= 3.2.0)
     bunny (2.15.0)
       amq-protocol (~> 2.3, >= 2.3.1)
@@ -317,7 +317,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_upsert (~> 0.9.5)
-  bulk_insert (~> 1.4)
+  bulk_insert (~> 1.8)
   capybara (~> 3.32)
   concurrent-ruby (~> 1.1)
   draper (~> 4.0)
