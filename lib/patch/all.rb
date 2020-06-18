@@ -2,3 +2,4 @@
 
 require 'patch/active_record/interval_style'
 require 'patch/active_record/preload'
+require 'patch/active_support/string_duration'

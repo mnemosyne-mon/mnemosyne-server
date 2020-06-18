@@ -29,7 +29,7 @@ module Controller
     end
 
     def try_to_duration(str)
-      ActiveSupport::Duration.parse("PT#{str}")
+      ::ActiveSupport::Duration.parse_string(str)
     rescue ArgumentError
       nil
     end
