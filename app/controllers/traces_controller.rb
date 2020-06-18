@@ -62,11 +62,11 @@ class TracesController < ApplicationController
   end
 
   has_scope :ls do |_, scope, value|
-    scope.where('(stop - start) >= ?', ::ActiveSupport::Duration.parse_string(value))
+    scope.where('(stop - start) >= interval ?', ::ActiveSupport::Duration.parse_string(value).iso8601)
   end
 
   has_scope :le do |_, scope, value|
-    scope.where('(stop - start) < ?', ::ActiveSupport::Duration.parse_string(value))
+    scope.where('(stop - start) < interval ?', ::ActiveSupport::Duration.parse_string(value).iso8601)
   end
 
   has_scope :range, default: true, allow_blank: true do |controller, scope, _|
