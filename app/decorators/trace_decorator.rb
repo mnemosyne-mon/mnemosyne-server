@@ -66,9 +66,9 @@ class TraceDecorator < BaseDecorator
           status: meta['status'],
           host: meta.dig('headers', 'Host'),
           user_agent: meta.dig('headers', 'User-Agent'),
-          controller: meta.dig('controller'),
-          action: meta.dig('action'),
-          format: meta.dig('format')
+          controller: meta['controller'],
+          action: meta['action'],
+          format: meta['format']
         }
       else
         meta

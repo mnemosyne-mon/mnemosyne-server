@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe FailureGroup, type: :model do
-  subject { FailureGroup.all.first }
+  subject { described_class.all.first }
 
   let(:platform) { create :platform }
   let(:application) { create :application, platform: platform }

@@ -29,7 +29,7 @@ namespace :yarn do
   Rake::Task['yarn:install'].clear
 
   desc 'Install all JavaScript dependencies as specified via Yarn'
-  task :install do
+  task install: :environment do
     system('yarn install --no-progress')
   end
 end

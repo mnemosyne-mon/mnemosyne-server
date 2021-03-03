@@ -4,7 +4,7 @@ module Patch
   module IntervalStyle
     def configure_connection
       super.tap do
-        execute <<-SQL
+        execute <<~SQL.squish
           SET intervalstyle = iso_8601;
         SQL
       end

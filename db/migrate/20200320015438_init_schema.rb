@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InitSchema < ActiveRecord::Migration[6.0]
   def up
     # These are extensions that must be enabled in order to support this database
@@ -64,19 +66,19 @@ class InitSchema < ActiveRecord::Migration[6.0]
     end
 
     if timescaledb?
-      execute <<-SQL.strip_heredoc
+      execute <<~SQL.squish
         SELECT create_hypertable(
           'traces'::regclass, 'stop'::name,
           chunk_time_interval => interval '6h');
       SQL
 
-      execute <<-SQL.strip_heredoc
+      execute <<~SQL.squish
         SELECT create_hypertable(
           'spans'::regclass, 'stop'::name,
           chunk_time_interval => interval '6h');
       SQL
 
-      execute <<-SQL.strip_heredoc
+      execute <<~SQL.squish
         SELECT create_hypertable(
           'failures'::regclass, 'stop'::name,
           chunk_time_interval => interval '6h');
@@ -89,6 +91,6 @@ class InitSchema < ActiveRecord::Migration[6.0]
   end
 
   def timescaledb?
-    !%w[off false 0].include?(ENV['TIMESCALEDB'])
+    %w[off false 0].exclude?(ENV['TIMESCALEDB'])
   end
 end

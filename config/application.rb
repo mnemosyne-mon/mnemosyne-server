@@ -34,7 +34,7 @@ module Server
     config.paths['config/locales'].unshift 'app/locales'
     # config.paths.add 'app/consumers', eager_load: true
 
-    logger = ActiveSupport::Logger.new(STDOUT)
+    logger = ActiveSupport::Logger.new($stdout)
     config.logger = ActiveSupport::TaggedLogging.new(logger)
     config.log_level = :info
 

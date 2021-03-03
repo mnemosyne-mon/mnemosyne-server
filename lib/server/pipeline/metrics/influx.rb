@@ -31,7 +31,7 @@ module Server
             platform: payload[:platform],
             hostname: payload[:hostname],
             application: payload[:application],
-            errors: payload.dig(:errors).present?
+            errors: payload[:errors].present?
           }
 
           case payload[:name]

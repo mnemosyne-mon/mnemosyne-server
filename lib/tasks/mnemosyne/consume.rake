@@ -6,8 +6,8 @@ namespace :mnemosyne do
     require 'hutch'
     require 'hutch/cli'
 
-    STDOUT.sync = true
-    STDERR.sync = true
+    $stdout.sync = true
+    $stderr.sync = true
 
     Zeitwerk::Loader.eager_load_all
 

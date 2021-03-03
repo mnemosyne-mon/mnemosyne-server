@@ -74,7 +74,7 @@ RSpec.describe Trace, type: :model do
 
   describe '<class>' do
     describe '.retention' do
-      subject(:traces) { Trace.retention(period, time) }
+      subject(:traces) { described_class.retention(period, time) }
 
       let(:period) { ::ActiveSupport::Duration.parse('P30D') }
       let(:time) { Time.zone.now }

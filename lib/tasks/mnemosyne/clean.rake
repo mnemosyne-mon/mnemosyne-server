@@ -20,7 +20,7 @@ namespace :mnemosyne do
       "Dropping chunks older then #{cutoff}..."
     end
 
-    sql = ActiveRecord::Base.sanitize_sql([<<~SQL, {interval: retention}])
+    sql = ActiveRecord::Base.sanitize_sql([<<~SQL.squish, {interval: retention}])
       SELECT drop_chunks(interval :interval, 'traces');
       SELECT drop_chunks(interval :interval, 'spans');
       SELECT drop_chunks(interval :interval, 'failures');

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/duration'
 
 module Patch
@@ -13,7 +15,7 @@ module Patch
         (((?<us>\d+(\.\d+)?)us)\s*)?
         (((?<ns>\d+(\.\d+)?)ns)\s*)?
         \z
-      /x
+      /x.freeze
 
       DURATION_FRACTIONS = {
         days: ::ActiveSupport::Duration::SECONDS_PER_DAY,
@@ -23,7 +25,7 @@ module Patch
         ms: 0.001,
         us: 0.000001,
         ns: 0.000000001
-      }
+      }.freeze
 
       def parse_string(str)
         case str
