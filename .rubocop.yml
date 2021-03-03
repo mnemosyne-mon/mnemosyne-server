@@ -1,66 +1,41 @@
 require:
+  - rubocop-performance
+  - rubocop-rails
   - rubocop-rspec
-
 
 AllCops:
   Exclude:
-    - 'bin/**/*'
-    - 'db/schema.rb'
-    - 'deploy/**/*'
-    - 'node_modules/**/*'
-    - 'vendor/**/*'
-  TargetRubyVersion: 2.5
-  TargetRailsVersion: 5.2
+    - "bin/**"
+    - "db/schema.rb"
+    - "vendor/**/*"
+  TargetRubyVersion: 2.7
+  TargetRailsVersion: 6.0
+  NewCops: enable
 
-
+#s
 # -----------------------------------------------------------------------------
 #                                   RAILS
 
 Rails:
   Enabled: true
 
-#
-# False positives:
-#   * On Acfs::Resource#update_attriubutes!
-#
-Rails/ActiveRecordAliases:
-  Exclude:
-    - spec/**/*_spec.rb
-
-#
-# False positives:
-#   * On embedded models in migrations.
-#
 Rails/ApplicationRecord:
   Exclude:
-    - 'db/**/*'
+    - "db/migrate/**/*"
 
-#
-# Often when triggered it just wants to pass joined paths as separate
-# arguments but that can hurt readability.
-#
-Rails/FilePath:
-  Enabled: false
-
-#
-# False positives:
-#   * Specs and migrations often need to update things without validations.
-#
 Rails/SkipsModelValidations:
   Exclude:
-    - 'db/migrations/**.rb'
-    - 'spec/**/*_spec.rb'
+    - "db/migrate/**/*"
 
-
-
+#
 # -----------------------------------------------------------------------------
 #                                   RSPEC
 
 RSpec:
   Include:
-    - 'spec/**/*_spec.rb'
-    - 'spec/spec_helper.rb'
-    - 'spec/rails_helper.rb'
+    - "spec/**/*_spec.rb"
+    - "spec/spec_helper.rb"
+    - "spec/rails_helper.rb"
 
 RSpec/ContextWording:
   Enabled: false
@@ -73,7 +48,7 @@ RSpec/ExpectInHook:
 
 RSpec/FilePath:
   Exclude:
-    - 'spec/client/**/*_spec.rb'
+    - "spec/client/**/*_spec.rb"
 
 RSpec/MessageSpies:
   Enabled: false
@@ -87,10 +62,11 @@ RSpec/MultipleExpectations:
 RSpec/NestedGroups:
   Max: 5
 
+#
 # -----------------------------------------------------------------------------
 #                                   Layout
 
-Layout/AlignParameters:
+Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
 
 Layout/CaseIndentation:
@@ -99,6 +75,18 @@ Layout/CaseIndentation:
     - case
     - end
   IndentOneStep: true
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/LineLength:
+  Exclude:
+    - "db/**/*"
+    - "spec/**/*"
+    - "config/**/*"
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
@@ -111,8 +99,7 @@ Layout/SpaceInsideBlockBraces:
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
-
-
+#
 # -----------------------------------------------------------------------------
 #                                    Lint
 
@@ -122,42 +109,36 @@ Layout/SpaceInsideHashLiteralBraces:
 #
 Lint/AmbiguousBlockAssociation:
   Exclude:
-    - 'spec/**/*_spec.rb'
+    - "spec/**/*_spec.rb"
 
-Lint/MissingCopEnableDirective:
-  Exclude:
-    - 'db/migrate/*.rb'
-
+#
 # -----------------------------------------------------------------------------
 #                                   Metrics
 
+Metrics/AbcSize:
+  Enabled: false
+
 Metrics/BlockLength:
   Exclude:
-    - 'db/**/*'
-    - 'spec/**/*'
-    - 'config/**/*'
-    - '**/*.rake'
+    - "db/**/*"
+    - "spec/**/*"
+    - "config/**/*"
+    - "**/*.rake"
 
 Metrics/ClassLength:
   Max: 200
 
-Metrics/LineLength:
-  Exclude:
-    - 'db/**/*'
-    - 'spec/**/*'
-    - 'config/**/*'
+Metrics/CyclomaticComplexity:
+  Enabled: false
 
 Metrics/MethodLength:
+  Max: 25
   Exclude:
-    - 'db/**/*'
+    - "db/**/*"
 
-
-
+#
 # -----------------------------------------------------------------------------
 #                                   Style
-
-Style/BracesAroundHashParameters:
-  EnforcedStyle: context_dependent
 
 #
 # Both styles or mixtures are reasonable
@@ -172,13 +153,6 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
-#
-# Scripts might include on top-level
-#
-Style/MixinUsage:
-  Exclude:
-    - 'scripts/**/*'
-
 Style/RaiseArgs:
   EnforcedStyle: compact
 
@@ -187,27 +161,21 @@ Style/RaiseArgs:
 #
 Style/RescueModifier:
   Exclude:
-    - 'spec/**/*_spec.rb'
+    - "spec/**/*_spec.rb"
 
 #
 # Quick single line rescues in specs
 #
 Style/RescueStandardError:
   Exclude:
-    - 'spec/**/*_spec.rb'
+    - "spec/**/*_spec.rb"
 
 #
 # Often used pattern in chaining subjects in specs
 #
 Style/Semicolon:
   Exclude:
-    - 'spec/**/*_spec.rb'
+    - "spec/**/*_spec.rb"
 
 Style/SignalException:
   EnforcedStyle: only_raise
-
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: comma
-
-Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: comma
