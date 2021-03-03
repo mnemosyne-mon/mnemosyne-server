@@ -276,8 +276,9 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 0.90.0, < 2.0)
-    rubocop-rspec (1.41.0)
-      rubocop (>= 0.68.1)
+    rubocop-rspec (2.2.0)
+      rubocop (~> 1.0)
+      rubocop-ast (>= 1.1.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
@@ -359,7 +360,7 @@ DEPENDENCIES
   rubocop (~> 1.11)
   rubocop-performance (~> 1.10)
   rubocop-rails (~> 2.9)
-  rubocop-rspec (~> 1.39)
+  rubocop-rspec (~> 2.0)
   selenium-webdriver
   sentry-raven (~> 3.0)
   slim
