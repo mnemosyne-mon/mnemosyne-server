@@ -62,6 +62,9 @@ RSpec/MultipleExpectations:
 RSpec/NestedGroups:
   Max: 5
 
+RSpec/FactoryBot/CreateList:
+  Enabled: False
+
 #
 # -----------------------------------------------------------------------------
 #                                   Layout
