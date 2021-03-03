@@ -17,7 +17,7 @@ AllCops:
 #                                   RAILS
 
 Rails:
-  Enabled: true
+  Enabled: True
 
 Rails/ApplicationRecord:
   Exclude:
@@ -38,26 +38,26 @@ RSpec:
     - "spec/rails_helper.rb"
 
 RSpec/ContextWording:
-  Enabled: false
+  Enabled: False
 
 RSpec/ExampleLength:
-  Enabled: false
+  Enabled: False
 
 RSpec/ExpectInHook:
-  Enabled: false
+  Enabled: False
 
 RSpec/FilePath:
   Exclude:
     - "spec/client/**/*_spec.rb"
 
 RSpec/MessageSpies:
-  Enabled: false
+  Enabled: False
 
 RSpec/MissingExampleGroupArgument:
-  Enabled: false
+  Enabled: False
 
 RSpec/MultipleExpectations:
-  Enabled: false
+  Enabled: False
 
 RSpec/NestedGroups:
   Max: 5
@@ -74,7 +74,7 @@ Layout/CaseIndentation:
   SupportedStyles:
     - case
     - end
-  IndentOneStep: true
+  IndentOneStep: True
 
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
@@ -94,7 +94,7 @@ Layout/MultilineMethodCallIndentation:
 Layout/SpaceInsideBlockBraces:
   EnforcedStyle: space
   EnforcedStyleForEmptyBraces: no_space
-  SpaceBeforeBlockParameters: false
+  SpaceBeforeBlockParameters: False
 
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
@@ -116,7 +116,7 @@ Lint/AmbiguousBlockAssociation:
 #                                   Metrics
 
 Metrics/AbcSize:
-  Enabled: false
+  Enabled: False
 
 Metrics/BlockLength:
   Exclude:
@@ -129,7 +129,7 @@ Metrics/ClassLength:
   Max: 200
 
 Metrics/CyclomaticComplexity:
-  Enabled: false
+  Enabled: False
 
 Metrics/MethodLength:
   Max: 25
@@ -145,13 +145,13 @@ Metrics/MethodLength:
 #
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
-  Enabled: false
+  Enabled: False
 
 #
 # Would be better but unlikely...
 #
 Style/Documentation:
-  Enabled: false
+  Enabled: False
 
 Style/RaiseArgs:
   EnforcedStyle: compact
