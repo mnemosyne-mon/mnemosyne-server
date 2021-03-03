@@ -1,0 +1,50 @@
+name: test
+on: [push, pull_request]
+jobs:
+  rspec:
+    name: rspec
+    runs-on: ubuntu-20.04
+
+    services:
+      postgres:
+        image: timescale/timescaledb:2.1.0-pg13
+        env:
+          POSTGRES_PASSWORD: secret
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      TZ: Etc/UTC
+      DATABASE_URL: postgresql://postgres:secret@localhost:5432
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - uses: c-hive/gha-yarn-cache@v1
+      - run: yarn install
+      - run: bundle exec rake db:create db:migrate assets:precompile
+      - run: bundle exec rspec spec --format doc
+
+
+  rubocop:
+    name: rubocop
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true
+      - run: bundle exec rubocop --color --parallel --fail-level E
