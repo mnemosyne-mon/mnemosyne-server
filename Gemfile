@@ -22,7 +22,7 @@ gem 'uuid4', '~> 1.3'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'draper', '~> 4.0'
-gem 'has_scope', '~> 0.7.1'
+gem 'has_scope', '~> 0.8.0'
 gem 'oj'
 gem 'rails-assets-manifest', '~> 2.1'
 gem 'rails-rfc6570', '~> 2.4'
