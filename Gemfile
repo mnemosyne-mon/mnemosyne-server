@@ -13,7 +13,7 @@ gem 'hutch', '~> 1.0'
 gem 'pg', '~> 1.2'
 
 gem 'dry-struct', '~> 1.3.0'
-gem 'dry-types', '~> 1.4.0'
+gem 'dry-types', '~> 1.5.0'
 gem 'uuid4', '~> 1.3'
 
 # Use Redis adapter to run Action Cable in production
