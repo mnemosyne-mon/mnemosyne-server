@@ -37,8 +37,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_record_upsert (0.9.5)
-      activerecord (>= 5.0, < 6.1)
+    active_record_upsert (0.10.0)
+      activerecord (>= 5.0, < 6.2)
       pg (>= 0.18, < 2.0)
     activejob (6.0.3.5)
       activesupport (= 6.0.3.5)
@@ -324,7 +324,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_record_upsert (~> 0.9.5)
+  active_record_upsert (~> 0.10.0)
   bulk_insert (~> 1.8)
   capybara (~> 3.32)
   concurrent-ruby (~> 1.1)
