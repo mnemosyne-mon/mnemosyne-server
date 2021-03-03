@@ -2,9 +2,8 @@
 
 require 'server/pipeline'
 
-config = Rails.application.config_for('pipeline')
-
-config.fetch(:load, [])&.each do |processor|
+pipeline = Rails.application.config_for('pipeline')
+pipeline.fetch(:load, [])&.each do |processor|
   case processor
     when Hash
       processor.each_pair do |name, config|
@@ -15,11 +14,9 @@ config.fetch(:load, [])&.each do |processor|
       end
     when String
       mod = ::Server::Pipeline.const_get(processor.to_s)
-      if mod.respond_to?(:call)
-        ::Server::Pipeline.default.use mod
-      else
-        raise "Invalid pipeline processor #{mod}: Does not respond to #call."
-      end
+      raise "Invalid pipeline processor #{mod}: Does not respond to #call." unless mod.respond_to?(:call)
+
+      ::Server::Pipeline.default.use(mod)
     else
       raise "Invalid pipeline configuration: #{processor}"
   end

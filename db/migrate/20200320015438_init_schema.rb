@@ -65,7 +65,7 @@ class InitSchema < ActiveRecord::Migration[6.0]
       t.index '((stop - start))', name: 'index_traces_duration'
     end
 
-    if timescaledb?
+    if timescaledb? # rubocop:disable Style/GuardClause
       execute <<~SQL.squish
         SELECT create_hypertable(
           'traces'::regclass, 'stop'::name,

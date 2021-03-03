@@ -14,7 +14,7 @@ class Span < ApplicationRecord
   belongs_to :trace
   belongs_to :platform
 
-  has_many :traces, foreign_key: :origin_id, dependent: :destroy
+  has_many :traces, foreign_key: :origin_id, dependent: :destroy, inverse_of: :spans
 
   class << self
     def retention(period, time = Time.zone.now)

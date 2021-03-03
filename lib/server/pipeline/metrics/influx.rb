@@ -21,6 +21,7 @@ module Server
         end
 
         # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/PerceivedComplexity
         def call(payload)
           values = {
             total: ::Server::Clock

@@ -46,7 +46,7 @@ module Server
           if mw.is_a?(Class)
             mw.new(nxt, *args, &block)
           elsif mw.respond_to?(:call)
-            ->(env) { mw.call(env, *args, &nxt.method(:call)) }
+            ->(env) { mw.call(env, *args, &nxt.method(:call)) } # rubocop:disable Performance/MethodObjectAsBlock
           else
             raise \
               "Invalid middleware: Does not respond to `#call`: #{mw.inspect}"

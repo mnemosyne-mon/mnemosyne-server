@@ -35,7 +35,7 @@ RSpec.describe Trace, type: :model do
   end
 
   describe '#application_id' do
-    subject { trace.platform_id }
+    subject { trace.application_id }
 
     it { is_expected.to be_a ::UUID4 }
   end

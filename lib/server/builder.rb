@@ -53,5 +53,6 @@ module Server
           stacktrace: error.fetch(:stacktrace, [])
       end
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

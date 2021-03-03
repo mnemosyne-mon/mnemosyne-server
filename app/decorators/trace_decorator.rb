@@ -79,9 +79,7 @@ class TraceDecorator < BaseDecorator
     case name
       when 'app.web.request.rack'
         :web
-      when 'app.job.perform.sidekiq'
-        :background
-      when 'app.messaging.receive.msgr'
+      when 'app.job.perform.sidekiq', 'app.messaging.receive.msgr'
         :background
       else
         :unknown

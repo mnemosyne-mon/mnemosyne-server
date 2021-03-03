@@ -115,6 +115,12 @@ Lint/AmbiguousBlockAssociation:
     - "spec/**/*_spec.rb"
 
 #
+# You might need some groups for grouping (maybe)?
+#
+Lint/MixedRegexpCaptureTypes:
+  Enabled: False
+
+#
 # -----------------------------------------------------------------------------
 #                                   Metrics
 
@@ -142,6 +148,12 @@ Metrics/MethodLength:
 #
 # -----------------------------------------------------------------------------
 #                                   Style
+
+#
+# Disable due to https://github.com/rubocop/rubocop/issues/5953
+#
+Style/AccessModifierDeclarations:
+  Enabled: False
 
 #
 # Both styles or mixtures are reasonable

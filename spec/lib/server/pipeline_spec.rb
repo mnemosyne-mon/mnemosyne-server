@@ -16,8 +16,10 @@ RSpec.describe ::Server::Pipeline do
     expect(::Server::Pipeline::Metadata::Rails::ActiveJob).to \
       receive(:call).with(3).and_yield(4)
 
+    # rubocop:disable RSpec/AnyInstance
     expect_any_instance_of(::Server::Builder).to \
       receive(:call).with(4)
+    # rubocop:enable RSpec/AnyInstance
 
     pipeline.call(1)
   end

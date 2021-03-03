@@ -25,8 +25,11 @@ class Application < ApplicationRecord
     def fetch(name:, platform:)
       platform = platform.id if platform.respond_to?(:id)
 
+      # We do need `upsert` here for performance reasons.
+      # rubocop:disable Rails/SkipsModelValidations
       find_by(name: name, platform_id: platform) ||
         upsert(name: name, platform_id: platform)
+      # rubocop:enable Rails/SkipsModelValidations
     end
   end
 end

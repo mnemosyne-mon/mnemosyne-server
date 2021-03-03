@@ -18,7 +18,7 @@ class Failure < ApplicationRecord
   belongs_to :application
 
   def stacktrace=(stacktrace)
-    self[:stacktrace] = Array(stacktrace).map(&method(:sl_conv)).reject(&:nil?)
+    self[:stacktrace] = Array(stacktrace).map {|sl| sl_conv(sl) }.reject(&:nil?)
   end
 
   private

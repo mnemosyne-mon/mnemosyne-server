@@ -8,12 +8,12 @@ module Server
 
         return resource if resource.is_a?(String)
 
-        encoder = StreamEncoder.new \
+        encoder = StreamEncoder.new(
           resource,
           format: :json,
           encoder: ->(val) { ::Oj.dump(val) },
-          **kwargs,
-          &method(:_stream_json_fallback)
+          **kwargs
+        ) {|object, **kwa| _stream_json_fallback(object, **kwa) }
 
         if kwargs[:stream]
           headers['Cache-Control'] ||= 'no-cache'
