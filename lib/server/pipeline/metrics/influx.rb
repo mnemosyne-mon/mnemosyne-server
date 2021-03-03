@@ -12,7 +12,7 @@ module Server
             database.to_s,
             async: true,
             **kwargs,
-            time_precision: 'ns',
+            time_precision: 'ns'
           )
         end
 
@@ -20,20 +20,18 @@ module Server
           ::Server::Pipeline::Metrics::Influx
         end
 
-        # rubocop:disable AbcSize
-        # rubocop:disable MethodLength
-        # rubocop:disable CyclomaticComplexity
+        # rubocop:disable Metrics/MethodLength
         def call(payload)
           values = {
             total: ::Server::Clock
-              .to_seconds(payload[:stop] - payload[:start]).to_f,
+              .to_seconds(payload[:stop] - payload[:start]).to_f
           }
 
           tags = {
             platform: payload[:platform],
             hostname: payload[:hostname],
             application: payload[:application],
-            errors: payload.dig(:errors).present?,
+            errors: payload.dig(:errors).present?
           }
 
           case payload[:name]
@@ -81,7 +79,7 @@ module Server
           data = {
             tags: tags,
             values: values,
-            timestamp: payload[:stop],
+            timestamp: payload[:stop]
           }
 
           @client.write_point(type, data, 'ns')

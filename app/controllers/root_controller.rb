@@ -13,7 +13,7 @@ class RootController < ApplicationController
     if trace
       redirect_to trace_path(trace.platform, trace)
     else
-      render 'traces/trace_not_found', status: 404
+      render 'traces/trace_not_found', status: :not_found
     end
   end
 end

@@ -11,7 +11,7 @@ class TraceDecorator < BaseDecorator
     as_json(**kwargs).values
   end
 
-  def serialize(**kwargs) # rubocop:disable MethodLength, AbcSize
+  def serialize(**kwargs)
     export do |out|
       out[:uuid]     = id
       out[:name]     = name
@@ -33,7 +33,6 @@ class TraceDecorator < BaseDecorator
     end
   end
 
-  # rubocop:disable MethodLength
   def props
     {
       routes: routes,
@@ -45,21 +44,18 @@ class TraceDecorator < BaseDecorator
         .range(start, stop)
         .limit(10_000)
         .decorate
-        .map(&:serialize),
+        .map(&:serialize)
     }.to_json
   end
-  # rubocop:enable all
 
   def routes
     {
       t_url: h.t_url_rfc6570,
       traces_url: \
-        h.trace_url_rfc6570.partial_expand(platform: platform.to_param),
+        h.trace_url_rfc6570.partial_expand(platform: platform.to_param)
     }
   end
 
-  # rubocop:disable AbcSize
-  # rubocop:disable MethodLength
   def metainfo
     case type
       when :web
@@ -72,13 +68,12 @@ class TraceDecorator < BaseDecorator
           user_agent: meta.dig('headers', 'User-Agent'),
           controller: meta.dig('controller'),
           action: meta.dig('action'),
-          format: meta.dig('format'),
+          format: meta.dig('format')
         }
       else
         meta
     end.compact
   end
-  # rubocop:enable all
 
   def type
     case name
@@ -93,22 +88,22 @@ class TraceDecorator < BaseDecorator
     end
   end
 
-  def type_icon # rubocop:disable MethodLength
+  def type_icon
     case type
       when :web
         h.tag.i \
-          'class': %w[fa fa-globe],
-          'title': 'Web Request',
+          class: %w[fa fa-globe],
+          title: 'Web Request',
           'aria-hidden': 'true'
       when :background
         h.tag.i \
-          'class': %w[fa fa-tasks],
-          'title': 'Background Job',
+          class: %w[fa fa-tasks],
+          title: 'Background Job',
           'aria-hidden': 'true'
       else
         h.tag.i \
-          'class': %w[fa fa-question],
-          'title': 'Unknown',
+          class: %w[fa fa-question],
+          title: 'Unknown',
           'aria-hidden': 'true'
     end
   end

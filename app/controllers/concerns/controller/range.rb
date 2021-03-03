@@ -8,11 +8,11 @@ module Controller
       @range ||= begin
         param = params.fetch(:range, 360).to_s.upcase
 
-        if (value = try_to_i(param))
-          value = value.minutes
-        else
-          value = try_to_duration(param)
-        end
+        value = if (value = try_to_i(param))
+                  value.minutes
+                else
+                  try_to_duration(param)
+                end
 
         value = 6.hours if value.blank?
 

@@ -4,7 +4,7 @@ module Server
   module Pipeline
     module Filter
       class Sample
-        MOD = (2 ** 122).freeze
+        MOD = (2**122)
         DIV = MOD.to_f.freeze
 
         def initialize(rate: 1.0, platform: [], keep_errors: true)
@@ -26,12 +26,14 @@ module Server
 
         def match_platform?(payload)
           return true if @platform.empty?
+
           @platform.include?(payload[:platform])
         end
 
         def no_errors?(payload)
           return true unless @keep_errors
-          !payload[:errors] || payload[:errors].empty?
+
+          payload[:errors].blank?
         end
       end
     end

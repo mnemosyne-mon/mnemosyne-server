@@ -4,21 +4,21 @@ require 'rails_helper'
 require 'server/pipeline'
 
 RSpec.describe ::Server::Pipeline::Metadata::Grape::Endpoint do
+  subject(:call) { described_class.call(payload) {|env| return env } }
+
   let(:payload) do
     {
       span: [{
-        name: 'example.trace.mnemosyne',
+        name: 'example.trace.mnemosyne'
       }, {
         name: 'app.controller.request.grape',
         meta: {
           endpoint: 'API::V2::Endpoint',
-          format: 'json',
-        },
-      }],
+          format: 'json'
+        }
+      }]
     }
   end
-
-  subject(:call) { described_class.call(payload) {|env| return env } }
 
   it 'extracts endpoint information' do
     expect(call[:meta]).to eq \

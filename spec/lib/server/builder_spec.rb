@@ -25,7 +25,7 @@ RSpec.describe ::Server::Builder do
           uuid: 'd9a6f0f0-eff4-4f43-af75-9d15ba2de93c',
           name: 'example.span.mnemosyne',
           start: 100_000_000,
-          stop: 200_000_000,
+          stop: 200_000_000
         }],
         errors: [{
           type: 'RuntimeError',
@@ -34,14 +34,14 @@ RSpec.describe ::Server::Builder do
             file: '(pry)',
             line: '2',
             call: 'm',
-            raw: "(pry):2:in `m'",
+            raw: "(pry):2:in `m'"
           }, {
             file: '/home/jan/.rvm/gems/ruby-2.4.2/gems/pry-0.10.4/lib/pry/pry_instance.rb',
             line: '355',
             call: 'eval',
-            raw: "/home/jan/.rvm/gems/ruby-2.4.2/gems/pry-0.10.4/lib/pry/pry_instance.rb:355:in `eval'",
-          }],
-        }],
+            raw: "/home/jan/.rvm/gems/ruby-2.4.2/gems/pry-0.10.4/lib/pry/pry_instance.rb:355:in `eval'"
+          }]
+        }]
       }
     end
 
@@ -192,11 +192,11 @@ RSpec.describe ::Server::Builder do
         expect(failure.stacktrace).to eq [{
           'file' => '(pry)',
           'line' => 2,
-          'call' => 'm',
+          'call' => 'm'
         }, {
           'file' => '/home/jan/.rvm/gems/ruby-2.4.2/gems/pry-0.10.4/lib/pry/pry_instance.rb',
           'line' => 355,
-          'call' => 'eval',
+          'call' => 'eval'
         }]
       end
     end

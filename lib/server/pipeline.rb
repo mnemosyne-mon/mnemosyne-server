@@ -37,7 +37,6 @@ module Server
 
       private
 
-      # rubocop:disable MethodLength
       def build(stack)
         app = ::Server::Builder.new
 
@@ -54,7 +53,6 @@ module Server
           end
         end
       end
-      # rubocop:enable all
     end
   end
 end

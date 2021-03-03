@@ -15,7 +15,7 @@ begin
   end
 
   task(:default).clear.enhance %i[rubocop spec]
-rescue LoadError # rubocop:disable HandleExceptions
+rescue LoadError
   # noop
 end
 

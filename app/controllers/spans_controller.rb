@@ -11,7 +11,7 @@ class SpansController < ApplicationController
 
   def context
     {
-      platform: platform,
+      platform: platform
     }
   end
 end

@@ -23,7 +23,7 @@ module Server
         end
       end
 
-      def cast_value(value) # rubocop:disable MethodLength
+      def cast_value(value)
         case value
           when ::ActiveSupport::Duration
             value

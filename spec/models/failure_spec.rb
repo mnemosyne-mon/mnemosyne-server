@@ -11,13 +11,13 @@ RSpec.describe Failure, type: :model do
   describe '<factory>' do
     let(:trace) { failure.trace }
 
-    context '#platform' do
+    describe '#platform' do
       subject { failure.platform.id }
 
       it { is_expected.to eq trace.platform.id }
     end
 
-    context '#application' do
+    describe '#application' do
       subject { failure.application.id }
 
       it { is_expected.to eq trace.application.id }

@@ -3,8 +3,6 @@
 module Server
   module Streaming
     module JSONStreaming
-      # rubocop:disable AbcSize
-      # rubocop:disable MethodLength
       def _render_with_renderer_json(resource, **kwargs)
         self.content_type ||= Mime[:json]
 
@@ -27,7 +25,6 @@ module Server
           encoder.read
         end
       end
-      # rubocop:enable all
 
       private
 

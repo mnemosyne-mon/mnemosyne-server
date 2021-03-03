@@ -20,8 +20,6 @@ class FailureGroup < ApplicationRecord
   belongs_to :application
 
   class << self
-    # rubocop:disable AbcSize
-    # rubocop:disable MethodLength
     def default
       select(
         t[:type],
@@ -41,8 +39,6 @@ class FailureGroup < ApplicationRecord
         t[:application_id]
       ).order(t[:stop].maximum.desc)
     end
-    # rubocop:enable all
-
     alias t arel_table
   end
 end

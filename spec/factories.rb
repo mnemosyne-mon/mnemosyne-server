@@ -43,7 +43,7 @@ FactoryBot.define do
         rand(4..33).times do |i|
           interval = [
             trace.start + Rational(rand(trace.duration), 1_000_000_000),
-            trace.start + Rational(rand(trace.duration), 1_000_000_000),
+            trace.start + Rational(rand(trace.duration), 1_000_000_000)
           ]
 
           create :span,
@@ -80,7 +80,7 @@ FactoryBot.define do
           platform: platform,
           application: application,
           activity_id: activity_id,
-          stop: stop,
+          stop: stop
         }.compact)
       end
     end

@@ -48,7 +48,7 @@ module Server
         [
           '//',
           request.host_with_port,
-          request.headers['HTTP_X_RELATIVE_URL_ROOT'],
+          request.headers['HTTP_X_RELATIVE_URL_ROOT']
         ].join
       end
     }

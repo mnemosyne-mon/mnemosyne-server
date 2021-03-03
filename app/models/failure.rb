@@ -29,7 +29,7 @@ class Failure < ApplicationRecord
     {
       file: stackline[:file].to_s,
       line: stackline[:line].to_i,
-      call: stackline[:call].to_s,
+      call: stackline[:call].to_s
     }
   end
 end

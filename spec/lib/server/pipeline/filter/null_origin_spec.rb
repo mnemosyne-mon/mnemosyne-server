@@ -19,6 +19,6 @@ RSpec.describe ::Server::Pipeline::Filter::NullOrigin do
   it 'does not yield on null origin traces' do
     expect do |b|
       described_class.call({origin: '00000000-0000-0000-0000-000000000000'}, &b)
-    end.to_not yield_control
+    end.not_to yield_control
   end
 end

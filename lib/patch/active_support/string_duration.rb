@@ -3,7 +3,7 @@ require 'active_support/duration'
 module Patch
   module ActiveSupport
     module StringDuration
-      DURATION_REGEXP = %r/
+      DURATION_REGEXP = /
         \A\s*
         (((?<days>\d+(\.\d+)?)d)\s*)?
         (((?<hours>\d+(\.\d+)?)h)\s*)?
@@ -22,20 +22,20 @@ module Patch
         seconds: 1,
         ms: 0.001,
         us: 0.000001,
-        ns: 0.000000001,
+        ns: 0.000000001
       }
 
       def parse_string(str)
         case str
-        when /\A\s*\d+(\.\d+)?\s*\z/
-          build(Float(str.to_s.strip))
-        when DURATION_REGEXP
-          m = Regexp.last_match
-          build(DURATION_FRACTIONS.inject(0) {|s, f|
-            m[f[0]] ? s + Float(m[f[0]]) * f[1] : s
-          })
-        else
-          raise ArgumentError
+          when /\A\s*\d+(\.\d+)?\s*\z/
+            build(Float(str.to_s.strip))
+          when DURATION_REGEXP
+            m = Regexp.last_match
+            build(DURATION_FRACTIONS.inject(0) do |s, f|
+              m[f[0]] ? s + Float(m[f[0]]) * f[1] : s
+            end)
+          else
+            raise ArgumentError
         end
       end
 

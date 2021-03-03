@@ -8,6 +8,7 @@ module Server
 
         def call(payload)
           return if payload[:origin] == NULL_UUID
+
           yield(payload)
         end
 

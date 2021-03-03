@@ -9,15 +9,15 @@ RSpec.describe ::Server::Pipeline::Metadata::Rails::ActionController do
   let(:payload) do
     {
       span: [{
-        name: 'example.trace.mnemosyne',
+        name: 'example.trace.mnemosyne'
       }, {
         name: 'app.controller.request.rails',
         meta: {
           controller: 'ApplicationController',
           action: 'index',
-          format: 'json',
-        },
-      }],
+          format: 'json'
+        }
+      }]
     }
   end
 

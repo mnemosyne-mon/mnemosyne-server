@@ -32,7 +32,7 @@ RSpec.describe ::ActiveSupport::Duration do
 
     # whitespace
     '  4m3s ' => {minutes: 4, seconds: 3},
-    "\t4d 1m1s" => {days: 4, minutes: 1, seconds: 1},
+    "\t4d 1m1s" => {days: 4, minutes: 1, seconds: 1}
   }
 
   let(:fn) { described_class.method(:parse_string) }

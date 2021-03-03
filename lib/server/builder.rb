@@ -4,9 +4,7 @@ require 'server/clock'
 
 module Server
   class Builder
-    # rubocop:disable AbcSize
-    # rubocop:disable MethodLength
-    # rubocop:disable BlockLength
+    # rubocop:disable Metrics/MethodLength
     def call(payload)
       platform = ::Platform.fetch name: payload.fetch(:platform)
 

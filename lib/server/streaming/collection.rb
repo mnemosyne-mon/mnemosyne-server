@@ -3,7 +3,7 @@
 module Server
   module Streaming
     module Collection
-      def to_json_stream(out, encoder:, **kwargs) # rubocop:disable MethodLength
+      def to_json_stream(out, encoder:, **kwargs)
         out << '['
 
         each_with_index do |object, i|

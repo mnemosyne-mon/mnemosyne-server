@@ -82,7 +82,7 @@ class TracesController < ApplicationController
 
     # Force PostgreSQL to use filter indexes if filtered are specified
     # instead of favoring the ordered stop index.
-    if (FILTER_PARAMS & params.keys).any? # rubocop:disable IfUnlessModifier
+    if (FILTER_PARAMS & params.keys).any? # rubocop:disable Style/IfUnlessModifier
       @traces = @traces.order(:id)
     end
 
@@ -122,7 +122,7 @@ class TracesController < ApplicationController
 
   def context
     {
-      platform: platform,
+      platform: platform
     }
   end
 end
