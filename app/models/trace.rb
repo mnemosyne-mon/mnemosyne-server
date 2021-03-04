@@ -25,7 +25,7 @@ class Trace < ApplicationRecord
     end
 
     def retention(period, time = Time.zone.now)
-      period = ::Server::Types::Duration.new.cast_value(period)
+      period = ActiveSupport::Duration.parse(period) unless period.is_a?(ActiveSupport::Duration)
       tlimit = time - period
 
       where t[:stop].lt(tlimit).and(t[:store].eq(false))
