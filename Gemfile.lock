@@ -133,7 +133,7 @@ GEM
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
     faraday-net_http (1.0.1)
-    ffi (1.14.2)
+    ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     has_scope (0.8.0)
@@ -151,7 +151,7 @@ GEM
     influxdb (0.8.1)
     json (2.5.1)
     kgio (2.11.3)
-    listen (3.4.1)
+    listen (3.5.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.9.0)
@@ -344,7 +344,7 @@ DEPENDENCIES
   hutch (~> 1.0)
   ibsciss-middleware (~> 0.4.2)
   influxdb
-  listen (>= 3.0.5, < 3.4.2)
+  listen (>= 3.0.5, < 3.5.1)
   mnemosyne-ruby (~> 1.10)
   oj
   pg (~> 1.2)
