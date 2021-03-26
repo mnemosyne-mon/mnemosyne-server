@@ -3,7 +3,7 @@
   "license": "AGPLv3",
   "private": true,
   "devDependencies": {
-    "@babel/core": "7.13.10",
+    "@babel/core": "7.13.13",
     "@babel/plugin-transform-react-jsx": "7.13.12",
     "@babel/preset-env": "7.13.12",
     "@gfx/zopfli": "1.0.15",
