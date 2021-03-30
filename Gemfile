@@ -37,7 +37,7 @@ gem 'mnemosyne-ruby', '~> 1.10'
 gem 'sentry-raven', '~> 3.0'
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.5.1'
+  gem 'listen', '>= 3.0.5', '< 3.5.2'
   gem 'web-console', '>= 3.3.0'
 
   gem 'spring'
