@@ -69,6 +69,10 @@ class TracesController < ApplicationController
     scope.where('(stop - start) < interval ?', ::ActiveSupport::Duration.parse_string(value).iso8601)
   end
 
+  has_scope :meta, type: hash do |_, scope, value|
+    scope.where('meta @> ?', value.to_json)
+  end
+
   has_scope :range, default: true, allow_blank: true do |controller, scope, _|
     scope.range controller.range
   end
