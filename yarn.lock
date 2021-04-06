@@ -4484,11 +4484,6 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
-lodash.escaperegexp@^4.0:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/lodash.escaperegexp/-/lodash.escaperegexp-4.1.2.tgz#64762c48618082518ac3df4ccf5d5886dae20347"
-  integrity sha1-ZHYsSGGAglGKw99Mz11YhtriA0c=
-
 lodash.get@^4.0:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -7364,15 +7359,14 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   dependencies:
     minimalistic-assert "^1.0.0"
 
-webpack-assets-manifest@5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/webpack-assets-manifest/-/webpack-assets-manifest-5.0.2.tgz#e4efe6ddaefe82bd6af0f6cdf05e4317d45e252f"
-  integrity sha512-e5aZ7oA9ZLz3/yrkZRkq+oNdlImTxuAWyPmhoLaZHpbA1uR8RFtSNakwFyFgV23X++9Tc8YeCpKF5/FAHLBH9Q==
+webpack-assets-manifest@5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/webpack-assets-manifest/-/webpack-assets-manifest-5.0.3.tgz#0ea198da4d882dbec5a13dc41e46f4cb33d2a2e2"
+  integrity sha512-bKFVRLhI6joPtveEvKz9ZsHJplMysSHlAQm3vlkn3fz1utmNUrGym7v4BwwDd2sUPoiwEPrVbEX8CgwruCryrQ==
   dependencies:
     chalk "^4.0"
     deepmerge "^4.0"
     lockfile "^1.0"
-    lodash.escaperegexp "^4.0"
     lodash.get "^4.0"
     lodash.has "^4.0"
     schema-utils "^3.0"
