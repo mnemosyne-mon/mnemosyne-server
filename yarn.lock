@@ -7342,10 +7342,10 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   dependencies:
     minimalistic-assert "^1.0.0"
 
-webpack-assets-manifest@5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/webpack-assets-manifest/-/webpack-assets-manifest-5.0.4.tgz#d9f6304bd4c74af778d13f91f5a50f00c6a80eb3"
-  integrity sha512-rydYbaO0CZ3FISem187FwAqEZ5JpuogexpQB8NWgv8eR3To47NyNykH/6qq50ocslVZGuAjMq+kC8v9ov2pZhw==
+webpack-assets-manifest@5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/webpack-assets-manifest/-/webpack-assets-manifest-5.0.5.tgz#0727d9855129110a962c0992504d91c13f5613e8"
+  integrity sha512-sZ5i2O5OTjbdjnJZE0ZAHqFqYejD0PSXjKUOIBie1DMGlZo/2OLdx7UYMuOQyiygfRYB8FPYBqz3QGWV+1BPvw==
   dependencies:
     chalk "^4.0"
     deepmerge "^4.0"
