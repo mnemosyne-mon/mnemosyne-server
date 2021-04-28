@@ -15,7 +15,7 @@
     "coffeescript": "2.5.1",
     "compression-webpack-plugin": "7.1.2",
     "css-loader": "5.2.4",
-    "cssnano": "5.0.1",
+    "cssnano": "5.0.2",
     "file-loader": "6.2.0",
     "image-webpack-loader": "7.0.1",
     "mini-css-extract-plugin": "1.5.0",
