@@ -1,9 +1,17 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:base", "schedule:earlyMondays"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
+    },
+    {
+      "matchFiles": ["package.json"],
+      "groupName": "NPM"
+    },
+    {
+      "matchLanguages": ["Gemfile"],
+      "groupName": "Ruby"
     }
   ]
 }
