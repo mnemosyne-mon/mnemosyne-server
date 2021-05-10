@@ -1,14 +1,14 @@
 .container
   form.tracesearch action=search_path
     .input-group
-      input.form-control type="search" name="id" placeholder="Paste a trace ID here..."
-      button.btn type="submit" Go
+      input.form-control type="search" name="id" placeholder="Paste a trace ID here..." required=true
+      button.btn.btn-primary type="submit" Search Traces
 
   .platforms
     - @platforms.each do |platform|
       .platform
         h3
-          = link_to platform.name, platform_path(platform)
+          = link_to platform.name, traces_path(platform)
         div
           .info
             span Applications
