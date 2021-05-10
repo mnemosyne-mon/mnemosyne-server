@@ -33,7 +33,8 @@ jobs:
           node-version: 14
       - uses: c-hive/gha-yarn-cache@v1
       - run: yarn install
-      - run: bundle exec rake db:create:all db:migrate assets:precompile
+      - run: yarn build
+      - run: bundle exec rake db:create:all db:migrate
       - run: bundle exec rspec spec --format doc
 
 
