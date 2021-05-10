@@ -1,9 +1,12 @@
 default: &default
-  host: localhost
+  # host: localhost
+  host: rabbitmq-0.dev.xopic.de
   port: 5672
   vhost: /
-  username: guest
-  password: guest
+  # username: guest
+  # password: guest
+  username: mnemosyne
+  password: OJ5Dt6KCOtAv
   pool: 25
 
 development:

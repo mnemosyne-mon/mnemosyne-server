@@ -11,7 +11,7 @@ $header-border-color: theme-color("primary")
 @import '~bootstrap/scss/reboot'
 @import '~bootstrap/scss/type'
 @import '~bootstrap/scss/grid'
-@import '~bootstrap/scss/popover'
+@import '~bootstrap/scss/containers'
 
 $fa-font-path: '~font-awesome/fonts'
 @import '~font-awesome/scss/font-awesome'
@@ -33,3 +33,9 @@ body
 
 #main
   margin: auto
+
+a
+  text-decoration: none
+
+  &:focus, &:hover
+    text-decoration: underline
