@@ -9,7 +9,7 @@ gem 'unicorn', '~> 6.0'
 gem 'active_record_upsert', '~> 0.10.0'
 
 gem 'bulk_insert', '~> 1.8'
-gem 'hutch', '~> 1.0'
+gem 'hutch', github: 'ruby-amqp/hutch', ref: '9322ead'
 gem 'pg', '~> 1.2'
 
 gem 'dry-struct', '~> 1.4.0'

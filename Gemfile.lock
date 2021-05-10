@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/ruby-amqp/hutch.git
+  revision: 9322eadad011774ddef53a88ea122430113bdcde
+  ref: 9322ead
+  specs:
+    hutch (1.0.1.pre)
+      activesupport (>= 4.2, < 7)
+      bunny (>= 2.15, < 2.16)
+      carrot-top (~> 0.0.7)
+      multi_json (~> 1.14)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -143,11 +154,6 @@ GEM
     has_scope (0.8.0)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
-    hutch (1.0.0)
-      activesupport (>= 4.2, < 7)
-      bunny (>= 2.15, < 2.16)
-      carrot-top (~> 0.0.7)
-      multi_json (~> 1.14)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     ibsciss-middleware (0.4.2)
@@ -354,7 +360,7 @@ DEPENDENCIES
   dry-types (~> 1.5.0)
   factory_bot_rails
   has_scope (~> 0.8.0)
-  hutch (~> 1.0)
+  hutch!
   ibsciss-middleware (~> 0.4.2)
   influxdb
   listen (~> 3.5.1)
