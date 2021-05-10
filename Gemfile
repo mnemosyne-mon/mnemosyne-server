@@ -34,7 +34,9 @@ gem 'influxdb'
 
 gem 'concurrent-ruby', '~> 1.1'
 gem 'mnemosyne-ruby', '~> 1.10'
-gem 'sentry-raven', '~> 3.0'
+
+gem 'sentry-ruby'
+gem 'sentry-rails'
 
 group :development do
   gem 'listen', '~> 3.5.1'
