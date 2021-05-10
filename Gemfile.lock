@@ -177,6 +177,8 @@ GEM
     nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    nokogiri (1.11.3-x86_64-linux)
+      racc (~> 1.4)
     oj (3.11.5)
     parallel (1.20.1)
     parser (3.0.1.1)
@@ -332,7 +334,7 @@ GEM
 
 PLATFORMS
   ruby
-  x64_64-linux
+  x86_64-linux
 
 DEPENDENCIES
   active_record_upsert (~> 0.10.0)
@@ -376,4 +378,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   2.2.12
+   2.2.17
