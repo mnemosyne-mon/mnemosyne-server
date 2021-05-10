@@ -28,13 +28,12 @@ export class Field extends Component
   render: ->
     { title, value, href } = this.props
 
-    if value?
-      value = value.toString()
-
     $ 'div',
       $ 'h4', title
       do =>
-        if value
-          $ 'a', title: value, href: href, value
+        if value? && href
+          $ 'a', title: value.toString(), href: href, value.toString()
+        else if value?
+          $ 'p', value
         else
           $ 'a', className: 'empty', '<none>'

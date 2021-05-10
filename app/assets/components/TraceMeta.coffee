@@ -3,6 +3,8 @@ import {
   createElement as $
 } from './core'
 
+import FaExternalLink from 'preact-icons/fa/external-link'
+
 import URIJS from 'urijs'
 
 import { Field } from './TraceInfo'
@@ -45,8 +47,7 @@ class WebMeta extends Component
         href: routes.traces_url(ws: meta['status']) if meta['status']?
       $ Field,
         title: 'Path'
-        value: meta['path']
-        href: routes.traces_url(application: application['uuid'], wp: meta['path']) if meta['path']?
+        value: this.pathField()
       $ Field,
         title: 'Query'
         value: meta['query']
@@ -54,6 +55,25 @@ class WebMeta extends Component
         title: 'Action'
         value: meta['action']
         href: routes.traces_url(application: application['uuid'], wc: meta['controller'], wa: meta['action']) if meta['action']?
+
+  pathField: ->
+    { routes } = this.context
+    { application, meta } = this.props.trace
+
+    return unless meta['path']?
+
+    traceUrl = routes.traces_url(application: application['uuid'], wp: meta['path'])
+
+    # If it makes sense, let's add a direct link to the request's URL
+    if meta['method'] == 'GET' && meta['host']?
+      visitUrl = 'http://' + meta['host'] + meta['path']
+
+      [
+        $('a', href: traceUrl, meta['path']),
+        $('a', href: visitUrl, class: 'external', $(FaExternalLink))
+      ]
+    else
+      $ 'a', href: traceUrl, meta['path']
 
 
 class JobMeta extends Component
