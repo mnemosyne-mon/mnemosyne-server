@@ -37,7 +37,6 @@ jobs:
       - run: bundle exec rake db:create:all db:migrate
       - run: bundle exec rspec spec --format doc
 
-
   rubocop:
     name: rubocop
     runs-on: ubuntu-20.04
