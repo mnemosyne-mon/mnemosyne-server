@@ -33,8 +33,9 @@ export class Field extends Component
 
     $ 'div',
       $ 'h4', title
-      do =>
-        if value
-          $ 'a', title: value, href: href, value
-        else
-          $ 'a', className: 'empty', '<none>'
+      $ 'div',
+        do =>
+          if value
+            $ 'a', title: value, href: href, value
+          else
+            $ 'a', className: 'empty', '<none>'
