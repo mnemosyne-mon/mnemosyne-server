@@ -31,9 +31,9 @@
     "webpack-merge": "5.7.3"
   },
   "dependencies": {
+    "@popperjs/core": "2.9.2",
     "bootstrap": "5.0.0",
     "font-awesome": "4.7.0",
-    "popper.js": "1.16.1",
     "preact": "10.5.13",
     "preact-icon-base": "2.0.6",
     "preact-icons": "2.2.5",
