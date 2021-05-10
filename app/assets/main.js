@@ -3,11 +3,10 @@ import {
   render
 } from 'preact'
 
-import { TraceView, TimeHeader } from 'components/index'
+import { TraceView } from 'components/index'
 
 const components = {
-  TraceView: TraceView,
-  TimeHeader: TimeHeader
+  TraceView: TraceView
 }
 
 function initalize() {
