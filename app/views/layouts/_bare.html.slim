@@ -9,7 +9,7 @@ html lang=I18n.locale
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', crossorigin: 'anonymous'
-    = javascript_include_tag 'application', crossorigin: 'anonymous', async: true
+    = javascript_include_tag 'application', async: true, crossorigin: 'anonymous'
 
     link rel="apple-touch-icon" sizes="180x180" href=asset_url('favicon/apple-touch-icon.png')
     link rel="icon" type="images/x-icon" sizes="any" href=asset_url('favicon/favicon.ico')
