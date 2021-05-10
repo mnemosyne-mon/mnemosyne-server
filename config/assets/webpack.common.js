@@ -68,12 +68,6 @@ module.exports = function (env, argv) {
               },
             },
             {
-              loader: "cache-loader",
-              options: {
-                cacheDirectory: path.join(root, "tmp/cache/webpack"),
-              },
-            },
-            {
               loader: "css-loader",
               options: {
                 esModule: true,
@@ -85,10 +79,12 @@ module.exports = function (env, argv) {
               loader: "postcss-loader",
               options: {
                 sourceMap: true,
-                plugins: [
-                  require("postcss-preset-env")(),
-                  require("cssnano")(),
-                ],
+                postcssOptions: {
+                  plugins: [
+                    require("postcss-preset-env")(),
+                    require("cssnano")(),
+                  ],
+                },
               },
             },
             {
@@ -102,12 +98,6 @@ module.exports = function (env, argv) {
         {
           test: /\.(jsx?|coffee)$/i,
           use: [
-            {
-              loader: "cache-loader",
-              options: {
-                cacheDirectory: path.join(root, "tmp/cache/webpack"),
-              },
-            },
             {
               loader: "babel-loader",
               options: {
@@ -146,52 +136,20 @@ module.exports = function (env, argv) {
         filename: "[name].[contenthash].css",
       }),
       new WebpackAssetsManifest({
+        contextRelativeKeys: true,
         integrity: true,
         integrityHashes: ["sha384"],
+        output: "manifest.json",
         publicPath: env.publicPath,
         writeToDisk: true,
         customize(entry, original, manifest, asset) {
-          if (entry.key == "manifest.js") {
-            // Skip manifest entry point. This file only defines external
-            // assets and should not be used otherwise.
+          if (entry.key.match(/(^manifest\.js$|\.gz$|\.map$|\.txt$|^\.)/)) {
+            // Skip files not needed in the asset manifest.
+            //
+            // The `manifest.js` entrypoint only defines external assets such as
+            // images and shall not be used otherwise.
             return false;
           }
-
-          let modules = manifest.stats.modules.filter((mod) =>
-            mod.assets.includes(original.value)
-          );
-
-          if (entry.key.endsWith(".map")) {
-            // Skip source maps
-            return false;
-          }
-
-          if (modules.length == 0) {
-            // This matches entry points that should exported to the manifest
-            return entry;
-          }
-
-          let chunk = manifest.stats.chunks.find((chunk) =>
-            chunk.names.includes("manifest")
-          );
-
-          let extmod = modules.find((mod) => mod.chunks.includes(chunk.id));
-
-          if (!extmod) {
-            // Dependency of any other bundle e.g. image required in CSS
-            // Do not emit a manifest entry for such files
-            console.warn("Do not emit " + original.value);
-            return false;
-          }
-
-          let mod = extmod.modules.find(
-            (mod) => mod.assets[0] === original.value
-          );
-
-          return {
-            key: path.normalize(mod.name),
-            value: entry.value,
-          };
         },
       }),
       new webpack.optimize.ModuleConcatenationPlugin(),

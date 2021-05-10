@@ -1,5 +1,5 @@
 //
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const zopfli = require("@gfx/zopfli");
 const CompressionPlugin = require("compression-webpack-plugin");
 
