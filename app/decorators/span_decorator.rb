@@ -27,8 +27,8 @@ class SpanDecorator < BaseDecorator
   end
 
   def offset
-    s_start = ::Mnemosyne::Clock.to_tick start
-    t_start = ::Mnemosyne::Clock.to_tick trace.start
+    s_start = ::Server::Clock.to_tick start
+    t_start = ::Server::Clock.to_tick trace.start
 
     (s_start - t_start).to_f / trace.duration * 100
   end
