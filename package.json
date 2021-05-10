@@ -41,7 +41,7 @@
   },
   "scripts": {
     "build": "webpack --config config/assets/webpack.config.js",
-    "start": "webpack-dev-server --config config/assets/webpack.config.js"
+    "start": "webpack serve --config config/assets/webpack.config.js"
   },
   "browserslist": [
     "last 1 chrome versions"

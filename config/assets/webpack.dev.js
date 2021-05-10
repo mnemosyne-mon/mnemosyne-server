@@ -28,7 +28,7 @@ module.exports = function (env, argv) {
       headers: { "Access-Control-Allow-Origin": "*" },
       historyApiFallback: true,
       host: "0.0.0.0",
-      port: 9000,
+      port: 9002,
       proxy: { "/": "http://localhost:9001" },
       // publicPath: env.publicPath,
       watchOptions: {
