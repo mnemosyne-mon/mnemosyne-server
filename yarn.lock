@@ -1953,10 +1953,10 @@ coa@^2.0.2:
     chalk "^2.4.1"
     q "^1.1.2"
 
-coffee-loader@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/coffee-loader/-/coffee-loader-2.0.0.tgz#76f4e193074cea8bf3e226aaed5ea356d3380c1b"
-  integrity sha512-fCq1T1b8ByUiPcWRMe3HCgvfS9h8kahRWR44Mew57x7Xm5MsNg9mjnV4XHHj6rWQS2+8SMYavHJQHQDUNybqhw==
+coffee-loader@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/coffee-loader/-/coffee-loader-3.0.0.tgz#c81821c10e2e5625aa5c78e8d18c30704f2b8a7e"
+  integrity sha512-2UPQNXfMAt4RmI/K9VxnLyrXdYdHPHQuEFiGcb70pTsVPmrV9M6Xg3p9ub7t1ettZZqvXUujjHozp22uTfLkzg==
 
 coffeescript@2.5.1:
   version "2.5.1"
