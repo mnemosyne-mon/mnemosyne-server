@@ -8,7 +8,7 @@ class RootController < ApplicationController
   end
 
   def trace
-    trace = Trace.find_by id: params[:id]
+    trace = Trace.find_by id: params[:id].strip
 
     if trace
       redirect_to trace_path(trace.platform, trace)
