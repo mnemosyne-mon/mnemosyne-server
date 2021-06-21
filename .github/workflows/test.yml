@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-      - uses: c-hive/gha-yarn-cache@v1
+      - uses: c-hive/gha-yarn-cache@v2
       - run: yarn install
       - run: yarn build
       - run: bundle exec rake db:create:all db:migrate
