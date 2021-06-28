@@ -23,7 +23,7 @@
     "postcss-preset-env": "6.7.0",
     "sass": "1.35.1",
     "sass-loader": "12.1.0",
-    "style-loader": "2.0.0",
+    "style-loader": "3.0.0",
     "webpack": "5.40.0",
     "webpack-assets-manifest": "5.0.6",
     "webpack-cli": "4.7.2",
