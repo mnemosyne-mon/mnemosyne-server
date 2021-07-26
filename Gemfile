@@ -39,7 +39,7 @@ gem 'sentry-ruby'
 gem 'sentry-rails'
 
 group :development do
-  gem 'listen', '~> 3.5.1'
+  gem 'listen', '~> 3.6.0'
   gem 'web-console', '>= 3.3.0'
 
   gem 'spring'
