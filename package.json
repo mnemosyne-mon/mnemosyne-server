@@ -24,9 +24,9 @@
     "sass": "1.37.5",
     "sass-loader": "12.1.0",
     "style-loader": "3.2.1",
-    "webpack": "5.49.0",
+    "webpack": "5.50.0",
     "webpack-assets-manifest": "5.0.6",
-    "webpack-cli": "4.7.2",
+    "webpack-cli": "4.8.0",
     "webpack-dev-server": "3.11.2",
     "webpack-merge": "5.8.0"
   },
