@@ -170,7 +170,7 @@ GEM
     influxdb (0.8.1)
     json (2.5.1)
     kgio (2.11.4)
-    listen (3.6.0)
+    listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.10.0)
@@ -372,7 +372,7 @@ DEPENDENCIES
   hutch!
   ibsciss-middleware (~> 0.4.2)
   influxdb
-  listen (~> 3.6.0)
+  listen (~> 3.7.0)
   mnemosyne-ruby (~> 1.10)
   oj
   pg (~> 1.2)
