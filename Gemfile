@@ -9,7 +9,7 @@ gem 'unicorn', '~> 6.0'
 gem 'active_record_upsert', '~> 0.10.0'
 
 gem 'bulk_insert', '~> 1.8'
-gem 'hutch', github: 'ruby-amqp/hutch', ref: '9322ead'
+gem 'hutch', '~> 1.1'
 gem 'pg', '~> 1.2'
 
 gem 'dry-struct', '~> 1.4.0'
@@ -24,7 +24,7 @@ gem 'uuid4', '~> 1.3'
 gem 'draper', '~> 4.0'
 gem 'has_scope', '~> 0.8.0'
 gem 'oj'
-gem 'rails-assets-manifest', '~> 2.1'
+gem 'rails-assets-manifest', '~> 2.1', '>= 2.1.2'
 gem 'rails-rfc6570', '~> 2.4'
 gem 'responders', '~> 3.0'
 gem 'slim'
@@ -35,8 +35,8 @@ gem 'influxdb'
 gem 'concurrent-ruby', '~> 1.1'
 gem 'mnemosyne-ruby', '~> 1.10'
 
-gem 'sentry-ruby'
 gem 'sentry-rails'
+gem 'sentry-ruby'
 
 group :development do
   gem 'listen', '~> 3.7.0'

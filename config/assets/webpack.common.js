@@ -44,16 +44,7 @@ module.exports = function (env, argv) {
       rules: [
         {
           test: /\.(ico|eot|ttf|woff|woff2|jpe?g|png|gif|svg)$/i,
-          use: [
-            {
-              loader: "file-loader",
-              options: {
-                name: env.dev
-                  ? "[path][name].[ext]"
-                  : "[name].[contenthash].[ext]",
-              },
-            },
-          ],
+          type: 'asset/resource',
         },
         {
           test: /\.(scss|sass|css)$/i,

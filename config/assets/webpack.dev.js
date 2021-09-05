@@ -2,12 +2,6 @@
 const { merge } = require("webpack-merge");
 
 module.exports = function (env, argv) {
-  if (argv.host) {
-    // We're running on the webpack-dev-server and always
-    // use a stable publicPath
-    env.publicPath = "/assets/";
-  }
-
   let common = require("./webpack.common.js")(env);
 
   return merge(common, {
@@ -23,17 +17,16 @@ module.exports = function (env, argv) {
     },
 
     devServer: {
-      compress: true,
-      contentBase: "/assets/",
-      headers: { "Access-Control-Allow-Origin": "*" },
-      historyApiFallback: true,
+      static: {
+        directory: "/public/",
+        serveIndex: true,
+        watch: {
+          ignored: /node_modules/,
+        },
+      },
       host: "0.0.0.0",
       port: 9002,
       proxy: { "/": "http://localhost:9001" },
-      // publicPath: env.publicPath,
-      watchOptions: {
-        ignored: /node_modules/,
-      },
     },
   });
 };

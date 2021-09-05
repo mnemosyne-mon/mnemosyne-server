@@ -15,7 +15,6 @@
     "compression-webpack-plugin": "8.0.1",
     "css-loader": "6.2.0",
     "cssnano": "5.0.8",
-    "file-loader": "6.2.0",
     "image-webpack-loader": "7.0.1",
     "mini-css-extract-plugin": "2.2.0",
     "postcss": "8.3.6",
