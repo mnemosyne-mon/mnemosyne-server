@@ -12,7 +12,7 @@
     "clean-webpack-plugin": "4.0.0",
     "coffee-loader": "3.0.0",
     "coffeescript": "2.5.1",
-    "compression-webpack-plugin": "8.0.1",
+    "compression-webpack-plugin": "9.0.0",
     "css-loader": "6.2.0",
     "cssnano": "5.0.8",
     "image-webpack-loader": "7.0.1",
