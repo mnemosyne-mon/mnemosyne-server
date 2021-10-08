@@ -26,9 +26,9 @@ export class TraceGraph extends Component
       $ 'div', this.renderBar(node)
 
   renderName: (node) ->
-    if node.traces?.length > 0
+    if node.children
       $ 'a',
-        href: this.context.routes.traces_url(id: node.traces[0])
+        href: this.context.routes.traces_url(origin: node.uuid)
         node.title || node.name
     else
       node.title || node.name

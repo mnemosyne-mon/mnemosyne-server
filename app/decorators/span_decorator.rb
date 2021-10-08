@@ -17,7 +17,7 @@ class SpanDecorator < BaseDecorator
         offset: offset
       }
 
-      json[:traces] = traces.map(&:id)
+      json[:children] = traces.any?
       json[:meta] = meta
     end
   end
