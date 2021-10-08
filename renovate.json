@@ -1,16 +1,29 @@
 {
-  "extends": ["config:base", "schedule:earlyMondays"],
+  "extends": [
+    "config:base",
+    "schedule:earlyMondays"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "automerge": true
     },
     {
-      "matchFiles": ["package.json"],
+      "matchFiles": [
+        "package.json"
+      ],
       "groupName": "NPM"
     },
     {
-      "matchLanguages": ["Gemfile"],
+      "matchLanguages": [
+        "Gemfile"
+      ],
       "groupName": "Ruby"
     }
   ]
