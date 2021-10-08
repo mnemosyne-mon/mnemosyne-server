@@ -8,6 +8,10 @@ class TracesController < ApplicationController
 
   include ::Server::Streaming::JSONStreaming
 
+  # Skip an implicit time range filter if at least on these scopes have been
+  # applied.
+  RANGE_EXCLUDE_KEYS = %i[activity]
+
   respond_to :html, :json
   respond_to :csv, only: :index
 
@@ -30,7 +34,7 @@ class TracesController < ApplicationController
   end
 
   has_scope :activity do |_, scope, value|
-    scope.where activity_id: value.to_s
+    scope.where activity_id: UUID4.try_convert(value.to_s)
   end
 
   has_scope :application do |controller, scope, value|
@@ -77,8 +81,12 @@ class TracesController < ApplicationController
     scope.where('meta @> ?', value.to_json)
   end
 
-  has_scope :range, default: true, allow_blank: true do |controller, scope, _|
-    scope.range controller.range
+  has_scope :range, default: true, allow_blank: true do |controller, scope, value|
+    if !value && (controller.send(:current_scopes).keys & RANGE_EXCLUDE_KEYS).any?
+      scope
+    else
+      scope.range controller.range
+    end
   end
 
   FILTER_PARAMS = %w[origin application hostname wm wp ws wc wa ls le].freeze
