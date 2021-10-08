@@ -13,7 +13,7 @@ class BaseDecorator < Draper::Decorator
 
   protected
 
-  def export
-    {}.tap(&Proc.new)
+  def export(&block)
+    {}.tap(&block)
   end
 end

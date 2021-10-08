@@ -29,6 +29,10 @@ class TracesController < ApplicationController
     scope.limit [0, [value.to_i, 100_000].min].max
   end
 
+  has_scope :activity do |_, scope, value|
+    scope.where activity_id: value.to_s
+  end
+
   has_scope :application do |controller, scope, value|
     scope.where application_id: controller.platform.applications.resolve(value)
   end

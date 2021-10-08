@@ -1,8 +1,8 @@
 .container
   form.tracesearch action=search_path
     .input-group
-      input.form-control type="search" name="id" placeholder="Paste a trace ID here..." required=true
-      button.btn.btn-primary type="submit" Search Traces
+      input.form-control type="search" name="id" placeholder="Paste a UUID here..." required=true
+      button.btn.btn-primary type="submit" Search
 
   .platforms
     - @platforms.each do |platform|
