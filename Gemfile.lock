@@ -39,8 +39,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_record_upsert (0.10.1)
-      activerecord (>= 5.0, < 6.2)
+    active_record_upsert (0.11.1)
+      activerecord (>= 5.2, < 7.1)
       pg (>= 0.18, < 2.0)
     activejob (6.1.4.1)
       activesupport (= 6.1.4.1)
@@ -160,7 +160,7 @@ GEM
       bunny (>= 2.16, < 3.0)
       carrot-top (~> 0.0.7)
       multi_json (~> 1.14)
-    i18n (1.8.10)
+    i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     ibsciss-middleware (0.4.2)
     ice_nine (0.11.2)
@@ -179,7 +179,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     mini_portile2 (2.6.1)
-    minitest (5.14.4)
+    minitest (5.15.0)
     mnemosyne-ruby (1.12.0)
       activesupport (>= 4)
       bunny
@@ -354,14 +354,14 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.4.2)
+    zeitwerk (2.5.3)
 
 PLATFORMS
   ruby
   x86_64-linux
 
 DEPENDENCIES
-  active_record_upsert (~> 0.10.0)
+  active_record_upsert (~> 0.11.0)
   bulk_insert (~> 1.8)
   capybara (~> 3.32)
   concurrent-ruby (~> 1.1)
