@@ -1,20 +1,36 @@
+@import '../variables'
+@import '../functions'
+
 .tracegraph
   background-color: #fff
   padding: 1rem
 
+  @each $color in $base-colors
+    $index: index($base-colors, $color)
+
+    .tg-color-#{$index}
+      --tg-bar-color: #{contrast-color($color)}
+      --tg-bar-background-color: #{$color}
+      --tg-row-background-color: #{mix(white, nth($base-colors, ($index + 1) % 8 + 1), 80%)}
+
   > div
-    margin: 0
+    margin: 1px 0
     padding: 0
     display: flex
 
     cursor: pointer
 
+    background-color: var(--tg-row-background-color)
+
+    // &:nth-child(2n+1)
+    //   background-color: #f2f2f2
+
     &.selected
       outline: 1px solid #aaa
-      background-color: #DFEBF2
+      background-color: #fff
 
-    &:nth-child(2n+1)
-      background-color: #f2f2f2
+    &:hover
+      background-color: #f8f8f8
 
     > div
       width: 100%
@@ -26,9 +42,6 @@
     > div:last-child
       padding-right: 40px
 
-    &:hover
-      background-color: #DFEBF2
-
   .tg-info
     padding: 1px 0 0 4px
 
@@ -36,7 +49,7 @@
     text-overflow: ellipsis
     white-space: nowrap
 
-    color: #777
+    color: #555
     font-size: 0.7rem
 
     a
@@ -45,11 +58,12 @@
 
   .tg-bar
     display: block
-    margin: 2px 0 2px 0
-    padding: 1px 0 0 1px
-    height: 14px
+    margin: 0
+    padding: 2px 0 0 4px
+    height: 100%
     line-height: 14px
 
     font-size: 11px
 
-    background-color: #8ACAED
+    color: var(--tg-bar-color)
+    background-color: var(--tg-bar-background-color)

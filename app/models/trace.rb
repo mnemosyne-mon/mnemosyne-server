@@ -8,9 +8,9 @@ class Trace < ApplicationRecord
 
   attribute :id, :uuid
   attribute :origin_id, :uuid
+  attribute :activity_id, :uuid
   attribute :platform_id, :uuid
   attribute :application_id, :uuid
-  attribute :activity_id, :uuid
 
   has_many :spans, -> { order('start') }, inverse_of: :trace
   has_many :failures, dependent: :destroy

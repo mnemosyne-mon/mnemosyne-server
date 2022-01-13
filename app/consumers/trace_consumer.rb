@@ -9,8 +9,10 @@ class TraceConsumer
 
   if ENV['QUEUE_IDENT'].present?
     queue_name "mnemosyne.server.#{ENV['QUEUE_IDENT'].strip}"
-  else
+  elsif Rails.env.production?
     queue_name 'mnemosyne.server'
+  else
+    queue_name "mnemosyne.#{Rails.env}"
   end
 
   def process(message)

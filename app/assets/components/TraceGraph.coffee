@@ -16,9 +16,22 @@ export class TraceGraph extends Component
   renderNode: (node) ->
     selected = this.props.selection == node['uuid']
 
+    hash = node['application']['name'].toString()
+      .split('')
+      .map (char) -> char.charCodeAt(0)
+      .reduce(((a, b) -> a + b), 0)
+
+    # colors are defined in SASS file
+    color = hash % 40
+
+    cls = [
+      'selected' if selected
+      "tg-color-#{color}"
+    ]
+
     $ 'div',
       key: node.uuid
-      className: 'selected' if selected
+      className: cls.join(' ')
       onClick: => this.select(node['uuid'])
       $ 'div',
         className: 'tg-info',

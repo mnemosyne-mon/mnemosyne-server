@@ -8,6 +8,7 @@ class Span < ApplicationRecord
 
   attribute :id, :uuid
   attribute :trace_id, :uuid
+  attribute :activity_id, :uuid
   attribute :platform_id, :uuid
   attribute :application_id, :uuid
 
@@ -17,6 +18,24 @@ class Span < ApplicationRecord
   has_many :traces, foreign_key: :origin_id, dependent: :destroy, inverse_of: :origin
 
   class << self
+    def sorted
+      order(:start)
+    end
+
+    def flatten_hierarchy(list = [])
+      where(nil).each_with_object(list) do |span, list|
+        list << span
+        next if span.traces.count != 1
+
+        trace = span.traces.take
+        trace.spans.after(trace.start).flatten_hierarchy(list)
+      end
+    end
+
+    def after(time)
+      where t[:stop].gteq(time)
+    end
+
     def retention(period, time = Time.zone.now)
       period = ::Server::Types::Duration.new.cast_value(period)
       tlimit = time - period

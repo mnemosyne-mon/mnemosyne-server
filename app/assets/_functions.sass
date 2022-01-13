@@ -4,3 +4,6 @@
     @return mix(black, $color, $percent)
   @else
     @return mix(white, $color, $percent)
+
+@function contrast-color($color, $dark: #212529, $light: #fff)
+  @return if(lightness($color) < 55%, $light, $dark)

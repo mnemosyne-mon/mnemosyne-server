@@ -17,20 +17,33 @@ class SpanDecorator < BaseDecorator
         offset: offset
       }
 
+      json[:application] = {
+        name: trace.application.name
+      }
+
+      json[:activity] = {
+        uuid: activity_id
+      }
+
+      json[:trace] = {
+        uuid: trace.id,
+        url: h.trace_url(trace.platform, trace)
+      }
+
       json[:children] = traces.any?
       json[:meta] = meta
     end
   end
 
   def width
-    duration.to_f / trace.duration * 100
+    duration.to_f / container.duration * 100
   end
 
   def offset
     s_start = ::Server::Clock.to_tick start
-    t_start = ::Server::Clock.to_tick trace.start
+    t_start = ::Server::Clock.to_tick container.start
 
-    (s_start - t_start).to_f / trace.duration * 100
+    (s_start - t_start).to_f / container.duration * 100
   end
 
   def title
@@ -51,6 +64,10 @@ class SpanDecorator < BaseDecorator
   end
 
   private
+
+  def container
+    context.fetch(:container) { trace }
+  end
 
   def name_for_url(url, scheme)
     url = ::URI.parse(url)

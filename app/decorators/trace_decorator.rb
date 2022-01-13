@@ -38,14 +38,19 @@ class TraceDecorator < BaseDecorator
       routes: routes,
       trace: serialize,
       failures: object.failures.decorate.as_json,
-      spans: object.spans
-        .includes(:trace, :traces, scope: Trace.after(start))
-        .includes(traces: [:application])
-        .range(start, stop)
-        .limit(10_000)
-        .decorate
-        .map(&:serialize)
+      spans: flatten_spans.map(&:serialize)
     }.to_json
+  end
+
+  def flatten_spans
+    spans = object.spans.after(start)
+      .includes(:trace, :traces, scope: Trace.after(start))
+      .includes(trace: %i[application platform])
+      .includes(traces: [:application])
+      .range(start, stop)
+      .limit(1000)
+      .flatten_hierarchy
+      .lazy.map {|span| span.decorate(context: {container: object}) }
   end
 
   def routes
@@ -152,6 +157,13 @@ class TraceDecorator < BaseDecorator
 
   def duration_text
     format '%.2f ms', duration_ms
+  end
+
+  def trace_subtree_ids
+    Rails.cache.fetch("child-traces-#{id}") do
+      traces = Trace.where(origin_id: object.spans.select(:id))
+      traces.decorate.map(&:trace_subtree_ids).flatten + traces.map(&:id)
+    end
   end
 
   private

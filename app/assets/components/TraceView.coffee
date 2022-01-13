@@ -59,13 +59,10 @@ export class TraceView extends Component
       this.setState selection: null
 
   select: (uuid) ->
-    if this.props.trace['uuid'] == uuid
-      this.setState selection: this.props.trace
-    else
-      for span in this.props.spans
-        if span['uuid'] == uuid
-          this.setState selection: span
-          break
+    for span in this.props.spans
+      if span['uuid'] == uuid
+        this.setState selection: span
+        break
 
   render: ->
     { trace, spans, failures } = this.props
@@ -81,7 +78,7 @@ export class TraceView extends Component
           $ TraceFailures, failures: failures
       $ 'div', className: 'container-fluid traceview-main',
         $ TraceGraph,
-          nodes: [trace, spans...],
+          nodes: [spans...],
           selection: this.state.selection?['uuid']
           onSelect: this.select.bind(this)
         if this.state.selection?
