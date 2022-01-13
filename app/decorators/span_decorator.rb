@@ -22,7 +22,7 @@ class SpanDecorator < BaseDecorator
       }
 
       json[:activity] = {
-        uuid: activity_id
+        uuid: trace.activity_id
       }
 
       json[:trace] = {
