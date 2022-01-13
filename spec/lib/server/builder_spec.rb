@@ -59,8 +59,8 @@ RSpec.describe ::Server::Builder do
       expect { call }.to change(Trace, :count).from(0).to(1)
     end
 
-    it 'creates span' do
-      expect { call }.to change(Span, :count).from(0).to(1)
+    it 'creates two spans' do
+      expect { call }.to change(Span, :count).from(0).to(2)
     end
 
     it 'creates failure' do
@@ -133,29 +133,26 @@ RSpec.describe ::Server::Builder do
       end
     end
 
-    describe 'span' do
-      subject(:span) { trace.spans.first }
-
+    describe 'spans' do
       before { call }
 
-      example 'UUID equals payload value' do
-        expect(span.id).to eq 'd9a6f0f0-eff4-4f43-af75-9d15ba2de93c'
+      example 'first matches trace' do
+        trace.spans[0].tap do |span|
+          expect(span.id).to eq 'cd25562f-42e6-48e6-9f3b-08632da38921'
+          expect(span.name).to eq 'example.trace.mnemosyne'
+          expect(span.start).to eq Time.at(0).utc
+          expect(span.stop).to eq Time.at(1).utc
+        end
       end
 
-      example 'name equals payload value' do
-        expect(span.name).to eq 'example.span.mnemosyne'
-      end
-
-      example 'start time equals payload value' do
-        expect(span.start).to eq Time.at(Rational(1, 10)).utc
-      end
-
-      example 'stop time equals payload value' do
-        expect(span.stop).to eq Time.at(Rational(2, 10)).utc
-      end
-
-      example 'correct trace is associated' do
-        expect(span.trace.id).to eq 'cd25562f-42e6-48e6-9f3b-08632da38921'
+      example 'second matches include span record' do
+        trace.spans[1].tap do |span|
+          expect(span.id).to eq 'd9a6f0f0-eff4-4f43-af75-9d15ba2de93c'
+          expect(span.name).to eq 'example.span.mnemosyne'
+          expect(span.start).to eq Time.at(Rational(1, 10)).utc
+          expect(span.stop).to eq Time.at(Rational(2, 10)).utc
+          expect(span.trace_id).to eq 'cd25562f-42e6-48e6-9f3b-08632da38921'
+        end
       end
     end
 
