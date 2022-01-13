@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_160023) do
     t.uuid "platform_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "activity_id", null: false
+    t.uuid "activity_id"
     t.index ["id"], name: "index_spans_on_id"
     t.index ["name"], name: "index_spans_on_name"
     t.index ["start"], name: "index_spans_on_start"
