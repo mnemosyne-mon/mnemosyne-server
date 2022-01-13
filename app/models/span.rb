@@ -25,7 +25,11 @@ class Span < ApplicationRecord
     def flatten_hierarchy(list = [])
       where(nil).each_with_object(list) do |span, list|
         list << span
-        next if span.traces.count != 1
+
+        # We explicitly use `#length` to *not* run an additional COUNT query on
+        # the database, but to get the size of the preloaded `traces`
+        # association.
+        next if span.traces.length != 1
 
         trace = span.traces.take
         trace.spans.after(trace.start).flatten_hierarchy(list)
