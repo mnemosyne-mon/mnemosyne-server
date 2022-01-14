@@ -80,7 +80,14 @@ class SpanDecorator < BaseDecorator
       return [] if traces.length != 1
 
       trace = traces.take
-      trace.spans.after(container.start).decorate(context: {container: container})
+      trace.spans
+        .after(start)
+        .includes(:trace, :traces, scope: Trace.after(trace.start))
+        .includes(trace: %i[application platform])
+        .includes(traces: [:application])
+        .range(trace.start, trace.stop)
+        .limit(1000)
+        .decorate(context: {container: container})
     end
   end
 
