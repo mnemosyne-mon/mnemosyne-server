@@ -24,7 +24,24 @@ namespace :mnemosyne do
 
     Hutch::Logging.logger = Rails.logger
 
-    config = Rails.application.config_for(:hutch).symbolize_keys
+    configuration = begin
+      if (file = Rails.root.join("config/hutch.#{Rails.env}.yml")).exist? ||
+          (file = Rails.root.join("config/hutch.yml")).exist?
+
+        require "erb"
+        (YAML.load(ERB.new(file.read).result) || {})[Rails.env] || {}
+      else
+        raise "Could not load configuration. No such file - config/hutch.yml"
+      end
+    end.symbolize_keys
+
+    profile = ENV.fetch('PROFILE', :default)
+    config = configuration.fetch(profile) do
+      warn "Connection profile not found: #{profile}"
+      exit 1
+    end
+
+    Rails.logger.info("Using connection profile: #{profile}")
 
     ENV['QUEUE_IDENT'] ||= config[:ident] if config.key?(:ident)
 
@@ -54,7 +71,7 @@ namespace :mnemosyne do
     Hutch::Config.set :mq_password, config[:password] if config.key?(:password)
     Hutch::Config.set :mq_exchange, config.fetch(:exchange, 'mnemosyne')
 
-    Hutch::Config.set :channel_prefetch, config[:pool]
+    Hutch::Config.set :channel_prefetch, config.fetch(:prefetch) { config[:pool] * 2 }
     Hutch::Config.set :consumer_pool_size, config[:pool]
 
     Hutch::Config.set :publisher_confirms, \

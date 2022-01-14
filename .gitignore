@@ -15,3 +15,6 @@
 /public/assets
 /node_modules
 /deploy
+
+# Ignore env-overrides for configs
+config/hutch.*.yml
