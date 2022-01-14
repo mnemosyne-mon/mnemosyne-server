@@ -31,6 +31,7 @@ class SpanDecorator < BaseDecorator
       }
 
       json[:children] = traces.any?
+      json[:spans] = spans.map(&:serialize)
       json[:meta] = meta
     end
   end
@@ -63,7 +64,39 @@ class SpanDecorator < BaseDecorator
     end
   end
 
+  def stats
+    [make_stats, spans.map(&:stats)].flatten.reduce(&:+)
+  end
+
   private
+
+  def spans
+    @spans ||= begin
+      return [] unless context.key?(:container)
+
+      # We explicitly use `#length` to *not* run an additional COUNT query on
+      # the database, but to get the size of the preloaded `traces`
+      # association.
+      return [] if traces.length != 1
+
+      trace = traces.take
+      trace.spans.after(container.start).decorate(context: {container: container})
+    end
+  end
+
+  def make_stats
+    if span.name.start_with?('app.')
+      Stats.new(1, 0, 0, 0)
+    elsif span.name.start_with?('db.')
+      Stats.new(0, 1, 0, 0)
+    elsif span.name.start_with?('view.')
+      Stats.new(0, 0, 1, 0)
+    elsif span.name.start_with?('external.')
+      Stats.new(0, 0, 0, 1)
+    else
+      Stats.new(0, 0, 0, 0)
+    end
+  end
 
   def container
     context.fetch(:container) { trace }
@@ -80,5 +113,25 @@ class SpanDecorator < BaseDecorator
 
     url.port = nil
     url.to_s
+  end
+
+  Stats = Struct.new(:app, :db, :view, :external) do
+    def +(stat)
+      Stats.new(
+        app + stat.app,
+        db + stat.db,
+        view + stat.view,
+        external + stat.external
+      )
+    end
+
+    def as_json
+      {
+        db: db,
+        app: app,
+        view: view,
+        external: external,
+      }
+    end
   end
 end

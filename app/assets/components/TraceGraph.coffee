@@ -18,13 +18,13 @@ export class TraceGraph extends Component
         $ 'dt', 'external'
         $ 'dd', this.props.trace.stats.count.external
       $ 'div', className: 'tg-graph',
-        this.props.spans.map this.renderNode.bind(this)
+        this.props.spans.map(this.renderNode).flat()
 
-  select: (uuid) ->
+  select: (uuid) =>
     window.location.hash = "#sm-#{uuid}"
     this.props.onSelect(uuid)
 
-  renderNode: (node) ->
+  renderNode: (node) =>
     selected = this.props.selection == node['uuid']
 
     hash = node['application']['name'].toString()
@@ -40,16 +40,23 @@ export class TraceGraph extends Component
       "tg-color-#{color}"
     ]
 
-    $ 'div',
-      key: node.uuid
-      className: cls.join(' ')
-      onClick: => this.select(node['uuid'])
+    rows = [
       $ 'div',
-        className: 'tg-info',
-        this.renderName(node)
-      $ 'div', this.renderBar(node)
+        key: node.uuid
+        className: cls.join(' ')
+        onClick: => this.select(node['uuid'])
+        $ 'div',
+          className: 'tg-info',
+          this.renderName(node)
+        $ 'div', this.renderBar(node)
+    ]
 
-  renderName: (node) ->
+    if node.spans
+      rows.push node.spans.map this.renderNode
+
+    rows
+
+  renderName: (node) =>
     if node.children
       $ 'a',
         href: this.context.routes.traces_url(origin: node.uuid)
@@ -57,7 +64,7 @@ export class TraceGraph extends Component
     else
       node.title || node.name
 
-  renderBar: (node) ->
+  renderBar: (node) =>
     style = {}
 
     if node.metric?

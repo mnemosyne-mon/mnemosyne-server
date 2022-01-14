@@ -22,20 +22,6 @@ class Span < ApplicationRecord
       order(:start)
     end
 
-    def flatten_hierarchy(list = [])
-      where(nil).each_with_object(list) do |span, list|
-        list << span
-
-        # We explicitly use `#length` to *not* run an additional COUNT query on
-        # the database, but to get the size of the preloaded `traces`
-        # association.
-        next if span.traces.length != 1
-
-        trace = span.traces.take
-        trace.spans.after(trace.start).flatten_hierarchy(list)
-      end
-    end
-
     def after(time)
       where t[:stop].gteq(time)
     end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class TraceDecorator < BaseDecorator
-  decorates_association :spans
   decorates_association :application
   decorates_association :activity
   decorates_association :platform
@@ -35,13 +34,10 @@ class TraceDecorator < BaseDecorator
   end
 
   def stats
+    pp spans.map(&:stats).reduce(&:+)
+
     {
-      count: {
-        db: flatten_spans.count {|span| span.name.start_with?('db.') },
-        app: flatten_spans.count {|span| span.name.start_with?('app.') },
-        view: flatten_spans.count {|span| span.name.start_with?('view.') },
-        external: flatten_spans.count {|span| span.name.start_with?('external.') },
-      }
+      count: spans.map(&:stats).sum.as_json
     }
   end
 
@@ -50,20 +46,18 @@ class TraceDecorator < BaseDecorator
       routes: routes,
       trace: serialize,
       failures: object.failures.decorate.as_json,
-      spans: flatten_spans
-        .lazy
-        .map {|span| span.decorate(context: {container: object}).serialize }
+      spans: spans.map(&:serialize)
     }.to_json
   end
 
-  def flatten_spans
+  def spans
     @spans ||= object.spans.after(start)
       .includes(:trace, :traces, scope: Trace.after(start))
       .includes(trace: %i[application platform])
       .includes(traces: [:application])
       .range(start, stop)
       .limit(1000)
-      .flatten_hierarchy
+      .decorate(context: {container: object})
   end
 
   def routes

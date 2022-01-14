@@ -32,6 +32,14 @@ makeRoutes = (routes) ->
   helpers
 
 
+findSpan = (spans, uuid) ->
+  for span in spans
+    if span['uuid'] == uuid
+      return span
+    else if span.spans && (match = findSpan(span.spans, uuid))
+      return match
+
+
 export class TraceView extends Component
   constructor: (props) ->
     super(props)
@@ -59,10 +67,11 @@ export class TraceView extends Component
       this.setState selection: null
 
   select: (uuid) ->
-    for span in this.props.spans
-      if span['uuid'] == uuid
-        this.setState selection: span
-        break
+    match = findSpan(this.props.spans, uuid)
+    if match
+      this.setState selection: match
+    else
+      console.log('Span not found: ', uuid)
 
   render: ->
     { trace, spans, failures } = this.props
@@ -79,7 +88,7 @@ export class TraceView extends Component
       $ 'div', className: 'container-fluid traceview-main',
         $ TraceGraph,
           trace: trace,
-          spans: [spans...],
+          spans: spans,
           selection: this.state.selection?['uuid']
           onSelect: this.select.bind(this)
         if this.state.selection?
