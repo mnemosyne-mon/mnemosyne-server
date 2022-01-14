@@ -39,7 +39,7 @@ namespace :mnemosyne do
     config = configuration.fetch(profile) do
       warn "Connection profile not found: #{profile}"
       exit 1
-    end
+    end.symbolize_keys
 
     Rails.logger.info("Using connection profile: #{profile}")
 
