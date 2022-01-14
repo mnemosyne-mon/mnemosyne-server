@@ -78,7 +78,8 @@ export class TraceView extends Component
           $ TraceFailures, failures: failures
       $ 'div', className: 'container-fluid traceview-main',
         $ TraceGraph,
-          nodes: [spans...],
+          trace: trace,
+          spans: [spans...],
           selection: this.state.selection?['uuid']
           onSelect: this.select.bind(this)
         if this.state.selection?

@@ -6,8 +6,19 @@ import './TraceGraph.sass'
 
 export class TraceGraph extends Component
   render: ->
+
     $ 'section', className: 'tracegraph',
-      this.props.nodes.map this.renderNode.bind(this)
+      $ 'dl', className: 'tg-stats',
+        $ 'dt', 'app'
+        $ 'dd', this.props.trace.stats.count.app
+        $ 'dt', 'db'
+        $ 'dd', this.props.trace.stats.count.db
+        $ 'dt', 'view'
+        $ 'dd', this.props.trace.stats.count.view
+        $ 'dt', 'external'
+        $ 'dd', this.props.trace.stats.count.external
+      $ 'div', className: 'tg-graph',
+        this.props.spans.map this.renderNode.bind(this)
 
   select: (uuid) ->
     window.location.hash = "#sm-#{uuid}"

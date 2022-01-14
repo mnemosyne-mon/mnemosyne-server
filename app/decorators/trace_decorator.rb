@@ -28,9 +28,21 @@ class TraceDecorator < BaseDecorator
 
       out[:origin] = {uuid: origin_id}
       out[:origin][:trace] = origin.trace_id if origin
+      out[:stats] = stats
 
       out[:meta] = metainfo
     end
+  end
+
+  def stats
+    {
+      count: {
+        db: flatten_spans.count {|span| span.name.start_with?('db.') },
+        app: flatten_spans.count {|span| span.name.start_with?('app.') },
+        view: flatten_spans.count {|span| span.name.start_with?('view.') },
+        external: flatten_spans.count {|span| span.name.start_with?('external.') },
+      }
+    }
   end
 
   def props
@@ -38,19 +50,20 @@ class TraceDecorator < BaseDecorator
       routes: routes,
       trace: serialize,
       failures: object.failures.decorate.as_json,
-      spans: flatten_spans.map(&:serialize)
+      spans: flatten_spans
+        .lazy
+        .map {|span| span.decorate(context: {container: object}).serialize }
     }.to_json
   end
 
   def flatten_spans
-    spans = object.spans.after(start)
+    @spans ||= object.spans.after(start)
       .includes(:trace, :traces, scope: Trace.after(start))
       .includes(trace: %i[application platform])
       .includes(traces: [:application])
       .range(start, stop)
       .limit(1000)
       .flatten_hierarchy
-      .lazy.map {|span| span.decorate(context: {container: object}) }
   end
 
   def routes

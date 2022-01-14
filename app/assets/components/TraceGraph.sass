@@ -13,34 +13,57 @@
       --tg-bar-background-color: #{$color}
       --tg-row-background-color: #{mix(white, nth($base-colors, ($index + 1) % 8 + 1), 80%)}
 
-  > div
+  .tg-stats
+    display: flex
+    font-size: 90%
+    margin: 0
+
+    dt
+      margin-right: .3em
+      font-weight: normal
+      font-variant: small-caps
+      color: #999
+
+      &:after
+        content: ':'
+
+    dd
+      margin-right: 1em
+
+  .tg-graph > div
     margin: 1px 0
     padding: 0
+    width: 100%
+
     display: flex
+    box-sizing: border-box
 
     cursor: pointer
 
     background-color: var(--tg-row-background-color)
-
-    // &:nth-child(2n+1)
-    //   background-color: #f2f2f2
 
     &.selected
       outline: 1px solid #aaa
       background-color: #fff
 
     &:hover
+      outline: 1px solid #bbb
       background-color: #f8f8f8
 
     > div
-      width: 100%
-      padding: 0 0 0 4px
+      padding: 0
+      overflow: hidden
+      vertical-align: bottom
 
     > div:first-child
       width: 300px
+      padding: .1em .4em .05em
+      border-right: 1px solid rgba(0, 0, 0, 0.1)
 
     > div:last-child
       padding-right: 40px
+      width: 100%
+
 
   .tg-info
     padding: 1px 0 0 4px
@@ -52,16 +75,12 @@
     color: #555
     font-size: 0.7rem
 
-    a
-      display: block
-      text-decoration: none
-
   .tg-bar
     display: block
     margin: 0
     padding: 2px 0 0 4px
     height: 100%
-    line-height: 14px
+    box-sizing: border-box
 
     font-size: 11px
 
