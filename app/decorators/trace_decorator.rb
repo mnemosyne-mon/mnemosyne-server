@@ -159,13 +159,6 @@ class TraceDecorator < BaseDecorator
     format '%.2f ms', duration_ms
   end
 
-  def trace_subtree_ids
-    Rails.cache.fetch("child-traces-#{id}") do
-      traces = Trace.where(origin_id: object.spans.select(:id))
-      traces.decorate.map(&:trace_subtree_ids).flatten + traces.map(&:id)
-    end
-  end
-
   private
 
   def origin_url
