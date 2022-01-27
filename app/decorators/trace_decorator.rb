@@ -34,10 +34,8 @@ class TraceDecorator < BaseDecorator
   end
 
   def stats
-    pp spans.map(&:stats).reduce(&:+)
-
     {
-      count: spans.map(&:stats).sum.as_json
+      count: spans.sum(&:stats).as_json
     }
   end
 
