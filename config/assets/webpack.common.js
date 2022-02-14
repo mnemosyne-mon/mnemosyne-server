@@ -130,7 +130,6 @@ module.exports = function (env, argv) {
         contextRelativeKeys: true,
         integrity: true,
         integrityHashes: ["sha384"],
-        output: "manifest.json",
         publicPath: env.publicPath,
         writeToDisk: true,
         customize(entry, original, manifest, asset) {
