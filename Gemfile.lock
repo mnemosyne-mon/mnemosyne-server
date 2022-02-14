@@ -165,7 +165,7 @@ GEM
       bunny (>= 2.16, < 3.0)
       carrot-top (~> 0.0.7)
       multi_json (~> 1.14)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     ibsciss-middleware (0.4.2)
     ice_nine (0.11.2)
@@ -175,7 +175,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.13.0)
+    loofah (2.14.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -230,7 +230,7 @@ GEM
       bundler (>= 1.15.0)
       railties (= 6.1.4.4)
       sprockets-rails (>= 2.0.0)
-    rails-assets-manifest (2.1.2)
+    rails-assets-manifest (3.0.0)
       activesupport (> 4.2)
       railties (> 4.2)
     rails-dom-testing (2.0.3)
@@ -361,7 +361,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
@@ -388,7 +388,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 5.5)
   rails (~> 6.1.0)
-  rails-assets-manifest (~> 2.1, >= 2.1.2)
+  rails-assets-manifest (~> 3.0, >= 3.0.0)
   rails-rfc6570 (~> 2.4)
   responders (~> 3.0)
   rspec (~> 3.9)
