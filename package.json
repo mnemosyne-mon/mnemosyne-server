@@ -36,7 +36,7 @@
     "preact": "10.6.6",
     "preact-icon-base": "2.0.6",
     "preact-icons": "2.2.5",
-    "urijs": "1.19.8"
+    "urijs": "1.19.9"
   },
   "scripts": {
     "build": "webpack --config config/assets/webpack.config.js",
