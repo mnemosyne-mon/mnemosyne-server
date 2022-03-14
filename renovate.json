@@ -10,7 +10,8 @@
     {
       "matchUpdateTypes": [
         "minor",
-        "patch"
+        "patch",
+        "lockFileMaintenance"
       ],
       "automerge": true
     },
