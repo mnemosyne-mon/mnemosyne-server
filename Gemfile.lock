@@ -139,6 +139,7 @@ GEM
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffi (1.15.5)
+    forked (0.1.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     has_scope (0.8.0)
@@ -366,6 +367,7 @@ DEPENDENCIES
   dry-struct (~> 1.4.0)
   dry-types (~> 1.5.0)
   factory_bot_rails
+  forked (~> 0.1.2)
   has_scope (~> 0.8.0)
   hutch (~> 1.1)
   ibsciss-middleware (~> 0.4.2)
@@ -400,4 +402,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   2.3.3
+   2.3.8

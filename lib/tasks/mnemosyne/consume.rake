@@ -3,6 +3,8 @@
 namespace :mnemosyne do
   desc 'Run hutch and consume messages from clients'
   task consume: :environment do
+    require 'etc'
+
     require 'hutch'
     require 'hutch/cli'
 
@@ -63,6 +65,7 @@ namespace :mnemosyne do
 
     config[:exchange] = ENV['EXCHANGE'] || config[:exchange] || 'mnemosyne'
     config[:pool] = ENV['POOL']&.to_i || config[:pool] || 5
+    config[:worker] = ENV['WORKER']&.to_i || config[:worker] || Etc.nprocessors
 
     Hutch::Config.set :mq_host, config[:host] if config.key?(:host)
     Hutch::Config.set :mq_port, config[:port] if config.key?(:port)
@@ -83,6 +86,23 @@ namespace :mnemosyne do
 
     Hutch::Config[:error_handlers] << Hutch::ErrorHandlers::Sentry.new
 
-    Hutch::CLI.new.run([])
+    if config[:worker] > 1
+      require 'forked'
+      process_manager = Forked::ProcessManager.new(logger: Rails.logger, process_timeout: 10)
+
+      ::ActiveRecord::Base.clear_all_connections!
+
+      config[:worker].times do
+        process_manager.fork('worker') do
+          Rails.application.reloader.wrap do
+            Hutch::CLI.new.run([])
+          end
+        end
+      end
+
+      process_manager.wait_for_shutdown
+    else
+      Hutch::CLI.new.run([])
+    end
   end
 end
