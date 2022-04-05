@@ -26,7 +26,7 @@ require 'csv'
 module Server
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 7.0
 
     # Settings in config/environments/* take precedence over those specified
     # here. Application configuration can go into files in config/initializers
@@ -46,6 +46,9 @@ module Server
 
     config.time_zone = 'Europe/Berlin'
     config.active_record.default_timezone = :utc
+
+    # Currently required at least to run specs
+    config.active_record.partial_inserts = true
 
     config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/').to_s
 
