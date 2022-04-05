@@ -82,7 +82,7 @@ class SpanDecorator < BaseDecorator
       trace = traces.take
       trace.spans
         .after(start)
-        .includes(:trace, :traces)
+        .includes(:trace, :traces, scope: Trace.after(trace.start))
         .includes(trace: %i[application platform])
         .includes(traces: [:application])
         .range(trace.start, trace.stop)

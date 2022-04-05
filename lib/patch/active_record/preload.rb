@@ -5,16 +5,19 @@ module Patch
     ScopedPreload = Struct.new(:args, :scope)
 
     module Preloader
-      def preload(records, associations, preload_scope = nil)
-        return super unless associations.is_a?(ScopedPreload)
-
-        super(records, associations.args, associations.scope)
+      def initialize(associations:, scope: nil, **kwargs)
+        if associations.is_a?(ScopedPreload)
+          super(associations: associations.args, scope: associations.scope, **kwargs)
+        else
+          super
+        end
       end
     end
 
     module QueryMethods
       def includes(*args, scope: nil, **kwargs)
         if scope
+          puts "Includes with scope: #{scope}"
           super ScopedPreload.new([*args, kwargs], scope)
         else
           super(*args, kwargs)
@@ -23,6 +26,7 @@ module Patch
 
       def preload(*args, scope: nil, **kwargs)
         if scope
+          puts "Preload with scope: #{scope}"
           super ScopedPreload.new([*args, kwargs], scope)
         else
           super(*args, kwargs)
