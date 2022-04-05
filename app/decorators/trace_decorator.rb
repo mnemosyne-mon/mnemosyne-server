@@ -50,7 +50,7 @@ class TraceDecorator < BaseDecorator
 
   def spans
     @spans ||= object.spans.after(start)
-      .includes(:trace, :traces, scope: Trace.after(start))
+      .includes(:trace, :traces)
       .includes(trace: %i[application platform])
       .includes(traces: [:application])
       .range(start, stop)
