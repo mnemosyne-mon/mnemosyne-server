@@ -1,3 +1,5 @@
+@use 'sass:math'
+
 @import 'panel'
 
 .tracesearch
@@ -71,7 +73,7 @@
 
     @for $i from 0 through 255
       &.weight-#{$i}
-        background-color: rgba(#00f, $i / 255)
+        background-color: rgba(#00f, math.div($i, 255))
 
         @if $i > 120
           color: white
