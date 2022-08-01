@@ -100,17 +100,17 @@ class TraceDecorator < BaseDecorator
     case type
       when :web
         h.tag.i \
-          class: %w[fa-regular fa-globe],
+          class: %w[fa-solid fa-globe],
           title: 'Web Request',
           'aria-hidden': 'true'
       when :background
         h.tag.i \
-          class: %w[fa-regular fa-tasks],
+          class: %w[fa-solid fa-tasks],
           title: 'Background Job',
           'aria-hidden': 'true'
       else
         h.tag.i \
-          class: %w[fa-regular fa-question],
+          class: %w[fa-solid fa-question],
           title: 'Unknown',
           'aria-hidden': 'true'
     end
