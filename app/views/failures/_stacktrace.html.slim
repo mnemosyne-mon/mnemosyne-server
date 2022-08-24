@@ -3,7 +3,7 @@ table.stacktrace
     tr
       td.file
         span= l['file'].split('/')[0..-2].join('/')
-        span= '/' + l['file'].split('/')[-1]
+        span= '/' + l['file'].split('/')[-1].to_s
       td.line= l['line']
       td.call= l['call']
 
