@@ -32,7 +32,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.2.1",
     "@popperjs/core": "2.11.6",
-    "bootstrap": "5.2.2",
+    "bootstrap": "5.2.3",
     "preact": "10.11.3",
     "preact-icon-base": "2.0.6",
     "preact-icons": "2.2.5",
