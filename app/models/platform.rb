@@ -28,7 +28,7 @@ class Platform < ApplicationRecord
   class << self
     def fetch(name:)
       # rubocop:disable Rails/SkipsModelValidations
-      find_by(name: name) || upsert(name: name)
+      find_by(name: name) || upsert({name: name})
       # rubocop:enable Rails/SkipsModelValidations
     end
   end
