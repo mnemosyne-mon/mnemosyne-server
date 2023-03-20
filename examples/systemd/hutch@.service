@@ -6,10 +6,19 @@ PartOf=hutch.target
 
 [Service]
 Type=simple
+
+# Specify the path to your puma application root
 Environment=RAILS_ENV=production
+Environment=LOG_LEVEL=info
+Environment=MALLOC_ARENA_MAX=2
+Environment=JOB_INDEX=%i
+EnvironmentFile=/home/mnemosyne/.config/default/mnemosyne
 WorkingDirectory=/home/mnemosyne/application/current
-ExecStart=/usr/bin/bundle exec rake mnemosyne:consume
+ExecStart=/home/mnemosyne/application/current/bin/rake mnemosyne:consume
 Restart=always
+RestartSec=120
+RuntimeMaxSec=24h
+StandardOutput=null
 
 [Install]
 WantedBy=hutch.target

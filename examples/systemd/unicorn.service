@@ -1,0 +1,27 @@
+[Unit]
+Description=Unicorn HTTP Server
+After=network.target
+Requires=unicorn.socket
+Conflicts=puma.service
+
+[Service]
+Type=simple
+
+Environment=LISTEN=/tmp/mnemosyne/web.sock
+Environment=MALLOC_ARENA_MAX=2
+Environment=RAILS_ENV=production
+Environment=RAILS_MAX_THREADS=1
+Environment=WORKER=8
+EnvironmentFile=/home/mnemosyne/.config/default/mnemosyne
+
+WorkingDirectory=/home/mnemosyne/application/current/
+
+ExecStart=/home/mnemosyne/application/current/bin/unicorn --config-file config/unicorn.rb --listen ${LISTEN}
+ExecReload=/bin/kill -USR2 $MAINPID
+ExecStop=/bin/kill -QUIT $MAINPID
+
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=default.target

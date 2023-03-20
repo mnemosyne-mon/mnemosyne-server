@@ -2,14 +2,24 @@
 Description=Puma HTTP Server
 After=network.target
 Requires=puma.socket
+Conflicts=unicorn.service
 
 [Service]
 Type=simple
+
+Environment=LISTEN=unix:///tmp/mnemosyne/web.sock
+Environment=MALLOC_ARENA_MAX=2
 Environment=RAILS_ENV=production
 Environment=RAILS_MAX_THREADS=32
+Environment=WEB_CONCURRENCY=4
+EnvironmentFile=/home/mnemosyne/.config/default/mnemosyne
+
 WorkingDirectory=/home/mnemosyne/application/current
-ExecStart=/home/mnemosyne/application/current/bin/puma -C config/puma.rb -w 3 -t 8:32 -b unix:///tmp/mnemosyne/puma.socket
-Restart=always
+
+ExecStart=/home/mnemosyne/application/current/bin/puma -C config/puma.rb -b ${LISTEN}
+
+Restart=on-failure
+RestartSec=10s
 
 [Install]
 WantedBy=default.target

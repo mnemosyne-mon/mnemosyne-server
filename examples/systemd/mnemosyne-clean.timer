@@ -4,6 +4,7 @@ Description=Run menmosyne clean up task removing data according to retention pol
 [Timer]
 OnCalendar=*-*-* 00:00:00
 Unit=mnemosyne-clean.service
+RandomizedDelaySec=2h
 
 [Install]
 WantedBy=timers.target

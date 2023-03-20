@@ -1,6 +1,6 @@
 [Unit]
-Description=Puma Socket
-Conflicts=unicorn.socket
+Description=Unicorn Socket
+Conflicts=puma.socket
 
 [Socket]
 ListenStream=/tmp/mnemosyne/web.sock
