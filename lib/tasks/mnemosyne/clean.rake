@@ -14,7 +14,7 @@ namespace :mnemosyne do
     next if Platform.all.empty?
 
     retention = Platform.maximum(:retention_period)
-    cutoff = Time.zone.now - ActiveSupport::Duration.parse(retention)
+    cutoff = Time.zone.now - retention
 
     logger.info do
       "Dropping chunks older then #{cutoff}..."
