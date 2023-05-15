@@ -3,7 +3,7 @@
   "license": "AGPLv3",
   "private": true,
   "devDependencies": {
-    "@babel/core": "7.21.5",
+    "@babel/core": "7.21.8",
     "@babel/plugin-transform-react-jsx": "7.21.5",
     "@babel/preset-env": "7.21.5",
     "@gfx/zopfli": "1.0.15",
@@ -23,17 +23,17 @@
     "sass": "1.62.1",
     "sass-loader": "13.2.2",
     "style-loader": "3.3.2",
-    "webpack": "5.81.0",
+    "webpack": "5.82.1",
     "webpack-assets-manifest": "5.1.0",
-    "webpack-cli": "5.0.2",
-    "webpack-dev-server": "4.13.3",
+    "webpack-cli": "5.1.1",
+    "webpack-dev-server": "4.15.0",
     "webpack-merge": "5.8.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.4.0",
     "@popperjs/core": "2.11.7",
     "bootstrap": "5.2.3",
-    "preact": "10.13.2",
+    "preact": "10.14.0",
     "preact-icon-base": "2.0.6",
     "preact-icons": "2.2.5",
     "urijs": "1.19.11"
