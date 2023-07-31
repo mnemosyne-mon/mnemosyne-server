@@ -31,10 +31,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - uses: c-hive/gha-yarn-cache@v2
-      - run: yarn install
-      - run: yarn build
-      - run: bundle exec rake db:create:all db:migrate
+          cache: yarn
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: yarn build --mode production
+      - run: bundle exec rake db:setup
       - run: bundle exec rspec spec --format doc
 
   rubocop:
