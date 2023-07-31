@@ -4,17 +4,35 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
+# Ignore bundler config
 /.bundle
 
-# Ignore all logfiles and tempfiles.
+# Ignore all logfiles and tempfiles
 /log/*
+/tmp/*
 !/log/.keep
-/tmp
-/spec/examples.txt
-/public/assets
-/node_modules
+!/tmp/.keep
+
+# Ignore pidfiles, but keep the directory
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
+# Ignore local build artifacts
+/coverage
 /deploy
+/node_modules
+/public/assets
+/spec/examples.txt
+
+# Ignore node modules and PNP
+/.pnp.*
+/.yarn/*
+/node_modules
+!/.yarn/patches
+!/.yarn/plugins
+!/.yarn/sdks
+!/.yarn/versions
 
 # Ignore env-overrides for configs
 config/hutch.*.yml
