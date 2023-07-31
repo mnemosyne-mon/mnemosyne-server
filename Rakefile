@@ -30,6 +30,6 @@ namespace :yarn do
 
   desc 'Install all JavaScript dependencies as specified via Yarn'
   task install: :environment do
-    system('yarn install --no-progress')
+    system('yarn install')
   end
 end
