@@ -28,7 +28,7 @@ gem 'draper', '~> 4.0'
 gem 'has_scope', '~> 0.8.0'
 gem 'oj'
 gem 'rails-assets-manifest', '~> 3.0', '>= 3.0.0'
-gem 'rails-rfc6570', '~> 2.4'
+gem 'rails-rfc6570', '~> 3.0'
 gem 'responders', '~> 3.0'
 gem 'slim'
 
