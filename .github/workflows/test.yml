@@ -28,11 +28,12 @@ jobs:
         with:
           ruby-version: '3.2'
           bundler-cache: true
+      # https://github.com/actions/setup-node/issues/899
+      - run: corepack enable
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: yarn
-      - run: corepack enable
       - run: yarn install --immutable
       - run: yarn build --mode production
       - run: bundle exec rake db:create:all db:setup
