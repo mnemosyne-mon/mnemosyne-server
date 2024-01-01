@@ -6,7 +6,7 @@ ruby '~> 3.2'
 
 gem 'forked', '~> 0.1.2'
 gem 'puma', '~> 6.0'
-gem 'rails', '~> 7.0.0'
+gem 'rails', '~> 7.1.0'
 gem 'unicorn', '~> 6.0'
 
 gem 'active_record_upsert', '~> 0.11.0'
