@@ -28,12 +28,12 @@ namespace :mnemosyne do
 
     configuration = begin
       if (file = Rails.root.join("config/hutch.#{Rails.env}.yml")).exist? ||
-          (file = Rails.root.join("config/hutch.yml")).exist?
+         (file = Rails.root.join('config/hutch.yml')).exist?
 
-        require "erb"
-        (YAML.load(ERB.new(file.read).result) || {})[Rails.env] || {}
+        require 'erb'
+        (YAML.safe_load(ERB.new(file.read).result, aliases: true) || {})[Rails.env] || {}
       else
-        raise "Could not load configuration. No such file - config/hutch.yml"
+        raise 'Could not load configuration. No such file - config/hutch.yml'
       end
     end.symbolize_keys
 
@@ -77,7 +77,7 @@ namespace :mnemosyne do
     Hutch::Config.set :channel_prefetch, config.fetch(:prefetch) { config[:pool] * 2 }
     Hutch::Config.set :consumer_pool_size, config[:pool]
 
-    Hutch::Config.set :publisher_confirms, \
+    Hutch::Config.set :publisher_confirms,
       config.fetch(:publisher_confirms, true)
 
     Hutch::Config.set :autoload_rails, true
@@ -90,7 +90,7 @@ namespace :mnemosyne do
       require 'forked'
       process_manager = Forked::ProcessManager.new(logger: Rails.logger, process_timeout: 10)
 
-      ::ActiveRecord::Base.clear_all_connections!
+      ActiveRecord::Base.clear_all_connections!
 
       config[:worker].times do
         process_manager.fork('worker') do

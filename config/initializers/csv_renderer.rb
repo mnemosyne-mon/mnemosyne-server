@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-::ActionController::Renderers.add :csv do |list, _opts|
+ActionController::Renderers.add :csv do |list, _opts|
   encoder = Enumerator.new do |y|
     list.each do |row|
       y << row.as_csv.to_csv

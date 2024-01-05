@@ -65,20 +65,20 @@ class SpanDecorator < BaseDecorator
   end
 
   def stats
-    [make_stats, spans.map(&:stats)].flatten.reduce(&:+)
+    [make_stats, spans.map(&:stats)].flatten.reduce(&:add)
   end
 
   private
 
   def spans
+    return [] unless context.key?(:container)
+
+    # We explicitly use `#length` to *not* run an additional COUNT query on
+    # the database, but to get the size of the preloaded `traces`
+    # association.
+    return [] if traces.length != 1
+
     @spans ||= begin
-      return [] unless context.key?(:container)
-
-      # We explicitly use `#length` to *not* run an additional COUNT query on
-      # the database, but to get the size of the preloaded `traces`
-      # association.
-      return [] if traces.length != 1
-
       trace = traces.take
       trace.spans
         .after(start)
@@ -123,12 +123,12 @@ class SpanDecorator < BaseDecorator
   end
 
   Stats = Struct.new(:app, :db, :view, :external) do
-    def +(stat)
+    def add(other)
       Stats.new(
-        app + stat.app,
-        db + stat.db,
-        view + stat.view,
-        external + stat.external
+        app + other.app,
+        db + other.db,
+        view + other.view,
+        external + other.external
       )
     end
 
@@ -137,7 +137,7 @@ class SpanDecorator < BaseDecorator
         db: db,
         app: app,
         view: view,
-        external: external,
+        external: external
       }
     end
   end

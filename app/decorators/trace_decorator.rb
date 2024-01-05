@@ -35,7 +35,7 @@ class TraceDecorator < BaseDecorator
 
   def stats
     {
-      count: spans.sum(&:stats).as_json
+      count: spans.lazy.map(&:stats).reduce(&:add).as_json
     }
   end
 

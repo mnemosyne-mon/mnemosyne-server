@@ -5,7 +5,7 @@
 ## Consume client messages
 
 ```
-spring rake mnemosyne:consume
+rake mnemosyne:consume
 ```
 
 Restart after code changes.
