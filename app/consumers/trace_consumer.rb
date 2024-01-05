@@ -21,6 +21,6 @@ class TraceConsumer
     retry if !@retry && (@retry = true)
     raise
   ensure
-    ::ActiveRecord::Base.clear_active_connections!
+    ::ActiveRecord::Base.connection_handler.clear_active_connections!
   end
 end

@@ -20,7 +20,7 @@ jobs:
 
     env:
       TZ: Etc/UTC
-      DATABASE_URL: postgresql://postgres:secret@localhost:5432
+      DATABASE_URL: postgresql://postgres:secret@localhost:5432/mnemosyne
 
     steps:
       - uses: actions/checkout@master
@@ -36,7 +36,7 @@ jobs:
           cache: yarn
       - run: yarn install --immutable
       - run: yarn build --mode production
-      - run: bundle exec rake db:create:all db:setup
+      - run: bundle exec rake db:create db:setup
       - run: bundle exec rspec spec --format doc
 
   rubocop:

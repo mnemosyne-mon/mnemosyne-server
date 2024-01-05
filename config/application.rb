@@ -14,11 +14,10 @@ require 'action_controller/railtie'
 # require "action_text/engine"
 require 'action_view/railtie'
 # require "action_cable/engine"
-# require "sprockets/railtie"
 require 'rails/test_unit/railtie'
 
-# Require the gems listed in Gemfile, including any gems you've limited to
-# :test, :development, or :production.
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 require 'csv'
@@ -26,12 +25,12 @@ require 'csv'
 module Server
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.1
 
-    # Settings in config/environments/* take precedence over those specified
-    # here. Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets tasks patch server])
 
     config.filter_parameters += %i[passw secret token _key crypt salt certificate otp ssn]
     config.session_store :cookie_store, key: '_mnemosyne', same_site: :lax
