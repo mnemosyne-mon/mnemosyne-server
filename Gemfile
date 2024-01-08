@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 ruby '~> 3.2'
 
 gem 'forked', '~> 0.1.2'
-gem 'puma', '~> 6.0'
+gem 'puma', '~> 6.4'
 gem 'rails', '~> 7.1.0'
 gem 'unicorn', '~> 6.0'
 
