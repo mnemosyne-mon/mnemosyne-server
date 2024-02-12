@@ -144,7 +144,7 @@ GEM
       dry-logic (~> 1.4)
       zeitwerk (~> 2.6)
     erubi (1.12.0)
-    factory_bot (6.4.5)
+    factory_bot (6.4.6)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
@@ -195,7 +195,7 @@ GEM
       bunny
     multi_json (1.15.0)
     mutex_m (0.2.0)
-    net-imap (0.4.9.1)
+    net-imap (0.4.10)
       date
       net-protocol
     net-pop (0.1.2)
@@ -284,7 +284,7 @@ GEM
     regexp_parser (2.9.0)
     reline (0.4.2)
       io-console (~> 0.5)
-    request_store (1.5.1)
+    request_store (1.6.0)
       rack (>= 1.4)
     responders (3.1.1)
       actionpack (>= 5.2)
@@ -326,8 +326,8 @@ GEM
       parser (>= 3.2.1.0)
     rubocop-capybara (2.20.0)
       rubocop (~> 1.41)
-    rubocop-factory_bot (2.25.0)
-      rubocop (~> 1.33)
+    rubocop-factory_bot (2.25.1)
+      rubocop (~> 1.41)
     rubocop-performance (1.20.2)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.30.0, < 2.0)
