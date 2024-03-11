@@ -36,7 +36,7 @@ gem 'ibsciss-middleware', '~> 0.4.2'
 gem 'influxdb'
 
 gem 'concurrent-ruby', '~> 1.1'
-gem 'mnemosyne-ruby', '~> 1.10'
+gem 'mnemosyne-ruby', '~> 2.0'
 
 gem 'sentry-rails'
 gem 'sentry-ruby'
