@@ -25,8 +25,8 @@ module.exports = function (env, argv) {
         },
       },
       host: "0.0.0.0",
-      port: 9002,
-      proxy: { "/": "http://localhost:9001" },
+      port: 3001,
+      proxy: [{ context: "/", target: "http://localhost:3000" }],
     },
   });
 };
