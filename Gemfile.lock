@@ -203,7 +203,7 @@ GEM
       timeout
     net-smtp (0.4.0.1)
       net-protocol
-    nio4r (2.7.0)
+    nio4r (2.7.1)
     nokogiri (1.16.3)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
@@ -330,7 +330,7 @@ GEM
     rubocop-performance (1.20.2)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.30.0, < 2.0)
-    rubocop-rails (2.24.0)
+    rubocop-rails (2.24.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
