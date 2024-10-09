@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Span, type: :model do
+RSpec.describe Span do
   subject(:span) { create(:span, **attributes) }
 
   let(:time) { Time.zone.now }

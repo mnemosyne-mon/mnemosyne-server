@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe Platform, type: :model do
+RSpec.describe Platform do
   let(:platform) { create(:platform) }
 
   describe "#id" do

@@ -10,7 +10,7 @@ class TracesController < ApplicationController
 
   # Skip an implicit time range filter if at least on these scopes have been
   # applied.
-  RANGE_EXCLUDE_KEYS = %i[activity]
+  RANGE_EXCLUDE_KEYS = %i[activity].freeze
 
   respond_to :html, :json
   respond_to :csv, only: :index
@@ -82,7 +82,7 @@ class TracesController < ApplicationController
   end
 
   has_scope :range, default: true, allow_blank: true do |controller, scope, value|
-    if !value && (controller.send(:current_scopes).keys & RANGE_EXCLUDE_KEYS).any?
+    if !value && controller.send(:current_scopes).keys.intersect?(RANGE_EXCLUDE_KEYS)
       scope
     else
       scope.range controller.range
@@ -98,7 +98,7 @@ class TracesController < ApplicationController
 
     # Force PostgreSQL to use filter indexes if filtered are specified
     # instead of favoring the ordered stop index.
-    if (FILTER_PARAMS & params.keys).any?
+    if FILTER_PARAMS.intersect?(params.keys)
       @traces = @traces.order(:id)
     end
 
@@ -123,7 +123,7 @@ class TracesController < ApplicationController
   end
 
   def default_origin_value
-    if (FILTER_PARAMS & params.keys).any?
+    if FILTER_PARAMS.intersect?(params.keys)
       "any"
     else
       "none"

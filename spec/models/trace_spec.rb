@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Trace, type: :model do
+RSpec.describe Trace do
   subject(:trace) { create(:trace, **attributes) }
 
   let(:time) { Time.zone.now }

@@ -61,7 +61,7 @@ FactoryBot.define do
     stop { Time.zone.now }
     name { "mnemosyne.test.span" }
 
-    association :trace
+    trace
 
     after(:build) do |span|
       span.platform_id = span.trace.platform_id

@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe FailureGroup, type: :model do
-  subject { described_class.all.first }
+RSpec.describe FailureGroup do
+  subject { described_class.first }
 
   let(:platform) { create(:platform) }
   let(:application) { create(:application, platform:) }

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Failure, type: :model do
+RSpec.describe Failure do
   subject { failure }
 
   let(:failure) { create(:failure, **attributes) }

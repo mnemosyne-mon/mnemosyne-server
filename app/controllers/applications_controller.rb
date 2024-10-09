@@ -4,7 +4,7 @@ class ApplicationsController < ApplicationController
   include Controller::Platform
 
   def index
-    @applications = Application.all
+    @applications = Application
       .where(platform:)
   end
 end

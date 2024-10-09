@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Application, type: :model do
+RSpec.describe Application do
   subject(:application) { create(:application) }
 
   describe "#id" do

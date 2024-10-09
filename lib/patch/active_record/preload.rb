@@ -17,7 +17,7 @@ module Patch
     module QueryMethods
       def includes(*, scope: nil, **kwargs)
         if scope
-          puts "Includes with scope: #{scope}"
+          Rails.logger.debug { "Includes with scope: #{scope}" }
           super(ScopedPreload.new([*args, kwargs], scope))
         else
           super(*, kwargs)
@@ -26,7 +26,7 @@ module Patch
 
       def preload(*, scope: nil, **kwargs)
         if scope
-          puts "Preload with scope: #{scope}"
+          Rails.logger.debug { "Preload with scope: #{scope}" }
           super(ScopedPreload.new([*args, kwargs], scope))
         else
           super(*, kwargs)
