@@ -90,7 +90,7 @@ namespace :mnemosyne do
       require "forked"
       process_manager = Forked::ProcessManager.new(logger: Rails.logger, process_timeout: 10)
 
-      ActiveRecord::Base.clear_all_connections!
+      ActiveRecord::Base.connection_handler&.clear_all_connections!
 
       config[:worker].times do
         process_manager.fork("worker") do
