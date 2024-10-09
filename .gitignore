@@ -34,5 +34,8 @@
 !/.yarn/sdks
 !/.yarn/versions
 
-# Ignore env-overrides for configs
+# Ignore overrides for configuration files
+config/environments/*.local.yml
 config/hutch.*.yml
+config/settings.local.yml
+config/settings/*.local.yml

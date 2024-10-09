@@ -4,12 +4,14 @@ source 'https://rubygems.org'
 
 ruby '~> 3.2'
 
+gem 'config', '~> 5.5'
+gem 'dry-validation', '~> 1.10'
 gem 'forked', '~> 0.1.2'
 gem 'puma', '~> 6.4'
-gem 'rails', '~> 7.1.0'
+gem 'rails', '~> 7.2.0'
 gem 'unicorn', '~> 6.0'
 
-gem 'active_record_upsert', '~> 0.11.0'
+gem 'active_record_upsert', github: 'jesjos/active_record_upsert', ref: 'c3e07ae'
 
 gem 'bulk_insert', '~> 1.8'
 gem 'hutch', '~> 1.1'
