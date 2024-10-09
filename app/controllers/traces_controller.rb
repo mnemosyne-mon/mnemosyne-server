@@ -30,7 +30,7 @@ class TracesController < ApplicationController
   end
 
   has_scope :limit, default: 200, allow_blank: true do |_, scope, value|
-    scope.limit [0, [value.to_i, 100_000].min].max
+    scope.limit(value.to_i.clamp(0, 100_000))
   end
 
   has_scope :activity do |_, scope, value|
