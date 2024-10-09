@@ -7,7 +7,7 @@ module Server
         module ActiveJob
           def call(payload)
             Array(payload[:span]).each do |span|
-              next unless span[:name] == 'app.job.perform.active_job'
+              next unless span[:name] == "app.job.perform.active_job"
 
               payload[:meta] ||= {}
               payload[:meta][:worker] = span.dig(:meta, :job)

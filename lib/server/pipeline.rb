@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-require 'middleware'
+require "middleware"
 
-require 'server/builder'
-require 'server/pipeline/filter/null_origin'
-require 'server/pipeline/filter/sample'
-require 'server/pipeline/metadata/grape/endpoint'
-require 'server/pipeline/metadata/rails/action_controller'
-require 'server/pipeline/metadata/rails/active_job'
-require 'server/pipeline/metrics/influx'
+require "server/builder"
+require "server/pipeline/filter/null_origin"
+require "server/pipeline/filter/sample"
+require "server/pipeline/metadata/grape/endpoint"
+require "server/pipeline/metadata/rails/action_controller"
+require "server/pipeline/metadata/rails/active_job"
+require "server/pipeline/metrics/influx"
 
 module Server
   module Pipeline
     class << self
-      def call(*args)
-        default.call(*args)
+      def call(*)
+        default.call(*)
       end
 
       def default

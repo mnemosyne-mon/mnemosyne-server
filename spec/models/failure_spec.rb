@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Failure, type: :model do
   subject { failure }
@@ -8,24 +8,24 @@ RSpec.describe Failure, type: :model do
   let(:failure) { create(:failure, **attributes) }
   let(:attributes) { {} }
 
-  describe '<factory>' do
+  describe "<factory>" do
     let(:trace) { failure.trace }
 
-    describe '#platform' do
+    describe "#platform" do
       subject { failure.platform.id }
 
       it { is_expected.to eq trace.platform.id }
     end
 
-    describe '#application' do
+    describe "#application" do
       subject { failure.application.id }
 
       it { is_expected.to eq trace.application.id }
     end
 
-    context 'with platform attribute' do
-      let(:platform) { create :platform }
-      let(:attributes) { {platform: platform} }
+    context "with platform attribute" do
+      let(:platform) { create(:platform) }
+      let(:attributes) { {platform:} }
 
       it { expect { failure }.to change(Platform, :count).from(0).to(1) }
 
@@ -33,9 +33,9 @@ RSpec.describe Failure, type: :model do
       it { expect(trace.platform.id).to eq platform.id }
     end
 
-    context 'with application attribute' do
-      let(:application) { create :application }
-      let(:attributes) { {application: application} }
+    context "with application attribute" do
+      let(:application) { create(:application) }
+      let(:attributes) { {application:} }
 
       it { expect { failure }.to change(Application, :count).from(0).to(1) }
 
@@ -44,27 +44,27 @@ RSpec.describe Failure, type: :model do
     end
   end
 
-  describe '#id' do
+  describe "#id" do
     subject { super().id }
 
-    it { is_expected.to be_a ::UUID4 }
+    it { is_expected.to be_a UUID4 }
   end
 
-  describe '#trace_id' do
+  describe "#trace_id" do
     subject { super().trace_id }
 
-    it { is_expected.to be_a ::UUID4 }
+    it { is_expected.to be_a UUID4 }
   end
 
-  describe '#platform_id' do
+  describe "#platform_id" do
     subject { super().platform_id }
 
-    it { is_expected.to be_a ::UUID4 }
+    it { is_expected.to be_a UUID4 }
   end
 
-  describe '#application_id' do
+  describe "#application_id" do
     subject { super().application_id }
 
-    it { is_expected.to be_a ::UUID4 }
+    it { is_expected.to be_a UUID4 }
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RootController < ApplicationController
-  layout 'global'
+  layout "global"
 
   def index
     # TODO
@@ -9,7 +9,7 @@ class RootController < ApplicationController
 
   def trace
     unless search_term
-      render 'traces/trace_not_found', status: :not_found
+      render "traces/trace_not_found", status: :not_found
       return
     end
 
@@ -28,7 +28,7 @@ class RootController < ApplicationController
       return
     end
 
-    render 'traces/trace_not_found', status: :not_found
+    render "traces/trace_not_found", status: :not_found
   end
 
   private

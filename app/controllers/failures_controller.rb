@@ -21,16 +21,16 @@ class FailuresController < ApplicationController
   end
 
   has_scope :text do |_, scope, value|
-    scope.where('text ~* ?', value)
+    scope.where("text ~* ?", value)
   end
 
   def index
     @failures = FailureGroup
-      .where(platform: platform)
+      .where(platform:)
       .includes(:application, :platform)
 
     @failures = apply_scopes @failures
-    @failures = @failures.decorate(context: context)
+    @failures = @failures.decorate(context:)
   end
 
   def show
@@ -41,7 +41,7 @@ class FailuresController < ApplicationController
 
   def context
     {
-      platform: platform
+      platform:,
     }
   end
 end

@@ -12,13 +12,13 @@ module Server
           resource,
           format: :json,
           encoder: ->(val) { ::Oj.dump(val) },
-          **kwargs
+          **kwargs,
         ) {|object, **kwa| _stream_json_fallback(object, **kwa) }
 
         if kwargs[:stream]
-          headers['Cache-Control'] ||= 'no-cache'
-          headers['Transfer-Encoding'] = 'chunked'
-          headers.delete('Content-Length')
+          headers["Cache-Control"] ||= "no-cache"
+          headers["Transfer-Encoding"] = "chunked"
+          headers.delete("Content-Length")
 
           Rack::Chunked::Body.new(encoder)
         else
@@ -28,11 +28,11 @@ module Server
 
       private
 
-      def _stream_json_fallback(object, encoder:, **kwargs)
+      def _stream_json_fallback(object, encoder:, **)
         if object.respond_to?(:as_json)
-          encoder.call(object.as_json(**kwargs))
+          encoder.call(object.as_json(**))
         else
-          object.to_json(**kwargs)
+          object.to_json(**)
         end
       end
     end

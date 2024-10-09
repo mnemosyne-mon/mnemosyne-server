@@ -5,6 +5,6 @@ class ApplicationsController < ApplicationController
 
   def index
     @applications = Application.all
-      .where(platform: platform)
+      .where(platform:)
   end
 end

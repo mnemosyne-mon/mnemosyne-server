@@ -4,10 +4,10 @@ module Server
   module Streaming
     module Collection
       def to_json_stream(out, encoder:, **kwargs)
-        out << '['
+        out << "["
 
         each_with_index do |object, i|
-          out << ',' if i.positive?
+          out << "," if i.positive?
 
           if object.respond_to?(:to_json_stream)
             object.to_json_stream(out, **kwargs)
@@ -18,7 +18,7 @@ module Server
           end
         end
 
-        out << ']'
+        out << "]"
       end
     end
   end

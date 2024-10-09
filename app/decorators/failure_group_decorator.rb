@@ -10,7 +10,7 @@ class FailureGroupDecorator < BaseDecorator
   end
 
   def render_stacktrace
-    h.render partial: 'stacktrace', object: stacktrace
+    h.render partial: "stacktrace", object: stacktrace
   end
 
   def index_path(**params)

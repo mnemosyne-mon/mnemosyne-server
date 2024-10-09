@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'server/pipeline'
+require "server/pipeline"
 
-pipeline = Rails.application.config_for('pipeline')
+pipeline = Rails.application.config_for("pipeline")
 pipeline&.fetch(:load, [])&.each do |processor|
   case processor
     when Hash

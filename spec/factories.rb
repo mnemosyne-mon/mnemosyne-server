@@ -9,7 +9,7 @@ FactoryBot.define do
 
   factory :application do
     transient do
-      platform { create :platform }
+      platform { create(:platform) }
     end
 
     sequence(:title) {|n| "Spec Application ##{n}" }
@@ -22,15 +22,15 @@ FactoryBot.define do
 
   factory :trace do
     transient do
-      platform { create :platform }
-      application { create :application, platform: platform }
+      platform { create(:platform) }
+      application { create(:application, platform:) }
       activity_id { generate(:uuid) }
     end
 
-    start { Time.zone.now - 2.seconds }
+    start { 2.seconds.ago }
     stop { Time.zone.now }
-    name { 'mnemosyne.test.trace' }
-    hostname { 'host-0' }
+    name { "mnemosyne.test.trace" }
+    hostname { "host-0" }
 
     after(:build) do |t, e|
       t.platform = e.platform
@@ -43,14 +43,14 @@ FactoryBot.define do
         rand(4..33).times do |i|
           interval = [
             trace.start + Rational(rand(trace.duration), 1_000_000_000),
-            trace.start + Rational(rand(trace.duration), 1_000_000_000)
+            trace.start + Rational(rand(trace.duration), 1_000_000_000),
           ]
 
-          create :span,
-            trace: trace,
+          create(:span,
+            trace:,
             start: interval.min,
             stop: interval.max,
-            meta: {index: i}
+            meta: {index: i},)
         end
       end
     end
@@ -59,7 +59,7 @@ FactoryBot.define do
   factory :span do
     start { Time.zone.now }
     stop { Time.zone.now }
-    name { 'mnemosyne.test.span' }
+    name { "mnemosyne.test.span" }
 
     association :trace
 
@@ -77,16 +77,16 @@ FactoryBot.define do
 
       trace do
         create(:trace, **{
-          platform: platform,
-          application: application,
-          activity_id: activity_id,
-          stop: stop
-        }.compact)
+          platform:,
+          application:,
+          activity_id:,
+          stop:,
+        }.compact,)
       end
     end
 
-    type { 'RuntimeError' }
-    text { 'Error Message' }
+    type { "RuntimeError" }
+    text { "Error Message" }
     stacktrace { [] }
 
     after(:build) do |f, e|

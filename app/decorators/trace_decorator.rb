@@ -6,8 +6,8 @@ class TraceDecorator < BaseDecorator
   decorates_association :platform
   decorates_association :origin
 
-  def as_csv(**kwargs)
-    as_json(**kwargs).values
+  def as_csv(**)
+    as_json(**).values
   end
 
   def serialize(**kwargs)
@@ -35,16 +35,16 @@ class TraceDecorator < BaseDecorator
 
   def stats
     {
-      count: spans.lazy.map(&:stats).reduce(&:add).as_json
+      count: spans.lazy.map(&:stats).reduce(&:add).as_json,
     }
   end
 
   def props
     {
-      routes: routes,
+      routes:,
       trace: serialize,
       failures: object.failures.decorate.as_json,
-      spans: spans.map(&:serialize)
+      spans: spans.map(&:serialize),
     }.to_json
   end
 
@@ -61,8 +61,8 @@ class TraceDecorator < BaseDecorator
   def routes
     {
       t_url: h.t_url_rfc6570,
-      traces_url: \
-        h.trace_url_rfc6570.partial_expand(platform: platform.to_param)
+      traces_url:
+        h.trace_url_rfc6570.partial_expand(platform: platform.to_param),
     }
   end
 
@@ -70,15 +70,15 @@ class TraceDecorator < BaseDecorator
     case type
       when :web
         {
-          path: meta['path'],
-          query: meta['query'],
-          method: meta['method'],
-          status: meta['status'],
-          host: meta.dig('headers', 'Host'),
-          user_agent: meta.dig('headers', 'User-Agent'),
-          controller: meta['controller'],
-          action: meta['action'],
-          format: meta['format']
+          path: meta["path"],
+          query: meta["query"],
+          method: meta["method"],
+          status: meta["status"],
+          host: meta.dig("headers", "Host"),
+          user_agent: meta.dig("headers", "User-Agent"),
+          controller: meta["controller"],
+          action: meta["action"],
+          format: meta["format"],
         }
       else
         meta
@@ -87,9 +87,9 @@ class TraceDecorator < BaseDecorator
 
   def type
     case name
-      when 'app.web.request.rack'
+      when "app.web.request.rack"
         :web
-      when 'app.job.perform.sidekiq', 'app.messaging.receive.msgr'
+      when "app.job.perform.sidekiq", "app.messaging.receive.msgr"
         :background
       else
         :unknown
@@ -101,27 +101,27 @@ class TraceDecorator < BaseDecorator
       when :web
         h.tag.i \
           class: %w[fa-solid fa-globe],
-          title: 'Web Request',
-          'aria-hidden': 'true'
+          title: "Web Request",
+          "aria-hidden": "true"
       when :background
         h.tag.i \
           class: %w[fa-solid fa-tasks],
-          title: 'Background Job',
-          'aria-hidden': 'true'
+          title: "Background Job",
+          "aria-hidden": "true"
       else
         h.tag.i \
           class: %w[fa-solid fa-question],
-          title: 'Unknown',
-          'aria-hidden': 'true'
+          title: "Unknown",
+          "aria-hidden": "true"
     end
   end
 
   def status
-    meta['status'] || ''
+    meta["status"] || ""
   end
 
   def method
-    meta['method'] || ''
+    meta["method"] || ""
   end
 
   def title
@@ -130,12 +130,12 @@ class TraceDecorator < BaseDecorator
 
   def trace_title
     case name
-      when 'app.web.request.rack'
-        meta['path']
-      when 'app.messaging.receive.msgr'
-        meta.dig('delivery_info', 'routing_key')
-      when 'app.job.perform.sidekiq'
-        meta['worker']
+      when "app.web.request.rack"
+        meta["path"]
+      when "app.messaging.receive.msgr"
+        meta.dig("delivery_info", "routing_key")
+      when "app.job.perform.sidekiq"
+        meta["worker"]
     end
   end
 
@@ -153,15 +153,15 @@ class TraceDecorator < BaseDecorator
 
   def render_information
     case name
-      when 'app.web.request.rack'
-        h.render 'traces/web/rack'
+      when "app.web.request.rack"
+        h.render "traces/web/rack"
       else
-        'Nothing'
+        "Nothing"
     end
   end
 
   def duration_text
-    format '%.2f ms', duration_ms
+    format "%.2f ms", duration_ms
   end
 
   private

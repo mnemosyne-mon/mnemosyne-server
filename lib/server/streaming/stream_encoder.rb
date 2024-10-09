@@ -10,8 +10,8 @@ module Server
         @fallback = fallback
       end
 
-      def each(&block)
-        enumerator.each(&block)
+      def each(&)
+        enumerator.each(&)
       end
 
       def read

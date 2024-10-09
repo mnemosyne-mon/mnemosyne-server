@@ -27,8 +27,8 @@ class Application < ApplicationRecord
 
       # We do need `upsert` here for performance reasons.
       # rubocop:disable Rails/SkipsModelValidations
-      find_by(name: name, platform_id: platform) ||
-        upsert({name: name, platform_id: platform})
+      find_by(name:, platform_id: platform) ||
+        upsert({name:, platform_id: platform})
       # rubocop:enable Rails/SkipsModelValidations
     end
   end

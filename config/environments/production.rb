@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/integer/time'
+require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -54,7 +54,7 @@ Rails.application.configure do
   # operation, but avoids logging too much information to avoid
   # inadvertent exposure of personally identifiable information (PII).
   # If you want to log everything, set the level to "debug".
-  config.log_level = ENV.fetch('RAILS_LOG_LEVEL', 'info')
+  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store

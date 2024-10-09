@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'server/streaming/json_streaming'
+require "server/streaming/json_streaming"
 
 class TracesController < ApplicationController
   include Controller::Platform
@@ -18,11 +18,11 @@ class TracesController < ApplicationController
   has_scope :origin, default: nil, allow_blank: true do |cr, scope, value|
     value = cr.default_origin_value if value.nil?
 
-    if value == 'any'
+    if value == "any"
       scope
     elsif (uuid = UUID4.try_convert(value))
       scope.where(origin_id: uuid.to_s)
-    elsif value.nil? || value == 'null' || value == 'none'
+    elsif value.nil? || value == "null" || value == "none"
       scope.where(origin: nil)
     else
       raise "Invalid origin: #{value}"
@@ -50,35 +50,35 @@ class TracesController < ApplicationController
   end
 
   has_scope :wm do |_, scope, value|
-    scope.where("meta->>'method' IN (?)", value.split(',').map(&:strip))
+    scope.where("meta->>'method' IN (?)", value.split(",").map(&:strip))
   end
 
   has_scope :wp do |_, scope, value|
-    scope.where('meta @> ?', {path: value}.to_json)
+    scope.where("meta @> ?", {path: value}.to_json)
   end
 
   has_scope :ws do |_, scope, value|
-    scope.where('meta @> ?', {status: value.to_i}.to_json)
+    scope.where("meta @> ?", {status: value.to_i}.to_json)
   end
 
   has_scope :wc do |_, scope, value|
-    scope.where('meta @> ?', {controller: value}.to_json)
+    scope.where("meta @> ?", {controller: value}.to_json)
   end
 
   has_scope :wa do |_, scope, value|
-    scope.where('meta @> ?', {action: value}.to_json)
+    scope.where("meta @> ?", {action: value}.to_json)
   end
 
   has_scope :ls do |_, scope, value|
-    scope.where('(stop - start) >= interval ?', ::ActiveSupport::Duration.parse_string(value).iso8601)
+    scope.where("(stop - start) >= interval ?", ::ActiveSupport::Duration.parse_string(value).iso8601)
   end
 
   has_scope :le do |_, scope, value|
-    scope.where('(stop - start) < interval ?', ::ActiveSupport::Duration.parse_string(value).iso8601)
+    scope.where("(stop - start) < interval ?", ::ActiveSupport::Duration.parse_string(value).iso8601)
   end
 
   has_scope :meta, type: :hash do |_, scope, value|
-    scope.where('meta @> ?', value.to_json)
+    scope.where("meta @> ?", value.to_json)
   end
 
   has_scope :range, default: true, allow_blank: true do |controller, scope, value|
@@ -98,18 +98,18 @@ class TracesController < ApplicationController
 
     # Force PostgreSQL to use filter indexes if filtered are specified
     # instead of favoring the ordered stop index.
-    if (FILTER_PARAMS & params.keys).any? # rubocop:disable Style/IfUnlessModifier
+    if (FILTER_PARAMS & params.keys).any?
       @traces = @traces.order(:id)
     end
 
     @traces = apply_scopes @traces
-    @traces = @traces.decorate(context: context)
+    @traces = @traces.decorate(context:)
 
     respond_with @traces
   end
 
   def show
-    @trace = trace.decorate(context: context)
+    @trace = trace.decorate(context:)
 
     respond_with @trace
   end
@@ -117,16 +117,16 @@ class TracesController < ApplicationController
   def update
     @trace = trace
     @trace.update! store: params[:store]
-    @trace = @trace.decorate(context: context)
+    @trace = @trace.decorate(context:)
 
     respond_with @trace
   end
 
   def default_origin_value
     if (FILTER_PARAMS & params.keys).any?
-      'any'
+      "any"
     else
-      'none'
+      "none"
     end
   end
 
@@ -138,7 +138,7 @@ class TracesController < ApplicationController
 
   def context
     {
-      platform: platform
+      platform:,
     }
   end
 end

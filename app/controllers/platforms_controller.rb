@@ -6,7 +6,7 @@ class PlatformsController < ApplicationController
   def index
     @platforms = Platform.all.decorate
 
-    render layout: 'global'
+    render layout: "global"
   end
 
   def show; end

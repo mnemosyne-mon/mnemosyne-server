@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require 'server/pipeline'
+require "server/pipeline"
 
 class TraceConsumer
   include Hutch::Consumer
 
-  consume '#'
+  consume "#"
 
-  if ENV['QUEUE_IDENT'].present?
+  if ENV["QUEUE_IDENT"].present?
     queue_name "mnemosyne.server.#{ENV['QUEUE_IDENT'].strip}"
   elsif Rails.env.production?
-    queue_name 'mnemosyne.server'
+    queue_name "mnemosyne.server"
   else
     queue_name "mnemosyne.#{Rails.env}"
   end

@@ -7,11 +7,11 @@ ActionController::Renderers.add :csv do |list, _opts|
     end
   end
 
-  headers['Content-Type'] = 'text/csv'
-  headers['Content-Disposition'] = 'attachment; filename="data.csv"'
-  headers['Cache-Control'] ||= 'no-cache'
-  headers['Transfer-Encoding'] = 'chunked'
-  headers.delete('Content-Length')
+  headers["Content-Type"] = "text/csv"
+  headers["Content-Disposition"] = 'attachment; filename="data.csv"'
+  headers["Cache-Control"] ||= "no-cache"
+  headers["Transfer-Encoding"] = "chunked"
+  headers.delete("Content-Length")
 
   Rack::Chunked::Body.new(encoder)
 end

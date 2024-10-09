@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class FailureGroup < ApplicationRecord
-  self.primary_key = 'id'
-  self.table_name = 'failures'
-  self.inheritance_column = '__no_column'
+  self.primary_key = "id"
+  self.table_name = "failures"
+  self.inheritance_column = "__no_column"
 
   default_scope { default }
 
@@ -27,16 +27,16 @@ class FailureGroup < ApplicationRecord
         t[:stacktrace],
         t[:platform_id],
         t[:application_id],
-        t[:stop].minimum.as('first_occurrence_at'),
-        t[:stop].maximum.as('last_occurrence_at'),
-        t[Arel.star].count.as('count'),
-        Arel::Nodes::NamedFunction.new('array_agg', [t[:id]]).as('ids')
+        t[:stop].minimum.as("first_occurrence_at"),
+        t[:stop].maximum.as("last_occurrence_at"),
+        t[Arel.star].count.as("count"),
+        Arel::Nodes::NamedFunction.new("array_agg", [t[:id]]).as("ids"),
       ).group(
         t[:type],
         t[:text],
         t[:stacktrace],
         t[:platform_id],
-        t[:application_id]
+        t[:application_id],
       ).order(t[:stop].maximum.desc)
     end
     alias t arel_table

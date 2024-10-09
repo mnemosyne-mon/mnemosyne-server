@@ -3,17 +3,17 @@
 class BaseDecorator < Draper::Decorator
   delegate_all
 
-  def as_json(*args, **kwargs)
-    serialize(**kwargs).as_json(*args, **kwargs)
+  def as_json(*, **)
+    serialize(**).as_json(*, **)
   end
 
-  def to_json(*args)
-    ::Oj.dump as_json(*args), mode: :strict
+  def to_json(*)
+    ::Oj.dump as_json(*), mode: :strict
   end
 
   protected
 
-  def export(&block)
-    {}.tap(&block)
+  def export(&)
+    {}.tap(&)
   end
 end

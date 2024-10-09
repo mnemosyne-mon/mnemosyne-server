@@ -4,9 +4,9 @@ $stdout.sync = true
 $stderr.sync = true
 
 namespace :mnemosyne do
-  desc 'Clean up old traces and spans'
+  desc "Clean up old traces and spans"
   task clean: :environment do
-    require 'server/clock'
+    require "server/clock"
 
     logger = Rails.logger
     logger.level = :info

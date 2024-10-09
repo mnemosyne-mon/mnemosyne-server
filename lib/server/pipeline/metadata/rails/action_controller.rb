@@ -7,7 +7,7 @@ module Server
         module ActionController
           def call(payload)
             Array(payload[:span]).each do |span|
-              next unless span[:name] == 'app.controller.request.rails'
+              next unless span[:name] == "app.controller.request.rails"
 
               payload[:meta] ||= {}
               payload[:meta][:controller] = span.dig(:meta, :controller)

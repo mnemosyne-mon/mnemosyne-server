@@ -8,7 +8,7 @@ module Server
           (time.to_f * 1_000_000_000).to_i
         else
           utc = time.utc
-          utc.to_i * 1_000_000_000 + utc.nsec
+          (utc.to_i * 1_000_000_000) + utc.nsec
         end
       end
 

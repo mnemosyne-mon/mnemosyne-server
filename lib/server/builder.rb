@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require 'server/clock'
+require "server/clock"
 
 module Server
   class Builder
-    # rubocop:disable Metrics/MethodLength
     def call(payload)
       platform = ::Platform.fetch name: payload.fetch(:platform)
 
@@ -17,13 +16,13 @@ module Server
           id: payload[:uuid],
           meta: payload[:meta],
           name: payload[:name],
-          platform: platform,
+          platform:,
           hostname: payload[:hostname],
-          application: application,
+          application:,
           origin_id: payload[:origin],
           activity_id: payload[:transaction],
           start: ::Server::Clock.to_time(Integer(payload[:start])),
-          stop: ::Server::Clock.to_time(Integer(payload[:stop]))
+          stop: ::Server::Clock.to_time(Integer(payload[:stop])),
         )
       end
 
@@ -38,7 +37,7 @@ module Server
           activity_id: payload[:transaction],
           platform_id: trace.platform_id,
           start: ::Server::Clock.to_time(Integer(payload[:start])),
-          stop: ::Server::Clock.to_time(Integer(payload[:stop]))
+          stop: ::Server::Clock.to_time(Integer(payload[:stop])),
         )
 
         Array(payload[:span]).each do |data|
@@ -50,7 +49,7 @@ module Server
             activity_id: payload[:transaction],
             platform_id: trace.platform_id,
             start: ::Server::Clock.to_time(Integer(data[:start])),
-            stop: ::Server::Clock.to_time(Integer(data[:stop]))
+            stop: ::Server::Clock.to_time(Integer(data[:stop])),
           )
         end
       end
@@ -60,7 +59,7 @@ module Server
           type: error.fetch(:type),
           text: error.fetch(:text),
           stop: trace.stop,
-          trace: trace,
+          trace:,
           hostname: trace.hostname,
           platform: trace.platform,
           application: trace.application,

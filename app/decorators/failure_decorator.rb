@@ -7,10 +7,10 @@ class FailureDecorator < BaseDecorator
 
   def serialize(**)
     export do |out|
-      out['uuid'] = id
-      out['type'] = type
-      out['text'] = text
-      out['path'] = self_path
+      out["uuid"] = id
+      out["type"] = type
+      out["text"] = text
+      out["path"] = self_path
     end
   end
 
@@ -30,7 +30,7 @@ class FailureDecorator < BaseDecorator
   end
 
   def render_stacktrace
-    h.render partial: 'stacktrace', object: stacktrace
+    h.render partial: "stacktrace", object: stacktrace
   end
 
   def index_path(**params)

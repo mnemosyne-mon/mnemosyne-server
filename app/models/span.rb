@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Span < ApplicationRecord
-  self.primary_key = 'id'
+  self.primary_key = "id"
 
   extend Model::Range
   include Model::Duration

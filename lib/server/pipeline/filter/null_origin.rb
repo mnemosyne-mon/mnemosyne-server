@@ -4,7 +4,7 @@ module Server
   module Pipeline
     module Filter
       module NullOrigin
-        NULL_UUID = '00000000-0000-0000-0000-000000000000'
+        NULL_UUID = "00000000-0000-0000-0000-000000000000"
 
         def call(payload)
           return if payload[:origin] == NULL_UUID

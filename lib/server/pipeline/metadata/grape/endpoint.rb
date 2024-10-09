@@ -7,7 +7,7 @@ module Server
         module Endpoint
           def call(payload)
             Array(payload[:span]).each do |span|
-              next unless span[:name] == 'app.controller.request.grape'
+              next unless span[:name] == "app.controller.request.grape"
 
               payload[:meta] ||= {}
               payload[:meta][:controller] = span.dig(:meta, :endpoint)

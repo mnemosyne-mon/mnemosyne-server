@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Trace < ApplicationRecord
-  self.primary_key = 'id'
+  self.primary_key = "id"
 
   extend Model::Range
   include Model::Duration
@@ -12,12 +12,12 @@ class Trace < ApplicationRecord
   attribute :platform_id, :uuid
   attribute :application_id, :uuid
 
-  has_many :spans, -> { order('start') }, inverse_of: :trace
+  has_many :spans, -> { order("start") }, inverse_of: :trace
   has_many :failures, dependent: :destroy
 
   belongs_to :application
   belongs_to :platform
-  belongs_to :origin, class_name: 'Span', optional: true
+  belongs_to :origin, class_name: "Span", optional: true
 
   class << self
     def after(time)

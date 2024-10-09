@@ -2,8 +2,8 @@
 
 module Model
   module Range
-    def range(*args, includes: false)
-      where(Range.range(self, *args), includes)
+    def range(*, includes: false)
+      where(Range.range(self, *), includes)
     end
 
     class << self

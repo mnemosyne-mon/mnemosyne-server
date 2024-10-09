@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_support/duration'
+require "active_support/duration"
 
 module Patch
   module ActiveSupport
@@ -15,7 +15,7 @@ module Patch
         (((?<us>\d+(\.\d+)?)us)\s*)?
         (((?<ns>\d+(\.\d+)?)ns)\s*)?
         \z
-      /x.freeze
+      /x
 
       DURATION_FRACTIONS = {
         days: ::ActiveSupport::Duration::SECONDS_PER_DAY,
@@ -24,7 +24,7 @@ module Patch
         seconds: 1,
         ms: 0.001,
         us: 0.000001,
-        ns: 0.000000001
+        ns: 0.000000001,
       }.freeze
 
       def parse_string(str)
@@ -34,7 +34,7 @@ module Patch
           when DURATION_REGEXP
             m = Regexp.last_match
             build(DURATION_FRACTIONS.inject(0) do |s, f|
-              m[f[0]] ? s + Float(m[f[0]]) * f[1] : s
+              m[f[0]] ? s + (Float(m[f[0]]) * f[1]) : s
             end)
           else
             raise ArgumentError

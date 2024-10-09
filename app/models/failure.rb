@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Failure < ApplicationRecord
-  self.primary_key = 'id'
-  self.inheritance_column = '__no_column'
+  self.primary_key = "id"
+  self.inheritance_column = "__no_column"
 
   attribute :id, :uuid
   attribute :trace_id, :uuid
@@ -29,7 +29,7 @@ class Failure < ApplicationRecord
     {
       file: stackline[:file].to_s,
       line: stackline[:line].to_i,
-      call: stackline[:call].to_s
+      call: stackline[:call].to_s,
     }
   end
 end
