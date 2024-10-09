@@ -1,73 +1,22 @@
 require:
+  - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-rspec_rails
 
 AllCops:
   Exclude:
     - "bin/**"
     - "db/schema.rb"
     - "vendor/**/*"
-  TargetRubyVersion: 2.7
-  TargetRailsVersion: 6.0
+  TargetRubyVersion: 3.3
+  TargetRailsVersion: 7.2
   NewCops: enable
 
-#s
-# -----------------------------------------------------------------------------
-#                                   RAILS
-
-Rails:
-  Enabled: True
-
-Rails/ApplicationRecord:
-  Exclude:
-    - "db/migrate/**/*"
-
-Rails/SkipsModelValidations:
-  Exclude:
-    - "db/migrate/**/*"
-
 #
-# -----------------------------------------------------------------------------
-#                                   RSPEC
-
-RSpec:
-  Include:
-    - "spec/**/*_spec.rb"
-    - "spec/spec_helper.rb"
-    - "spec/rails_helper.rb"
-
-RSpec/ContextWording:
-  Enabled: False
-
-RSpec/ExampleLength:
-  Enabled: False
-
-RSpec/ExpectInHook:
-  Enabled: False
-
-RSpec/FilePath:
-  Exclude:
-    - "spec/client/**/*_spec.rb"
-
-RSpec/MessageSpies:
-  Enabled: False
-
-RSpec/MissingExampleGroupArgument:
-  Enabled: False
-
-RSpec/MultipleExpectations:
-  Enabled: False
-
-RSpec/NestedGroups:
-  Max: 5
-
-RSpec/FactoryBot/CreateList:
-  Enabled: False
-
-#
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 #                                   Layout
 
 Layout/ArgumentAlignment:
@@ -75,10 +24,10 @@ Layout/ArgumentAlignment:
 
 Layout/CaseIndentation:
   EnforcedStyle: end
+  IndentOneStep: True
   SupportedStyles:
     - case
     - end
-  IndentOneStep: True
 
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
@@ -104,7 +53,7 @@ Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
 #
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 #                                    Lint
 
 #
@@ -121,8 +70,14 @@ Lint/AmbiguousBlockAssociation:
 Lint/MixedRegexpCaptureTypes:
   Enabled: False
 
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
 #
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 #                                   Metrics
 
 Metrics/AbcSize:
@@ -136,62 +91,124 @@ Metrics/BlockLength:
     - "**/*.rake"
 
 Metrics/ClassLength:
-  Max: 200
+  Enabled: false
 
 Metrics/CyclomaticComplexity:
-  Enabled: False
+  Enabled: false
 
 Metrics/MethodLength:
-  Max: 25
-  Exclude:
-    - "db/**/*"
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
 
 #
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+#                                  Naming
+
+Naming/FileName:
+  Exclude:
+    - "**/Gemfile"
+    - "**/Rakefile"
+    - "**/Appraisals"
+
+#
+# ---------------------------------------------------------------------------
+#                                   RAILS
+
+Rails:
+  Enabled: True
+
+Rails/ApplicationRecord:
+  Exclude:
+    - "db/migrate/**/*"
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - "db/migrate/**/*"
+
+#
+# ---------------------------------------------------------------------------
+#                                   RSPEC
+
+RSpec/ContextWording:
+  Enabled: False
+
+RSpec/ExampleLength:
+  Enabled: False
+
+RSpec/ExpectInHook:
+  Enabled: False
+
+RSpec/MessageSpies:
+  Enabled: False
+
+RSpec/MissingExampleGroupArgument:
+  Enabled: False
+
+RSpec/MultipleExpectations:
+  Enabled: False
+
+RSpec/NestedGroups:
+  Max: 5
+
+RSpec/ScatteredSetup:
+  Enabled: false
+
+#
+# ---------------------------------------------------------------------------
 #                                   Style
 
-#
-# Disable due to https://github.com/rubocop/rubocop/issues/5953
-#
-Style/AccessModifierDeclarations:
-  Enabled: False
-
-#
-# Both styles or mixtures are reasonable
-#
 Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
-  Enabled: False
+  Enabled: false
 
-#
-# Would be better but unlikely...
-#
 Style/Documentation:
-  Enabled: False
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
 
 Style/RaiseArgs:
   EnforcedStyle: compact
 
-#
-# Quick single line rescues in specs
-#
+Style/RedundantBegin:
+  Enabled: false
+
 Style/RescueModifier:
   Exclude:
     - "spec/**/*_spec.rb"
 
-#
-# Quick single line rescues in specs
-#
 Style/RescueStandardError:
   Exclude:
     - "spec/**/*_spec.rb"
 
-#
-# Often used pattern in chaining subjects in specs
-#
 Style/Semicolon:
   Exclude:
     - "spec/**/*_spec.rb"
 
 Style/SignalException:
   EnforcedStyle: only_raise
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrivialAccessors:
+  AllowPredicates: true
