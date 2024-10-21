@@ -31,6 +31,16 @@ class Trace < ApplicationRecord
       where t[:stop].lt(tlimit).and(t[:store].eq(false))
     end
 
+    def latency_above(value)
+      duration = ::ActiveSupport::Duration.parse_string(value)
+      where("(stop - start) >= ?", duration.iso8601)
+    end
+
+    def latency_below(value)
+      duration = ::ActiveSupport::Duration.parse_string(value)
+      where("(stop - start) < ?", duration.iso8601)
+    end
+
     alias t arel_table
   end
 end

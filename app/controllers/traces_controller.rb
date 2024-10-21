@@ -70,11 +70,11 @@ class TracesController < ApplicationController
   end
 
   has_scope :ls do |_, scope, value|
-    scope.where("(stop - start) >= interval ?", ::ActiveSupport::Duration.parse_string(value).iso8601)
+    scope.latency_above(value)
   end
 
   has_scope :le do |_, scope, value|
-    scope.where("(stop - start) < interval ?", ::ActiveSupport::Duration.parse_string(value).iso8601)
+    scope.latency_below(value)
   end
 
   has_scope :meta, type: :hash do |_, scope, value|
