@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2020_03_20_015438) do
+ActiveRecord::Schema[7.2].define(version: 2020_03_20_015438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -98,5 +98,4 @@ ActiveRecord::Schema[7.0].define(version: 2020_03_20_015438) do
     t.index ["platform_id"], name: "index_traces_on_platform_id"
     t.index ["stop"], name: "index_traces_on_stop", order: :desc
   end
-
 end
