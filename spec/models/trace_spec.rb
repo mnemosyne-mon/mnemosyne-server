@@ -104,5 +104,47 @@ RSpec.describe Trace do
         end
       end
     end
+
+    describe ".latency_above" do
+      subject(:traces) { described_class.latency_above(value) }
+
+      let(:value) { "5s" }
+
+      let!(:expected) do
+        create(:trace, :w_spans, start: Time.zone.now, stop: Time.zone.now + 10)
+      end
+
+      before do
+        create(:trace, :w_spans, start: Time.zone.now, stop: Time.zone.now + 4)
+        create(:trace, :w_spans, start: Time.zone.now, stop: Time.zone.now + 2)
+      end
+
+      it "returns only traces above 5 seconds in length" do
+        expect(described_class.count).to eq 3
+
+        expect(traces).to contain_exactly(expected)
+      end
+    end
+
+    describe ".latency_below" do
+      subject(:traces) { described_class.latency_below(value) }
+
+      let(:value) { "5s" }
+
+      let!(:expected) do
+        create(:trace, :w_spans, start: Time.zone.now, stop: Time.zone.now + 4)
+      end
+
+      before do
+        create(:trace, :w_spans, start: Time.zone.now, stop: Time.zone.now + 6)
+        create(:trace, :w_spans, start: Time.zone.now, stop: Time.zone.now + 10)
+      end
+
+      it "returns only traces above 5 seconds in length" do
+        expect(described_class.count).to eq 3
+
+        expect(traces).to contain_exactly(expected)
+      end
+    end
   end
 end
