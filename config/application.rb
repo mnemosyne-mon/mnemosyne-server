@@ -38,7 +38,10 @@ module Server
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks patch server])
 
-    config.filter_parameters += %i[passw secret token _key crypt salt certificate otp ssn]
+    config.filter_parameters += %i[
+      passw email secret token _key crypt salt certificate otp ssn cvv cvc
+    ]
+
     config.session_store :cookie_store, key: "_mnemosyne", same_site: :lax
     config.action_dispatch.cookies_serializer = :json
 
