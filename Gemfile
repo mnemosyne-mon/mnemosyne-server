@@ -17,7 +17,7 @@ gem "bulk_insert", "~> 1.8"
 gem "hutch", "~> 1.1"
 gem "pg", "~> 1.2"
 
-gem "dry-struct", "~> 1.6.0"
+gem "dry-struct", "~> 1.7.0"
 gem "dry-types", "~> 1.8.0"
 gem "uuid4", "~> 1.3"
 
