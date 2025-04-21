@@ -60,7 +60,7 @@ group :development, :test do
   gem "rubocop-factory_bot", "~> 2.27.0"
   gem "rubocop-performance", "~> 1.25.0"
   gem "rubocop-rails", "~> 2.31.0"
-  gem "rubocop-rspec", "~> 3.5.0"
+  gem "rubocop-rspec", "~> 3.6.0"
   gem "rubocop-rspec_rails", "~> 2.30.0"
 end
 
