@@ -11,7 +11,7 @@ gem "puma", "~> 6.4"
 gem "rails", "~> 8.0.0"
 gem "unicorn", "~> 6.0"
 
-gem "active_record_upsert", github: "jesjos/active_record_upsert", ref: "5b2769eb5ec089665e5a099c151401d5ba14c104"
+gem "active_record_upsert", github: "jesjos/active_record_upsert", ref: "d19fa2709749de501b351d430fd17d6832c31963"
 
 gem "bulk_insert", "~> 1.8"
 gem "hutch", "~> 1.1"
