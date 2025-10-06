@@ -27,7 +27,7 @@ gem "uuid4", "~> 1.3"
 # gem 'bcrypt', '~> 3.1.7'
 
 gem "draper", "~> 4.0"
-gem "has_scope", "~> 0.8.0"
+gem "has_scope", "~> 0.9.0"
 gem "oj"
 gem "rails-assets-manifest", "~> 3.0", ">= 3.0.0"
 gem "rails-rfc6570", "~> 3.0"
