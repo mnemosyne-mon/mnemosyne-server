@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/jesjos/active_record_upsert.git
-  revision: d19fa2709749de501b351d430fd17d6832c31963
-  ref: d19fa2709749de501b351d430fd17d6832c31963
+  revision: 75de3f1f1aaf9898276860d91a079ff7dfb023bd
+  ref: 75de3f1f1aaf9898276860d91a079ff7dfb023bd
   specs:
-    active_record_upsert (0.11.2)
-      activerecord (>= 5.2, < 8.1)
+    active_record_upsert (0.12.0)
+      activerecord (>= 5.2, < 8.2)
       pg (>= 0.18, < 2.0)
 
 GEM
