@@ -23,15 +23,7 @@ Bundler.require(*Rails.groups)
 module Server
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.2
-
-    # Manually assign the Rails secret key base from ENV or the
-    # rubyconfig framework instead of Rails credentials. We do not use
-    # encrypted credentials because this is an open-source application
-    # and anyone needs their own credentials. Proper deployments are a
-    # pain too, since they do ship the configuration, not the
-    # application source.
-    config.secret_key_base = ENV["SECRET_KEY_BASE"] || Settings.secret_key_base
+    config.load_defaults 8.1
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
