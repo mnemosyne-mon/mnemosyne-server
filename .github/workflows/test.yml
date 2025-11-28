@@ -7,16 +7,16 @@ jobs:
 
     services:
       postgres:
-        image: timescale/timescaledb:2.21.3-pg15
+        image: timescale/timescaledb:2.21.3-pg17
         env:
           POSTGRES_PASSWORD: secret
         ports:
           - 5432:5432
         options: >-
           --health-cmd pg_isready
-          --health-interval 10s
+          --health-interval 1s
           --health-timeout 5s
-          --health-retries 5
+          --health-retries 30
 
     env:
       TZ: Etc/UTC
