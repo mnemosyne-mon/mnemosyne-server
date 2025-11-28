@@ -2,7 +2,7 @@
 
 module Server
   class Responder < ::ActionController::Responder
-    def has_view_rendering? # rubocop:disable Naming/PredicateName
+    def has_view_rendering? # rubocop:disable Naming/PredicatePrefix
       return false if format == :json
 
       super

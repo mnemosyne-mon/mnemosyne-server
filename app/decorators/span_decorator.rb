@@ -68,6 +68,26 @@ class SpanDecorator < BaseDecorator
     [make_stats, spans.map(&:stats)].flatten.reduce(&:add)
   end
 
+  Stats = Struct.new(:app, :db, :view, :external) do
+    def add(other)
+      Stats.new(
+        app + other.app,
+        db + other.db,
+        view + other.view,
+        external + other.external,
+      )
+    end
+
+    def as_json
+      {
+        db:,
+        app:,
+        view:,
+        external:,
+      }
+    end
+  end
+
   private
 
   def spans
@@ -120,25 +140,5 @@ class SpanDecorator < BaseDecorator
 
     url.port = nil
     url.to_s
-  end
-
-  Stats = Struct.new(:app, :db, :view, :external) do
-    def add(other)
-      Stats.new(
-        app + other.app,
-        db + other.db,
-        view + other.view,
-        external + other.external,
-      )
-    end
-
-    def as_json
-      {
-        db:,
-        app:,
-        view:,
-        external:,
-      }
-    end
   end
 end
