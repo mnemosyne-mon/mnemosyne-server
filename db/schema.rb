@@ -10,32 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2020_03_20_015438) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_28_184258) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
-  enable_extension "plpgsql"
   enable_extension "timescaledb"
 
   create_table "applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
+    t.datetime "created_at", null: false
     t.string "name", null: false
     t.uuid "platform_id", null: false
-    t.datetime "created_at", null: false
+    t.string "title"
     t.datetime "updated_at", null: false
     t.index ["platform_id", "name"], name: "index_applications_on_platform_id_and_name", unique: true
   end
 
   create_table "failures", id: false, force: :cascade do |t|
-    t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
-    t.string "type", null: false
-    t.text "text", null: false
-    t.string "hostname", null: false
-    t.jsonb "stacktrace", null: false
-    t.uuid "trace_id", null: false
-    t.uuid "platform_id", null: false
     t.uuid "application_id", null: false
-    t.datetime "stop", precision: nil, null: false
     t.datetime "created_at", null: false
+    t.string "hostname", null: false
+    t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
+    t.uuid "platform_id", null: false
+    t.jsonb "stacktrace", null: false
+    t.datetime "stop", precision: nil, null: false
+    t.text "text", null: false
+    t.uuid "trace_id", null: false
+    t.string "type", null: false
     t.datetime "updated_at", null: false
     t.index ["application_id"], name: "index_failures_on_application_id"
     t.index ["hostname"], name: "index_failures_on_hostname"
@@ -47,25 +47,25 @@ ActiveRecord::Schema[7.2].define(version: 2020_03_20_015438) do
   end
 
   create_table "platforms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
+    t.datetime "created_at", null: false
     t.string "name", null: false
     t.interval "retention_period", default: "P14D"
-    t.datetime "created_at", null: false
+    t.string "title"
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_platforms_on_name", unique: true
   end
 
   create_table "spans", id: false, force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
+    t.jsonb "meta"
     t.string "name", null: false
+    t.uuid "platform_id", null: false
     t.datetime "start", precision: nil, null: false
     t.datetime "stop", precision: nil, null: false
-    t.jsonb "meta"
     t.uuid "trace_id", null: false
-    t.uuid "platform_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["id"], name: "index_spans_on_id"
+    t.index ["id"], name: "index_spans_on_id", unique: true
     t.index ["name"], name: "index_spans_on_name"
     t.index ["start"], name: "index_spans_on_start"
     t.index ["stop"], name: "index_spans_on_stop", order: :desc
@@ -73,18 +73,18 @@ ActiveRecord::Schema[7.2].define(version: 2020_03_20_015438) do
   end
 
   create_table "traces", id: false, force: :cascade do |t|
-    t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
-    t.string "name", null: false
+    t.uuid "activity_id", null: false
+    t.uuid "application_id", null: false
+    t.datetime "created_at", null: false
     t.string "hostname", null: false
+    t.uuid "id", default: -> { "gen_random_uuid()" }, null: false
+    t.jsonb "meta"
+    t.string "name", null: false
+    t.uuid "origin_id"
+    t.uuid "platform_id", null: false
     t.datetime "start", precision: nil, null: false
     t.datetime "stop", precision: nil, null: false
     t.boolean "store", default: false, null: false
-    t.jsonb "meta"
-    t.uuid "application_id", null: false
-    t.uuid "activity_id", null: false
-    t.uuid "platform_id", null: false
-    t.uuid "origin_id"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "((meta ->> 'method'::text))", name: "index_traces_meta_method"
     t.index "((stop - start))", name: "index_traces_duration"

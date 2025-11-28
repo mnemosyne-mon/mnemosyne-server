@@ -97,8 +97,6 @@ GEM
     bigdecimal (3.3.1)
     bindex (0.8.1)
     builder (3.3.0)
-    bulk_insert (1.9.0)
-      activerecord (>= 3.2.0)
     bunny (2.23.0)
       amq-protocol (~> 2.3, >= 2.3.1)
       sorted_set (~> 1, >= 1.0.2)
@@ -455,7 +453,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_upsert!
-  bulk_insert (~> 1.8)
   capybara (~> 3.32)
   concurrent-ruby (~> 1.1)
   config (~> 5.5)

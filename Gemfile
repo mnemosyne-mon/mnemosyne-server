@@ -13,7 +13,6 @@ gem "unicorn", "~> 6.0"
 
 gem "active_record_upsert", github: "jesjos/active_record_upsert", ref: "75de3f1f1aaf9898276860d91a079ff7dfb023bd"
 
-gem "bulk_insert", "~> 1.8"
 gem "hutch", "~> 1.1"
 gem "pg", "~> 1.2"
 
