@@ -8,7 +8,7 @@ gem "config", "~> 5.5"
 gem "dry-validation", "~> 1.10"
 gem "forked", "~> 0.1.2"
 gem "puma", "~> 6.4"
-gem "rails", "~> 8.0.0"
+gem "rails", "~> 8.1.0"
 gem "unicorn", "~> 6.0"
 
 gem "active_record_upsert", github: "jesjos/active_record_upsert", ref: "75de3f1f1aaf9898276860d91a079ff7dfb023bd"
