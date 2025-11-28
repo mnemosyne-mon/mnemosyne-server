@@ -31,9 +31,7 @@ module Server
         @kickoff = build(stack)
       end
 
-      def call(env)
-        @kickoff.call(env)
-      end
+      delegate :call, to: :@kickoff
 
       private
 

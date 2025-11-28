@@ -15,12 +15,12 @@ module Patch
     end
 
     module QueryMethods
-      def includes(*args, scope: nil, **kwargs)
+      def includes(*, scope: nil, **kwargs)
         if scope
           Rails.logger.debug { "Includes with scope: #{scope}" }
           super(ScopedPreload.new([*args, kwargs], scope))
         else
-          super(*args, kwargs)
+          super(*, kwargs)
         end
       end
 
