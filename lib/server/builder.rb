@@ -26,33 +26,29 @@ module Server
         )
       end
 
-      # `Span.column_names` is required to force bulk insert plugin
-      # to process `id` column too.
-      Span.bulk_insert(*Span.column_names) do |worker|
-        worker.add(
-          id: payload[:uuid],
-          meta: payload[:meta],
-          name: payload[:name],
-          trace_id: trace.id,
-          activity_id: payload[:transaction],
-          platform_id: trace.platform_id,
-          start: ::Server::Clock.to_time(Integer(payload[:start])),
-          stop: ::Server::Clock.to_time(Integer(payload[:stop])),
-        )
+      spans = [{
+        id: payload[:uuid],
+        meta: payload[:meta],
+        name: payload[:name],
+        trace_id: trace.id,
+        platform_id: trace.platform_id,
+        start: ::Server::Clock.to_time(Integer(payload[:start])),
+        stop: ::Server::Clock.to_time(Integer(payload[:stop])),
+      }]
 
-        Array(payload[:span]).each do |data|
-          worker.add(
-            id: data[:uuid],
-            meta: data[:meta],
-            name: data[:name],
-            trace_id: trace.id,
-            activity_id: payload[:transaction],
-            platform_id: trace.platform_id,
-            start: ::Server::Clock.to_time(Integer(data[:start])),
-            stop: ::Server::Clock.to_time(Integer(data[:stop])),
-          )
-        end
+      Array.wrap(payload[:span]).each do |data|
+        spans.append({
+          id: data[:uuid],
+          meta: data[:meta],
+          name: data[:name],
+          trace_id: trace.id,
+          platform_id: trace.platform_id,
+          start: ::Server::Clock.to_time(Integer(data[:start])),
+          stop: ::Server::Clock.to_time(Integer(data[:stop])),
+        })
       end
+
+      Span.upsert_all(spans, unique_by: :id) # rubocop:disable Rails/SkipsModelValidations
 
       payload.fetch(:errors, []).each do |error|
         Failure.create! \
