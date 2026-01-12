@@ -433,7 +433,7 @@ GEM
       raindrops (~> 0.7)
     uri (1.1.1)
     useragent (0.16.11)
-    uuid4 (1.4.0)
+    uuid4 (1.4.2)
       base62-rb (~> 0.3.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
