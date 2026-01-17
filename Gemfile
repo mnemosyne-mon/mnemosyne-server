@@ -7,7 +7,7 @@ ruby "~> 3.2"
 gem "config", "~> 5.5"
 gem "dry-validation", "~> 1.10"
 gem "forked", "~> 0.1.2"
-gem "puma", "~> 6.4"
+gem "puma", "~> 7.0"
 gem "rails", "~> 8.1.0"
 gem "unicorn", "~> 6.0"
 
