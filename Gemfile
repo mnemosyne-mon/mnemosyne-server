@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "~> 3.2"
+ruby "~> 4.0"
 
 gem "config", "~> 5.5"
 gem "dry-validation", "~> 1.10"
