@@ -3,7 +3,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WebpackAssetsManifest = require("webpack-assets-manifest");
+const { WebpackAssetsManifest } = require("webpack-assets-manifest");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const root = path.resolve(__dirname, "../../");
@@ -44,7 +44,7 @@ module.exports = function (env, argv) {
       rules: [
         {
           test: /\.(ico|eot|ttf|woff|woff2|jpe?g|png|gif|svg)$/i,
-          type: 'asset/resource',
+          type: "asset/resource",
         },
         {
           test: /\.(scss|sass|css)$/i,
