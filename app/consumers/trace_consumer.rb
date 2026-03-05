@@ -18,7 +18,11 @@ class TraceConsumer
   def process(message)
     ::Server::Pipeline.call(message.body)
   rescue ActiveRecord::RecordNotUnique
-    retry if !@retry && (@retry = true)
+    unless @retry
+      @retry = true
+      retry
+    end
+
     raise
   ensure
     ::ActiveRecord::Base.connection_handler.clear_active_connections!
