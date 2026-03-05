@@ -1,3 +1,7 @@
+@use "~@fortawesome/fontawesome-free/scss/variables" with ($font-path: "~@fortawesome/fontawesome-free/webfonts")
+@use "~@fortawesome/fontawesome-free/scss/fontawesome"
+@use "~@fortawesome/fontawesome-free/scss/solid"
+
 @import '~bootstrap/scss/functions'
 @import '~bootstrap/scss/variables'
 @import '~bootstrap/scss/variables-dark'
@@ -14,17 +18,12 @@
 @import '~bootstrap/scss/buttons'
 @import '~bootstrap/scss/forms'
 
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts'
-@import '~@fortawesome/fontawesome-free/scss/solid'
-@import '~@fortawesome/fontawesome-free/scss/fontawesome'
-
 @import 'header'
 @import 'common'
 @import 'traces'
 @import 'failures'
 @import 'platforms'
 @import 'filter'
-
 
 *
   box-sizing: border-box
