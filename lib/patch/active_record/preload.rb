@@ -18,7 +18,7 @@ module Patch
       def includes(*, scope: nil, **kwargs)
         if scope
           Rails.logger.debug { "Includes with scope: #{scope}" }
-          super(ScopedPreload.new([*args, kwargs], scope))
+          super(ScopedPreload.new([*, kwargs], scope))
         else
           super(*, kwargs)
         end
@@ -27,9 +27,9 @@ module Patch
       def preload(*, scope: nil, **kwargs)
         if scope
           Rails.logger.debug { "Preload with scope: #{scope}" }
-          super(ScopedPreload.new([*args, kwargs], scope))
+          super(ScopedPreload.new([*, kwargs], scope))
         else
-          super(*args, kwargs)
+          super(*, kwargs)
         end
       end
     end
