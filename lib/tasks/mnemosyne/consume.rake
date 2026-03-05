@@ -88,7 +88,10 @@ namespace :mnemosyne do
 
     if config[:worker] > 1
       require "forked"
-      process_manager = Forked::ProcessManager.new(logger: Rails.logger, process_timeout: 10)
+      process_manager = Forked::ProcessManager.new(
+        logger: Rails.logger,
+        process_timeout: 10,
+      )
 
       ActiveRecord::Base.connection_handler&.clear_all_connections!
 
@@ -96,6 +99,11 @@ namespace :mnemosyne do
         process_manager.fork("worker") do
           Rails.application.reloader.wrap do
             Hutch::CLI.new.run([])
+          ensure
+            # Cleanly exit worker processes so that the process manager
+            # does not restart them. They shall all exit and the outer
+            # process restarted on errors.
+            exit(0)
           end
         end
       end
