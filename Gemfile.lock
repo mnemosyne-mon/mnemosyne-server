@@ -232,7 +232,7 @@ GEM
       activesupport (>= 6.1)
       bunny
     multi_json (1.20.1)
-    net-imap (0.6.3)
+    net-imap (0.6.4)
       date
       net-protocol
     net-pop (0.1.2)
