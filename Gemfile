@@ -11,7 +11,7 @@ gem "puma", "~> 7.0"
 gem "rails", "~> 8.1.0"
 gem "thruster", "~> 0.1.16"
 
-gem "active_record_upsert", github: "jesjos/active_record_upsert", ref: "75de3f1f1aaf9898276860d91a079ff7dfb023bd"
+gem "active_record_upsert", github: "jesjos/active_record_upsert", ref: "5b656f4d1983d89f7ea9c00c8dd6ec8aad47b07f"
 
 gem "hutch", "~> 1.1"
 gem "pg", "~> 1.2"

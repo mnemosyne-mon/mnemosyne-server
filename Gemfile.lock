@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/jesjos/active_record_upsert.git
-  revision: 75de3f1f1aaf9898276860d91a079ff7dfb023bd
-  ref: 75de3f1f1aaf9898276860d91a079ff7dfb023bd
+  revision: 5b656f4d1983d89f7ea9c00c8dd6ec8aad47b07f
+  ref: 5b656f4d1983d89f7ea9c00c8dd6ec8aad47b07f
   specs:
-    active_record_upsert (0.12.0)
+    active_record_upsert (0.13.0)
       activerecord (>= 5.2, < 8.2)
       pg (>= 0.18, < 2.0)
 
@@ -496,4 +496,4 @@ RUBY VERSION
   ruby 4.0.1p0
 
 BUNDLED WITH
-  4.0.7
+  4.0.15
