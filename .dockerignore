@@ -1,0 +1,16 @@
+# Ignore everything and selectivly add things to the Docker context:
+*
+!/app/
+!/bin/
+!/config/
+/config/*.local.ya?ml
+!/db/
+!/lib/
+!/public/*.html
+!/.postcssrc.js
+!/config.ru
+!/Gemfile*
+!/LICENSE
+!/package.json
+!/Rakefile
+!/bun.lock

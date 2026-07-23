@@ -28,14 +28,11 @@ jobs:
         with:
           ruby-version: "4.0.5"
           bundler-cache: true
-      # https://github.com/actions/setup-node/issues/899
-      - run: corepack enable
-      - uses: actions/setup-node@v6
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: "24"
-          cache: yarn
-      - run: yarn install --immutable
-      - run: yarn build --mode production
+          bun-version-file: ".bun-version"
+      - run: bun install --frozen-lockfile
+      - run: bun run build --mode production
       - run: bundle exec rake db:create db:setup
       - run: bundle exec rspec spec --force-color --format documentation
 
