@@ -20,16 +20,14 @@ rescue LoadError
 end
 
 namespace :assets do
-  task precompile: %i[yarn:install] do
-    system("yarn run build")
+  task precompile: %i[bun:install] do
+    system("bun run build")
   end
 end
 
-namespace :yarn do
-  Rake::Task["yarn:install"].clear
-
-  desc "Install all JavaScript dependencies as specified via Yarn"
+namespace :bun do
+  desc "Install all JavaScript dependencies as specified via Bun"
   task install: :environment do
-    system("yarn install")
+    system("bun install --frozen-lockfile")
   end
 end

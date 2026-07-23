@@ -1,3 +1,3 @@
 web: bin/rails server --port 9001
-assets: yarn start
+assets: bun run start
 consumer: bin/rake mnemosyne:consume
