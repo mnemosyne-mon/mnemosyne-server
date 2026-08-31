@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/jesjos/active_record_upsert.git
-  revision: 5b656f4d1983d89f7ea9c00c8dd6ec8aad47b07f
-  ref: 5b656f4d1983d89f7ea9c00c8dd6ec8aad47b07f
+  revision: 115acc11ec8ee9ac5394ea3828b47cc9891c936a
+  ref: 115acc11ec8ee9ac5394ea3828b47cc9891c936a
   specs:
     active_record_upsert (0.13.0)
       activerecord (>= 5.2, < 8.2)
@@ -172,7 +172,7 @@ GEM
       dry-initializer (~> 3.2)
       dry-schema (~> 1.14)
       zeitwerk (~> 2.6)
-    erb (6.0.6)
+    erb (6.0.7)
     erubi (1.13.1)
     factory_bot (6.6.0)
       activesupport (>= 6.1.0)
@@ -268,7 +268,7 @@ GEM
     puma (7.2.1)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.2.6)
+    rack (3.2.7)
     rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -332,7 +332,7 @@ GEM
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
-    responders (3.2.0)
+    responders (3.2.1)
       actionpack (>= 7.0)
       railties (>= 7.0)
     rexml (3.4.4)
@@ -443,7 +443,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.8.2)
+    zeitwerk (2.8.3)
 
 PLATFORMS
   x86_64-linux
